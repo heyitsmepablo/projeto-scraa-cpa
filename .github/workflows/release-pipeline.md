@@ -39,5 +39,5 @@ runs-on: ubuntu-latest
             # 2. Executa o comando. Ele vai ler o .releaserc.json da raiz e achar os plugins no node_modules temporário.
             - name: Executar Semantic Release
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               run: npx semantic-release
