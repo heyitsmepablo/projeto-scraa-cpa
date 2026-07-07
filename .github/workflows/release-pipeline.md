@@ -1,0 +1,43 @@
+name: Release Pipeline
+
+on:
+push:
+branches: - main - stage - dev - 1.x
+
+permissions:
+contents: write
+issues: write
+pull-requests: write
+
+jobs:
+release:
+name: Build, Test & Release
+runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout do repositório
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            # 1. Instala o Semantic Release e os plugins temporariamente na raiz
+            # O --no-save garante que ele não tente criar ou alterar um package.json na raiz
+            - name: Instalar Semantic Release (Global/Temporário)
+              run: >
+                  npm install --no-save
+                  semantic-release
+                  @semantic-release/changelog
+                  @semantic-release/git
+                  @semantic-release/exec
+                  conventional-changelog-conventionalcommits
+
+            # 2. Executa o comando. Ele vai ler o .releaserc.json da raiz e achar os plugins no node_modules temporário.
+            - name: Executar Semantic Release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: npx semantic-release

@@ -1,0 +1,115 @@
+{
+    "branches": [
+        "main",
+        {
+            "name": "1.x",
+            "range": "1.x",
+            "channel": "1.x"
+        },
+        {
+            "name": "dev",
+            "prerelease": "alpha",
+            "channel": "alpha"
+        },
+        {
+            "name": "stage",
+            "prerelease": "beta",
+            "channel": "beta"
+        }
+    ],
+    "plugins": [
+        [
+            "@semantic-release/commit-analyzer",
+            {
+                "preset": "conventionalcommits"
+            }
+        ],
+        [
+            "@semantic-release/release-notes-generator",
+            {
+                "preset": "conventionalcommits",
+                "presetConfig": {
+                    "types": [
+                        {
+                            "type": "feat",
+                            "section": "✨ Funcionalidades"
+                        },
+                        {
+                            "type": "fix",
+                            "section": "🐛 Correções de Bugs"
+                        },
+                        {
+                            "type": "perf",
+                            "section": "⚡ Melhorias de Performance"
+                        },
+                        {
+                            "type": "revert",
+                            "section": "⏪ Reversões"
+                        },
+                        {
+                            "type": "refactor",
+                            "section": "♻️ Refatoração de Código",
+                            "hidden": false
+                        },
+                        {
+                            "type": "docs",
+                            "section": "📚 Documentação",
+                            "hidden": false
+                        },
+                        {
+                            "type": "style",
+                            "section": "💄 Estilos",
+                            "hidden": true
+                        },
+                        {
+                            "type": "chore",
+                            "section": "🤖 Tarefas de Manutenção",
+                            "hidden": true
+                        },
+                        {
+                            "type": "test",
+                            "section": "✅ Testes",
+                            "hidden": true
+                        },
+                        {
+                            "type": "build",
+                            "section": "📦 Build",
+                            "hidden": true
+                        },
+                        {
+                            "type": "ci",
+                            "section": "👷 CI/CD",
+                            "hidden": true
+                        }
+                    ]
+                }
+            }
+        ],
+        [
+            "@semantic-release/changelog",
+            {
+                "changelogTitle": "# Histórico de Mudanças\n\nTodas as mudanças notáveis neste projeto serão documentadas neste arquivo. Consulte [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/) para diretrizes de commits."
+            }
+        ],
+        [
+            "@semantic-release/exec",
+            {
+                "prepareCmd": "npm version ${nextRelease.version} --prefix api --no-git-tag-version && npm version ${nextRelease.version} --prefix client/web/next --no-git-tag-version"
+            }
+        ],
+        [
+            "@semantic-release/git",
+            {
+                "assets": [
+                    "api/package.json",
+                    "api/package-lock.json",
+                    "client/web/next/package.json",
+                    "client/web/next/package-lock.json",
+                    "CHANGELOG.md"
+                ],
+                "message": "chore(release): ${nextRelease.version} [skip ci]\n\nCompare aqui ${lastRelease.gitTag} com ${nextRelease.gitTag} https://github.com/heyitsmepablo/dashboard-indicadores/compare/${lastRelease.gitTag}...${nextRelease.gitTag}\n\n${nextRelease.notes}"
+            }
+        ],
+        "@semantic-release/github"
+    ]
+}

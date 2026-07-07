@@ -1,0 +1,204 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum TipoVinculo {
+  CONVENIO
+  CONTRATO
+}
+
+enum TipoInstituicao {
+  FEDERAL
+  ESTADUAL
+  MUNICIPAL
+  FILANTROPICO
+  EMPRESA
+}
+
+enum TipoAditivo {
+  PRAZO
+  SUPRESSAO
+  VALOR
+}
+
+enum TipoOperacao {
+  INSERT
+  UPDATE
+  DELETE
+}
+
+// ==========================================
+// TABELAS DE REFERÊNCIA (GOVERNO)
+// ==========================================
+model SigtapImportacao {
+  id              Int       @id @default(autoincrement())
+  competencia     String    @db.Char(6) // Ex: "202301"
+  dataInicio      DateTime  @default(now()) @map("data_inicio")
+  dataFim         DateTime? @map("data_fim")
+  status          String    @db.VarChar(20) // "SUCESSO", "FALHA", "EM_ANDAMENTO"
+  tabelasAfetadas String?   @map("tabelas_afetadas") @db.Text // Ex: "tb_procedimento, tb_grupo"
+  criadoEm        DateTime  @default(now()) @map("criado_em")
+  atualizadoEm    DateTime  @updatedAt @map("atualizado_em")
+
+  // Relação 1:N com o Changelog
+  changelogs SigtapChangelog[]
+
+  @@map("sigtap_importacao")
+}
+
+model SigtapChangelog {
+  id           Int    @id @default(autoincrement())
+  importacaoId Int    @map("importacao_id")
+  tabela       String @db.VarChar(50)
+
+  // A âncora de busca (O Código)
+  chaveRegistro String @map("chave_registro") @db.VarChar(50)
+
+  // A NOVA COLUNA: O Nome amigável para a sua interface
+  descricaoRegistro String? @map("descricao_registro") @db.VarChar(250) // Ex: "Dosagem de Ácido Úrico"
+
+  tipoOperacao TipoOperacao @map("tipo_operacao")
+  dadosAntigos Json?        @map("dados_antigos")
+  dadosNovos   Json?        @map("dados_novos")
+  criadoEm     DateTime     @default(now()) @map("criado_em")
+
+  importacao SigtapImportacao @relation(fields: [importacaoId], references: [id], onDelete: Cascade)
+
+  @@index([importacaoId])
+  @@index([chaveRegistro]) // Fundamental para buscar "O histórico do procedimento X"
+  @@index([tabela, tipoOperacao])
+  @@map("sigtap_changelog")
+}
+
+model SigtapProcedimento {
+  coProcedimento     String   @id @map("co_procedimento") @db.VarChar(10)
+  noProcedimento     String   @map("no_procedimento") @db.VarChar(250)
+  tpComplexidade     String   @map("tp_complexidade") @db.Char(1)
+  tpSexo             String   @map("tp_sexo") @db.Char(1)
+  qtMaximaExecucao   Int      @map("qt_maxima_execucao")
+  qtDiasPermanencia  Int      @map("qt_dias_permanencia")
+  qtPontos           Int      @map("qt_pontos")
+  vlIdadeMinima      Int      @map("vl_idade_minima")
+  vlIdadeMaxima      Int      @map("vl_idade_maxima")
+  vlSh               Decimal  @map("vl_sh") @db.Decimal(12, 2)
+  vlSa               Decimal  @map("vl_sa") @db.Decimal(12, 2)
+  vlSp               Decimal  @map("vl_sp") @db.Decimal(12, 2)
+  coFinanciamento    String   @map("co_financiamento") @db.VarChar(2)
+  coRubrica          String   @map("co_rubrica") @db.VarChar(6)
+  qtTempoPermanencia Int      @map("qt_tempo_permanencia")
+  dtCompetencia      String   @map("dt_competencia") @db.Char(6)
+  criadoEm           DateTime @default(now()) @map("criado_em")
+  atualizadoEm       DateTime @updatedAt @map("atualizado_em")
+
+  // Relação reversa (1:N)
+  planosOperativos PlanoOperativoProcedimento[]
+
+  @@map("sigtap_procedimento")
+}
+
+// ==========================================
+// ENTIDADES ADMINISTRATIVAS
+// ==========================================
+
+model Instituicao {
+  id              Int             @id @default(autoincrement())
+  nome            String          @db.VarChar(150)
+  cnes            String          @db.VarChar(7)
+  cnpj            String          @db.VarChar(14)
+  tipoInstituicao TipoInstituicao @map("tipo_instituicao")
+  criadoEm        DateTime        @default(now()) @map("criado_em")
+  atualizadoEm    DateTime        @updatedAt @map("atualizado_em")
+
+  // Relação reversa (1:N)
+  vinculos Vinculo[]
+
+  @@map("instituicao")
+}
+
+model Vinculo {
+  id            Int         @id @default(autoincrement())
+  instituicaoId Int         @map("instituicao_id")
+  numero        String      @db.VarChar(50)
+  tipoVinculo   TipoVinculo @map("tipo_vinculo")
+  dataInicio    DateTime    @map("data_inicio") @db.Date
+  dataFim       DateTime?   @map("data_fim") @db.Date // Opcional, pois pode ser contrato por tempo indeterminado
+  valorTotal    Decimal     @map("valor_total") @db.Decimal(15, 2)
+  criadoEm      DateTime    @default(now()) @map("criado_em")
+  atualizadoEm  DateTime    @updatedAt @map("atualizado_em")
+
+  // Relações
+  instituicao      Instituicao      @relation(fields: [instituicaoId], references: [id])
+  aditivos         Aditivo[]
+  planosOperativos PlanoOperativo[]
+  // producoesFaturadas ProducaoFaturada[]
+
+  @@map("vinculo")
+}
+
+model Aditivo {
+  id               Int          @id @default(autoincrement())
+  vinculoId        Int          @map("vinculo_id")
+  numero           String       @db.VarChar(50)
+  tipoAditivo1     TipoAditivo  @map("tipo_aditivo_1")
+  tipoAditivo2     TipoAditivo? @map("tipo_aditivo_2")
+  dataInicio       DateTime     @map("data_inicio") @db.Date
+  dataFim          DateTime?    @map("data_fim") @db.Date
+  valorTotal       Decimal      @map("valor_total") @db.Decimal(15, 2)
+  dataDaAssinatura DateTime     @map("data_da_assinatura") @db.Date
+  criadoEm         DateTime     @default(now()) @map("criado_em")
+  atualizadoEm     DateTime     @updatedAt @map("atualizado_em")
+
+  // Relações
+  vinculo         Vinculo          @relation(fields: [vinculoId], references: [id])
+  planoOperativos PlanoOperativo[]
+
+  @@map("aditivo")
+}
+
+// ==========================================
+// OPERAÇÃO E FATURAMENTO
+// ==========================================
+
+model PlanoOperativo {
+  id            Int                          @id @default(autoincrement())
+  vinculoId     Int                          @map("vinculo_id")
+  aditivoId     Int?                         @map("aditivo_id")
+  vigente       Boolean                      @default(true) @map("vigente")
+  criadoEm      DateTime                     @default(now()) @map("criado_em")
+  expiradoEm    DateTime?                    @map("expirado_em")
+  atualizadoEm  DateTime                     @updatedAt @map("atualizado_em")
+  // Relações
+  vinculo       Vinculo                      @relation(fields: [vinculoId], references: [id])
+  aditivo       Aditivo?                     @relation(fields: [aditivoId], references: [id])
+  procedimentos PlanoOperativoProcedimento[]
+
+  @@map("plano_operativo")
+}
+
+// Entidade Associativa (N:M)
+model PlanoOperativoProcedimento {
+  planoOperativoId   Int      @map("plano_operativo_id")
+  coProcedimento     String   @map("co_procedimento") @db.VarChar(10)
+  quantidadePactuada Int      @map("quantidade_pactuada")
+  valorPactuado      Decimal  @map("valor_pactuado") @db.Decimal(12, 2)
+  criadoEm           DateTime @default(now()) @map("criado_em")
+  atualizadoEm       DateTime @updatedAt @map("atualizado_em")
+
+  // Relações
+  planoOperativo PlanoOperativo     @relation(fields: [planoOperativoId], references: [id])
+  procedimento   SigtapProcedimento @relation(fields: [coProcedimento], references: [coProcedimento])
+
+  // Chave Primária Composta
+  @@id([planoOperativoId, coProcedimento])
+  @@map("plano_operativo_procedimento")
+}
