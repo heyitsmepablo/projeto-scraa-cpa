@@ -1,0 +1,38 @@
+name: CI-scripts
+
+on:
+  push:
+    branches: ["main", "stage", "dev"]
+  pull_request:
+    branches: ["main", "stage", "dev"]
+
+jobs:
+  test-sync-sigtap:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: scripts/sync_sigtap
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Install dependencies
+        run: poetry install --no-interaction
+
+      - name: Run tests with pytest
+        run: poetry run pytest tests/ -v
+
+      - name: Run type checking with mypy
+        run: poetry run mypy src/ --ignore-missing-imports
