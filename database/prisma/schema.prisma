@@ -38,6 +38,112 @@ enum TipoOperacao {
 }
 
 // ==========================================
+// ENTIDADES ADMINISTRATIVAS
+// ==========================================
+
+model Instituicao {
+  id              Int             @id @default(autoincrement())
+  nome            String          @db.VarChar(150)
+  cnes            String          @db.VarChar(7)
+  cnpj            String          @db.VarChar(14)
+  tipoInstituicao TipoInstituicao @map("tipo_instituicao")
+  criadoEm        DateTime        @default(now()) @map("criado_em")
+  atualizadoEm    DateTime        @updatedAt @map("atualizado_em")
+
+  // Relação reversa (1:N)
+  vinculos Vinculo[]
+
+  @@index([cnes])
+  @@index([cnpj])
+  @@map("instituicao")
+}
+
+model Vinculo {
+  id            Int         @id @default(autoincrement())
+  instituicaoId Int         @map("instituicao_id")
+  numero        String      @db.VarChar(50)
+  tipoVinculo   TipoVinculo @map("tipo_vinculo")
+  dataInicio    DateTime    @map("data_inicio") @db.Date
+  dataFim       DateTime?   @map("data_fim") @db.Date // Opcional, pois pode ser contrato por tempo indeterminado
+  valorTotal    Decimal     @map("valor_total") @db.Decimal(15, 2)
+  criadoEm      DateTime    @default(now()) @map("criado_em")
+  atualizadoEm  DateTime    @updatedAt @map("atualizado_em")
+
+  // Relações
+  instituicao      Instituicao      @relation(fields: [instituicaoId], references: [id])
+  aditivos         Aditivo[]
+  planosOperativos PlanoOperativo[]
+  // producoesFaturadas ProducaoFaturada[]
+
+  @@index([instituicaoId])
+  @@index([numero])
+  @@map("vinculo")
+}
+
+model Aditivo {
+  id               Int          @id @default(autoincrement())
+  vinculoId        Int          @map("vinculo_id")
+  numero           String       @db.VarChar(50)
+  tipoAditivo1     TipoAditivo  @map("tipo_aditivo_1")
+  tipoAditivo2     TipoAditivo? @map("tipo_aditivo_2")
+  dataInicio       DateTime     @map("data_inicio") @db.Date
+  dataFim          DateTime?    @map("data_fim") @db.Date
+  valorTotal       Decimal      @map("valor_total") @db.Decimal(15, 2)
+  dataDaAssinatura DateTime     @map("data_da_assinatura") @db.Date
+  criadoEm         DateTime     @default(now()) @map("criado_em")
+  atualizadoEm     DateTime     @updatedAt @map("atualizado_em")
+
+  // Relações
+  vinculo         Vinculo          @relation(fields: [vinculoId], references: [id])
+  planoOperativos PlanoOperativo[]
+
+  @@index([vinculoId])
+  @@index([numero])
+  @@map("aditivo")
+}
+
+// ==========================================
+// OPERAÇÃO E FATURAMENTO
+// ==========================================
+
+model PlanoOperativo {
+  id            Int                          @id @default(autoincrement())
+  vinculoId     Int                          @map("vinculo_id")
+  aditivoId     Int?                         @map("aditivo_id")
+  vigente       Boolean                      @default(true) @map("vigente")
+  criadoEm      DateTime                     @default(now()) @map("criado_em")
+  expiradoEm    DateTime?                    @map("expirado_em")
+  atualizadoEm  DateTime                     @updatedAt @map("atualizado_em")
+  // Relações
+  vinculo       Vinculo                      @relation(fields: [vinculoId], references: [id])
+  aditivo       Aditivo?                     @relation(fields: [aditivoId], references: [id])
+  procedimentos PlanoOperativoProcedimento[]
+
+  @@index([vinculoId])
+  @@index([aditivoId])
+  @@map("plano_operativo")
+}
+
+// Entidade Associativa (N:M)
+model PlanoOperativoProcedimento {
+  planoOperativoId   Int      @map("plano_operativo_id")
+  coProcedimento     String   @map("co_procedimento") @db.VarChar(10)
+  quantidadePactuada Int      @map("quantidade_pactuada")
+  valorPactuado      Decimal  @map("valor_pactuado") @db.Decimal(12, 2)
+  criadoEm           DateTime @default(now()) @map("criado_em")
+  atualizadoEm       DateTime @updatedAt @map("atualizado_em")
+
+  // Relações
+  planoOperativo PlanoOperativo     @relation(fields: [planoOperativoId], references: [id])
+  procedimento   SigtapProcedimento @relation(fields: [coProcedimento], references: [coProcedimento])
+
+  // Chave Primária Composta
+  @@id([planoOperativoId, coProcedimento])
+  @@index([coProcedimento])
+  @@map("plano_operativo_procedimento")
+}
+
+// ==========================================
 // TABELAS DE REFERÊNCIA (GOVERNO)
 // ==========================================
 model SigtapImportacao {
@@ -65,13 +171,15 @@ model SigtapChangelog {
   chaveRegistro String @map("chave_registro") @db.VarChar(50)
 
   // A NOVA COLUNA: O Nome amigável para a sua interface
-  descricaoRegistro String? @map("descricao_registro") @db.VarChar(250) // Ex: "Dosagem de Ácido Úrico"
+  descricaoRegistro String? @map("descricao_registro") @db.Text // Ex: "Dosagem de Ácido Úrico"
 
   tipoOperacao TipoOperacao @map("tipo_operacao")
   dadosAntigos Json?        @map("dados_antigos")
   dadosNovos   Json?        @map("dados_novos")
   criadoEm     DateTime     @default(now()) @map("criado_em")
 
+  // NOTA: A constraint desta chave estrangeira foi alterada para DEFERRABLE via migration SQL bruta
+  // para melhorar a performance de inserts em massa, adiando a checagem até o COMMIT.
   importacao SigtapImportacao @relation(fields: [importacaoId], references: [id], onDelete: Cascade)
 
   @@index([importacaoId])
@@ -80,125 +188,296 @@ model SigtapChangelog {
   @@map("sigtap_changelog")
 }
 
+model SigtapFinanciamento {
+  id              Int       @id @default(autoincrement())
+  coFinanciamento String    @unique @map("co_financiamento") @db.VarChar(2)
+  noFinanciamento String    @map("no_financiamento") @db.VarChar(50)
+  dtCompetencia   String    @map("dt_competencia") @db.Char(6)
+  criadoEm        DateTime  @default(now()) @map("criado_em")
+  atualizadoEm    DateTime  @updatedAt @map("atualizado_em")
+  deletadoEm      DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_financiamento")
+}
+
+model SigtapRubrica {
+  id            Int       @id @default(autoincrement())
+  coRubrica     String    @unique @map("co_rubrica") @db.VarChar(6)
+  noRubrica     String    @map("no_rubrica") @db.VarChar(100)
+  dtCompetencia String    @map("dt_competencia") @db.Char(6)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletadoEm    DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_rubrica")
+}
+
 model SigtapProcedimento {
-  coProcedimento     String   @id @map("co_procedimento") @db.VarChar(10)
-  noProcedimento     String   @map("no_procedimento") @db.VarChar(250)
-  tpComplexidade     String   @map("tp_complexidade") @db.Char(1)
-  tpSexo             String   @map("tp_sexo") @db.Char(1)
-  qtMaximaExecucao   Int      @map("qt_maxima_execucao")
-  qtDiasPermanencia  Int      @map("qt_dias_permanencia")
-  qtPontos           Int      @map("qt_pontos")
-  vlIdadeMinima      Int      @map("vl_idade_minima")
-  vlIdadeMaxima      Int      @map("vl_idade_maxima")
-  vlSh               Decimal  @map("vl_sh") @db.Decimal(12, 2)
-  vlSa               Decimal  @map("vl_sa") @db.Decimal(12, 2)
-  vlSp               Decimal  @map("vl_sp") @db.Decimal(12, 2)
-  coFinanciamento    String   @map("co_financiamento") @db.VarChar(2)
-  coRubrica          String   @map("co_rubrica") @db.VarChar(6)
-  qtTempoPermanencia Int      @map("qt_tempo_permanencia")
-  dtCompetencia      String   @map("dt_competencia") @db.Char(6)
-  criadoEm           DateTime @default(now()) @map("criado_em")
-  atualizadoEm       DateTime @updatedAt @map("atualizado_em")
+  coProcedimento     String    @id @map("co_procedimento") @db.VarChar(10)
+  noProcedimento     String    @map("no_procedimento") @db.VarChar(250)
+  tpComplexidade     String    @map("tp_complexidade") @db.Char(1)
+  tpSexo             String    @map("tp_sexo") @db.Char(1)
+  qtMaximaExecucao   Int       @map("qt_maxima_execucao")
+  qtDiasPermanencia  Int       @map("qt_dias_permanencia")
+  qtPontos           Int       @map("qt_pontos")
+  vlIdadeMinima      Int       @map("vl_idade_minima")
+  vlIdadeMaxima      Int       @map("vl_idade_maxima")
+  vlSh               Decimal   @map("vl_sh") @db.Decimal(12, 2)
+  vlSa               Decimal   @map("vl_sa") @db.Decimal(12, 2)
+  vlSp               Decimal   @map("vl_sp") @db.Decimal(12, 2)
+  coFinanciamento    String    @map("co_financiamento") @db.VarChar(2)
+  coRubrica          String?   @map("co_rubrica") @db.VarChar(6)
+  qtTempoPermanencia Int       @map("qt_tempo_permanencia")
+  dtCompetencia      String    @map("dt_competencia") @db.Char(6)
+  criadoEm           DateTime  @default(now()) @map("criado_em")
+  atualizadoEm       DateTime  @updatedAt @map("atualizado_em")
+  deletedAt          DateTime? @map("deletado_em")
 
   // Relação reversa (1:N)
   planosOperativos PlanoOperativoProcedimento[]
 
-  @@map("sigtap_procedimento")
+  @@index([coFinanciamento])
+  @@index([coRubrica])
+  @@index([dtCompetencia])
+  @@map("sigtap_tb_procedimento")
 }
 
-// ==========================================
-// ENTIDADES ADMINISTRATIVAS
-// ==========================================
+model SigtapDetalhe {
+  coDetalhe     String    @id @map("co_detalhe") @db.VarChar(3)
+  noDetalhe     String    @map("no_detalhe") @db.VarChar(100)
+  dtCompetencia String    @map("dt_competencia") @db.Char(6)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletedAt     DateTime? @map("deletado_em")
 
-model Instituicao {
-  id              Int             @id @default(autoincrement())
-  nome            String          @db.VarChar(150)
-  cnes            String          @db.VarChar(7)
-  cnpj            String          @db.VarChar(14)
-  tipoInstituicao TipoInstituicao @map("tipo_instituicao")
-  criadoEm        DateTime        @default(now()) @map("criado_em")
-  atualizadoEm    DateTime        @updatedAt @map("atualizado_em")
-
-  // Relação reversa (1:N)
-  vinculos Vinculo[]
-
-  @@map("instituicao")
+  @@map("sigtap_tb_detalhe")
 }
 
-model Vinculo {
-  id            Int         @id @default(autoincrement())
-  instituicaoId Int         @map("instituicao_id")
-  numero        String      @db.VarChar(50)
-  tipoVinculo   TipoVinculo @map("tipo_vinculo")
-  dataInicio    DateTime    @map("data_inicio") @db.Date
-  dataFim       DateTime?   @map("data_fim") @db.Date // Opcional, pois pode ser contrato por tempo indeterminado
-  valorTotal    Decimal     @map("valor_total") @db.Decimal(15, 2)
-  criadoEm      DateTime    @default(now()) @map("criado_em")
-  atualizadoEm  DateTime    @updatedAt @map("atualizado_em")
+model SigtapDescricaoDetalhe {
+  coDetalhe     String    @id @map("co_detalhe") @db.VarChar(3)
+  dsDetalhe     String    @map("ds_detalhe") @db.VarChar(4000)
+  dtCompetencia String    @map("dt_competencia") @db.Char(6)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletedAt     DateTime? @map("deletado_em")
 
-  // Relações
-  instituicao      Instituicao      @relation(fields: [instituicaoId], references: [id])
-  aditivos         Aditivo[]
-  planosOperativos PlanoOperativo[]
-  // producoesFaturadas ProducaoFaturada[]
-
-  @@map("vinculo")
+  @@map("sigtap_tb_descricao_detalhe")
 }
 
-model Aditivo {
-  id               Int          @id @default(autoincrement())
-  vinculoId        Int          @map("vinculo_id")
-  numero           String       @db.VarChar(50)
-  tipoAditivo1     TipoAditivo  @map("tipo_aditivo_1")
-  tipoAditivo2     TipoAditivo? @map("tipo_aditivo_2")
-  dataInicio       DateTime     @map("data_inicio") @db.Date
-  dataFim          DateTime?    @map("data_fim") @db.Date
-  valorTotal       Decimal      @map("valor_total") @db.Decimal(15, 2)
-  dataDaAssinatura DateTime     @map("data_da_assinatura") @db.Date
-  criadoEm         DateTime     @default(now()) @map("criado_em")
-  atualizadoEm     DateTime     @updatedAt @map("atualizado_em")
+model SigtapRegistro {
+  coRegistro    String    @id @map("co_registro") @db.VarChar(2)
+  noRegistro    String    @map("no_registro") @db.VarChar(50)
+  dtCompetencia String    @map("dt_competencia") @db.Char(6)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletedAt     DateTime? @map("deletado_em")
 
-  // Relações
-  vinculo         Vinculo          @relation(fields: [vinculoId], references: [id])
-  planoOperativos PlanoOperativo[]
-
-  @@map("aditivo")
+  @@map("sigtap_tb_registro")
 }
 
-// ==========================================
-// OPERAÇÃO E FATURAMENTO
-// ==========================================
+model SigtapServico {
+  coServico     String    @id @map("co_servico") @db.VarChar(3)
+  noServico     String    @map("no_servico") @db.VarChar(120)
+  dtCompetencia String    @map("dt_competencia") @db.Char(6)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletedAt     DateTime? @map("deletado_em")
 
-model PlanoOperativo {
-  id            Int                          @id @default(autoincrement())
-  vinculoId     Int                          @map("vinculo_id")
-  aditivoId     Int?                         @map("aditivo_id")
-  vigente       Boolean                      @default(true) @map("vigente")
-  criadoEm      DateTime                     @default(now()) @map("criado_em")
-  expiradoEm    DateTime?                    @map("expirado_em")
-  atualizadoEm  DateTime                     @updatedAt @map("atualizado_em")
-  // Relações
-  vinculo       Vinculo                      @relation(fields: [vinculoId], references: [id])
-  aditivo       Aditivo?                     @relation(fields: [aditivoId], references: [id])
-  procedimentos PlanoOperativoProcedimento[]
-
-  @@map("plano_operativo")
+  @@map("sigtap_tb_servico")
 }
 
-// Entidade Associativa (N:M)
-model PlanoOperativoProcedimento {
-  planoOperativoId   Int      @map("plano_operativo_id")
-  coProcedimento     String   @map("co_procedimento") @db.VarChar(10)
-  quantidadePactuada Int      @map("quantidade_pactuada")
-  valorPactuado      Decimal  @map("valor_pactuado") @db.Decimal(12, 2)
-  criadoEm           DateTime @default(now()) @map("criado_em")
-  atualizadoEm       DateTime @updatedAt @map("atualizado_em")
+model SigtapServicoClassificacao {
+  coServico       String    @map("co_servico") @db.VarChar(3)
+  coClassificacao String    @map("co_classificacao") @db.VarChar(3)
+  noClassificacao String    @map("no_classificacao") @db.VarChar(150)
+  dtCompetencia   String    @map("dt_competencia") @db.Char(6)
+  criadoEm        DateTime  @default(now()) @map("criado_em")
+  atualizadoEm    DateTime  @updatedAt @map("atualizado_em")
+  deletedAt       DateTime? @map("deletado_em")
 
-  // Relações
-  planoOperativo PlanoOperativo     @relation(fields: [planoOperativoId], references: [id])
-  procedimento   SigtapProcedimento @relation(fields: [coProcedimento], references: [coProcedimento])
+  @@id([coServico, coClassificacao])
+  @@map("sigtap_tb_servico_classificacao")
+}
 
-  // Chave Primária Composta
-  @@id([planoOperativoId, coProcedimento])
-  @@map("plano_operativo_procedimento")
+model SigtapModalidade {
+  coModalidade  String    @id @map("co_modalidade") @db.VarChar(2)
+  noModalidade  String    @map("no_modalidade") @db.VarChar(100)
+  dtCompetencia String    @map("dt_competencia") @db.Char(6)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletedAt     DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_modalidade")
+}
+
+model SigtapTipoLeito {
+  coTipoLeito   String    @id @map("co_tipo_leito") @db.VarChar(2)
+  noTipoLeito   String    @map("no_tipo_leito") @db.VarChar(60)
+  dtCompetencia String    @map("dt_competencia") @db.Char(6)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletedAt     DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_tipo_leito")
+}
+
+model SigtapCid {
+  coCid              String    @id @map("co_cid") @db.VarChar(4)
+  noCid              String    @map("no_cid") @db.VarChar(100)
+  tpAgravo           String    @map("tp_agravo") @db.Char(1)
+  tpSexo             String    @map("tp_sexo") @db.Char(1)
+  tpEstadio          String    @map("tp_estadio") @db.Char(1)
+  vlCamposIrradiados Int       @map("vl_campos_irradiados")
+  criadoEm           DateTime  @default(now()) @map("criado_em")
+  atualizadoEm       DateTime  @updatedAt @map("atualizado_em")
+  deletedAt          DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_cid")
+}
+
+model SigtapOcupacao {
+  coOcupacao   String    @id @map("co_ocupacao") @db.Char(6)
+  noOcupacao   String    @map("no_ocupacao") @db.VarChar(150)
+  criadoEm     DateTime  @default(now()) @map("criado_em")
+  atualizadoEm DateTime  @updatedAt @map("atualizado_em")
+  deletedAt    DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_ocupacao")
+}
+
+model SigtapHabilitacao {
+  coHabilitacao String    @id @map("co_habilitacao") @db.VarChar(4)
+  noHabilitacao String    @map("no_habilitacao") @db.VarChar(150)
+  dtCompetencia String    @map("dt_competencia") @db.Char(6)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletedAt     DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_habilitacao")
+}
+
+model SigtapGrupo {
+  coGrupo       String    @id @map("co_grupo") @db.VarChar(2)
+  noGrupo       String    @map("no_grupo") @db.VarChar(100)
+  dtCompetencia String    @map("dt_competencia") @db.Char(6)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletedAt     DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_grupo")
+}
+
+model SigtapSubGrupo {
+  coGrupo       String    @map("co_grupo") @db.VarChar(2)
+  coSubGrupo    String    @map("co_sub_grupo") @db.VarChar(2)
+  noSubGrupo    String    @map("no_sub_grupo") @db.VarChar(100)
+  dtCompetencia String    @map("dt_competencia") @db.Char(6)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletedAt     DateTime? @map("deletado_em")
+
+  @@id([coGrupo, coSubGrupo])
+  @@map("sigtap_tb_sub_grupo")
+}
+
+model SigtapFormaOrganizacao {
+  coGrupo            String    @map("co_grupo") @db.VarChar(2)
+  coSubGrupo         String    @map("co_sub_grupo") @db.VarChar(2)
+  coFormaOrganizacao String    @map("co_forma_organizacao") @db.VarChar(2)
+  noFormaOrganizacao String    @map("no_forma_organizacao") @db.VarChar(100)
+  dtCompetencia      String    @map("dt_competencia") @db.Char(6)
+  criadoEm           DateTime  @default(now()) @map("criado_em")
+  atualizadoEm       DateTime  @updatedAt @map("atualizado_em")
+  deletedAt          DateTime? @map("deletado_em")
+
+  @@id([coGrupo, coSubGrupo, coFormaOrganizacao])
+  @@map("sigtap_tb_forma_organizacao")
+}
+
+model SigtapSiaSih {
+  coProcedimentoSiaSih String    @map("co_procedimento_sia_sih") @db.VarChar(10)
+  noProcedimentoSiaSih String    @map("no_procedimento_sia_sih") @db.VarChar(100)
+  tpProcedimento       String    @map("tp_procedimento") @db.VarChar(1)
+  dtCompetencia        String    @map("dt_competencia") @db.Char(6)
+  criadoEm             DateTime  @default(now()) @map("criado_em")
+  atualizadoEm         DateTime  @updatedAt @map("atualizado_em")
+  deletedAt            DateTime? @map("deletado_em")
+
+  @@id([coProcedimentoSiaSih, tpProcedimento])
+  @@map("sigtap_tb_sia_sih")
+}
+
+model SigtapGrupoHabilitacao {
+  nuGrupoHabilitacao String    @id @map("nu_grupo_habilitacao") @db.VarChar(4)
+  noGrupoHabilitacao String    @map("no_grupo_habilitacao") @db.VarChar(20)
+  dsGrupoHabilitacao String    @map("ds_grupo_habilitacao") @db.VarChar(250)
+  criadoEm           DateTime  @default(now()) @map("criado_em")
+  atualizadoEm       DateTime  @updatedAt @map("atualizado_em")
+  deletedAt          DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_grupo_habilitacao")
+}
+
+model SigtapDescricao {
+  coProcedimento String    @id @map("co_procedimento") @db.VarChar(10)
+  dsProcedimento String    @map("ds_procedimento") @db.VarChar(4000)
+  dtCompetencia  String    @map("dt_competencia") @db.Char(6)
+  criadoEm       DateTime  @default(now()) @map("criado_em")
+  atualizadoEm   DateTime  @updatedAt @map("atualizado_em")
+  deletedAt      DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_descricao")
+}
+
+model SigtapRegraCondicionada {
+  coRegraCondicionada String    @id @map("co_regra_condicionada") @db.VarChar(4)
+  noRegraCondicionada String    @map("no_regra_condicionada") @db.VarChar(150)
+  dsRegraCondicionada String    @map("ds_regra_condicionada") @db.VarChar(4000)
+  criadoEm            DateTime  @default(now()) @map("criado_em")
+  atualizadoEm        DateTime  @updatedAt @map("atualizado_em")
+  deletedAt           DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_regra_condicionada")
+}
+
+model SigtapRedeAtencao {
+  coRedeAtencao String    @id @map("co_rede_atencao") @db.VarChar(3)
+  noRedeAtencao String    @map("no_rede_atencao") @db.VarChar(50)
+  criadoEm      DateTime  @default(now()) @map("criado_em")
+  atualizadoEm  DateTime  @updatedAt @map("atualizado_em")
+  deletedAt     DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_rede_atencao")
+}
+
+model SigtapComponenteRede {
+  coComponenteRede String    @id @map("co_componente_rede") @db.VarChar(10)
+  noComponenteRede String    @map("no_componente_rede") @db.VarChar(150)
+  coRedeAtencao    String    @map("co_rede_atencao") @db.VarChar(3)
+  criadoEm         DateTime  @default(now()) @map("criado_em")
+  atualizadoEm     DateTime  @updatedAt @map("atualizado_em")
+  deletedAt        DateTime? @map("deletado_em")
+
+  @@index([coRedeAtencao])
+  @@map("sigtap_tb_componente_rede")
+}
+
+model SigtapTuss {
+  coTuss       String    @id @map("co_tuss") @db.VarChar(10)
+  noTuss       String    @map("no_tuss") @db.VarChar(450)
+  criadoEm     DateTime  @default(now()) @map("criado_em")
+  atualizadoEm DateTime  @updatedAt @map("atualizado_em")
+  deletedAt    DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_tuss")
+}
+
+model SigtapRenases {
+  coRenases    String    @id @map("co_renases") @db.VarChar(10)
+  noRenases    String    @map("no_renases") @db.VarChar(150)
+  criadoEm     DateTime  @default(now()) @map("criado_em")
+  atualizadoEm DateTime  @updatedAt @map("atualizado_em")
+  deletedAt    DateTime? @map("deletado_em")
+
+  @@map("sigtap_tb_renases")
 }
