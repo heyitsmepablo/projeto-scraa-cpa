@@ -1,7 +1,17 @@
 # Sync SIGTAP
 
-Módulo responsável por automatizar a sincronização da **TabelaUnificada** do SIGTAP (DATASUS). 
-O sistema conecta no servidor FTP do DATASUS, baixa o arquivo ZIP da competência mais recente, extrai as informações da `tb_procedimento`, calcula o diff (diferença) em relação aos dados já salvos no PostgreSQL e atualiza a base com inserções, atualizações e exclusões (soft deletes), criando changelogs para auditoria.
+Módulo (ETL) responsável por automatizar a sincronização da **Tabela Unificada** do SIGTAP (DATASUS). 
+O sistema conecta no servidor FTP do DATASUS, baixa o arquivo ZIP da competência mais recente, descompacta os arquivos `.txt`, e realiza a carga no PostgreSQL. 
+
+Além disso, o ETL é capaz de calcular um *diff* (diferença) entre a nova base baixada e os dados já existentes no banco de dados. Ele aplica as inserções, atualizações e exclusões lógicas de mais de 23 tabelas do SIGTAP (Procedimentos, CIDs, CBOs, Habilitações, Regras, etc) e registra todas as mudanças na tabela de **Changelog**, permitindo uma auditoria rigorosa de como os valores e regras dos procedimentos evoluíram ao longo do tempo.
+
+## Funcionalidades Principais
+
+- Sincronização automática da Tabela Unificada.
+- Suporte a mais de 23 tabelas relacionais do DATASUS (ex: `tb_procedimento`, `tb_financiamento`, `tb_cid`, `tb_ocupacao`, etc).
+- Arquitetura baseada em Micro-batches para otimizar o uso da memória RAM (pandas chunking).
+- Geração de Changelogs automáticos (identifica o que mudou de um mês para o outro de forma declarativa).
+- Inserções em massa (Bulk inserts) utilizando técnicas para alta performance.
 
 ## Requisitos
 
