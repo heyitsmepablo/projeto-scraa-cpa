@@ -1,0 +1,630 @@
+2026-07-08T01:47:38 [INFO] sync_sigtap.main - Iniciando rotina de sincronização SIGTAP genérica...
+2026-07-08T01:47:39 [INFO] sync_sigtap.main - Última competência no FTP: 202606 (TabelaUnificada_202606_v2606091427.zip)
+2026-07-08T01:47:41 [INFO] sync_sigtap.etl_core - Baixando TabelaUnificada_202606_v2606091427.zip para /tmp/tmpxjh9tiso/TabelaUnificada_202606_v2606091427.zip...
+2026-07-08T01:47:45 [INFO] sync_sigtap.main - [01/24] (0.0%) Processando tb_procedimento | ETA: Calculando...
+2026-07-08T01:47:45 [INFO] sync_sigtap.main - [tb_procedimento] Diff -> INSERTs: 4994, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:47:49 [INFO] sync_sigtap.main - [02/24] (4.2%) Processando tb_financiamento | ETA: 01:45
+2026-07-08T01:47:50 [INFO] sync_sigtap.main - [tb_financiamento] Diff -> INSERTs: 7, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:47:50 [INFO] sync_sigtap.main - [03/24] (8.3%) Processando tb_rubrica | ETA: 01:00
+2026-07-08T01:47:50 [INFO] sync_sigtap.main - [tb_rubrica] Diff -> INSERTs: 43, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:47:51 [INFO] sync_sigtap.main - [04/24] (12.5%) Processando tb_detalhe | ETA: 00:44
+2026-07-08T01:47:51 [INFO] sync_sigtap.main - [tb_detalhe] Diff -> INSERTs: 51, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:47:52 [INFO] sync_sigtap.main - [05/24] (16.7%) Processando tb_descricao_detalhe | ETA: 00:36
+2026-07-08T01:47:52 [INFO] sync_sigtap.main - [tb_descricao_detalhe] Diff -> INSERTs: 51, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:47:53 [INFO] sync_sigtap.main - [06/24] (20.8%) Processando tb_registro | ETA: 00:31
+2026-07-08T01:47:53 [INFO] sync_sigtap.main - [tb_registro] Diff -> INSERTs: 10, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:47:54 [INFO] sync_sigtap.main - [07/24] (25.0%) Processando tb_servico | ETA: 00:27
+2026-07-08T01:47:54 [INFO] sync_sigtap.main - [tb_servico] Diff -> INSERTs: 74, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:47:55 [INFO] sync_sigtap.main - [08/24] (29.2%) Processando tb_servico_classificacao | ETA: 00:24
+2026-07-08T01:47:55 [INFO] sync_sigtap.main - [tb_servico_classificacao] Diff -> INSERTs: 433, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:47:56 [INFO] sync_sigtap.main - [09/24] (33.3%) Processando tb_modalidade | ETA: 00:22
+2026-07-08T01:47:56 [INFO] sync_sigtap.main - [tb_modalidade] Diff -> INSERTs: 4, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:47:57 [INFO] sync_sigtap.main - [10/24] (37.5%) Processando tb_tipo_leito | ETA: 00:19
+2026-07-08T01:47:57 [INFO] sync_sigtap.main - [tb_tipo_leito] Diff -> INSERTs: 41, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:47:57 [INFO] sync_sigtap.main - [11/24] (41.7%) Processando tb_cid | ETA: 00:17
+2026-07-08T01:47:58 [INFO] sync_sigtap.main - [tb_cid] Diff -> INSERTs: 14242, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:07 [INFO] sync_sigtap.main - [12/24] (45.8%) Processando tb_ocupacao | ETA: 00:26
+2026-07-08T01:48:07 [INFO] sync_sigtap.main - [tb_ocupacao] Diff -> INSERTs: 2719, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:09 [INFO] sync_sigtap.main - [13/24] (50.0%) Processando tb_habilitacao | ETA: 00:24
+2026-07-08T01:48:09 [INFO] sync_sigtap.main - [tb_habilitacao] Diff -> INSERTs: 346, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:10 [INFO] sync_sigtap.main - [14/24] (54.2%) Processando tb_grupo | ETA: 00:21
+2026-07-08T01:48:10 [INFO] sync_sigtap.main - [tb_grupo] Diff -> INSERTs: 9, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:11 [INFO] sync_sigtap.main - [15/24] (58.3%) Processando tb_sub_grupo | ETA: 00:18
+2026-07-08T01:48:11 [INFO] sync_sigtap.main - [tb_sub_grupo] Diff -> INSERTs: 68, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:12 [INFO] sync_sigtap.main - [16/24] (62.5%) Processando tb_forma_organizacao | ETA: 00:16
+2026-07-08T01:48:12 [INFO] sync_sigtap.main - [tb_forma_organizacao] Diff -> INSERTs: 416, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:13 [INFO] sync_sigtap.main - [17/24] (66.7%) Processando tb_sia_sih | ETA: 00:14
+2026-07-08T01:48:13 [INFO] sync_sigtap.main - [tb_sia_sih] Diff -> INSERTs: 8383, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:18 [INFO] sync_sigtap.main - [18/24] (70.8%) Processando tb_grupo_habilitacao | ETA: 00:13
+2026-07-08T01:48:18 [INFO] sync_sigtap.main - [tb_grupo_habilitacao] Diff -> INSERTs: 31, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:19 [INFO] sync_sigtap.main - [19/24] (75.0%) Processando tb_descricao | ETA: 00:11
+2026-07-08T01:48:20 [INFO] sync_sigtap.main - [tb_descricao] Diff -> INSERTs: 4299, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:22 [INFO] sync_sigtap.main - [20/24] (79.2%) Processando tb_regra_condicionada | ETA: 00:09
+2026-07-08T01:48:23 [INFO] sync_sigtap.main - [tb_regra_condicionada] Diff -> INSERTs: 14, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:23 [INFO] sync_sigtap.main - [21/24] (83.3%) Processando tb_rede_atencao | ETA: 00:07
+2026-07-08T01:48:24 [INFO] sync_sigtap.main - [tb_rede_atencao] Diff -> INSERTs: 5, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:24 [INFO] sync_sigtap.main - [22/24] (87.5%) Processando tb_componente_rede | ETA: 00:05
+2026-07-08T01:48:24 [INFO] sync_sigtap.main - [tb_componente_rede] Diff -> INSERTs: 20, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:25 [INFO] sync_sigtap.main - [23/24] (91.7%) Processando tb_tuss | ETA: 00:03
+2026-07-08T01:48:25 [INFO] sync_sigtap.main - [tb_tuss] Diff -> INSERTs: 5766, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:48:30 [ERROR] sync_sigtap.main - Erro ao processar tb_tuss: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(250)
+
+[SQL: INSERT INTO sigtap_changelog (importacao_id, tabela, chave_registro, descricao_registro, tipo_operacao, dados_antigos, dados_novos, criado_em) SELECT p0::INTEGER, p1::VARCHAR, p2::VARCHAR, p3::VARCHAR, p4::"TipoOperacao", p5::JSON, p6::JSON, p7::TIME ... 203083 characters truncated ... 6, p7, sen_counter) ORDER BY sen_counter RETURNING sigtap_changelog.id, sigtap_changelog.id AS id__1]
+[parameters: {'criado_em__0': datetime.datetime(2026, 7, 8, 4, 48, 27, 172164), 'importacao_id__0': 1, 'tipo_operacao__0': 'INSERT', 'tabela__0': 'sigtap_tb_tuss', 'descricao_registro__0': 'Procedimento proveniente de tabela própria sem mapeamento para TUSS', 'dados_novos__0': '{"coTuss": "00000000", "noTuss": "Procedimento proveniente de tabela pr\\u00f3pria sem mapeamento para TUSS"}', 'chave_registro__0': '00000000', 'dados_antigos__0': 'null', 'criado_em__1': datetime.datetime(2026, 7, 8, 4, 48, 27, 172170), 'importacao_id__1': 1, 'tipo_operacao__1': 'INSERT', 'tabela__1': 'sigtap_tb_tuss', 'descricao_registro__1': 'Consulta em consultório (no horário normal ou preestabelecido)', 'dados_novos__1': '{"coTuss": "10101012", "noTuss": "Consulta em consult\\u00f3rio (no hor\\u00e1rio normal ou preestabelecido)"}', 'chave_registro__1': '10101012', 'dados_antigos__1': 'null', 'criado_em__2': datetime.datetime(2026, 7, 8, 4, 48, 27, 172172), 'importacao_id__2': 1, 'tipo_operacao__2': 'INSERT', 'tabela__2': 'sigtap_tb_tuss', 'descricao_registro__2': 'Consulta em domicílio', 'dados_novos__2': '{"coTuss": "10101020", "noTuss": "Consulta em domic\\u00edlio"}', 'chave_registro__2': '10101020', 'dados_antigos__2': 'null', 'criado_em__3': datetime.datetime(2026, 7, 8, 4, 48, 27, 172174), 'importacao_id__3': 1, 'tipo_operacao__3': 'INSERT', 'tabela__3': 'sigtap_tb_tuss', 'descricao_registro__3': 'Consulta em pronto socorro', 'dados_novos__3': '{"coTuss": "10101039", "noTuss": "Consulta em pronto socorro"}', 'chave_registro__3': '10101039', 'dados_antigos__3': 'null', 'criado_em__4': datetime.datetime(2026, 7, 8, 4, 48, 27, 172176), 'importacao_id__4': 1, 'tipo_operacao__4': 'INSERT', 'tabela__4': 'sigtap_tb_tuss', 'descricao_registro__4': 'Visita hospitalar (paciente internado)', 'dados_novos__4': '{"coTuss": "10102019", "noTuss": "Visita hospitalar (paciente internado)"}', 'chave_registro__4': '10102019', 'dados_antigos__4': 'null', 'criado_em__5': datetime.datetime(2026, 7, 8, 4, 48, 27, 172177), 'importacao_id__5': 1, 'tipo_operacao__5': 'INSERT', 'tabela__5': 'sigtap_tb_tuss', 'descricao_registro__5': 'Atendimento ao recém-nascido em berçário', 'dados_novos__5': '{"coTuss": "10103015", "noTuss": "Atendimento ao rec\\u00e9m-nascido em ber\\u00e7\\u00e1rio"}', 'chave_registro__5': '10103015', 'dados_antigos__5': 'null', 'criado_em__6': datetime.datetime(2026, 7, 8, 4, 48, 27, 172179), 'importacao_id__6': 1 ... 7900 parameters truncated ... 'chave_registro__993': '30719135', 'dados_antigos__993': 'null', 'criado_em__994': datetime.datetime(2026, 7, 8, 4, 48, 27, 173517), 'importacao_id__994': 1, 'tipo_operacao__994': 'INSERT', 'tabela__994': 'sigtap_tb_tuss', 'descricao_registro__994': 'Abaixamento miotendinoso no antebraço', 'dados_novos__994': '{"coTuss": "30720010", "noTuss": "Abaixamento miotendinoso no antebra\\u00e7o"}', 'chave_registro__994': '30720010', 'dados_antigos__994': 'null', 'criado_em__995': datetime.datetime(2026, 7, 8, 4, 48, 27, 173518), 'importacao_id__995': 1, 'tipo_operacao__995': 'INSERT', 'tabela__995': 'sigtap_tb_tuss', 'descricao_registro__995': 'Alongamento dos ossos do antebraço com fixador externo dinâmico - tratamento cirúrgico', 'dados_novos__995': '{"coTuss": "30720028", "noTuss": "Alongamento dos ossos do antebra\\u00e7o com fixador externo din\\u00e2mico - tratamento cir\\u00fargico"}', 'chave_registro__995': '30720028', 'dados_antigos__995': 'null', 'criado_em__996': datetime.datetime(2026, 7, 8, 4, 48, 27, 173519), 'importacao_id__996': 1, 'tipo_operacao__996': 'INSERT', 'tabela__996': 'sigtap_tb_tuss', 'descricao_registro__996': 'Amputação ao nível do antebraço - tratamento cirúrgico', 'dados_novos__996': '{"coTuss": "30720036", "noTuss": "Amputa\\u00e7\\u00e3o ao n\\u00edvel do antebra\\u00e7o - tratamento cir\\u00fargico"}', 'chave_registro__996': '30720036', 'dados_antigos__996': 'null', 'criado_em__997': datetime.datetime(2026, 7, 8, 4, 48, 27, 173521), 'importacao_id__997': 1, 'tipo_operacao__997': 'INSERT', 'tabela__997': 'sigtap_tb_tuss', 'descricao_registro__997': 'Biópsia cirúrgica do antebraço', 'dados_novos__997': '{"coTuss": "30720044", "noTuss": "Bi\\u00f3psia cir\\u00fargica do antebra\\u00e7o"}', 'chave_registro__997': '30720044', 'dados_antigos__997': 'null', 'criado_em__998': datetime.datetime(2026, 7, 8, 4, 48, 27, 173522), 'importacao_id__998': 1, 'tipo_operacao__998': 'INSERT', 'tabela__998': 'sigtap_tb_tuss', 'descricao_registro__998': 'Contratura isquêmica de Volkmann - tratamento cirúrgico', 'dados_novos__998': '{"coTuss": "30720052", "noTuss": "Contratura isqu\\u00eamica de Volkmann - tratamento cir\\u00fargico"}', 'chave_registro__998': '30720052', 'dados_antigos__998': 'null', 'criado_em__999': datetime.datetime(2026, 7, 8, 4, 48, 27, 173523), 'importacao_id__999': 1, 'tipo_operacao__999': 'INSERT', 'tabela__999': 'sigtap_tb_tuss', 'descricao_registro__999': 'Correção de deformidade adquirida de antebraço com fixador externo', 'dados_novos__999': '{"coTuss": "30720060", "noTuss": "Corre\\u00e7\\u00e3o de deformidade adquirida de antebra\\u00e7o com fixador externo"}', 'chave_registro__999': '30720060', 'dados_antigos__999': 'null'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h). Interrompendo a sincronização.
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2127, in _exec_insertmany_context
+    dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.StringDataRightTruncation: value too long for type character varying(250)
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/src/sync_sigtap/main.py", line 112, in execute_etl
+    etl.apply_diff(diff, session, importacao.id, df_db, model_class, table_name)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/src/sync_sigtap/etl_core.py", line 325, in apply_diff
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1316, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1290, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 465, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 641, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 94, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 1144, in _emit_insert_statements
+    result = connection.execute(
+        statement, multiparams, execution_options=execution_options
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_insertmany_context(dialect, context)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2135, in _exec_insertmany_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e,
+        ^^
+    ...<4 lines>...
+        is_sub_exec=True,
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2127, in _exec_insertmany_context
+    dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.DataError: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(250)
+
+[SQL: INSERT INTO sigtap_changelog (importacao_id, tabela, chave_registro, descricao_registro, tipo_operacao, dados_antigos, dados_novos, criado_em) SELECT p0::INTEGER, p1::VARCHAR, p2::VARCHAR, p3::VARCHAR, p4::"TipoOperacao", p5::JSON, p6::JSON, p7::TIME ... 203083 characters truncated ... 6, p7, sen_counter) ORDER BY sen_counter RETURNING sigtap_changelog.id, sigtap_changelog.id AS id__1]
+[parameters: {'criado_em__0': datetime.datetime(2026, 7, 8, 4, 48, 27, 172164), 'importacao_id__0': 1, 'tipo_operacao__0': 'INSERT', 'tabela__0': 'sigtap_tb_tuss', 'descricao_registro__0': 'Procedimento proveniente de tabela própria sem mapeamento para TUSS', 'dados_novos__0': '{"coTuss": "00000000", "noTuss": "Procedimento proveniente de tabela pr\\u00f3pria sem mapeamento para TUSS"}', 'chave_registro__0': '00000000', 'dados_antigos__0': 'null', 'criado_em__1': datetime.datetime(2026, 7, 8, 4, 48, 27, 172170), 'importacao_id__1': 1, 'tipo_operacao__1': 'INSERT', 'tabela__1': 'sigtap_tb_tuss', 'descricao_registro__1': 'Consulta em consultório (no horário normal ou preestabelecido)', 'dados_novos__1': '{"coTuss": "10101012", "noTuss": "Consulta em consult\\u00f3rio (no hor\\u00e1rio normal ou preestabelecido)"}', 'chave_registro__1': '10101012', 'dados_antigos__1': 'null', 'criado_em__2': datetime.datetime(2026, 7, 8, 4, 48, 27, 172172), 'importacao_id__2': 1, 'tipo_operacao__2': 'INSERT', 'tabela__2': 'sigtap_tb_tuss', 'descricao_registro__2': 'Consulta em domicílio', 'dados_novos__2': '{"coTuss": "10101020", "noTuss": "Consulta em domic\\u00edlio"}', 'chave_registro__2': '10101020', 'dados_antigos__2': 'null', 'criado_em__3': datetime.datetime(2026, 7, 8, 4, 48, 27, 172174), 'importacao_id__3': 1, 'tipo_operacao__3': 'INSERT', 'tabela__3': 'sigtap_tb_tuss', 'descricao_registro__3': 'Consulta em pronto socorro', 'dados_novos__3': '{"coTuss": "10101039", "noTuss": "Consulta em pronto socorro"}', 'chave_registro__3': '10101039', 'dados_antigos__3': 'null', 'criado_em__4': datetime.datetime(2026, 7, 8, 4, 48, 27, 172176), 'importacao_id__4': 1, 'tipo_operacao__4': 'INSERT', 'tabela__4': 'sigtap_tb_tuss', 'descricao_registro__4': 'Visita hospitalar (paciente internado)', 'dados_novos__4': '{"coTuss": "10102019", "noTuss": "Visita hospitalar (paciente internado)"}', 'chave_registro__4': '10102019', 'dados_antigos__4': 'null', 'criado_em__5': datetime.datetime(2026, 7, 8, 4, 48, 27, 172177), 'importacao_id__5': 1, 'tipo_operacao__5': 'INSERT', 'tabela__5': 'sigtap_tb_tuss', 'descricao_registro__5': 'Atendimento ao recém-nascido em berçário', 'dados_novos__5': '{"coTuss": "10103015", "noTuss": "Atendimento ao rec\\u00e9m-nascido em ber\\u00e7\\u00e1rio"}', 'chave_registro__5': '10103015', 'dados_antigos__5': 'null', 'criado_em__6': datetime.datetime(2026, 7, 8, 4, 48, 27, 172179), 'importacao_id__6': 1 ... 7900 parameters truncated ... 'chave_registro__993': '30719135', 'dados_antigos__993': 'null', 'criado_em__994': datetime.datetime(2026, 7, 8, 4, 48, 27, 173517), 'importacao_id__994': 1, 'tipo_operacao__994': 'INSERT', 'tabela__994': 'sigtap_tb_tuss', 'descricao_registro__994': 'Abaixamento miotendinoso no antebraço', 'dados_novos__994': '{"coTuss": "30720010", "noTuss": "Abaixamento miotendinoso no antebra\\u00e7o"}', 'chave_registro__994': '30720010', 'dados_antigos__994': 'null', 'criado_em__995': datetime.datetime(2026, 7, 8, 4, 48, 27, 173518), 'importacao_id__995': 1, 'tipo_operacao__995': 'INSERT', 'tabela__995': 'sigtap_tb_tuss', 'descricao_registro__995': 'Alongamento dos ossos do antebraço com fixador externo dinâmico - tratamento cirúrgico', 'dados_novos__995': '{"coTuss": "30720028", "noTuss": "Alongamento dos ossos do antebra\\u00e7o com fixador externo din\\u00e2mico - tratamento cir\\u00fargico"}', 'chave_registro__995': '30720028', 'dados_antigos__995': 'null', 'criado_em__996': datetime.datetime(2026, 7, 8, 4, 48, 27, 173519), 'importacao_id__996': 1, 'tipo_operacao__996': 'INSERT', 'tabela__996': 'sigtap_tb_tuss', 'descricao_registro__996': 'Amputação ao nível do antebraço - tratamento cirúrgico', 'dados_novos__996': '{"coTuss": "30720036", "noTuss": "Amputa\\u00e7\\u00e3o ao n\\u00edvel do antebra\\u00e7o - tratamento cir\\u00fargico"}', 'chave_registro__996': '30720036', 'dados_antigos__996': 'null', 'criado_em__997': datetime.datetime(2026, 7, 8, 4, 48, 27, 173521), 'importacao_id__997': 1, 'tipo_operacao__997': 'INSERT', 'tabela__997': 'sigtap_tb_tuss', 'descricao_registro__997': 'Biópsia cirúrgica do antebraço', 'dados_novos__997': '{"coTuss": "30720044", "noTuss": "Bi\\u00f3psia cir\\u00fargica do antebra\\u00e7o"}', 'chave_registro__997': '30720044', 'dados_antigos__997': 'null', 'criado_em__998': datetime.datetime(2026, 7, 8, 4, 48, 27, 173522), 'importacao_id__998': 1, 'tipo_operacao__998': 'INSERT', 'tabela__998': 'sigtap_tb_tuss', 'descricao_registro__998': 'Contratura isquêmica de Volkmann - tratamento cirúrgico', 'dados_novos__998': '{"coTuss": "30720052", "noTuss": "Contratura isqu\\u00eamica de Volkmann - tratamento cir\\u00fargico"}', 'chave_registro__998': '30720052', 'dados_antigos__998': 'null', 'criado_em__999': datetime.datetime(2026, 7, 8, 4, 48, 27, 173523), 'importacao_id__999': 1, 'tipo_operacao__999': 'INSERT', 'tabela__999': 'sigtap_tb_tuss', 'descricao_registro__999': 'Correção de deformidade adquirida de antebraço com fixador externo', 'dados_novos__999': '{"coTuss": "30720060", "noTuss": "Corre\\u00e7\\u00e3o de deformidade adquirida de antebra\\u00e7o com fixador externo"}', 'chave_registro__999': '30720060', 'dados_antigos__999': 'null'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2026-07-08T01:48:30 [ERROR] sync_sigtap.main - Falha na sincronização: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(250)
+
+[SQL: INSERT INTO sigtap_changelog (importacao_id, tabela, chave_registro, descricao_registro, tipo_operacao, dados_antigos, dados_novos, criado_em) SELECT p0::INTEGER, p1::VARCHAR, p2::VARCHAR, p3::VARCHAR, p4::"TipoOperacao", p5::JSON, p6::JSON, p7::TIME ... 203083 characters truncated ... 6, p7, sen_counter) ORDER BY sen_counter RETURNING sigtap_changelog.id, sigtap_changelog.id AS id__1]
+[parameters: {'criado_em__0': datetime.datetime(2026, 7, 8, 4, 48, 27, 172164), 'importacao_id__0': 1, 'tipo_operacao__0': 'INSERT', 'tabela__0': 'sigtap_tb_tuss', 'descricao_registro__0': 'Procedimento proveniente de tabela própria sem mapeamento para TUSS', 'dados_novos__0': '{"coTuss": "00000000", "noTuss": "Procedimento proveniente de tabela pr\\u00f3pria sem mapeamento para TUSS"}', 'chave_registro__0': '00000000', 'dados_antigos__0': 'null', 'criado_em__1': datetime.datetime(2026, 7, 8, 4, 48, 27, 172170), 'importacao_id__1': 1, 'tipo_operacao__1': 'INSERT', 'tabela__1': 'sigtap_tb_tuss', 'descricao_registro__1': 'Consulta em consultório (no horário normal ou preestabelecido)', 'dados_novos__1': '{"coTuss": "10101012", "noTuss": "Consulta em consult\\u00f3rio (no hor\\u00e1rio normal ou preestabelecido)"}', 'chave_registro__1': '10101012', 'dados_antigos__1': 'null', 'criado_em__2': datetime.datetime(2026, 7, 8, 4, 48, 27, 172172), 'importacao_id__2': 1, 'tipo_operacao__2': 'INSERT', 'tabela__2': 'sigtap_tb_tuss', 'descricao_registro__2': 'Consulta em domicílio', 'dados_novos__2': '{"coTuss": "10101020", "noTuss": "Consulta em domic\\u00edlio"}', 'chave_registro__2': '10101020', 'dados_antigos__2': 'null', 'criado_em__3': datetime.datetime(2026, 7, 8, 4, 48, 27, 172174), 'importacao_id__3': 1, 'tipo_operacao__3': 'INSERT', 'tabela__3': 'sigtap_tb_tuss', 'descricao_registro__3': 'Consulta em pronto socorro', 'dados_novos__3': '{"coTuss": "10101039", "noTuss": "Consulta em pronto socorro"}', 'chave_registro__3': '10101039', 'dados_antigos__3': 'null', 'criado_em__4': datetime.datetime(2026, 7, 8, 4, 48, 27, 172176), 'importacao_id__4': 1, 'tipo_operacao__4': 'INSERT', 'tabela__4': 'sigtap_tb_tuss', 'descricao_registro__4': 'Visita hospitalar (paciente internado)', 'dados_novos__4': '{"coTuss": "10102019", "noTuss": "Visita hospitalar (paciente internado)"}', 'chave_registro__4': '10102019', 'dados_antigos__4': 'null', 'criado_em__5': datetime.datetime(2026, 7, 8, 4, 48, 27, 172177), 'importacao_id__5': 1, 'tipo_operacao__5': 'INSERT', 'tabela__5': 'sigtap_tb_tuss', 'descricao_registro__5': 'Atendimento ao recém-nascido em berçário', 'dados_novos__5': '{"coTuss": "10103015", "noTuss": "Atendimento ao rec\\u00e9m-nascido em ber\\u00e7\\u00e1rio"}', 'chave_registro__5': '10103015', 'dados_antigos__5': 'null', 'criado_em__6': datetime.datetime(2026, 7, 8, 4, 48, 27, 172179), 'importacao_id__6': 1 ... 7900 parameters truncated ... 'chave_registro__993': '30719135', 'dados_antigos__993': 'null', 'criado_em__994': datetime.datetime(2026, 7, 8, 4, 48, 27, 173517), 'importacao_id__994': 1, 'tipo_operacao__994': 'INSERT', 'tabela__994': 'sigtap_tb_tuss', 'descricao_registro__994': 'Abaixamento miotendinoso no antebraço', 'dados_novos__994': '{"coTuss": "30720010", "noTuss": "Abaixamento miotendinoso no antebra\\u00e7o"}', 'chave_registro__994': '30720010', 'dados_antigos__994': 'null', 'criado_em__995': datetime.datetime(2026, 7, 8, 4, 48, 27, 173518), 'importacao_id__995': 1, 'tipo_operacao__995': 'INSERT', 'tabela__995': 'sigtap_tb_tuss', 'descricao_registro__995': 'Alongamento dos ossos do antebraço com fixador externo dinâmico - tratamento cirúrgico', 'dados_novos__995': '{"coTuss": "30720028", "noTuss": "Alongamento dos ossos do antebra\\u00e7o com fixador externo din\\u00e2mico - tratamento cir\\u00fargico"}', 'chave_registro__995': '30720028', 'dados_antigos__995': 'null', 'criado_em__996': datetime.datetime(2026, 7, 8, 4, 48, 27, 173519), 'importacao_id__996': 1, 'tipo_operacao__996': 'INSERT', 'tabela__996': 'sigtap_tb_tuss', 'descricao_registro__996': 'Amputação ao nível do antebraço - tratamento cirúrgico', 'dados_novos__996': '{"coTuss": "30720036", "noTuss": "Amputa\\u00e7\\u00e3o ao n\\u00edvel do antebra\\u00e7o - tratamento cir\\u00fargico"}', 'chave_registro__996': '30720036', 'dados_antigos__996': 'null', 'criado_em__997': datetime.datetime(2026, 7, 8, 4, 48, 27, 173521), 'importacao_id__997': 1, 'tipo_operacao__997': 'INSERT', 'tabela__997': 'sigtap_tb_tuss', 'descricao_registro__997': 'Biópsia cirúrgica do antebraço', 'dados_novos__997': '{"coTuss": "30720044", "noTuss": "Bi\\u00f3psia cir\\u00fargica do antebra\\u00e7o"}', 'chave_registro__997': '30720044', 'dados_antigos__997': 'null', 'criado_em__998': datetime.datetime(2026, 7, 8, 4, 48, 27, 173522), 'importacao_id__998': 1, 'tipo_operacao__998': 'INSERT', 'tabela__998': 'sigtap_tb_tuss', 'descricao_registro__998': 'Contratura isquêmica de Volkmann - tratamento cirúrgico', 'dados_novos__998': '{"coTuss": "30720052", "noTuss": "Contratura isqu\\u00eamica de Volkmann - tratamento cir\\u00fargico"}', 'chave_registro__998': '30720052', 'dados_antigos__998': 'null', 'criado_em__999': datetime.datetime(2026, 7, 8, 4, 48, 27, 173523), 'importacao_id__999': 1, 'tipo_operacao__999': 'INSERT', 'tabela__999': 'sigtap_tb_tuss', 'descricao_registro__999': 'Correção de deformidade adquirida de antebraço com fixador externo', 'dados_novos__999': '{"coTuss": "30720060", "noTuss": "Corre\\u00e7\\u00e3o de deformidade adquirida de antebra\\u00e7o com fixador externo"}', 'chave_registro__999': '30720060', 'dados_antigos__999': 'null'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2127, in _exec_insertmany_context
+    dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.StringDataRightTruncation: value too long for type character varying(250)
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/src/sync_sigtap/main.py", line 112, in execute_etl
+    etl.apply_diff(diff, session, importacao.id, df_db, model_class, table_name)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/src/sync_sigtap/etl_core.py", line 325, in apply_diff
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1316, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1290, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 465, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 641, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 94, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 1144, in _emit_insert_statements
+    result = connection.execute(
+        statement, multiparams, execution_options=execution_options
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_insertmany_context(dialect, context)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2135, in _exec_insertmany_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e,
+        ^^
+    ...<4 lines>...
+        is_sub_exec=True,
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2127, in _exec_insertmany_context
+    dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.DataError: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(250)
+
+[SQL: INSERT INTO sigtap_changelog (importacao_id, tabela, chave_registro, descricao_registro, tipo_operacao, dados_antigos, dados_novos, criado_em) SELECT p0::INTEGER, p1::VARCHAR, p2::VARCHAR, p3::VARCHAR, p4::"TipoOperacao", p5::JSON, p6::JSON, p7::TIME ... 203083 characters truncated ... 6, p7, sen_counter) ORDER BY sen_counter RETURNING sigtap_changelog.id, sigtap_changelog.id AS id__1]
+[parameters: {'criado_em__0': datetime.datetime(2026, 7, 8, 4, 48, 27, 172164), 'importacao_id__0': 1, 'tipo_operacao__0': 'INSERT', 'tabela__0': 'sigtap_tb_tuss', 'descricao_registro__0': 'Procedimento proveniente de tabela própria sem mapeamento para TUSS', 'dados_novos__0': '{"coTuss": "00000000", "noTuss": "Procedimento proveniente de tabela pr\\u00f3pria sem mapeamento para TUSS"}', 'chave_registro__0': '00000000', 'dados_antigos__0': 'null', 'criado_em__1': datetime.datetime(2026, 7, 8, 4, 48, 27, 172170), 'importacao_id__1': 1, 'tipo_operacao__1': 'INSERT', 'tabela__1': 'sigtap_tb_tuss', 'descricao_registro__1': 'Consulta em consultório (no horário normal ou preestabelecido)', 'dados_novos__1': '{"coTuss": "10101012", "noTuss": "Consulta em consult\\u00f3rio (no hor\\u00e1rio normal ou preestabelecido)"}', 'chave_registro__1': '10101012', 'dados_antigos__1': 'null', 'criado_em__2': datetime.datetime(2026, 7, 8, 4, 48, 27, 172172), 'importacao_id__2': 1, 'tipo_operacao__2': 'INSERT', 'tabela__2': 'sigtap_tb_tuss', 'descricao_registro__2': 'Consulta em domicílio', 'dados_novos__2': '{"coTuss": "10101020", "noTuss": "Consulta em domic\\u00edlio"}', 'chave_registro__2': '10101020', 'dados_antigos__2': 'null', 'criado_em__3': datetime.datetime(2026, 7, 8, 4, 48, 27, 172174), 'importacao_id__3': 1, 'tipo_operacao__3': 'INSERT', 'tabela__3': 'sigtap_tb_tuss', 'descricao_registro__3': 'Consulta em pronto socorro', 'dados_novos__3': '{"coTuss": "10101039", "noTuss": "Consulta em pronto socorro"}', 'chave_registro__3': '10101039', 'dados_antigos__3': 'null', 'criado_em__4': datetime.datetime(2026, 7, 8, 4, 48, 27, 172176), 'importacao_id__4': 1, 'tipo_operacao__4': 'INSERT', 'tabela__4': 'sigtap_tb_tuss', 'descricao_registro__4': 'Visita hospitalar (paciente internado)', 'dados_novos__4': '{"coTuss": "10102019", "noTuss": "Visita hospitalar (paciente internado)"}', 'chave_registro__4': '10102019', 'dados_antigos__4': 'null', 'criado_em__5': datetime.datetime(2026, 7, 8, 4, 48, 27, 172177), 'importacao_id__5': 1, 'tipo_operacao__5': 'INSERT', 'tabela__5': 'sigtap_tb_tuss', 'descricao_registro__5': 'Atendimento ao recém-nascido em berçário', 'dados_novos__5': '{"coTuss": "10103015", "noTuss": "Atendimento ao rec\\u00e9m-nascido em ber\\u00e7\\u00e1rio"}', 'chave_registro__5': '10103015', 'dados_antigos__5': 'null', 'criado_em__6': datetime.datetime(2026, 7, 8, 4, 48, 27, 172179), 'importacao_id__6': 1 ... 7900 parameters truncated ... 'chave_registro__993': '30719135', 'dados_antigos__993': 'null', 'criado_em__994': datetime.datetime(2026, 7, 8, 4, 48, 27, 173517), 'importacao_id__994': 1, 'tipo_operacao__994': 'INSERT', 'tabela__994': 'sigtap_tb_tuss', 'descricao_registro__994': 'Abaixamento miotendinoso no antebraço', 'dados_novos__994': '{"coTuss": "30720010", "noTuss": "Abaixamento miotendinoso no antebra\\u00e7o"}', 'chave_registro__994': '30720010', 'dados_antigos__994': 'null', 'criado_em__995': datetime.datetime(2026, 7, 8, 4, 48, 27, 173518), 'importacao_id__995': 1, 'tipo_operacao__995': 'INSERT', 'tabela__995': 'sigtap_tb_tuss', 'descricao_registro__995': 'Alongamento dos ossos do antebraço com fixador externo dinâmico - tratamento cirúrgico', 'dados_novos__995': '{"coTuss": "30720028", "noTuss": "Alongamento dos ossos do antebra\\u00e7o com fixador externo din\\u00e2mico - tratamento cir\\u00fargico"}', 'chave_registro__995': '30720028', 'dados_antigos__995': 'null', 'criado_em__996': datetime.datetime(2026, 7, 8, 4, 48, 27, 173519), 'importacao_id__996': 1, 'tipo_operacao__996': 'INSERT', 'tabela__996': 'sigtap_tb_tuss', 'descricao_registro__996': 'Amputação ao nível do antebraço - tratamento cirúrgico', 'dados_novos__996': '{"coTuss": "30720036", "noTuss": "Amputa\\u00e7\\u00e3o ao n\\u00edvel do antebra\\u00e7o - tratamento cir\\u00fargico"}', 'chave_registro__996': '30720036', 'dados_antigos__996': 'null', 'criado_em__997': datetime.datetime(2026, 7, 8, 4, 48, 27, 173521), 'importacao_id__997': 1, 'tipo_operacao__997': 'INSERT', 'tabela__997': 'sigtap_tb_tuss', 'descricao_registro__997': 'Biópsia cirúrgica do antebraço', 'dados_novos__997': '{"coTuss": "30720044", "noTuss": "Bi\\u00f3psia cir\\u00fargica do antebra\\u00e7o"}', 'chave_registro__997': '30720044', 'dados_antigos__997': 'null', 'criado_em__998': datetime.datetime(2026, 7, 8, 4, 48, 27, 173522), 'importacao_id__998': 1, 'tipo_operacao__998': 'INSERT', 'tabela__998': 'sigtap_tb_tuss', 'descricao_registro__998': 'Contratura isquêmica de Volkmann - tratamento cirúrgico', 'dados_novos__998': '{"coTuss": "30720052", "noTuss": "Contratura isqu\\u00eamica de Volkmann - tratamento cir\\u00fargico"}', 'chave_registro__998': '30720052', 'dados_antigos__998': 'null', 'criado_em__999': datetime.datetime(2026, 7, 8, 4, 48, 27, 173523), 'importacao_id__999': 1, 'tipo_operacao__999': 'INSERT', 'tabela__999': 'sigtap_tb_tuss', 'descricao_registro__999': 'Correção de deformidade adquirida de antebraço com fixador externo', 'dados_novos__999': '{"coTuss": "30720060", "noTuss": "Corre\\u00e7\\u00e3o de deformidade adquirida de antebra\\u00e7o com fixador externo"}', 'chave_registro__999': '30720060', 'dados_antigos__999': 'null'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2026-07-08T01:50:18 [INFO] sync_sigtap.main - Iniciando rotina de sincronização SIGTAP genérica...
+2026-07-08T01:50:19 [INFO] sync_sigtap.main - Última competência no FTP: 202606 (TabelaUnificada_202606_v2606091427.zip)
+2026-07-08T01:50:21 [INFO] sync_sigtap.etl_core - Baixando TabelaUnificada_202606_v2606091427.zip para /tmp/tmppuu00hu1/TabelaUnificada_202606_v2606091427.zip...
+2026-07-08T01:50:25 [INFO] sync_sigtap.main - [01/24] (0.0%) Processando tb_procedimento | ETA: Calculando...
+2026-07-08T01:50:27 [INFO] sync_sigtap.main - [tb_procedimento] Diff -> INSERTs: 0, UPDATEs: 4993, DELETEs: 0
+2026-07-08T01:56:13 [ERROR] sync_sigtap.main - Erro ao processar tb_procedimento: (psycopg2.OperationalError) SSL connection has been closed unexpectedly
+
+[SQL: UPDATE sigtap_tb_procedimento SET no_procedimento=%(no_procedimento)s, tp_complexidade=%(tp_complexidade)s, tp_sexo=%(tp_sexo)s, qt_maxima_execucao=%(qt_maxima_execucao)s, qt_dias_permanencia=%(qt_dias_permanencia)s, qt_pontos=%(qt_pontos)s, vl_idade_minima=%(vl_idade_minima)s, vl_idade_maxima=%(vl_idade_maxima)s, vl_sh=%(vl_sh)s, vl_sa=%(vl_sa)s, vl_sp=%(vl_sp)s, co_financiamento=%(co_financiamento)s, co_rubrica=%(co_rubrica)s, qt_tempo_permanencia=%(qt_tempo_permanencia)s, dt_competencia=%(dt_competencia)s, atualizado_em=%(atualizado_em)s WHERE sigtap_tb_procedimento.co_procedimento = %(sigtap_tb_procedimento_co_procedimento)s]
+[parameters: [{'no_procedimento': 'ATIVIDADE EDUCATIVA / ORIENTAÇÃO EM GRUPO NA ATENÇÃO PRIMÁRIA', 'tp_complexidade': '1', 'tp_sexo': 'N', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 99.99, 'vl_idade_maxima': 99.99, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529054), 'sigtap_tb_procedimento_co_procedimento': '0101010010'}, {'no_procedimento': 'ATIVIDADE EDUCATIVA / ORIENTAÇÃO EM GRUPO NA ATENÇÃO ESPECIALIZADA', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.84, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 2.7, 'vl_sp': 0.0, 'co_financiamento': '06', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529060), 'sigtap_tb_procedimento_co_procedimento': '0101010028'}, {'no_procedimento': 'PRÁTICA CORPORAL / ATIVIDADE FÍSICA EM GRUPO', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.72, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529062), 'sigtap_tb_procedimento_co_procedimento': '0101010036'}, {'no_procedimento': 'PREVENÇÃO DA COVID-19 NAS ESCOLAS', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529064), 'sigtap_tb_procedimento_co_procedimento': '0101010095'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DAMALÁRIA', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529066), 'sigtap_tb_procedimento_co_procedimento': '0101010109'}, {'no_procedimento': 'ATIVIDADE DE EDUCAÇÃO PERMANENTE EM SAÚDE DO TRABALHADOR', 'tp_complexidade': '2', 'tp_sexo': 'N', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 99.99, 'vl_idade_maxima': 99.99, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '05', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529067), 'sigtap_tb_procedimento_co_procedimento': '0101010117'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DE ACIDENTE POR ANIMAIS PEÇONHENTOS.', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529069), 'sigtap_tb_procedimento_co_procedimento': '0101010125'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DA CÓLERA.', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529070), 'sigtap_tb_procedimento_co_procedimento': '0101010133'}  ... displaying 10 of 4993 total bound parameter sets ...  {'no_procedimento': 'OCI - GIN2 - PROGRESSÃO DA AVALIAÇÃO DIAGNÓSTICA DE SAÚDE DA MULHER (GINECOLOGIA)- SANGRAMENTO UTERINO ANORMAL II', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 1, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 1.08, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 323.24, 'vl_sp': 0.0, 'co_financiamento': '04', 'co_rubrica': '040086', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 535593), 'sigtap_tb_procedimento_co_procedimento': '0906010047'}, {'no_procedimento': 'OCI - GIN3 - PROGRESSÃO DA AVALIAÇÃO DIAGNÓSTICA DE SAÚDE DA MULHER (GINECOLOGIA)- ENDOMETRIOSE PROFUNDA- CASOS COMPLEXOS E PROGRAMAÇÃO CIRÚRGICA', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 1, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 1.08, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 372.49, 'vl_sp': 0.0, 'co_financiamento': '04', 'co_rubrica': '040086', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 535594), 'sigtap_tb_procedimento_co_procedimento': '0906010055'}]]
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Interrompendo a sincronização.
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1938, in _exec_single_context
+    self.dialect.do_executemany(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 801, in do_executemany
+    cursor.executemany(statement, parameters)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: SSL connection has been closed unexpectedly
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/src/sync_sigtap/main.py", line 112, in execute_etl
+    etl.apply_diff(diff, session, importacao.id, df_db, model_class, table_name)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/src/sync_sigtap/etl_core.py", line 272, in apply_diff
+    session.bulk_update_mappings(model_class, updates_list)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4717, in bulk_update_mappings
+    self._bulk_save_mappings(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        mapper,
+        ^^^^^^^
+    ...<5 lines>...
+        render_nulls=False,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4763, in _bulk_save_mappings
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4744, in _bulk_save_mappings
+    bulk_persistence._bulk_update(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        mapper,
+        ^^^^^^^
+    ...<3 lines>...
+        update_changed_only=update_changed_only,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/bulk_persistence.py", line 357, in _bulk_update
+    persistence._emit_update_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<6 lines>...
+        enable_check_rowcount=enable_check_rowcount,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 913, in _emit_update_statements
+    c = connection.execute(
+        statement, multiparams, execution_options=execution_options
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1938, in _exec_single_context
+    self.dialect.do_executemany(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 801, in do_executemany
+    cursor.executemany(statement, parameters)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL connection has been closed unexpectedly
+
+[SQL: UPDATE sigtap_tb_procedimento SET no_procedimento=%(no_procedimento)s, tp_complexidade=%(tp_complexidade)s, tp_sexo=%(tp_sexo)s, qt_maxima_execucao=%(qt_maxima_execucao)s, qt_dias_permanencia=%(qt_dias_permanencia)s, qt_pontos=%(qt_pontos)s, vl_idade_minima=%(vl_idade_minima)s, vl_idade_maxima=%(vl_idade_maxima)s, vl_sh=%(vl_sh)s, vl_sa=%(vl_sa)s, vl_sp=%(vl_sp)s, co_financiamento=%(co_financiamento)s, co_rubrica=%(co_rubrica)s, qt_tempo_permanencia=%(qt_tempo_permanencia)s, dt_competencia=%(dt_competencia)s, atualizado_em=%(atualizado_em)s WHERE sigtap_tb_procedimento.co_procedimento = %(sigtap_tb_procedimento_co_procedimento)s]
+[parameters: [{'no_procedimento': 'ATIVIDADE EDUCATIVA / ORIENTAÇÃO EM GRUPO NA ATENÇÃO PRIMÁRIA', 'tp_complexidade': '1', 'tp_sexo': 'N', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 99.99, 'vl_idade_maxima': 99.99, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529054), 'sigtap_tb_procedimento_co_procedimento': '0101010010'}, {'no_procedimento': 'ATIVIDADE EDUCATIVA / ORIENTAÇÃO EM GRUPO NA ATENÇÃO ESPECIALIZADA', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.84, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 2.7, 'vl_sp': 0.0, 'co_financiamento': '06', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529060), 'sigtap_tb_procedimento_co_procedimento': '0101010028'}, {'no_procedimento': 'PRÁTICA CORPORAL / ATIVIDADE FÍSICA EM GRUPO', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.72, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529062), 'sigtap_tb_procedimento_co_procedimento': '0101010036'}, {'no_procedimento': 'PREVENÇÃO DA COVID-19 NAS ESCOLAS', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529064), 'sigtap_tb_procedimento_co_procedimento': '0101010095'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DAMALÁRIA', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529066), 'sigtap_tb_procedimento_co_procedimento': '0101010109'}, {'no_procedimento': 'ATIVIDADE DE EDUCAÇÃO PERMANENTE EM SAÚDE DO TRABALHADOR', 'tp_complexidade': '2', 'tp_sexo': 'N', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 99.99, 'vl_idade_maxima': 99.99, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '05', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529067), 'sigtap_tb_procedimento_co_procedimento': '0101010117'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DE ACIDENTE POR ANIMAIS PEÇONHENTOS.', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529069), 'sigtap_tb_procedimento_co_procedimento': '0101010125'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DA CÓLERA.', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529070), 'sigtap_tb_procedimento_co_procedimento': '0101010133'}  ... displaying 10 of 4993 total bound parameter sets ...  {'no_procedimento': 'OCI - GIN2 - PROGRESSÃO DA AVALIAÇÃO DIAGNÓSTICA DE SAÚDE DA MULHER (GINECOLOGIA)- SANGRAMENTO UTERINO ANORMAL II', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 1, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 1.08, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 323.24, 'vl_sp': 0.0, 'co_financiamento': '04', 'co_rubrica': '040086', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 535593), 'sigtap_tb_procedimento_co_procedimento': '0906010047'}, {'no_procedimento': 'OCI - GIN3 - PROGRESSÃO DA AVALIAÇÃO DIAGNÓSTICA DE SAÚDE DA MULHER (GINECOLOGIA)- ENDOMETRIOSE PROFUNDA- CASOS COMPLEXOS E PROGRAMAÇÃO CIRÚRGICA', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 1, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 1.08, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 372.49, 'vl_sp': 0.0, 'co_financiamento': '04', 'co_rubrica': '040086', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 535594), 'sigtap_tb_procedimento_co_procedimento': '0906010055'}]]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-07-08T01:56:14 [ERROR] sync_sigtap.main - Falha na sincronização: (psycopg2.OperationalError) SSL connection has been closed unexpectedly
+
+[SQL: UPDATE sigtap_tb_procedimento SET no_procedimento=%(no_procedimento)s, tp_complexidade=%(tp_complexidade)s, tp_sexo=%(tp_sexo)s, qt_maxima_execucao=%(qt_maxima_execucao)s, qt_dias_permanencia=%(qt_dias_permanencia)s, qt_pontos=%(qt_pontos)s, vl_idade_minima=%(vl_idade_minima)s, vl_idade_maxima=%(vl_idade_maxima)s, vl_sh=%(vl_sh)s, vl_sa=%(vl_sa)s, vl_sp=%(vl_sp)s, co_financiamento=%(co_financiamento)s, co_rubrica=%(co_rubrica)s, qt_tempo_permanencia=%(qt_tempo_permanencia)s, dt_competencia=%(dt_competencia)s, atualizado_em=%(atualizado_em)s WHERE sigtap_tb_procedimento.co_procedimento = %(sigtap_tb_procedimento_co_procedimento)s]
+[parameters: [{'no_procedimento': 'ATIVIDADE EDUCATIVA / ORIENTAÇÃO EM GRUPO NA ATENÇÃO PRIMÁRIA', 'tp_complexidade': '1', 'tp_sexo': 'N', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 99.99, 'vl_idade_maxima': 99.99, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529054), 'sigtap_tb_procedimento_co_procedimento': '0101010010'}, {'no_procedimento': 'ATIVIDADE EDUCATIVA / ORIENTAÇÃO EM GRUPO NA ATENÇÃO ESPECIALIZADA', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.84, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 2.7, 'vl_sp': 0.0, 'co_financiamento': '06', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529060), 'sigtap_tb_procedimento_co_procedimento': '0101010028'}, {'no_procedimento': 'PRÁTICA CORPORAL / ATIVIDADE FÍSICA EM GRUPO', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.72, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529062), 'sigtap_tb_procedimento_co_procedimento': '0101010036'}, {'no_procedimento': 'PREVENÇÃO DA COVID-19 NAS ESCOLAS', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529064), 'sigtap_tb_procedimento_co_procedimento': '0101010095'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DAMALÁRIA', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529066), 'sigtap_tb_procedimento_co_procedimento': '0101010109'}, {'no_procedimento': 'ATIVIDADE DE EDUCAÇÃO PERMANENTE EM SAÚDE DO TRABALHADOR', 'tp_complexidade': '2', 'tp_sexo': 'N', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 99.99, 'vl_idade_maxima': 99.99, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '05', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529067), 'sigtap_tb_procedimento_co_procedimento': '0101010117'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DE ACIDENTE POR ANIMAIS PEÇONHENTOS.', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529069), 'sigtap_tb_procedimento_co_procedimento': '0101010125'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DA CÓLERA.', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529070), 'sigtap_tb_procedimento_co_procedimento': '0101010133'}  ... displaying 10 of 4993 total bound parameter sets ...  {'no_procedimento': 'OCI - GIN2 - PROGRESSÃO DA AVALIAÇÃO DIAGNÓSTICA DE SAÚDE DA MULHER (GINECOLOGIA)- SANGRAMENTO UTERINO ANORMAL II', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 1, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 1.08, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 323.24, 'vl_sp': 0.0, 'co_financiamento': '04', 'co_rubrica': '040086', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 535593), 'sigtap_tb_procedimento_co_procedimento': '0906010047'}, {'no_procedimento': 'OCI - GIN3 - PROGRESSÃO DA AVALIAÇÃO DIAGNÓSTICA DE SAÚDE DA MULHER (GINECOLOGIA)- ENDOMETRIOSE PROFUNDA- CASOS COMPLEXOS E PROGRAMAÇÃO CIRÚRGICA', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 1, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 1.08, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 372.49, 'vl_sp': 0.0, 'co_financiamento': '04', 'co_rubrica': '040086', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 535594), 'sigtap_tb_procedimento_co_procedimento': '0906010055'}]]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1938, in _exec_single_context
+    self.dialect.do_executemany(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 801, in do_executemany
+    cursor.executemany(statement, parameters)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: SSL connection has been closed unexpectedly
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/src/sync_sigtap/main.py", line 112, in execute_etl
+    etl.apply_diff(diff, session, importacao.id, df_db, model_class, table_name)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/src/sync_sigtap/etl_core.py", line 272, in apply_diff
+    session.bulk_update_mappings(model_class, updates_list)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4717, in bulk_update_mappings
+    self._bulk_save_mappings(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        mapper,
+        ^^^^^^^
+    ...<5 lines>...
+        render_nulls=False,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4763, in _bulk_save_mappings
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4744, in _bulk_save_mappings
+    bulk_persistence._bulk_update(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        mapper,
+        ^^^^^^^
+    ...<3 lines>...
+        update_changed_only=update_changed_only,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/bulk_persistence.py", line 357, in _bulk_update
+    persistence._emit_update_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<6 lines>...
+        enable_check_rowcount=enable_check_rowcount,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 913, in _emit_update_statements
+    c = connection.execute(
+        statement, multiparams, execution_options=execution_options
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1938, in _exec_single_context
+    self.dialect.do_executemany(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_sigtap/.venv/lib/python3.14/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 801, in do_executemany
+    cursor.executemany(statement, parameters)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL connection has been closed unexpectedly
+
+[SQL: UPDATE sigtap_tb_procedimento SET no_procedimento=%(no_procedimento)s, tp_complexidade=%(tp_complexidade)s, tp_sexo=%(tp_sexo)s, qt_maxima_execucao=%(qt_maxima_execucao)s, qt_dias_permanencia=%(qt_dias_permanencia)s, qt_pontos=%(qt_pontos)s, vl_idade_minima=%(vl_idade_minima)s, vl_idade_maxima=%(vl_idade_maxima)s, vl_sh=%(vl_sh)s, vl_sa=%(vl_sa)s, vl_sp=%(vl_sp)s, co_financiamento=%(co_financiamento)s, co_rubrica=%(co_rubrica)s, qt_tempo_permanencia=%(qt_tempo_permanencia)s, dt_competencia=%(dt_competencia)s, atualizado_em=%(atualizado_em)s WHERE sigtap_tb_procedimento.co_procedimento = %(sigtap_tb_procedimento_co_procedimento)s]
+[parameters: [{'no_procedimento': 'ATIVIDADE EDUCATIVA / ORIENTAÇÃO EM GRUPO NA ATENÇÃO PRIMÁRIA', 'tp_complexidade': '1', 'tp_sexo': 'N', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 99.99, 'vl_idade_maxima': 99.99, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529054), 'sigtap_tb_procedimento_co_procedimento': '0101010010'}, {'no_procedimento': 'ATIVIDADE EDUCATIVA / ORIENTAÇÃO EM GRUPO NA ATENÇÃO ESPECIALIZADA', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.84, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 2.7, 'vl_sp': 0.0, 'co_financiamento': '06', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529060), 'sigtap_tb_procedimento_co_procedimento': '0101010028'}, {'no_procedimento': 'PRÁTICA CORPORAL / ATIVIDADE FÍSICA EM GRUPO', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.72, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529062), 'sigtap_tb_procedimento_co_procedimento': '0101010036'}, {'no_procedimento': 'PREVENÇÃO DA COVID-19 NAS ESCOLAS', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '01', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529064), 'sigtap_tb_procedimento_co_procedimento': '0101010095'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DAMALÁRIA', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529066), 'sigtap_tb_procedimento_co_procedimento': '0101010109'}, {'no_procedimento': 'ATIVIDADE DE EDUCAÇÃO PERMANENTE EM SAÚDE DO TRABALHADOR', 'tp_complexidade': '2', 'tp_sexo': 'N', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 99.99, 'vl_idade_maxima': 99.99, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '05', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529067), 'sigtap_tb_procedimento_co_procedimento': '0101010117'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DE ACIDENTE POR ANIMAIS PEÇONHENTOS.', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529069), 'sigtap_tb_procedimento_co_procedimento': '0101010125'}, {'no_procedimento': 'ATIVIDADES EDUCATIVAS DA POPULAÇÃO SOBRE A TEMÁTICA DA CÓLERA.', 'tp_complexidade': '1', 'tp_sexo': 'I', 'qt_maxima_execucao': 9999, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 0.0, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 0.0, 'vl_sp': 0.0, 'co_financiamento': '07', 'co_rubrica': '', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 529070), 'sigtap_tb_procedimento_co_procedimento': '0101010133'}  ... displaying 10 of 4993 total bound parameter sets ...  {'no_procedimento': 'OCI - GIN2 - PROGRESSÃO DA AVALIAÇÃO DIAGNÓSTICA DE SAÚDE DA MULHER (GINECOLOGIA)- SANGRAMENTO UTERINO ANORMAL II', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 1, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 1.08, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 323.24, 'vl_sp': 0.0, 'co_financiamento': '04', 'co_rubrica': '040086', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 535593), 'sigtap_tb_procedimento_co_procedimento': '0906010047'}, {'no_procedimento': 'OCI - GIN3 - PROGRESSÃO DA AVALIAÇÃO DIAGNÓSTICA DE SAÚDE DA MULHER (GINECOLOGIA)- ENDOMETRIOSE PROFUNDA- CASOS COMPLEXOS E PROGRAMAÇÃO CIRÚRGICA', 'tp_complexidade': '2', 'tp_sexo': 'I', 'qt_maxima_execucao': 1, 'qt_dias_permanencia': 9999, 'qt_pontos': 0, 'vl_idade_minima': 1.08, 'vl_idade_maxima': 15.71, 'vl_sh': 0.0, 'vl_sa': 372.49, 'vl_sp': 0.0, 'co_financiamento': '04', 'co_rubrica': '040086', 'qt_tempo_permanencia': 9999, 'dt_competencia': '202606', 'atualizado_em': datetime.datetime(2026, 7, 8, 4, 50, 27, 535594), 'sigtap_tb_procedimento_co_procedimento': '0906010055'}]]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-07-08T01:57:00 [INFO] sync_sigtap.main - Iniciando rotina de sincronização SIGTAP genérica...
+2026-07-08T01:57:01 [INFO] sync_sigtap.main - Última competência no FTP: 202606 (TabelaUnificada_202606_v2606091427.zip)
+2026-07-08T01:57:03 [INFO] sync_sigtap.etl_core - Baixando TabelaUnificada_202606_v2606091427.zip para /tmp/tmpsn3xkuf5/TabelaUnificada_202606_v2606091427.zip...
+2026-07-08T01:57:07 [INFO] sync_sigtap.main - [01/24] (0.0%) Processando tb_procedimento | ETA: Calculando...
+2026-07-08T01:57:08 [INFO] sync_sigtap.main - [tb_procedimento] Diff -> INSERTs: 0, UPDATEs: 4993, DELETEs: 0
+2026-07-08T01:58:38 [INFO] sync_sigtap.main - Iniciando rotina de sincronização SIGTAP genérica...
+2026-07-08T01:58:39 [INFO] sync_sigtap.main - Última competência no FTP: 202606 (TabelaUnificada_202606_v2606091427.zip)
+2026-07-08T01:58:41 [INFO] sync_sigtap.etl_core - Baixando TabelaUnificada_202606_v2606091427.zip para /tmp/tmpwa3us0ax/TabelaUnificada_202606_v2606091427.zip...
+2026-07-08T01:58:44 [INFO] sync_sigtap.main - [01/24] (0.0%) Processando tb_procedimento | ETA: Calculando...
+2026-07-08T01:58:45 [INFO] sync_sigtap.main - [tb_procedimento] Diff -> INSERTs: 4994, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:58:51 [INFO] sync_sigtap.main - [02/24] (4.2%) Processando tb_financiamento | ETA: 02:38
+2026-07-08T01:58:52 [INFO] sync_sigtap.main - [tb_financiamento] Diff -> INSERTs: 7, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:58:52 [INFO] sync_sigtap.main - [03/24] (8.3%) Processando tb_rubrica | ETA: 01:27
+2026-07-08T01:58:53 [INFO] sync_sigtap.main - [tb_rubrica] Diff -> INSERTs: 43, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:58:53 [INFO] sync_sigtap.main - [04/24] (12.5%) Processando tb_detalhe | ETA: 01:02
+2026-07-08T01:58:54 [INFO] sync_sigtap.main - [tb_detalhe] Diff -> INSERTs: 51, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:58:55 [INFO] sync_sigtap.main - [05/24] (16.7%) Processando tb_descricao_detalhe | ETA: 00:51
+2026-07-08T01:58:55 [INFO] sync_sigtap.main - [tb_descricao_detalhe] Diff -> INSERTs: 51, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:58:56 [INFO] sync_sigtap.main - [06/24] (20.8%) Processando tb_registro | ETA: 00:42
+2026-07-08T01:58:56 [INFO] sync_sigtap.main - [tb_registro] Diff -> INSERTs: 10, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:58:57 [INFO] sync_sigtap.main - [07/24] (25.0%) Processando tb_servico | ETA: 00:36
+2026-07-08T01:58:57 [INFO] sync_sigtap.main - [tb_servico] Diff -> INSERTs: 74, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:58:58 [INFO] sync_sigtap.main - [08/24] (29.2%) Processando tb_servico_classificacao | ETA: 00:32
+2026-07-08T01:58:58 [INFO] sync_sigtap.main - [tb_servico_classificacao] Diff -> INSERTs: 433, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:58:59 [INFO] sync_sigtap.main - [09/24] (33.3%) Processando tb_modalidade | ETA: 00:29
+2026-07-08T01:59:00 [INFO] sync_sigtap.main - [tb_modalidade] Diff -> INSERTs: 4, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:00 [INFO] sync_sigtap.main - [10/24] (37.5%) Processando tb_tipo_leito | ETA: 00:26
+2026-07-08T01:59:01 [INFO] sync_sigtap.main - [tb_tipo_leito] Diff -> INSERTs: 41, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:01 [INFO] sync_sigtap.main - [11/24] (41.7%) Processando tb_cid | ETA: 00:23
+2026-07-08T01:59:02 [INFO] sync_sigtap.main - [tb_cid] Diff -> INSERTs: 14242, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:18 [INFO] sync_sigtap.main - [12/24] (45.8%) Processando tb_ocupacao | ETA: 00:39
+2026-07-08T01:59:18 [INFO] sync_sigtap.main - [tb_ocupacao] Diff -> INSERTs: 2719, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:21 [INFO] sync_sigtap.main - [13/24] (50.0%) Processando tb_habilitacao | ETA: 00:36
+2026-07-08T01:59:22 [INFO] sync_sigtap.main - [tb_habilitacao] Diff -> INSERTs: 346, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:23 [INFO] sync_sigtap.main - [14/24] (54.2%) Processando tb_grupo | ETA: 00:32
+2026-07-08T01:59:23 [INFO] sync_sigtap.main - [tb_grupo] Diff -> INSERTs: 9, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:24 [INFO] sync_sigtap.main - [15/24] (58.3%) Processando tb_sub_grupo | ETA: 00:27
+2026-07-08T01:59:24 [INFO] sync_sigtap.main - [tb_sub_grupo] Diff -> INSERTs: 68, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:25 [INFO] sync_sigtap.main - [16/24] (62.5%) Processando tb_forma_organizacao | ETA: 00:24
+2026-07-08T01:59:25 [INFO] sync_sigtap.main - [tb_forma_organizacao] Diff -> INSERTs: 416, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:26 [INFO] sync_sigtap.main - [17/24] (66.7%) Processando tb_sia_sih | ETA: 00:20
+2026-07-08T01:59:26 [INFO] sync_sigtap.main - [tb_sia_sih] Diff -> INSERTs: 8383, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:36 [INFO] sync_sigtap.main - [18/24] (70.8%) Processando tb_grupo_habilitacao | ETA: 00:21
+2026-07-08T01:59:36 [INFO] sync_sigtap.main - [tb_grupo_habilitacao] Diff -> INSERTs: 31, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:37 [INFO] sync_sigtap.main - [19/24] (75.0%) Processando tb_descricao | ETA: 00:17
+2026-07-08T01:59:38 [INFO] sync_sigtap.main - [tb_descricao] Diff -> INSERTs: 4299, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:43 [INFO] sync_sigtap.main - [20/24] (79.2%) Processando tb_regra_condicionada | ETA: 00:15
+2026-07-08T01:59:44 [INFO] sync_sigtap.main - [tb_regra_condicionada] Diff -> INSERTs: 14, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:44 [INFO] sync_sigtap.main - [21/24] (83.3%) Processando tb_rede_atencao | ETA: 00:12
+2026-07-08T01:59:45 [INFO] sync_sigtap.main - [tb_rede_atencao] Diff -> INSERTs: 5, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:45 [INFO] sync_sigtap.main - [22/24] (87.5%) Processando tb_componente_rede | ETA: 00:08
+2026-07-08T01:59:46 [INFO] sync_sigtap.main - [tb_componente_rede] Diff -> INSERTs: 20, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:46 [INFO] sync_sigtap.main - [23/24] (91.7%) Processando tb_tuss | ETA: 00:05
+2026-07-08T01:59:47 [INFO] sync_sigtap.main - [tb_tuss] Diff -> INSERTs: 5766, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:53 [INFO] sync_sigtap.main - [24/24] (95.8%) Processando tb_renases | ETA: 00:03
+2026-07-08T01:59:54 [INFO] sync_sigtap.main - [tb_renases] Diff -> INSERTs: 201, UPDATEs: 0, DELETEs: 0
+2026-07-08T01:59:55 [INFO] sync_sigtap.main - Sincronização concluída com sucesso.
+2026-07-08T02:01:02 [INFO] sync_sigtap.main - Iniciando rotina de sincronização SIGTAP genérica...
+2026-07-08T02:01:03 [INFO] sync_sigtap.main - Última competência no FTP: 202606 (TabelaUnificada_202606_v2606091427.zip)
+2026-07-08T02:01:05 [INFO] sync_sigtap.main - Competência 202606 já foi atualizada com sucesso anteriormente. Nada a fazer.

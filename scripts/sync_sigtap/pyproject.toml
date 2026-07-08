@@ -1,0 +1,35 @@
+[project]
+name = "sync-sigtap"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Pablo Eduardo",email = "pabloeduardossantos@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "pandas (>=2.2.0,<3.0.0)",
+    "openpyxl>=3.1.0,<4.0.0",
+    "sqlalchemy (>=2.0.51,<3.0.0)",
+    "python-dotenv (>=1.2.2,<2.0.0)",
+    "click (>=8.4.2,<9.0.0)",
+    "apscheduler (>=3.11.3,<4.0.0)",
+    "psycopg2-binary (>=2.9.12,<3.0.0)",
+]
+
+[tool.poetry]
+packages = [{include = "sync_sigtap", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.1.1,<10.0.0)",
+    "pytest-cov (>=7.1.0,<8.0.0)",
+    "pytest-mock (>=3.15.1,<4.0.0)",
+    "testcontainers[postgresql] (>=4.14.2,<5.0.0)",
+    "ruff (>=0.15.20,<0.16.0)",
+    "mypy (>=2.1.0,<3.0.0)"
+]
