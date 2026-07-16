@@ -7,12 +7,20 @@ on:
     branches: ["main", "stage", "dev"]
 
 jobs:
-  test-sync-sigtap:
+  test-python-modules:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        module: 
+          - sync_sigtap
+          - sync_cpa_data
+          - sync_datasus
+          - utils/format_and_validate_cpa_data
 
     defaults:
       run:
-        working-directory: scripts/sync_sigtap
+        working-directory: scripts/${{ matrix.module }}
 
     steps:
       - uses: actions/checkout@v6
@@ -20,7 +28,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.14"
+          python-version: "3.13"
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
