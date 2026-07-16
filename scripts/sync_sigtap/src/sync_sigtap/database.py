@@ -80,7 +80,8 @@ class SigtapProcedimento(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 def get_engine(url: str) -> Engine:
     return create_engine(url)
@@ -97,7 +98,8 @@ class SigtapFinanciamento(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapRubrica(Base):
     __tablename__ = "sigtap_tb_rubrica"
@@ -108,7 +110,8 @@ class SigtapRubrica(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapDetalhe(Base):
     __tablename__ = "sigtap_tb_detalhe"
@@ -118,7 +121,8 @@ class SigtapDetalhe(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapDescricaoDetalhe(Base):
     __tablename__ = "sigtap_tb_descricao_detalhe"
@@ -128,7 +132,8 @@ class SigtapDescricaoDetalhe(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapRegistro(Base):
     __tablename__ = "sigtap_tb_registro"
@@ -138,7 +143,8 @@ class SigtapRegistro(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapServico(Base):
     __tablename__ = "sigtap_tb_servico"
@@ -148,18 +154,20 @@ class SigtapServico(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapServicoClassificacao(Base):
     __tablename__ = "sigtap_tb_servico_classificacao"
 
     coServico: Mapped[str] = mapped_column("co_servico", String(3), primary_key=True)
-    coClassificacao: Mapped[str] = mapped_column("co_classificacao", String(3))
+    coClassificacao: Mapped[str] = mapped_column("co_classificacao", String(3), primary_key=True)
     noClassificacao: Mapped[str] = mapped_column("no_classificacao", String(150))
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapModalidade(Base):
     __tablename__ = "sigtap_tb_modalidade"
@@ -169,7 +177,8 @@ class SigtapModalidade(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapTipoLeito(Base):
     __tablename__ = "sigtap_tb_tipo_leito"
@@ -179,7 +188,8 @@ class SigtapTipoLeito(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapCid(Base):
     __tablename__ = "sigtap_tb_cid"
@@ -192,7 +202,8 @@ class SigtapCid(Base):
     vlCamposIrradiados: Mapped[int] = mapped_column("vl_campos_irradiados", Integer)
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapOcupacao(Base):
     __tablename__ = "sigtap_tb_ocupacao"
@@ -201,7 +212,8 @@ class SigtapOcupacao(Base):
     noOcupacao: Mapped[str] = mapped_column("no_ocupacao", String(150))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapHabilitacao(Base):
     __tablename__ = "sigtap_tb_habilitacao"
@@ -211,7 +223,8 @@ class SigtapHabilitacao(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapGrupo(Base):
     __tablename__ = "sigtap_tb_grupo"
@@ -221,30 +234,33 @@ class SigtapGrupo(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapSubGrupo(Base):
     __tablename__ = "sigtap_tb_sub_grupo"
 
     coGrupo: Mapped[str] = mapped_column("co_grupo", String(2), primary_key=True)
-    coSubGrupo: Mapped[str] = mapped_column("co_sub_grupo", String(2))
+    coSubGrupo: Mapped[str] = mapped_column("co_sub_grupo", String(2), primary_key=True)
     noSubGrupo: Mapped[str] = mapped_column("no_sub_grupo", String(100))
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapFormaOrganizacao(Base):
     __tablename__ = "sigtap_tb_forma_organizacao"
 
     coGrupo: Mapped[str] = mapped_column("co_grupo", String(2), primary_key=True)
-    coSubGrupo: Mapped[str] = mapped_column("co_sub_grupo", String(2))
-    coFormaOrganizacao: Mapped[str] = mapped_column("co_forma_organizacao", String(2))
+    coSubGrupo: Mapped[str] = mapped_column("co_sub_grupo", String(2), primary_key=True)
+    coFormaOrganizacao: Mapped[str] = mapped_column("co_forma_organizacao", String(2), primary_key=True)
     noFormaOrganizacao: Mapped[str] = mapped_column("no_forma_organizacao", String(100))
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapSiaSih(Base):
     __tablename__ = "sigtap_tb_sia_sih"
@@ -255,7 +271,8 @@ class SigtapSiaSih(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapGrupoHabilitacao(Base):
     __tablename__ = "sigtap_tb_grupo_habilitacao"
@@ -265,7 +282,8 @@ class SigtapGrupoHabilitacao(Base):
     dsGrupoHabilitacao: Mapped[str] = mapped_column("ds_grupo_habilitacao", String(250))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapDescricao(Base):
     __tablename__ = "sigtap_tb_descricao"
@@ -275,7 +293,8 @@ class SigtapDescricao(Base):
     dtCompetencia: Mapped[str] = mapped_column("dt_competencia", String(6))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapRegraCondicionada(Base):
     __tablename__ = "sigtap_tb_regra_condicionada"
@@ -285,7 +304,8 @@ class SigtapRegraCondicionada(Base):
     dsRegraCondicionada: Mapped[str] = mapped_column("ds_regra_condicionada", String(4000))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapRedeAtencao(Base):
     __tablename__ = "sigtap_tb_rede_atencao"
@@ -294,7 +314,8 @@ class SigtapRedeAtencao(Base):
     noRedeAtencao: Mapped[str] = mapped_column("no_rede_atencao", String(50))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapComponenteRede(Base):
     __tablename__ = "sigtap_tb_componente_rede"
@@ -304,7 +325,8 @@ class SigtapComponenteRede(Base):
     coRedeAtencao: Mapped[str] = mapped_column("co_rede_atencao", String(3))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapTuss(Base):
     __tablename__ = "sigtap_tb_tuss"
@@ -313,7 +335,8 @@ class SigtapTuss(Base):
     noTuss: Mapped[str] = mapped_column("no_tuss", String(450))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 
 class SigtapRenases(Base):
     __tablename__ = "sigtap_tb_renases"
@@ -322,5 +345,6 @@ class SigtapRenases(Base):
     noRenases: Mapped[str] = mapped_column("no_renases", String(150))
     criadoEm: Mapped[datetime] = mapped_column("criado_em", DateTime, default=datetime.utcnow)
     atualizadoEm: Mapped[datetime] = mapped_column("atualizado_em", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    deletedAt: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
+    deletadoNaCompetencia: Mapped[Optional[str]] = mapped_column("deletado_na_competencia", String(6), nullable=True)
+    deletadoEm: Mapped[Optional[datetime]] = mapped_column("deletado_em", DateTime, nullable=True)
 

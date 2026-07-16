@@ -33,9 +33,10 @@ Além disso, o ETL é capaz de calcular um *diff* (diferença) entre a nova base
 
 ## Configuração
 
-Copie o arquivo de variáveis de ambiente de exemplo e configure de acordo com seu ambiente:
+Copie o arquivo de variáveis de ambiente de exemplo na raiz do projeto e configure de acordo com seu ambiente:
 
 ```bash
+# A partir da raiz do projeto:
 cp .env.example .env
 ```
 

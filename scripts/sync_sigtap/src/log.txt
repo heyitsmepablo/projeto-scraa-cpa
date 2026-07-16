@@ -628,3 +628,57 @@ sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL connection has 
 2026-07-08T02:01:02 [INFO] sync_sigtap.main - Iniciando rotina de sincronização SIGTAP genérica...
 2026-07-08T02:01:03 [INFO] sync_sigtap.main - Última competência no FTP: 202606 (TabelaUnificada_202606_v2606091427.zip)
 2026-07-08T02:01:05 [INFO] sync_sigtap.main - Competência 202606 já foi atualizada com sucesso anteriormente. Nada a fazer.
+2026-07-15T18:31:49 [INFO] sync_sigtap.main - Iniciando rotina de sincronização SIGTAP genérica...
+2026-07-15T18:31:50 [INFO] sync_sigtap.main - Última competência no FTP: 202607 (TabelaUnificada_202607_v2607101010.zip)
+2026-07-15T18:33:34 [INFO] sync_sigtap.main - Iniciando rotina de sincronização SIGTAP genérica...
+2026-07-15T18:33:35 [INFO] sync_sigtap.main - Última competência no FTP: 202607 (TabelaUnificada_202607_v2607101010.zip)
+2026-07-15T18:33:35 [INFO] sync_sigtap.etl_core - Baixando TabelaUnificada_202607_v2607101010.zip para /tmp/tmp86qc15nm/TabelaUnificada_202607_v2607101010.zip...
+2026-07-15T18:33:38 [INFO] sync_sigtap.main - [01/24] (0.0%) Processando tb_procedimento | ETA: Calculando...
+2026-07-15T18:33:38 [INFO] sync_sigtap.main - [tb_procedimento] Diff -> INSERTs: 4996, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [02/24] (4.2%) Processando tb_financiamento | ETA: 00:19
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [tb_financiamento] Diff -> INSERTs: 7, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [03/24] (8.3%) Processando tb_rubrica | ETA: 00:09
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [tb_rubrica] Diff -> INSERTs: 43, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [04/24] (12.5%) Processando tb_detalhe | ETA: 00:06
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [tb_detalhe] Diff -> INSERTs: 59, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [05/24] (16.7%) Processando tb_descricao_detalhe | ETA: 00:04
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [tb_descricao_detalhe] Diff -> INSERTs: 59, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [06/24] (20.8%) Processando tb_registro | ETA: 00:03
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [tb_registro] Diff -> INSERTs: 10, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [07/24] (25.0%) Processando tb_servico | ETA: 00:02
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [tb_servico] Diff -> INSERTs: 74, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [08/24] (29.2%) Processando tb_servico_classificacao | ETA: 00:02
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [tb_servico_classificacao] Diff -> INSERTs: 434, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [09/24] (33.3%) Processando tb_modalidade | ETA: 00:02
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [tb_modalidade] Diff -> INSERTs: 4, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [10/24] (37.5%) Processando tb_tipo_leito | ETA: 00:01
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [tb_tipo_leito] Diff -> INSERTs: 41, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [11/24] (41.7%) Processando tb_cid | ETA: 00:01
+2026-07-15T18:33:39 [INFO] sync_sigtap.main - [tb_cid] Diff -> INSERTs: 14242, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [12/24] (45.8%) Processando tb_ocupacao | ETA: 00:03
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [tb_ocupacao] Diff -> INSERTs: 2719, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [13/24] (50.0%) Processando tb_habilitacao | ETA: 00:02
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [tb_habilitacao] Diff -> INSERTs: 346, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [14/24] (54.2%) Processando tb_grupo | ETA: 00:02
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [tb_grupo] Diff -> INSERTs: 9, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [15/24] (58.3%) Processando tb_sub_grupo | ETA: 00:02
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [tb_sub_grupo] Diff -> INSERTs: 69, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [16/24] (62.5%) Processando tb_forma_organizacao | ETA: 00:01
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [tb_forma_organizacao] Diff -> INSERTs: 417, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [17/24] (66.7%) Processando tb_sia_sih | ETA: 00:01
+2026-07-15T18:33:41 [INFO] sync_sigtap.main - [tb_sia_sih] Diff -> INSERTs: 8383, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:42 [INFO] sync_sigtap.main - [18/24] (70.8%) Processando tb_grupo_habilitacao | ETA: 00:01
+2026-07-15T18:33:42 [INFO] sync_sigtap.main - [tb_grupo_habilitacao] Diff -> INSERTs: 31, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:42 [INFO] sync_sigtap.main - [19/24] (75.0%) Processando tb_descricao | ETA: 00:01
+2026-07-15T18:33:42 [INFO] sync_sigtap.main - [tb_descricao] Diff -> INSERTs: 4301, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:42 [INFO] sync_sigtap.main - [20/24] (79.2%) Processando tb_regra_condicionada | ETA: 00:01
+2026-07-15T18:33:42 [INFO] sync_sigtap.main - [tb_regra_condicionada] Diff -> INSERTs: 14, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:42 [INFO] sync_sigtap.main - [21/24] (83.3%) Processando tb_rede_atencao | ETA: 00:00
+2026-07-15T18:33:42 [INFO] sync_sigtap.main - [tb_rede_atencao] Diff -> INSERTs: 5, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:42 [INFO] sync_sigtap.main - [22/24] (87.5%) Processando tb_componente_rede | ETA: 00:00
+2026-07-15T18:33:43 [INFO] sync_sigtap.main - [tb_componente_rede] Diff -> INSERTs: 20, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:43 [INFO] sync_sigtap.main - [23/24] (91.7%) Processando tb_tuss | ETA: 00:00
+2026-07-15T18:33:43 [INFO] sync_sigtap.main - [tb_tuss] Diff -> INSERTs: 5766, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:43 [INFO] sync_sigtap.main - [24/24] (95.8%) Processando tb_renases | ETA: 00:00
+2026-07-15T18:33:43 [INFO] sync_sigtap.main - [tb_renases] Diff -> INSERTs: 201, UPDATEs: 0, DELETEs: 0
+2026-07-15T18:33:43 [INFO] sync_sigtap.main - Sincronização concluída com sucesso.

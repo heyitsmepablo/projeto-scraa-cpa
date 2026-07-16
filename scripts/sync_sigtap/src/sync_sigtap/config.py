@@ -1,6 +1,6 @@
 import os
 from dataclasses import dataclass
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 @dataclass(frozen=True)
 class Settings:
@@ -13,7 +13,7 @@ class Settings:
     log_level: str
 
 def load_settings() -> Settings:
-    load_dotenv()
+    load_dotenv(find_dotenv())
     
     database_url = os.getenv("DATABASE_URL")
     if not database_url:
@@ -22,7 +22,7 @@ def load_settings() -> Settings:
     # SQLAlchemy requires postgresql:// instead of postgres://
     if database_url.startswith("postgres://"):
         database_url = database_url.replace("postgres://", "postgresql://", 1)
-        
+
     ftp_host = os.getenv("FTP_HOST", "ftp2.datasus.gov.br")
     ftp_dir = os.getenv("FTP_DIR", "/pub/sistemas/tup/downloads/")
     ftp_timeout = int(os.getenv("FTP_TIMEOUT", "30"))

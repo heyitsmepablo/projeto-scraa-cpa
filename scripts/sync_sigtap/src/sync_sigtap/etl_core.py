@@ -73,6 +73,31 @@ class FtpClient:
         valid_files.sort(key=lambda x: x[0], reverse=True)
         return valid_files[0]
 
+    def get_competencias_from(self, inicial: str) -> List[Tuple[str, str]]:
+        try:
+            with ftplib.FTP(self.host, timeout=self.timeout) as ftp:
+                ftp.login()
+                ftp.cwd(self.directory)
+                files = ftp.nlst()
+        except Exception as e:
+            raise FtpConnectionError(f"Erro ao conectar no FTP: {e}") from e
+
+        pattern = re.compile(r"^TabelaUnificada_(\d{6})(?:_.*)?\.zip$")
+        valid_files = []
+        for f in files:
+            m = pattern.match(f)
+            if m:
+                comp = m.group(1)
+                if comp >= inicial:
+                    valid_files.append((comp, f))
+                
+        if not valid_files:
+            raise FtpFileNotFoundError(f"Nenhum arquivo TabelaUnificada encontrado no FTP a partir de {inicial}.")
+            
+        valid_files.sort(key=lambda x: x[0])  # Crescente (do mais antigo para o mais novo)
+        return valid_files
+
+
     def download_zip(self, filename: str, dest: Path) -> Path:
         dest_file = dest / filename
         logger.info(f"Baixando {filename} para {dest_file}...")
@@ -175,7 +200,7 @@ class SigtapEtl:
         return df
 
     def extract_table_from_db(self, session: Session, model_class, table_name: str) -> pd.DataFrame:
-        query = session.query(model_class).filter(model_class.deletedAt.is_(None))
+        query = session.query(model_class).filter(model_class.deletadoEm.is_(None))
         df = pd.read_sql(query.statement, session.bind)
         if not df.empty:
             # DB cols are snake_case, rename to camelCase
@@ -192,16 +217,11 @@ class SigtapEtl:
                 pk_cols = COMPOSITE_PKS[table_name]
             else:
                 # the first DB column is usually 'id' (if autoincrement), so we must find the first actual domain column
-                # but we removed 'id' below. Let's just use the first column that doesn't equal 'id'
-                domain_cols = [c for c in df.columns if c != "id" and c not in ["criadoEm", "atualizadoEm", "deletedAt", "deletadoEm"]]
+                domain_cols = [c for c in df.columns if c != "id" and c not in ["criadoEm", "atualizadoEm", "deletedAt", "deletadoEm", "deletadoNaCompetencia"]]
                 pk_cols = [domain_cols[0]] if domain_cols else [df.columns[0]]
                 
-            # If we have 'id' column from prisma autoincrement, remove it before setting index
-            if "id" in df.columns and "id" not in pk_cols:
-                df = df.drop(columns=["id"])
-                
             df.set_index(pk_cols, inplace=True)
-            cols_to_drop = ["criadoEm", "atualizadoEm", "deletedAt", "deletadoEm"]
+            cols_to_drop = ["criadoEm", "atualizadoEm", "deletedAt", "deletadoEm", "deletadoNaCompetencia"]
             df = df.drop(columns=[c for c in cols_to_drop if c in df.columns], errors="ignore")
         return df
 
@@ -229,7 +249,7 @@ class SigtapEtl:
 
         return DiffResult(inserts, updates, deletes)
 
-    def apply_diff(self, diff: DiffResult, session: Session, importacao_id: int, df_db: pd.DataFrame, model_class, table_name: str) -> None:
+    def apply_diff(self, diff: DiffResult, session: Session, importacao_id: int, df_db: pd.DataFrame, model_class, table_name: str, competencia: str) -> None:
         from sqlalchemy import text
         now = datetime.utcnow()
         changelog_dicts = []
@@ -275,33 +295,34 @@ class SigtapEtl:
             updates_df = diff.updates.reset_index()
             updates_list = updates_df.to_dict(orient="records")
             updates_list = clean_nan(updates_list)
+            
+            # Injetar 'id' da surrogate PK caso exista no db
+            if "id" in df_db.columns:
+                id_series = df_db.loc[diff.updates.index, "id"]
+                for j, id_val in enumerate(id_series):
+                    updates_list[j]["id"] = int(id_val)
+
             batch_size = 500
             for i in range(0, len(updates_list), batch_size):
                 chunk = updates_list[i:i + batch_size]
                 session.bulk_update_mappings(model_class, chunk)
 
-            for i, row_ftp in diff.updates.iterrows():
-                row_db = df_db.loc[i]
-                dados_antigos = {}
-                dados_novos = {}
-                
-                for col in diff.updates.columns:
-                    val_ftp = row_ftp[col]
-                    val_db = row_db[col]
-                    if pd.isna(val_ftp) and pd.isna(val_db):
-                        continue
-                    if val_ftp != val_db:
-                        dados_antigos[col] = None if pd.isna(val_db) else val_db
-                        dados_novos[col] = None if pd.isna(val_ftp) else val_ftp
+            # Para manter o histórico acessível, gravamos a linha completa antes e depois
+            db_full_df = df_db.loc[diff.updates.index].reset_index()
+            db_list = clean_nan(db_full_df.to_dict(orient="records"))
+
+            for j, db_row in enumerate(db_list):
+                ftp_row = updates_list[j]
+                idx_val = diff.updates.index[j]
 
                 changelog_dicts.append({
                     "importacaoId": importacao_id,
                     "tabela": model_class.__tablename__,
-                    "chaveRegistro": get_pk_str(i),
-                    "descricaoRegistro": row_ftp.get(name_col) if name_col else None,
+                    "chaveRegistro": get_pk_str(idx_val),
+                    "descricaoRegistro": ftp_row.get(name_col) if name_col else None,
                     "tipoOperacao": "UPDATE",
-                    "dadosAntigos": dados_antigos,
-                    "dadosNovos": dados_novos
+                    "dadosAntigos": db_row,
+                    "dadosNovos": ftp_row
                 })
 
         # Process DELETES
@@ -313,7 +334,7 @@ class SigtapEtl:
                 pk_name = pk_names[0]
                 keys = diff.deletes.index.tolist()
                 col_attr = getattr(model_class, pk_name)
-                session.query(model_class).filter(col_attr.in_(keys)).update({"deletedAt": now}, synchronize_session=False)
+                session.query(model_class).filter(col_attr.in_(keys)).update({"deletadoEm": now, "deletadoNaCompetencia": competencia}, synchronize_session=False)
             else:
                 logger.warning(f"Deleção de chave composta não automatizada para {table_name}")
 
