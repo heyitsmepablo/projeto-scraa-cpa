@@ -1,0 +1,35 @@
+[project]
+name = "format-and-validate-cpa-data"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Pablo Eduardo",email = "pabloeduardossantos@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [    
+    "pandas>=2.2.0,<3.0.0",
+    "openpyxl>=3.1.0,<4.0.0",
+    "sqlalchemy>=2.0.51,<3.0.0",
+    "python-dotenv>=1.0.0,<2.0.0",
+    "psycopg2-binary>=2.9.0,<3.0.0",
+    "questionary>=2.0.0,<3.0.0",
+]
+
+[tool.poetry]
+packages = [{include = "format_and_validate_cpa_data", from = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.0.0,<9.0.0"
+pytest-mock = ">=3.14.0,<4.0.0"
+ruff = ">=0.5.0,<1.0.0"
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
