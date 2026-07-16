@@ -20,21 +20,28 @@ O projeto é monorepo e atualmente é composto pelas seguintes pastas e serviço
 
 ## Começando
 
-### 1. Banco de Dados
+### 1. Variáveis de Ambiente (Global)
+O projeto agora utiliza um **arquivo `.env` centralizado na raiz** para evitar redundâncias de credenciais (como a `DATABASE_URL`) entre os diferentes serviços e scripts.
+
+```bash
+# Na raiz do repositório
+cp .env.example .env
+# Preencha a DATABASE_URL com as credenciais locais
+```
+
+### 2. Banco de Dados
 Para subir a infraestrutura de banco de dados e aplicar as migrações:
 ```bash
 cd database
-# Configure o .env com a string de conexão (DATABASE_URL)
 npx prisma migrate dev
 ```
+*(Nota: O Prisma no diretório `database` pode exigir um `.env` local próprio caso não configurado para ler da raiz. Se ocorrer erro, faça um link simbólico ou crie o `.env` ali também).*
 
-### 2. Sincronização SIGTAP
+### 3. Sincronização SIGTAP
 Para configurar a rotina de ETL que popula as tabelas de referência do SIGTAP:
 ```bash
 cd scripts/sync_sigtap
 poetry install
-cp .env.example .env
-# Preencha a DATABASE_URL com as credenciais locais
 poetry run python -m sync_sigtap run
 ```
 
