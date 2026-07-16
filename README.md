@@ -10,12 +10,15 @@ O projeto é monorepo e atualmente é composto pelas seguintes pastas e serviço
 
 - **[`/database`](./database/)**: Contém o schema, as configurações e migrações do banco de dados (Prisma + PostgreSQL). Define toda a modelagem de domínio, as entidades de faturamento (Planos Operativos) e o ecossistema de tabelas replicadas do SIGTAP.
 - **[`/scripts/sync_sigtap`](./scripts/sync_sigtap/)**: Serviço em Python (ETL) responsável por sincronizar de forma autônoma e programada (ou manual) todos os dados do FTP do DATASUS referentes à Tabela Unificada do SIGTAP para o banco de dados do projeto. Mantém o histórico completo de alterações (Changelog) para fins de auditoria e compliance.
+- **[`/scripts/sync_cpa_data`](./scripts/sync_cpa_data/)**: Pipeline ETL responsável por extrair dados referentes às Instituições, Vínculos e Planos Operativos a partir de uma planilha Excel (CPA) local e sincronizá-los com o banco de dados PostgreSQL.
+- **[`/scripts/sync_datasus`](./scripts/sync_datasus/)**: Módulo responsável por automatizar o download e o processamento de bases de produção do DATASUS (SIA/SIH), parseando os arquivos originados do FTP governamental e populando os dados de produção faturada no banco de dados.
+- **[`/scripts/utils/format_and_validate_cpa_data`](./scripts/utils/format_and_validate_cpa_data/)**: Ferramentas auxiliares para a higienização, formatação e validação prévia dos dados da planilha do CPA.
 
 ## Tecnologias Principais
 
 - **Banco de Dados:** PostgreSQL 
 - **ORM:** Prisma
-- **ETL / Scripts:** Python 3.14+, Poetry
+- **ETL / Scripts:** Python 3.13+, Poetry, Pandas, PySUS
 - **CI/CD:** GitHub Actions
 
 ## Começando
@@ -26,7 +29,7 @@ O projeto agora utiliza um **arquivo `.env` centralizado na raiz** para evitar r
 ```bash
 # Na raiz do repositório
 cp .env.example .env
-# Preencha a DATABASE_URL com as credenciais locais
+# Preencha a DATABASE_URL e demais variáveis de configuração
 ```
 
 ### 2. Banco de Dados
@@ -38,11 +41,28 @@ npx prisma migrate dev
 *(Nota: O Prisma no diretório `database` pode exigir um `.env` local próprio caso não configurado para ler da raiz. Se ocorrer erro, faça um link simbólico ou crie o `.env` ali também).*
 
 ### 3. Sincronização SIGTAP
-Para configurar a rotina de ETL que popula as tabelas de referência do SIGTAP:
+Para rodar a rotina de ETL que popula as tabelas de referência do SIGTAP:
 ```bash
 cd scripts/sync_sigtap
 poetry install
 poetry run python -m sync_sigtap run
+```
+
+### 4. Carga de Dados da CPA
+Para carregar instituições, vínculos e planos operativos a partir da planilha:
+```bash
+cd scripts/sync_cpa_data
+poetry install
+poetry run python -m sync_cpa_data
+```
+
+### 5. Sincronização DATASUS (SIA/SIH)
+Para baixar e sincronizar a produção faturada do DATASUS (SIA/SIH):
+```bash
+cd scripts/sync_datasus
+poetry install
+# Exemplo puxando a partir da competência de Janeiro/2026:
+poetry run python -m sync_datasus --competencia-inicial 202601
 ```
 
 ## Arquitetura de Dados
