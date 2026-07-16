@@ -1,16 +1,18 @@
 [project]
 name = "sync-datasus"
 version = "0.1.0"
-description = ""
+description = "Script de sincronização de dados de produção DATASUS (SIA/SIH)"
 authors = [
     {name = "Pablo Santos",email = "pabloeduardossantos@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.11,<3.14"
 dependencies = [
+    "pysus==2.7.0",
     "pandas>=2.2.0,<3.0.0",
-    "openpyxl>=3.1.0,<4.0.0",
-    "sqlalchemy (>=2.0.51,<3.0.0)",
+    "sqlalchemy>=2.0.51,<3.0.0",
+    "python-dotenv>=1.2.2,<2.0.0",
+    "psycopg2-binary>=2.9.12,<3.0.0",
 ]
 
 [tool.poetry]
@@ -19,3 +21,13 @@ packages = [{include = "sync_datasus", from = "src"}]
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1,<10.0.0",
+    "pytest-cov>=7.1.0,<8.0.0",
+    "pytest-mock>=3.15.1,<4.0.0",
+    "testcontainers[postgresql]>=4.14.2,<5.0.0",
+    "ruff>=0.15.20,<0.16.0",
+    "mypy>=2.1.0,<3.0.0"
+]

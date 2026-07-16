@@ -1,0 +1,1046 @@
+2026-07-16T02:41:01 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T02:41:01 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202607: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202606: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202605: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202604: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202603: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202602: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIA MA.
+2026-07-16T02:41:01 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIA em MA.
+2026-07-16T02:41:01 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202607: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202606: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202605: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202604: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202603: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202602: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:01 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIH MA.
+2026-07-16T02:41:01 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIH em MA.
+2026-07-16T02:41:01 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
+2026-07-16T02:41:19 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T02:41:19 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202607: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202606: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202605: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202604: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202603: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202602: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIA MA.
+2026-07-16T02:41:19 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIA em MA.
+2026-07-16T02:41:19 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202607: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202606: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202605: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202604: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202603: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202602: 'NoneType' object has no attribute 'download'
+2026-07-16T02:41:19 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIH MA.
+2026-07-16T02:41:19 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIH em MA.
+2026-07-16T02:41:19 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
+2026-07-16T02:55:09 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T02:55:09 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T02:55:10 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:14 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:16 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:19 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:19 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:20 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:21 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:22 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:22 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:23 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:24 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:24 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:25 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:26 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:27 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:27 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:28 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:29 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:29 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIA MA.
+2026-07-16T02:55:29 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIA em MA.
+2026-07-16T02:55:29 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T02:55:29 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:30 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:31 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:34 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:35 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:35 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:36 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:37 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:37 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:38 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:39 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:39 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:40 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:41 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:42 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:42 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:43 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:44 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:55:44 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIH MA.
+2026-07-16T02:55:44 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIH em MA.
+2026-07-16T02:55:44 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
+2026-07-16T02:56:11 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T02:56:11 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T02:56:11 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:12 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:13 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:13 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:14 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:15 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:16 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:16 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:17 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:18 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:18 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:19 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:20 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:21 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:21 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:22 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:23 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:23 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:23 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIA MA.
+2026-07-16T02:56:23 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIA em MA.
+2026-07-16T02:56:23 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T02:56:24 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:25 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:25 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:26 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:27 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:28 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:28 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:29 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:30 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:30 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:31 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:32 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:33 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:33 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:34 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:35 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:35 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:36 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T02:56:36 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIH MA.
+2026-07-16T02:56:36 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIH em MA.
+2026-07-16T02:56:36 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
+2026-07-16T03:00:43 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T03:00:43 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T03:00:44 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:45 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:45 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:46 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:47 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:48 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:48 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:49 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:51 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:52 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:53 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:53 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:54 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:55 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:55 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:56 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:56 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIA MA.
+2026-07-16T03:00:56 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIA em MA.
+2026-07-16T03:00:56 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T03:00:57 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:58 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:58 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:00:59 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:00 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:00 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:01 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:02 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:03 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:03 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:04 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:05 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:05 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:06 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:07 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:08 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:08 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:09 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:01:09 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIH MA.
+2026-07-16T03:01:09 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIH em MA.
+2026-07-16T03:01:09 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
+2026-07-16T03:04:36 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T03:04:36 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T03:04:37 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:38 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:39 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:39 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:40 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:41 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:42 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:42 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:43 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:44 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:44 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:45 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:46 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:46 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:47 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:48 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:49 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:49 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:49 [INFO] sync_datasus.main - Competências a baixar: ['202601', '202602']
+2026-07-16T03:04:49 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202601...
+2026-07-16T03:04:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:51 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:52 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:52 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2601.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:04:54 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 35965 linhas...
+2026-07-16T03:04:54 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:04:54 [INFO] sync_datasus.etl_core - [SIA] Competência 202601 (MA) processada: 0 inserções.
+2026-07-16T03:04:54 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202602...
+2026-07-16T03:04:54 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:55 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:56 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:56 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 27841 linhas...
+2026-07-16T03:04:56 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:04:56 [INFO] sync_datasus.etl_core - [SIA] Competência 202602 (MA) processada: 0 inserções.
+2026-07-16T03:04:56 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T03:04:57 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:57 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:58 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:59 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:04:59 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:00 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:01 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:02 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:02 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:03 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:04 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:04 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:05 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:06 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:06 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:07 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:08 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:09 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:10 [INFO] sync_datasus.main - Competências a baixar: ['202601', '202602']
+2026-07-16T03:05:10 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202601...
+2026-07-16T03:05:11 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:11 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:12 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:13 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2601.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:05:16 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 463765 linhas...
+2026-07-16T03:05:16 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:05:16 [INFO] sync_datasus.etl_core - [SIH] Competência 202601 (MA) processada: 0 inserções.
+2026-07-16T03:05:16 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202602...
+2026-07-16T03:05:17 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:18 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:18 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T03:05:18 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T03:05:18 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:18 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:19 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:20 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:20 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 406839 linhas...
+2026-07-16T03:05:20 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:05:20 [INFO] sync_datasus.etl_core - [SIH] Competência 202602 (MA) processada: 0 inserções.
+2026-07-16T03:05:20 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
+2026-07-16T03:05:22 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:23 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:23 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:24 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:25 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:25 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:26 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:27 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:27 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:28 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:29 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:30 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:30 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:31 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:32 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:32 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:33 [INFO] sync_datasus.main - Competências a baixar: ['202501', '202502', '202503', '202504', '202505', '202506', '202507', '202508', '202509', '202510', '202511', '202512', '202601', '202602']
+2026-07-16T03:05:33 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202501...
+2026-07-16T03:05:33 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:34 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:35 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:35 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 24338 linhas...
+2026-07-16T03:05:35 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:05:35 [INFO] sync_datasus.etl_core - [SIA] Competência 202501 (MA) processada: 0 inserções.
+2026-07-16T03:05:35 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202502...
+2026-07-16T03:05:36 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:36 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:37 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:39 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2502.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:05:40 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 28106 linhas...
+2026-07-16T03:05:40 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:05:40 [INFO] sync_datasus.etl_core - [SIA] Competência 202502 (MA) processada: 0 inserções.
+2026-07-16T03:05:40 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202503...
+2026-07-16T03:05:41 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:42 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:42 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:43 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2503.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:05:44 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 29818 linhas...
+2026-07-16T03:05:44 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:05:44 [INFO] sync_datasus.etl_core - [SIA] Competência 202503 (MA) processada: 0 inserções.
+2026-07-16T03:05:44 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202504...
+2026-07-16T03:05:45 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:46 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:46 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:47 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2504.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:05:48 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 31398 linhas...
+2026-07-16T03:05:48 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:05:48 [INFO] sync_datasus.etl_core - [SIA] Competência 202504 (MA) processada: 0 inserções.
+2026-07-16T03:05:48 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202505...
+2026-07-16T03:05:49 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:51 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2505.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:05:52 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 34071 linhas...
+2026-07-16T03:05:52 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:05:52 [INFO] sync_datasus.etl_core - [SIA] Competência 202505 (MA) processada: 0 inserções.
+2026-07-16T03:05:52 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202506...
+2026-07-16T03:05:53 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:55 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:56 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:56 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2506.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:05:58 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 34797 linhas...
+2026-07-16T03:05:58 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:05:58 [INFO] sync_datasus.etl_core - [SIA] Competência 202506 (MA) processada: 0 inserções.
+2026-07-16T03:05:58 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202507...
+2026-07-16T03:05:58 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:05:59 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:00 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:01 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2507.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:06:02 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 36847 linhas...
+2026-07-16T03:06:02 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:06:02 [INFO] sync_datasus.etl_core - [SIA] Competência 202507 (MA) processada: 0 inserções.
+2026-07-16T03:06:02 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202508...
+2026-07-16T03:06:03 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:03 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:04 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:05 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2508.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:06:06 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 38921 linhas...
+2026-07-16T03:06:06 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:06:06 [INFO] sync_datasus.etl_core - [SIA] Competência 202508 (MA) processada: 0 inserções.
+2026-07-16T03:06:06 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202509...
+2026-07-16T03:06:07 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:08 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:08 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:09 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2509.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:06:10 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 39313 linhas...
+2026-07-16T03:06:10 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:06:10 [INFO] sync_datasus.etl_core - [SIA] Competência 202509 (MA) processada: 0 inserções.
+2026-07-16T03:06:10 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202510...
+2026-07-16T03:06:11 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:12 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:13 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:13 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2510.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:06:15 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 40357 linhas...
+2026-07-16T03:06:15 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:06:15 [INFO] sync_datasus.etl_core - [SIA] Competência 202510 (MA) processada: 0 inserções.
+2026-07-16T03:06:15 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202511...
+2026-07-16T03:06:15 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:16 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:17 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:18 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2511.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:06:19 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 40157 linhas...
+2026-07-16T03:06:19 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:06:19 [INFO] sync_datasus.etl_core - [SIA] Competência 202511 (MA) processada: 0 inserções.
+2026-07-16T03:06:19 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202512...
+2026-07-16T03:06:20 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:20 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:21 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:22 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sia/PSMA2512.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:06:23 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 32993 linhas...
+2026-07-16T03:06:23 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:06:23 [INFO] sync_datasus.etl_core - [SIA] Competência 202512 (MA) processada: 0 inserções.
+2026-07-16T03:06:23 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202601...
+2026-07-16T03:06:24 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:24 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:25 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:25 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 35965 linhas...
+2026-07-16T03:06:25 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:06:25 [INFO] sync_datasus.etl_core - [SIA] Competência 202601 (MA) processada: 0 inserções.
+2026-07-16T03:06:25 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202602...
+2026-07-16T03:06:26 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:27 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:28 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:28 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 27841 linhas...
+2026-07-16T03:06:28 [INFO] sync_datasus.etl_core - [SIA] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:06:28 [INFO] sync_datasus.etl_core - [SIA] Competência 202602 (MA) processada: 0 inserções.
+2026-07-16T03:06:28 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T03:06:28 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:29 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:30 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:31 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:31 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:32 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:33 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:33 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:34 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:35 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:36 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:36 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:37 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:38 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:38 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:39 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:40 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:41 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:42 [INFO] sync_datasus.main - Competências a baixar: ['202501', '202502', '202503', '202504', '202505', '202506', '202507', '202508', '202509', '202510', '202511', '202512', '202601', '202602']
+2026-07-16T03:06:42 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202501...
+2026-07-16T03:06:43 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:43 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:44 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:45 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2501.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:06:48 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 477606 linhas...
+2026-07-16T03:06:48 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:06:48 [INFO] sync_datasus.etl_core - [SIH] Competência 202501 (MA) processada: 0 inserções.
+2026-07-16T03:06:48 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202502...
+2026-07-16T03:06:49 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:51 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2502.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:06:55 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 443676 linhas...
+2026-07-16T03:06:55 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:06:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202502 (MA) processada: 0 inserções.
+2026-07-16T03:06:55 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202503...
+2026-07-16T03:06:55 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:56 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:57 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:06:58 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2503.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:07:01 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 475776 linhas...
+2026-07-16T03:07:01 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:07:01 [INFO] sync_datasus.etl_core - [SIH] Competência 202503 (MA) processada: 0 inserções.
+2026-07-16T03:07:01 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202504...
+2026-07-16T03:07:02 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:02 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:03 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:04 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2504.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:07:07 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 484539 linhas...
+2026-07-16T03:07:07 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:07:07 [INFO] sync_datasus.etl_core - [SIH] Competência 202504 (MA) processada: 0 inserções.
+2026-07-16T03:07:07 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202505...
+2026-07-16T03:07:08 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:09 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:09 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:10 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2505.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:07:14 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 507217 linhas...
+2026-07-16T03:07:14 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:07:14 [INFO] sync_datasus.etl_core - [SIH] Competência 202505 (MA) processada: 0 inserções.
+2026-07-16T03:07:14 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202506...
+2026-07-16T03:07:15 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:15 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:16 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:17 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/RDMA2506.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:07:19 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 44136 linhas...
+2026-07-16T03:07:21 [INFO] sync_datasus.etl_core - [SIH] Filtrados 3116 registros relevantes. Inserindo no banco...
+2026-07-16T03:07:21 [ERROR] sync_datasus.etl_core - [SIH] Erro na competência 202506 (MA): (psycopg2.errors.NotNullViolation) null value in column "DI_INTER" of relation "datasus_sih_tb_rd" violates not-null constraint
+DETAIL:  Failing row contains (1, 2025, 06, null, 0310010047, 2726653, 715.39, 4, 211130, 06, 02).
+
+[SQL: INSERT INTO datasus_sih_tb_rd ("ANO_CMPT", "MES_CMPT", "PROC_REA", "CNES", "VAL_TOT", "QT_DIARIAS", "UF_ZI", "FINANC", "COMPLEX") VALUES (%(ANO_CMPT__0)s, %(MES_CMPT__0)s, %(PROC_REA__0)s, %(CNES__0)s, %(VAL_TOT__0)s, %(QT_DIARIAS__0)s, %(UF_ZI__0)s, ... 162795 characters truncated ... ES__999)s, %(VAL_TOT__999)s, %(QT_DIARIAS__999)s, %(UF_ZI__999)s, %(FINANC__999)s, %(COMPLEX__999)s)]
+[parameters: {'ANO_CMPT__0': '2025', 'COMPLEX__0': '02', 'MES_CMPT__0': '06', 'UF_ZI__0': '211130', 'QT_DIARIAS__0': Decimal('4'), 'PROC_REA__0': '0310010047', 'CNES__0': '2726653', 'FINANC__0': '06', 'VAL_TOT__0': Decimal('715.39'), 'ANO_CMPT__1': '2025', 'COMPLEX__1': '02', 'MES_CMPT__1': '06', 'UF_ZI__1': '211130', 'QT_DIARIAS__1': Decimal('2'), 'PROC_REA__1': '0310010047', 'CNES__1': '2726653', 'FINANC__1': '06', 'VAL_TOT__1': Decimal('699.39'), 'ANO_CMPT__2': '2025', 'COMPLEX__2': '02', 'MES_CMPT__2': '06', 'UF_ZI__2': '211130', 'QT_DIARIAS__2': Decimal('1'), 'PROC_REA__2': '0310010047', 'CNES__2': '2726653', 'FINANC__2': '06', 'VAL_TOT__2': Decimal('691.39'), 'ANO_CMPT__3': '2025', 'COMPLEX__3': '02', 'MES_CMPT__3': '06', 'UF_ZI__3': '211130', 'QT_DIARIAS__3': Decimal('2'), 'PROC_REA__3': '0310010047', 'CNES__3': '2726653', 'FINANC__3': '06', 'VAL_TOT__3': Decimal('699.39'), 'ANO_CMPT__4': '2025', 'COMPLEX__4': '02', 'MES_CMPT__4': '06', 'UF_ZI__4': '211130', 'QT_DIARIAS__4': Decimal('2'), 'PROC_REA__4': '0310010047', 'CNES__4': '2726653', 'FINANC__4': '06', 'VAL_TOT__4': Decimal('699.39'), 'ANO_CMPT__5': '2025', 'COMPLEX__5': '02', 'MES_CMPT__5': '06', 'UF_ZI__5': '211130', 'QT_DIARIAS__5': Decimal('2') ... 8900 parameters truncated ... 'QT_DIARIAS__994': Decimal('4'), 'PROC_REA__994': '0303010037', 'CNES__994': '2456958', 'FINANC__994': '06', 'VAL_TOT__994': Decimal('1157.11'), 'ANO_CMPT__995': '2025', 'COMPLEX__995': '02', 'MES_CMPT__995': '06', 'UF_ZI__995': '211130', 'QT_DIARIAS__995': Decimal('27'), 'PROC_REA__995': '0303010037', 'CNES__995': '2456958', 'FINANC__995': '06', 'VAL_TOT__995': Decimal('2439.75'), 'ANO_CMPT__996': '2025', 'COMPLEX__996': '02', 'MES_CMPT__996': '06', 'UF_ZI__996': '211130', 'QT_DIARIAS__996': Decimal('29'), 'PROC_REA__996': '0303010037', 'CNES__996': '2456958', 'FINANC__996': '06', 'VAL_TOT__996': Decimal('2453.40'), 'ANO_CMPT__997': '2025', 'COMPLEX__997': '02', 'MES_CMPT__997': '06', 'UF_ZI__997': '211130', 'QT_DIARIAS__997': Decimal('9'), 'PROC_REA__997': '0303010037', 'CNES__997': '2456958', 'FINANC__997': '06', 'VAL_TOT__997': Decimal('1563.58'), 'ANO_CMPT__998': '2025', 'COMPLEX__998': '02', 'MES_CMPT__998': '06', 'UF_ZI__998': '211130', 'QT_DIARIAS__998': Decimal('4'), 'PROC_REA__998': '0303010037', 'CNES__998': '2456958', 'FINANC__998': '06', 'VAL_TOT__998': Decimal('1157.11'), 'ANO_CMPT__999': '2025', 'COMPLEX__999': '02', 'MES_CMPT__999': '06', 'UF_ZI__999': '211130', 'QT_DIARIAS__999': Decimal('22'), 'PROC_REA__999': '0303010037', 'CNES__999': '2456958', 'FINANC__999': '06', 'VAL_TOT__999': Decimal('2299.45')}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2127, in _exec_insertmany_context
+    dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "DI_INTER" of relation "datasus_sih_tb_rd" violates not-null constraint
+DETAIL:  Failing row contains (1, 2025, 06, null, 0310010047, 2726653, 715.39, 4, 211130, 06, 02).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/src/sync_datasus/etl_core.py", line 151, in processar_competencia
+    self.session.bulk_insert_mappings(ModelClass, chunk)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4669, in bulk_insert_mappings
+    self._bulk_save_mappings(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        mapper,
+        ^^^^^^^
+    ...<5 lines>...
+        render_nulls=render_nulls,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4763, in _bulk_save_mappings
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4752, in _bulk_save_mappings
+    bulk_persistence._bulk_insert(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        mapper,
+        ^^^^^^^
+    ...<4 lines>...
+        render_nulls=render_nulls,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/orm/bulk_persistence.py", line 222, in _bulk_insert
+    result = persistence._emit_insert_statements(
+        base_mapper,
+    ...<6 lines>...
+        execution_options=execution_options,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 1049, in _emit_insert_statements
+    result = connection.execute(
+        statement, multiparams, execution_options=execution_options
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_insertmany_context(dialect, context)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2135, in _exec_insertmany_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e,
+        ^^
+    ...<4 lines>...
+        is_sub_exec=True,
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2127, in _exec_insertmany_context
+    dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "DI_INTER" of relation "datasus_sih_tb_rd" violates not-null constraint
+DETAIL:  Failing row contains (1, 2025, 06, null, 0310010047, 2726653, 715.39, 4, 211130, 06, 02).
+
+[SQL: INSERT INTO datasus_sih_tb_rd ("ANO_CMPT", "MES_CMPT", "PROC_REA", "CNES", "VAL_TOT", "QT_DIARIAS", "UF_ZI", "FINANC", "COMPLEX") VALUES (%(ANO_CMPT__0)s, %(MES_CMPT__0)s, %(PROC_REA__0)s, %(CNES__0)s, %(VAL_TOT__0)s, %(QT_DIARIAS__0)s, %(UF_ZI__0)s, ... 162795 characters truncated ... ES__999)s, %(VAL_TOT__999)s, %(QT_DIARIAS__999)s, %(UF_ZI__999)s, %(FINANC__999)s, %(COMPLEX__999)s)]
+[parameters: {'ANO_CMPT__0': '2025', 'COMPLEX__0': '02', 'MES_CMPT__0': '06', 'UF_ZI__0': '211130', 'QT_DIARIAS__0': Decimal('4'), 'PROC_REA__0': '0310010047', 'CNES__0': '2726653', 'FINANC__0': '06', 'VAL_TOT__0': Decimal('715.39'), 'ANO_CMPT__1': '2025', 'COMPLEX__1': '02', 'MES_CMPT__1': '06', 'UF_ZI__1': '211130', 'QT_DIARIAS__1': Decimal('2'), 'PROC_REA__1': '0310010047', 'CNES__1': '2726653', 'FINANC__1': '06', 'VAL_TOT__1': Decimal('699.39'), 'ANO_CMPT__2': '2025', 'COMPLEX__2': '02', 'MES_CMPT__2': '06', 'UF_ZI__2': '211130', 'QT_DIARIAS__2': Decimal('1'), 'PROC_REA__2': '0310010047', 'CNES__2': '2726653', 'FINANC__2': '06', 'VAL_TOT__2': Decimal('691.39'), 'ANO_CMPT__3': '2025', 'COMPLEX__3': '02', 'MES_CMPT__3': '06', 'UF_ZI__3': '211130', 'QT_DIARIAS__3': Decimal('2'), 'PROC_REA__3': '0310010047', 'CNES__3': '2726653', 'FINANC__3': '06', 'VAL_TOT__3': Decimal('699.39'), 'ANO_CMPT__4': '2025', 'COMPLEX__4': '02', 'MES_CMPT__4': '06', 'UF_ZI__4': '211130', 'QT_DIARIAS__4': Decimal('2'), 'PROC_REA__4': '0310010047', 'CNES__4': '2726653', 'FINANC__4': '06', 'VAL_TOT__4': Decimal('699.39'), 'ANO_CMPT__5': '2025', 'COMPLEX__5': '02', 'MES_CMPT__5': '06', 'UF_ZI__5': '211130', 'QT_DIARIAS__5': Decimal('2') ... 8900 parameters truncated ... 'QT_DIARIAS__994': Decimal('4'), 'PROC_REA__994': '0303010037', 'CNES__994': '2456958', 'FINANC__994': '06', 'VAL_TOT__994': Decimal('1157.11'), 'ANO_CMPT__995': '2025', 'COMPLEX__995': '02', 'MES_CMPT__995': '06', 'UF_ZI__995': '211130', 'QT_DIARIAS__995': Decimal('27'), 'PROC_REA__995': '0303010037', 'CNES__995': '2456958', 'FINANC__995': '06', 'VAL_TOT__995': Decimal('2439.75'), 'ANO_CMPT__996': '2025', 'COMPLEX__996': '02', 'MES_CMPT__996': '06', 'UF_ZI__996': '211130', 'QT_DIARIAS__996': Decimal('29'), 'PROC_REA__996': '0303010037', 'CNES__996': '2456958', 'FINANC__996': '06', 'VAL_TOT__996': Decimal('2453.40'), 'ANO_CMPT__997': '2025', 'COMPLEX__997': '02', 'MES_CMPT__997': '06', 'UF_ZI__997': '211130', 'QT_DIARIAS__997': Decimal('9'), 'PROC_REA__997': '0303010037', 'CNES__997': '2456958', 'FINANC__997': '06', 'VAL_TOT__997': Decimal('1563.58'), 'ANO_CMPT__998': '2025', 'COMPLEX__998': '02', 'MES_CMPT__998': '06', 'UF_ZI__998': '211130', 'QT_DIARIAS__998': Decimal('4'), 'PROC_REA__998': '0303010037', 'CNES__998': '2456958', 'FINANC__998': '06', 'VAL_TOT__998': Decimal('1157.11'), 'ANO_CMPT__999': '2025', 'COMPLEX__999': '02', 'MES_CMPT__999': '06', 'UF_ZI__999': '211130', 'QT_DIARIAS__999': Decimal('22'), 'PROC_REA__999': '0303010037', 'CNES__999': '2456958', 'FINANC__999': '06', 'VAL_TOT__999': Decimal('2299.45')}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-07-16T03:07:21 [ERROR] sync_datasus.main - Erro ao processar SIH MA 202506. Pulando para a próxima. Detalhe: (psycopg2.errors.NotNullViolation) null value in column "DI_INTER" of relation "datasus_sih_tb_rd" violates not-null constraint
+DETAIL:  Failing row contains (1, 2025, 06, null, 0310010047, 2726653, 715.39, 4, 211130, 06, 02).
+
+[SQL: INSERT INTO datasus_sih_tb_rd ("ANO_CMPT", "MES_CMPT", "PROC_REA", "CNES", "VAL_TOT", "QT_DIARIAS", "UF_ZI", "FINANC", "COMPLEX") VALUES (%(ANO_CMPT__0)s, %(MES_CMPT__0)s, %(PROC_REA__0)s, %(CNES__0)s, %(VAL_TOT__0)s, %(QT_DIARIAS__0)s, %(UF_ZI__0)s, ... 162795 characters truncated ... ES__999)s, %(VAL_TOT__999)s, %(QT_DIARIAS__999)s, %(UF_ZI__999)s, %(FINANC__999)s, %(COMPLEX__999)s)]
+[parameters: {'ANO_CMPT__0': '2025', 'COMPLEX__0': '02', 'MES_CMPT__0': '06', 'UF_ZI__0': '211130', 'QT_DIARIAS__0': Decimal('4'), 'PROC_REA__0': '0310010047', 'CNES__0': '2726653', 'FINANC__0': '06', 'VAL_TOT__0': Decimal('715.39'), 'ANO_CMPT__1': '2025', 'COMPLEX__1': '02', 'MES_CMPT__1': '06', 'UF_ZI__1': '211130', 'QT_DIARIAS__1': Decimal('2'), 'PROC_REA__1': '0310010047', 'CNES__1': '2726653', 'FINANC__1': '06', 'VAL_TOT__1': Decimal('699.39'), 'ANO_CMPT__2': '2025', 'COMPLEX__2': '02', 'MES_CMPT__2': '06', 'UF_ZI__2': '211130', 'QT_DIARIAS__2': Decimal('1'), 'PROC_REA__2': '0310010047', 'CNES__2': '2726653', 'FINANC__2': '06', 'VAL_TOT__2': Decimal('691.39'), 'ANO_CMPT__3': '2025', 'COMPLEX__3': '02', 'MES_CMPT__3': '06', 'UF_ZI__3': '211130', 'QT_DIARIAS__3': Decimal('2'), 'PROC_REA__3': '0310010047', 'CNES__3': '2726653', 'FINANC__3': '06', 'VAL_TOT__3': Decimal('699.39'), 'ANO_CMPT__4': '2025', 'COMPLEX__4': '02', 'MES_CMPT__4': '06', 'UF_ZI__4': '211130', 'QT_DIARIAS__4': Decimal('2'), 'PROC_REA__4': '0310010047', 'CNES__4': '2726653', 'FINANC__4': '06', 'VAL_TOT__4': Decimal('699.39'), 'ANO_CMPT__5': '2025', 'COMPLEX__5': '02', 'MES_CMPT__5': '06', 'UF_ZI__5': '211130', 'QT_DIARIAS__5': Decimal('2') ... 8900 parameters truncated ... 'QT_DIARIAS__994': Decimal('4'), 'PROC_REA__994': '0303010037', 'CNES__994': '2456958', 'FINANC__994': '06', 'VAL_TOT__994': Decimal('1157.11'), 'ANO_CMPT__995': '2025', 'COMPLEX__995': '02', 'MES_CMPT__995': '06', 'UF_ZI__995': '211130', 'QT_DIARIAS__995': Decimal('27'), 'PROC_REA__995': '0303010037', 'CNES__995': '2456958', 'FINANC__995': '06', 'VAL_TOT__995': Decimal('2439.75'), 'ANO_CMPT__996': '2025', 'COMPLEX__996': '02', 'MES_CMPT__996': '06', 'UF_ZI__996': '211130', 'QT_DIARIAS__996': Decimal('29'), 'PROC_REA__996': '0303010037', 'CNES__996': '2456958', 'FINANC__996': '06', 'VAL_TOT__996': Decimal('2453.40'), 'ANO_CMPT__997': '2025', 'COMPLEX__997': '02', 'MES_CMPT__997': '06', 'UF_ZI__997': '211130', 'QT_DIARIAS__997': Decimal('9'), 'PROC_REA__997': '0303010037', 'CNES__997': '2456958', 'FINANC__997': '06', 'VAL_TOT__997': Decimal('1563.58'), 'ANO_CMPT__998': '2025', 'COMPLEX__998': '02', 'MES_CMPT__998': '06', 'UF_ZI__998': '211130', 'QT_DIARIAS__998': Decimal('4'), 'PROC_REA__998': '0303010037', 'CNES__998': '2456958', 'FINANC__998': '06', 'VAL_TOT__998': Decimal('1157.11'), 'ANO_CMPT__999': '2025', 'COMPLEX__999': '02', 'MES_CMPT__999': '06', 'UF_ZI__999': '211130', 'QT_DIARIAS__999': Decimal('22'), 'PROC_REA__999': '0303010037', 'CNES__999': '2456958', 'FINANC__999': '06', 'VAL_TOT__999': Decimal('2299.45')}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-07-16T03:07:21 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202507...
+2026-07-16T03:07:22 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:23 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:23 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:24 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2507.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:07:28 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 513554 linhas...
+2026-07-16T03:07:28 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:07:28 [INFO] sync_datasus.etl_core - [SIH] Competência 202507 (MA) processada: 0 inserções.
+2026-07-16T03:07:28 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202508...
+2026-07-16T03:07:28 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:29 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:30 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:31 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2508.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:07:34 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 503790 linhas...
+2026-07-16T03:07:34 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:07:34 [INFO] sync_datasus.etl_core - [SIH] Competência 202508 (MA) processada: 0 inserções.
+2026-07-16T03:07:34 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202509...
+2026-07-16T03:07:35 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:36 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:37 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:37 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/RDMA2509.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:07:39 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 43181 linhas...
+2026-07-16T03:07:41 [INFO] sync_datasus.etl_core - [SIH] Filtrados 3120 registros relevantes. Inserindo no banco...
+2026-07-16T03:07:42 [ERROR] sync_datasus.etl_core - [SIH] Erro na competência 202509 (MA): (psycopg2.errors.NotNullViolation) null value in column "DI_INTER" of relation "datasus_sih_tb_rd" violates not-null constraint
+DETAIL:  Failing row contains (2, 2025, 09, null, 0415020050, 2697696, 7806.33, 2, 211130, 06, 03).
+
+[SQL: INSERT INTO datasus_sih_tb_rd ("ANO_CMPT", "MES_CMPT", "PROC_REA", "CNES", "VAL_TOT", "QT_DIARIAS", "UF_ZI", "FINANC", "COMPLEX") VALUES (%(ANO_CMPT__0)s, %(MES_CMPT__0)s, %(PROC_REA__0)s, %(CNES__0)s, %(VAL_TOT__0)s, %(QT_DIARIAS__0)s, %(UF_ZI__0)s, ... 162795 characters truncated ... ES__999)s, %(VAL_TOT__999)s, %(QT_DIARIAS__999)s, %(UF_ZI__999)s, %(FINANC__999)s, %(COMPLEX__999)s)]
+[parameters: {'ANO_CMPT__0': '2025', 'COMPLEX__0': '03', 'MES_CMPT__0': '09', 'UF_ZI__0': '211130', 'QT_DIARIAS__0': Decimal('2'), 'PROC_REA__0': '0415020050', 'CNES__0': '2697696', 'FINANC__0': '06', 'VAL_TOT__0': Decimal('7806.33'), 'ANO_CMPT__1': '2025', 'COMPLEX__1': '03', 'MES_CMPT__1': '09', 'UF_ZI__1': '211130', 'QT_DIARIAS__1': Decimal('1'), 'PROC_REA__1': '0416080081', 'CNES__1': '2697696', 'FINANC__1': '06', 'VAL_TOT__1': Decimal('4038.83'), 'ANO_CMPT__2': '2025', 'COMPLEX__2': '03', 'MES_CMPT__2': '09', 'UF_ZI__2': '211130', 'QT_DIARIAS__2': Decimal('1'), 'PROC_REA__2': '0416080081', 'CNES__2': '2697696', 'FINANC__2': '06', 'VAL_TOT__2': Decimal('4161.17'), 'ANO_CMPT__3': '2025', 'COMPLEX__3': '02', 'MES_CMPT__3': '09', 'UF_ZI__3': '211130', 'QT_DIARIAS__3': Decimal('1'), 'PROC_REA__3': '0409060232', 'CNES__3': '2456958', 'FINANC__3': '06', 'VAL_TOT__3': Decimal('505.99'), 'ANO_CMPT__4': '2025', 'COMPLEX__4': '02', 'MES_CMPT__4': '09', 'UF_ZI__4': '211130', 'QT_DIARIAS__4': Decimal('2'), 'PROC_REA__4': '0409010294', 'CNES__4': '2697696', 'FINANC__4': '06', 'VAL_TOT__4': Decimal('867.87'), 'ANO_CMPT__5': '2025', 'COMPLEX__5': '02', 'MES_CMPT__5': '09', 'UF_ZI__5': '211130', 'QT_DIARIAS__5': Decimal('2') ... 8900 parameters truncated ... 'QT_DIARIAS__994': Decimal('11'), 'PROC_REA__994': '0304100021', 'CNES__994': '2697696', 'FINANC__994': '06', 'VAL_TOT__994': Decimal('4082.58'), 'ANO_CMPT__995': '2025', 'COMPLEX__995': '02', 'MES_CMPT__995': '09', 'UF_ZI__995': '211130', 'QT_DIARIAS__995': Decimal('2'), 'PROC_REA__995': '0409060151', 'CNES__995': '2697696', 'FINANC__995': '06', 'VAL_TOT__995': Decimal('1211.50'), 'ANO_CMPT__996': '2025', 'COMPLEX__996': '03', 'MES_CMPT__996': '09', 'UF_ZI__996': '211130', 'QT_DIARIAS__996': Decimal('3'), 'PROC_REA__996': '0415020050', 'CNES__996': '2697696', 'FINANC__996': '06', 'VAL_TOT__996': Decimal('10113.43'), 'ANO_CMPT__997': '2025', 'COMPLEX__997': '03', 'MES_CMPT__997': '09', 'UF_ZI__997': '211130', 'QT_DIARIAS__997': Decimal('5'), 'PROC_REA__997': '0415020034', 'CNES__997': '2697696', 'FINANC__997': '06', 'VAL_TOT__997': Decimal('3447.10'), 'ANO_CMPT__998': '2025', 'COMPLEX__998': '03', 'MES_CMPT__998': '09', 'UF_ZI__998': '211130', 'QT_DIARIAS__998': Decimal('2'), 'PROC_REA__998': '0304080020', 'CNES__998': '2697696', 'FINANC__998': '06', 'VAL_TOT__998': Decimal('1116.00'), 'ANO_CMPT__999': '2025', 'COMPLEX__999': '02', 'MES_CMPT__999': '09', 'UF_ZI__999': '211130', 'QT_DIARIAS__999': Decimal('7'), 'PROC_REA__999': '0304100021', 'CNES__999': '2697696', 'FINANC__999': '06', 'VAL_TOT__999': Decimal('567.63')}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2127, in _exec_insertmany_context
+    dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "DI_INTER" of relation "datasus_sih_tb_rd" violates not-null constraint
+DETAIL:  Failing row contains (2, 2025, 09, null, 0415020050, 2697696, 7806.33, 2, 211130, 06, 03).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/src/sync_datasus/etl_core.py", line 151, in processar_competencia
+    self.session.bulk_insert_mappings(ModelClass, chunk)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4669, in bulk_insert_mappings
+    self._bulk_save_mappings(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        mapper,
+        ^^^^^^^
+    ...<5 lines>...
+        render_nulls=render_nulls,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4763, in _bulk_save_mappings
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4752, in _bulk_save_mappings
+    bulk_persistence._bulk_insert(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        mapper,
+        ^^^^^^^
+    ...<4 lines>...
+        render_nulls=render_nulls,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/orm/bulk_persistence.py", line 222, in _bulk_insert
+    result = persistence._emit_insert_statements(
+        base_mapper,
+    ...<6 lines>...
+        execution_options=execution_options,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 1049, in _emit_insert_statements
+    result = connection.execute(
+        statement, multiparams, execution_options=execution_options
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_insertmany_context(dialect, context)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2135, in _exec_insertmany_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e,
+        ^^
+    ...<4 lines>...
+        is_sub_exec=True,
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2127, in _exec_insertmany_context
+    dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/kuro/projeto-scraa-cpa/scripts/sync_datasus/.venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "DI_INTER" of relation "datasus_sih_tb_rd" violates not-null constraint
+DETAIL:  Failing row contains (2, 2025, 09, null, 0415020050, 2697696, 7806.33, 2, 211130, 06, 03).
+
+[SQL: INSERT INTO datasus_sih_tb_rd ("ANO_CMPT", "MES_CMPT", "PROC_REA", "CNES", "VAL_TOT", "QT_DIARIAS", "UF_ZI", "FINANC", "COMPLEX") VALUES (%(ANO_CMPT__0)s, %(MES_CMPT__0)s, %(PROC_REA__0)s, %(CNES__0)s, %(VAL_TOT__0)s, %(QT_DIARIAS__0)s, %(UF_ZI__0)s, ... 162795 characters truncated ... ES__999)s, %(VAL_TOT__999)s, %(QT_DIARIAS__999)s, %(UF_ZI__999)s, %(FINANC__999)s, %(COMPLEX__999)s)]
+[parameters: {'ANO_CMPT__0': '2025', 'COMPLEX__0': '03', 'MES_CMPT__0': '09', 'UF_ZI__0': '211130', 'QT_DIARIAS__0': Decimal('2'), 'PROC_REA__0': '0415020050', 'CNES__0': '2697696', 'FINANC__0': '06', 'VAL_TOT__0': Decimal('7806.33'), 'ANO_CMPT__1': '2025', 'COMPLEX__1': '03', 'MES_CMPT__1': '09', 'UF_ZI__1': '211130', 'QT_DIARIAS__1': Decimal('1'), 'PROC_REA__1': '0416080081', 'CNES__1': '2697696', 'FINANC__1': '06', 'VAL_TOT__1': Decimal('4038.83'), 'ANO_CMPT__2': '2025', 'COMPLEX__2': '03', 'MES_CMPT__2': '09', 'UF_ZI__2': '211130', 'QT_DIARIAS__2': Decimal('1'), 'PROC_REA__2': '0416080081', 'CNES__2': '2697696', 'FINANC__2': '06', 'VAL_TOT__2': Decimal('4161.17'), 'ANO_CMPT__3': '2025', 'COMPLEX__3': '02', 'MES_CMPT__3': '09', 'UF_ZI__3': '211130', 'QT_DIARIAS__3': Decimal('1'), 'PROC_REA__3': '0409060232', 'CNES__3': '2456958', 'FINANC__3': '06', 'VAL_TOT__3': Decimal('505.99'), 'ANO_CMPT__4': '2025', 'COMPLEX__4': '02', 'MES_CMPT__4': '09', 'UF_ZI__4': '211130', 'QT_DIARIAS__4': Decimal('2'), 'PROC_REA__4': '0409010294', 'CNES__4': '2697696', 'FINANC__4': '06', 'VAL_TOT__4': Decimal('867.87'), 'ANO_CMPT__5': '2025', 'COMPLEX__5': '02', 'MES_CMPT__5': '09', 'UF_ZI__5': '211130', 'QT_DIARIAS__5': Decimal('2') ... 8900 parameters truncated ... 'QT_DIARIAS__994': Decimal('11'), 'PROC_REA__994': '0304100021', 'CNES__994': '2697696', 'FINANC__994': '06', 'VAL_TOT__994': Decimal('4082.58'), 'ANO_CMPT__995': '2025', 'COMPLEX__995': '02', 'MES_CMPT__995': '09', 'UF_ZI__995': '211130', 'QT_DIARIAS__995': Decimal('2'), 'PROC_REA__995': '0409060151', 'CNES__995': '2697696', 'FINANC__995': '06', 'VAL_TOT__995': Decimal('1211.50'), 'ANO_CMPT__996': '2025', 'COMPLEX__996': '03', 'MES_CMPT__996': '09', 'UF_ZI__996': '211130', 'QT_DIARIAS__996': Decimal('3'), 'PROC_REA__996': '0415020050', 'CNES__996': '2697696', 'FINANC__996': '06', 'VAL_TOT__996': Decimal('10113.43'), 'ANO_CMPT__997': '2025', 'COMPLEX__997': '03', 'MES_CMPT__997': '09', 'UF_ZI__997': '211130', 'QT_DIARIAS__997': Decimal('5'), 'PROC_REA__997': '0415020034', 'CNES__997': '2697696', 'FINANC__997': '06', 'VAL_TOT__997': Decimal('3447.10'), 'ANO_CMPT__998': '2025', 'COMPLEX__998': '03', 'MES_CMPT__998': '09', 'UF_ZI__998': '211130', 'QT_DIARIAS__998': Decimal('2'), 'PROC_REA__998': '0304080020', 'CNES__998': '2697696', 'FINANC__998': '06', 'VAL_TOT__998': Decimal('1116.00'), 'ANO_CMPT__999': '2025', 'COMPLEX__999': '02', 'MES_CMPT__999': '09', 'UF_ZI__999': '211130', 'QT_DIARIAS__999': Decimal('7'), 'PROC_REA__999': '0304100021', 'CNES__999': '2697696', 'FINANC__999': '06', 'VAL_TOT__999': Decimal('567.63')}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-07-16T03:07:42 [ERROR] sync_datasus.main - Erro ao processar SIH MA 202509. Pulando para a próxima. Detalhe: (psycopg2.errors.NotNullViolation) null value in column "DI_INTER" of relation "datasus_sih_tb_rd" violates not-null constraint
+DETAIL:  Failing row contains (2, 2025, 09, null, 0415020050, 2697696, 7806.33, 2, 211130, 06, 03).
+
+[SQL: INSERT INTO datasus_sih_tb_rd ("ANO_CMPT", "MES_CMPT", "PROC_REA", "CNES", "VAL_TOT", "QT_DIARIAS", "UF_ZI", "FINANC", "COMPLEX") VALUES (%(ANO_CMPT__0)s, %(MES_CMPT__0)s, %(PROC_REA__0)s, %(CNES__0)s, %(VAL_TOT__0)s, %(QT_DIARIAS__0)s, %(UF_ZI__0)s, ... 162795 characters truncated ... ES__999)s, %(VAL_TOT__999)s, %(QT_DIARIAS__999)s, %(UF_ZI__999)s, %(FINANC__999)s, %(COMPLEX__999)s)]
+[parameters: {'ANO_CMPT__0': '2025', 'COMPLEX__0': '03', 'MES_CMPT__0': '09', 'UF_ZI__0': '211130', 'QT_DIARIAS__0': Decimal('2'), 'PROC_REA__0': '0415020050', 'CNES__0': '2697696', 'FINANC__0': '06', 'VAL_TOT__0': Decimal('7806.33'), 'ANO_CMPT__1': '2025', 'COMPLEX__1': '03', 'MES_CMPT__1': '09', 'UF_ZI__1': '211130', 'QT_DIARIAS__1': Decimal('1'), 'PROC_REA__1': '0416080081', 'CNES__1': '2697696', 'FINANC__1': '06', 'VAL_TOT__1': Decimal('4038.83'), 'ANO_CMPT__2': '2025', 'COMPLEX__2': '03', 'MES_CMPT__2': '09', 'UF_ZI__2': '211130', 'QT_DIARIAS__2': Decimal('1'), 'PROC_REA__2': '0416080081', 'CNES__2': '2697696', 'FINANC__2': '06', 'VAL_TOT__2': Decimal('4161.17'), 'ANO_CMPT__3': '2025', 'COMPLEX__3': '02', 'MES_CMPT__3': '09', 'UF_ZI__3': '211130', 'QT_DIARIAS__3': Decimal('1'), 'PROC_REA__3': '0409060232', 'CNES__3': '2456958', 'FINANC__3': '06', 'VAL_TOT__3': Decimal('505.99'), 'ANO_CMPT__4': '2025', 'COMPLEX__4': '02', 'MES_CMPT__4': '09', 'UF_ZI__4': '211130', 'QT_DIARIAS__4': Decimal('2'), 'PROC_REA__4': '0409010294', 'CNES__4': '2697696', 'FINANC__4': '06', 'VAL_TOT__4': Decimal('867.87'), 'ANO_CMPT__5': '2025', 'COMPLEX__5': '02', 'MES_CMPT__5': '09', 'UF_ZI__5': '211130', 'QT_DIARIAS__5': Decimal('2') ... 8900 parameters truncated ... 'QT_DIARIAS__994': Decimal('11'), 'PROC_REA__994': '0304100021', 'CNES__994': '2697696', 'FINANC__994': '06', 'VAL_TOT__994': Decimal('4082.58'), 'ANO_CMPT__995': '2025', 'COMPLEX__995': '02', 'MES_CMPT__995': '09', 'UF_ZI__995': '211130', 'QT_DIARIAS__995': Decimal('2'), 'PROC_REA__995': '0409060151', 'CNES__995': '2697696', 'FINANC__995': '06', 'VAL_TOT__995': Decimal('1211.50'), 'ANO_CMPT__996': '2025', 'COMPLEX__996': '03', 'MES_CMPT__996': '09', 'UF_ZI__996': '211130', 'QT_DIARIAS__996': Decimal('3'), 'PROC_REA__996': '0415020050', 'CNES__996': '2697696', 'FINANC__996': '06', 'VAL_TOT__996': Decimal('10113.43'), 'ANO_CMPT__997': '2025', 'COMPLEX__997': '03', 'MES_CMPT__997': '09', 'UF_ZI__997': '211130', 'QT_DIARIAS__997': Decimal('5'), 'PROC_REA__997': '0415020034', 'CNES__997': '2697696', 'FINANC__997': '06', 'VAL_TOT__997': Decimal('3447.10'), 'ANO_CMPT__998': '2025', 'COMPLEX__998': '03', 'MES_CMPT__998': '09', 'UF_ZI__998': '211130', 'QT_DIARIAS__998': Decimal('2'), 'PROC_REA__998': '0304080020', 'CNES__998': '2697696', 'FINANC__998': '06', 'VAL_TOT__998': Decimal('1116.00'), 'ANO_CMPT__999': '2025', 'COMPLEX__999': '02', 'MES_CMPT__999': '09', 'UF_ZI__999': '211130', 'QT_DIARIAS__999': Decimal('7'), 'PROC_REA__999': '0304100021', 'CNES__999': '2697696', 'FINANC__999': '06', 'VAL_TOT__999': Decimal('567.63')}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-07-16T03:07:42 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202510...
+2026-07-16T03:07:42 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:43 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:44 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:45 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2510.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:07:48 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 500953 linhas...
+2026-07-16T03:07:48 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:07:48 [INFO] sync_datasus.etl_core - [SIH] Competência 202510 (MA) processada: 0 inserções.
+2026-07-16T03:07:48 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202511...
+2026-07-16T03:07:49 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:51 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:51 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2511.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:07:55 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 489741 linhas...
+2026-07-16T03:07:55 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:07:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202511 (MA) processada: 0 inserções.
+2026-07-16T03:07:55 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202512...
+2026-07-16T03:07:56 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:56 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:57 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:07:58 [INFO] httpx - HTTP Request: GET https://nbg1.your-objectstorage.com/pysus/public/data/ftp/sih/SPMA2512.parquet "HTTP/1.1 200 OK"
+2026-07-16T03:08:03 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 469099 linhas...
+2026-07-16T03:08:03 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:08:03 [INFO] sync_datasus.etl_core - [SIH] Competência 202512 (MA) processada: 0 inserções.
+2026-07-16T03:08:03 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202601...
+2026-07-16T03:08:04 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:08:04 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:08:05 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:08:09 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 463765 linhas...
+2026-07-16T03:08:09 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:08:09 [INFO] sync_datasus.etl_core - [SIH] Competência 202601 (MA) processada: 0 inserções.
+2026-07-16T03:08:09 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202602...
+2026-07-16T03:08:10 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:08:11 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:08:11 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:08:15 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 406839 linhas...
+2026-07-16T03:08:15 [INFO] sync_datasus.etl_core - [SIH] Filtrados 0 registros relevantes. Inserindo no banco...
+2026-07-16T03:08:15 [INFO] sync_datasus.etl_core - [SIH] Competência 202602 (MA) processada: 0 inserções.
+2026-07-16T03:08:15 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
+2026-07-16T03:37:44 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T03:37:44 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T03:37:45 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:45 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:46 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:47 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:47 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:48 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:49 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:51 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:52 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:52 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:53 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:54 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:55 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:55 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:56 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:57 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:57 [INFO] sync_datasus.main - Competências a baixar: ['202501', '202502', '202503', '202504', '202505', '202506', '202507', '202508', '202509', '202510', '202511', '202512', '202601', '202602']
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202501 já importada com sucesso (id=5). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202502 já importada com sucesso (id=6). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202503 já importada com sucesso (id=7). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202504 já importada com sucesso (id=8). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202505 já importada com sucesso (id=9). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202506 já importada com sucesso (id=10). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202507 já importada com sucesso (id=11). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202508 já importada com sucesso (id=12). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202509 já importada com sucesso (id=13). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202510 já importada com sucesso (id=14). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202511 já importada com sucesso (id=15). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202512 já importada com sucesso (id=16). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202601 já importada com sucesso (id=1). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202602 já importada com sucesso (id=2). Skip.
+2026-07-16T03:37:57 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T03:37:58 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:58 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:37:59 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:00 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:00 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:01 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:02 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:02 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:03 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:04 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:05 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:05 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:06 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:07 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:07 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:08 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:09 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:10 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:11 [INFO] sync_datasus.main - Competências a baixar: ['202501', '202502', '202503', '202504', '202505', '202506', '202507', '202508', '202509', '202510', '202511', '202512', '202601', '202602']
+2026-07-16T03:38:11 [INFO] sync_datasus.etl_core - [SIH] Competência 202501 já importada com sucesso (id=19). Skip.
+2026-07-16T03:38:11 [INFO] sync_datasus.etl_core - [SIH] Competência 202502 já importada com sucesso (id=20). Skip.
+2026-07-16T03:38:11 [INFO] sync_datasus.etl_core - [SIH] Competência 202503 já importada com sucesso (id=21). Skip.
+2026-07-16T03:38:11 [INFO] sync_datasus.etl_core - [SIH] Competência 202504 já importada com sucesso (id=22). Skip.
+2026-07-16T03:38:11 [INFO] sync_datasus.etl_core - [SIH] Competência 202505 já importada com sucesso (id=23). Skip.
+2026-07-16T03:38:11 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202506...
+2026-07-16T03:38:12 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:12 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:13 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:13 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 44136 linhas...
+2026-07-16T03:38:16 [INFO] sync_datasus.etl_core - [SIH] Filtrados 3116 registros relevantes. Inserindo no banco...
+2026-07-16T03:38:16 [INFO] sync_datasus.etl_core - [SIH] Competência 202506 (MA) processada: 3116 inserções.
+2026-07-16T03:38:16 [INFO] sync_datasus.etl_core - [SIH] Competência 202507 já importada com sucesso (id=25). Skip.
+2026-07-16T03:38:16 [INFO] sync_datasus.etl_core - [SIH] Competência 202508 já importada com sucesso (id=26). Skip.
+2026-07-16T03:38:16 [INFO] sync_datasus.etl_core - [SIH] Baixando MA - 202509...
+2026-07-16T03:38:16 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:17 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:18 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T03:38:18 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 43181 linhas...
+2026-07-16T03:38:20 [INFO] sync_datasus.etl_core - [SIH] Filtrados 3120 registros relevantes. Inserindo no banco...
+2026-07-16T03:38:20 [INFO] sync_datasus.etl_core - [SIH] Competência 202509 (MA) processada: 3120 inserções.
+2026-07-16T03:38:20 [INFO] sync_datasus.etl_core - [SIH] Competência 202510 já importada com sucesso (id=28). Skip.
+2026-07-16T03:38:20 [INFO] sync_datasus.etl_core - [SIH] Competência 202511 já importada com sucesso (id=29). Skip.
+2026-07-16T03:38:20 [INFO] sync_datasus.etl_core - [SIH] Competência 202512 já importada com sucesso (id=30). Skip.
+2026-07-16T03:38:20 [INFO] sync_datasus.etl_core - [SIH] Competência 202601 já importada com sucesso (id=3). Skip.
+2026-07-16T03:38:20 [INFO] sync_datasus.etl_core - [SIH] Competência 202602 já importada com sucesso (id=4). Skip.
+2026-07-16T03:38:20 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
+2026-07-16T04:09:45 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T04:09:45 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T04:09:46 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:47 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:47 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:48 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:49 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:49 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:51 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:52 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:52 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:53 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:54 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:54 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:55 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:56 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:56 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:57 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:58 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:58 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIA MA.
+2026-07-16T04:09:58 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIA em MA.
+2026-07-16T04:09:58 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T04:09:59 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:09:59 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:00 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:01 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:01 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:02 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:03 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:04 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:04 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:05 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:06 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:06 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:07 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:08 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:09 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:09 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:10 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:11 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:10:12 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIH em MA.
+2026-07-16T04:10:12 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
+2026-07-16T04:11:28 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T04:11:28 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T04:11:29 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:30 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:30 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:31 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:32 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:33 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:33 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:34 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:35 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:35 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:36 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:37 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:37 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:38 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:39 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:40 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:40 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:41 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sia.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:41 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIA MA.
+2026-07-16T04:11:41 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIA em MA.
+2026-07-16T04:11:41 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T04:11:42 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:42 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:43 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:44 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:45 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:45 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:46 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:47 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:47 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:48 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:49 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:50 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:51 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:52 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:52 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:53 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_columns.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:54 [INFO] httpx - HTTP Request: HEAD https://nbg1.your-objectstorage.com/pysus/public/catalog_sih.duckdb "HTTP/1.1 200 OK"
+2026-07-16T04:11:55 [INFO] sync_datasus.main - Competências a baixar: ['202501', '202502', '202503', '202504', '202505', '202506', '202507', '202508', '202509', '202510', '202511', '202512', '202601', '202602']
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202501 já importada com sucesso (id=19). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202502 já importada com sucesso (id=20). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202503 já importada com sucesso (id=21). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202504 já importada com sucesso (id=22). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202505 já importada com sucesso (id=23). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202506 já importada com sucesso (id=33). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202507 já importada com sucesso (id=25). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202508 já importada com sucesso (id=26). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202509 já importada com sucesso (id=34). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202510 já importada com sucesso (id=28). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202511 já importada com sucesso (id=29). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202512 já importada com sucesso (id=30). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202601 já importada com sucesso (id=3). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.etl_core - [SIH] Competência 202602 já importada com sucesso (id=4). Skip.
+2026-07-16T04:11:55 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
+2026-07-16T04:32:07 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T04:32:07 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T04:32:07 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2607.dbc...
+2026-07-16T04:32:08 [WARNING] sync_datasus.datasus_client - Arquivo não encontrado no FTP para SIA MA 202607.
+2026-07-16T04:32:08 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2606.dbc...
+2026-07-16T04:32:09 [WARNING] sync_datasus.datasus_client - Arquivo não encontrado no FTP para SIA MA 202606.
+2026-07-16T04:32:09 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2605.dbc...
+2026-07-16T04:33:21 [INFO] sync_datasus.main - Competências a baixar: ['202501', '202502', '202503', '202504', '202505', '202506', '202507', '202508', '202509', '202510', '202511', '202512', '202601', '202602', '202603', '202604', '202605']
+2026-07-16T04:33:21 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202501...
+2026-07-16T04:33:21 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2501.dbc...
+2026-07-16T04:34:05 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T04:34:05 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T04:34:05 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2607.dbc...
+2026-07-16T04:34:06 [WARNING] sync_datasus.datasus_client - Arquivo não encontrado no FTP para SIA MA 202607.
+2026-07-16T04:34:06 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2606.dbc...
+2026-07-16T04:34:06 [WARNING] sync_datasus.datasus_client - Arquivo não encontrado no FTP para SIA MA 202606.
+2026-07-16T04:34:06 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2605.dbc...
+2026-07-16T04:35:18 [INFO] sync_datasus.main - Competências a baixar: ['202501', '202502', '202503', '202504', '202505', '202506', '202507', '202508', '202509', '202510', '202511', '202512', '202601', '202602', '202603', '202604', '202605']
+2026-07-16T04:35:18 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202501...
+2026-07-16T04:35:18 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2501.dbc...
+2026-07-16T04:36:21 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 946034 linhas...
+2026-07-16T04:36:56 [INFO] sync_datasus.etl_core - [SIA] Filtrados 101903 registros relevantes. Inserindo no banco...
+2026-07-16T04:37:02 [INFO] sync_datasus.etl_core - [SIA] Competência 202501 (MA) processada: 101903 inserções.
+2026-07-16T04:37:02 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202502...
+2026-07-16T04:37:02 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2502.dbc...
+2026-07-16T04:38:09 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 937821 linhas...
+2026-07-16T04:38:44 [INFO] sync_datasus.etl_core - [SIA] Filtrados 84852 registros relevantes. Inserindo no banco...
+2026-07-16T04:38:49 [INFO] sync_datasus.etl_core - [SIA] Competência 202502 (MA) processada: 84852 inserções.
+2026-07-16T04:38:49 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202503...
+2026-07-16T04:38:49 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2503.dbc...
+2026-07-16T04:39:59 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 1019892 linhas...
+2026-07-16T04:40:36 [INFO] sync_datasus.etl_core - [SIA] Filtrados 80980 registros relevantes. Inserindo no banco...
+2026-07-16T04:40:41 [INFO] sync_datasus.etl_core - [SIA] Competência 202503 (MA) processada: 80980 inserções.
+2026-07-16T04:40:41 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202504...
+2026-07-16T04:40:41 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2504.dbc...
+2026-07-16T04:41:51 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 1003345 linhas...
+2026-07-16T04:42:27 [INFO] sync_datasus.etl_core - [SIA] Filtrados 66155 registros relevantes. Inserindo no banco...
+2026-07-16T04:42:30 [INFO] sync_datasus.etl_core - [SIA] Competência 202504 (MA) processada: 66155 inserções.
+2026-07-16T04:42:31 [INFO] sync_datasus.etl_core - [SIA] Baixando MA - 202505...
+2026-07-16T04:42:31 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2505.dbc...
+2026-07-16T04:43:49 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 1108316 linhas...
+2026-07-16T04:57:16 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T04:57:16 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / AC ---
+2026-07-16T04:57:16 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2607.dbc...
+2026-07-16T04:57:17 [WARNING] sync_datasus.datasus_client - Arquivo não encontrado no FTP para SIA AC 202607.
+2026-07-16T04:57:17 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2606.dbc...
+2026-07-16T04:57:17 [WARNING] sync_datasus.datasus_client - Arquivo não encontrado no FTP para SIA AC 202606.
+2026-07-16T04:57:17 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2605.dbc...
+2026-07-16T04:58:28 [INFO] sync_datasus.main - Competências a baixar: ['202601', '202602', '202603', '202604', '202605']
+2026-07-16T04:58:29 [INFO] sync_datasus.etl_core - [SIA] Baixando AC - 202601...
+2026-07-16T04:58:29 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2601.dbc...
+2026-07-16T04:59:48 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 1166190 linhas...
+2026-07-16T05:00:29 [INFO] sync_datasus.etl_core - [SIA] Filtrados 111559 registros relevantes. Inserindo no banco...
+2026-07-16T05:00:51 [INFO] sync_datasus.etl_core - [SIA] Competência 202601 (AC) processada: 111559 inserções.
+2026-07-16T05:00:51 [INFO] sync_datasus.etl_core - [SIA] Baixando AC - 202602...
+2026-07-16T05:00:51 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2602.dbc...
+2026-07-16T05:02:04 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 1081775 linhas...
+2026-07-16T05:02:41 [INFO] sync_datasus.etl_core - [SIA] Filtrados 79489 registros relevantes. Inserindo no banco...
+2026-07-16T05:02:57 [INFO] sync_datasus.etl_core - [SIA] Competência 202602 (AC) processada: 79489 inserções.
+2026-07-16T05:02:57 [INFO] sync_datasus.etl_core - [SIA] Baixando AC - 202603...
+2026-07-16T05:02:57 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2603.dbc...
+2026-07-16T05:04:28 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 1257611 linhas...
+2026-07-16T05:05:11 [INFO] sync_datasus.etl_core - [SIA] Filtrados 89309 registros relevantes. Inserindo no banco...
+2026-07-16T05:05:28 [INFO] sync_datasus.etl_core - [SIA] Competência 202603 (AC) processada: 89309 inserções.
+2026-07-16T05:05:29 [INFO] sync_datasus.etl_core - [SIA] Baixando AC - 202604...
+2026-07-16T05:05:29 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2604.dbc...
+2026-07-16T05:06:50 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 1167472 linhas...
+2026-07-16T05:07:30 [INFO] sync_datasus.etl_core - [SIA] Filtrados 113283 registros relevantes. Inserindo no banco...
+2026-07-16T05:07:51 [INFO] sync_datasus.etl_core - [SIA] Competência 202604 (AC) processada: 113283 inserções.
+2026-07-16T05:07:51 [INFO] sync_datasus.etl_core - [SIA] Baixando AC - 202605...
+2026-07-16T05:07:51 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2605.dbc...
+2026-07-16T05:09:02 [INFO] sync_datasus.etl_core - [SIA] Mapeando dataframe de 1108540 linhas...
+2026-07-16T05:09:39 [INFO] sync_datasus.etl_core - [SIA] Filtrados 105853 registros relevantes. Inserindo no banco...
+2026-07-16T05:09:59 [INFO] sync_datasus.etl_core - [SIA] Competência 202605 (AC) processada: 105853 inserções.
+2026-07-16T05:09:59 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / AC ---
+2026-07-16T05:09:59 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA2607.dbc...
+2026-07-16T05:10:00 [WARNING] sync_datasus.datasus_client - Arquivo não encontrado no FTP para SIH AC 202607.
+2026-07-16T05:10:00 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA2606.dbc...
+2026-07-16T05:10:01 [WARNING] sync_datasus.datasus_client - Arquivo não encontrado no FTP para SIH AC 202606.
+2026-07-16T05:10:01 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA2605.dbc...
+2026-07-16T05:10:06 [INFO] sync_datasus.main - Competências a baixar: ['202601', '202602', '202603', '202604', '202605']
+2026-07-16T05:10:07 [INFO] sync_datasus.etl_core - [SIH] Baixando AC - 202601...
+2026-07-16T05:10:07 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA2601.dbc...
+2026-07-16T05:10:13 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 40544 linhas...
+2026-07-16T05:10:16 [INFO] sync_datasus.etl_core - [SIH] Filtrados 2993 registros relevantes. Inserindo no banco...
+2026-07-16T05:10:17 [INFO] sync_datasus.etl_core - [SIH] Competência 202601 (AC) processada: 2993 inserções.
+2026-07-16T05:10:17 [INFO] sync_datasus.etl_core - [SIH] Baixando AC - 202602...
+2026-07-16T05:10:17 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA2602.dbc...
+2026-07-16T05:10:23 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 38265 linhas...
+2026-07-16T05:10:25 [INFO] sync_datasus.etl_core - [SIH] Filtrados 2915 registros relevantes. Inserindo no banco...
+2026-07-16T05:10:27 [INFO] sync_datasus.etl_core - [SIH] Competência 202602 (AC) processada: 2915 inserções.
+2026-07-16T05:10:27 [INFO] sync_datasus.etl_core - [SIH] Baixando AC - 202603...
+2026-07-16T05:10:27 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA2603.dbc...
+2026-07-16T05:10:34 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 41938 linhas...
+2026-07-16T05:10:36 [INFO] sync_datasus.etl_core - [SIH] Filtrados 3045 registros relevantes. Inserindo no banco...
+2026-07-16T05:10:38 [INFO] sync_datasus.etl_core - [SIH] Competência 202603 (AC) processada: 3045 inserções.
+2026-07-16T05:10:38 [INFO] sync_datasus.etl_core - [SIH] Baixando AC - 202604...
+2026-07-16T05:10:38 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA2604.dbc...
+2026-07-16T05:10:44 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 37332 linhas...
+2026-07-16T05:10:46 [INFO] sync_datasus.etl_core - [SIH] Filtrados 3001 registros relevantes. Inserindo no banco...
+2026-07-16T05:10:48 [INFO] sync_datasus.etl_core - [SIH] Competência 202604 (AC) processada: 3001 inserções.
+2026-07-16T05:10:49 [INFO] sync_datasus.etl_core - [SIH] Baixando AC - 202605...
+2026-07-16T05:10:49 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA2605.dbc...
+2026-07-16T05:10:54 [INFO] sync_datasus.etl_core - [SIH] Mapeando dataframe de 34498 linhas...
+2026-07-16T05:10:56 [INFO] sync_datasus.etl_core - [SIH] Filtrados 3140 registros relevantes. Inserindo no banco...
+2026-07-16T05:10:57 [INFO] sync_datasus.etl_core - [SIH] Competência 202605 (AC) processada: 3140 inserções.
+2026-07-16T05:10:57 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / AL ---
+2026-07-16T05:10:57 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2607.dbc...
+2026-07-16T05:10:58 [WARNING] sync_datasus.datasus_client - Arquivo não encontrado no FTP para SIA AL 202607.
+2026-07-16T05:10:58 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2606.dbc...
+2026-07-16T05:10:59 [WARNING] sync_datasus.datasus_client - Arquivo não encontrado no FTP para SIA AL 202606.
+2026-07-16T05:10:59 [INFO] sync_datasus.datasus_client - Tentando baixar ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2605.dbc...

@@ -1,0 +1,22 @@
+2026-07-16T03:54:24 [INFO] sync_datasus.main - Apagando registros locais do SIA...
+2026-07-16T03:54:24 [INFO] sync_datasus.main - Dados do SIA locais apagados com sucesso.
+2026-07-16T03:54:24 [INFO] sync_datasus.etl_core - Carregados 18 CNES ativos do banco.
+2026-07-16T03:54:24 [INFO] sync_datasus.main - --- Iniciando rotina para SIA / MA ---
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202607: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202606: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202605: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202604: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202603: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIA MA 202602: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIA MA.
+2026-07-16T03:54:24 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIA em MA.
+2026-07-16T03:54:24 [INFO] sync_datasus.main - --- Iniciando rotina para SIH / MA ---
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202607: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202606: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202605: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202604: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202603: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.datasus_client - Falha ao baixar SIH MA 202602: pysus not installed correctly
+2026-07-16T03:54:24 [WARNING] sync_datasus.etl_core - Não foi possível determinar a última competência no FTP para SIH MA.
+2026-07-16T03:54:24 [INFO] sync_datasus.main - Nenhuma nova competência a processar para SIH em MA.
+2026-07-16T03:54:24 [INFO] sync_datasus.main - Sincronização DATASUS finalizada.
