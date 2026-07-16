@@ -102,13 +102,25 @@ def main():
                     "RS", "RO", "RR", "SC", "SP", "SE", "TO"
                 ]
 
-            if args.reset or args.reset_only:
-                clean_database(session, ufs_to_process)
+            if args.reset or args.reset_only or args.reset_sia:
+                if args.reset_sia:
+                    msg = "Tem certeza absoluta que deseja apagar TODOS os dados locais do SIA? [y/N]: "
+                else:
+                    msg = "Tem certeza absoluta que deseja apagar TODOS os dados locais do DATASUS (SIA e SIH)? [y/N]: "
+                
+                confirm = input(msg)
+                if confirm.lower() != 'y':
+                    logger.info("Operação de reset cancelada pelo usuário.")
+                    return
+                
+                if args.reset_sia:
+                    clean_sia_database(session)
+                else:
+                    clean_database(session, ufs_to_process)
+                    
                 if args.reset_only:
                     logger.info("Finalizado (--reset-only).")
                     return
-            elif args.reset_sia:
-                clean_sia_database(session)
 
             client = DatasusClient()
             etl = DatasusEtl(session, client)
