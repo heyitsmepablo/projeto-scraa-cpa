@@ -7,7 +7,7 @@ Desenvolvimento do client web para monitoramento de execuções de contratos da 
 
 ---
 
-## Sprint 1: Fundação e Estrutura Base
+## Sprint 1: Fundação e Estrutura Base [x]
 
 **Objetivo:** Levantar a base estrutural do client web, garantindo navegação, roteamento, temas e serviços de comunicação configurados de forma pragmática.
 
@@ -21,7 +21,7 @@ Desenvolvimento do client web para monitoramento de execuções de contratos da 
 
 ---
 
-## Sprint 2: Gestão de Contratos e Instituições
+## Sprint 2: Gestão de Contratos e Instituições []
 
 **Objetivo:** Disponibilizar a visualização das entidades prestadoras de serviço e seus respectivos vínculos jurídicos.
 

@@ -3,3 +3,19 @@
 @import 'tailwindcss';
 @import 'tailwindcss-primeui';
 @import 'primeicons/primeicons.css';
+
+@custom-variant dark (&:where(.p-dark, .p-dark *, .dark, .dark *));
+
+@layer base {
+  html {
+    color-scheme: light;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  html.p-dark,
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-surface-50 text-surface-900 dark:bg-surface-950 dark:text-surface-0 antialiased;
+  }
+}

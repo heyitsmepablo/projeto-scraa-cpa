@@ -1,4 +1,4 @@
-<header class="h-16 border-b border-surface-200 dark:border-surface-800 bg-surface-0 dark:bg-surface-900 px-4 flex items-center justify-between shadow-xs sticky top-0 z-20">
+<header class="h-16 border-b border-surface-200/80 dark:border-surface-800 bg-surface-0/95 backdrop-blur-xs dark:bg-surface-900 px-4 flex items-center justify-between shadow-xs sticky top-0 z-20 transition-colors">
   <div class="flex items-center gap-3">
     <p-button
       icon="pi pi-bars"
@@ -9,7 +9,7 @@
       styleClass="p-button-rounded"
     />
     <div class="flex items-center gap-2">
-      <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-primary-contrast font-bold text-sm">
+      <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-600 text-white font-black text-sm shadow-xs">
         CPA
       </span>
       <div class="hidden sm:flex flex-col">
@@ -21,7 +21,7 @@
 
   <div class="flex items-center gap-2 sm:gap-3">
     <!-- Seletor de Competência Global -->
-    <div class="flex items-center gap-1 bg-surface-100 dark:bg-surface-800/80 p-1 rounded-xl border border-surface-200 dark:border-surface-700">
+    <div class="flex items-center gap-1 bg-surface-100/70 dark:bg-surface-800/80 p-1 rounded-xl border border-surface-200 dark:border-surface-700">
       <p-button
         icon="pi pi-chevron-left"
         [text]="true"
@@ -32,7 +32,7 @@
       />
 
       <div class="flex items-center gap-2 px-1">
-        <i class="pi pi-calendar text-primary text-sm hidden xs:inline-block"></i>
+        <i class="pi pi-calendar text-primary-600 dark:text-primary-400 text-sm hidden xs:inline-block"></i>
         <p-select
           [options]="competenceService.competencias()"
           [ngModel]="competenceService.competencia()"
@@ -62,6 +62,18 @@
       [value]="competenceService.competenciaFormatada()"
       severity="info"
       styleClass="hidden md:inline-flex font-mono text-xs font-semibold px-2.5 py-1"
+    />
+
+    <!-- Botão de Alternância de Tema -->
+    <p-button
+      [icon]="themeService.isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'"
+      [text]="true"
+      severity="secondary"
+      styleClass="p-button-rounded"
+      (onClick)="themeService.toggleTheme()"
+      [ariaLabel]="themeService.isDarkMode() ? 'Alternar para tema claro' : 'Alternar para tema escuro'"
+      [pTooltip]="themeService.isDarkMode() ? 'Mudar para tema claro' : 'Mudar para tema escuro'"
+      tooltipPosition="bottom"
     />
   </div>
 </header>
