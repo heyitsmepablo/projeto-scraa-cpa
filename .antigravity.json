@@ -2,22 +2,24 @@
   "subagents": {
     "elaborador": {
       "file": ".antigravity/subagents/elaborador.md",
-      "model": "gemini-3.1-pro",
-      "temperature": 0.5
+      "model": "gemini-3.1-pro-high",
+      "temperature": 0.4
     },
     "desenvolvedor": {
       "file": ".antigravity/subagents/desenvolvedor.md",
-      "model": "gemini-3.7-flash",
+      "model": "claude-sonnet-4.6",
+      "fallback_model": "gemini-3.1-pro-high",
       "temperature": 0.2
     },
     "revisor": {
       "file": ".antigravity/subagents/revisor.md",
-      "model": "gpt-4o",
-      "temperature": 0.1
+      "model": "gpt-oss-120b-medium",
+      "fallback_model": "gemini-3.1-pro-high",
+      "temperature": 0.0
     },
     "qa": {
       "file": ".antigravity/subagents/qa.md",
-      "model": "claude-3-5-sonnet",
+      "model": "gemini-3.1-pro-high",
       "temperature": 0.1
     }
   }
