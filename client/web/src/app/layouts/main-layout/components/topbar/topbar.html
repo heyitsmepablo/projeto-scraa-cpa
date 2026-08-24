@@ -1,0 +1,67 @@
+<header class="h-16 border-b border-surface-200 dark:border-surface-800 bg-surface-0 dark:bg-surface-900 px-4 flex items-center justify-between shadow-xs sticky top-0 z-20">
+  <div class="flex items-center gap-3">
+    <p-button
+      icon="pi pi-bars"
+      [text]="true"
+      severity="secondary"
+      (onClick)="toggleSidebar.emit()"
+      aria-label="Alternar Menu"
+      styleClass="p-button-rounded"
+    />
+    <div class="flex items-center gap-2">
+      <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-primary-contrast font-bold text-sm">
+        CPA
+      </span>
+      <div class="hidden sm:flex flex-col">
+        <span class="font-bold text-sm text-surface-900 dark:text-surface-0 leading-tight">PULSAR CPA</span>
+        <span class="text-xs text-surface-500 dark:text-surface-400">Contratos & Planos Operativos SUS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2 sm:gap-3">
+    <!-- Seletor de Competência Global -->
+    <div class="flex items-center gap-1 bg-surface-100 dark:bg-surface-800/80 p-1 rounded-xl border border-surface-200 dark:border-surface-700">
+      <p-button
+        icon="pi pi-chevron-left"
+        [text]="true"
+        severity="secondary"
+        size="small"
+        (onClick)="competenceService.previousCompetence()"
+        aria-label="Competência Anterior"
+      />
+
+      <div class="flex items-center gap-2 px-1">
+        <i class="pi pi-calendar text-primary text-sm hidden xs:inline-block"></i>
+        <p-select
+          [options]="competenceService.competencias()"
+          [ngModel]="competenceService.competencia()"
+          (ngModelChange)="onCompetenciaChange($event)"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Selecione a competência"
+          styleClass="w-36 sm:w-48 text-xs border-0 bg-transparent shadow-none"
+          [filter]="true"
+          filterPlaceholder="Buscar ano/mês..."
+          appendTo="body"
+        />
+      </div>
+
+      <p-button
+        icon="pi pi-chevron-right"
+        [text]="true"
+        severity="secondary"
+        size="small"
+        (onClick)="competenceService.nextCompetence()"
+        aria-label="Próxima Competência"
+      />
+    </div>
+
+    <!-- Indicador Ativo -->
+    <p-tag
+      [value]="competenceService.competenciaFormatada()"
+      severity="info"
+      styleClass="hidden md:inline-flex font-mono text-xs font-semibold px-2.5 py-1"
+    />
+  </div>
+</header>

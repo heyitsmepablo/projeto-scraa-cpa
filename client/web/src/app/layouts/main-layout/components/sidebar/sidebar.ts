@@ -1,26 +1,52 @@
-import { Component, signal } from '@angular/core';
-import { AvatarModule } from 'primeng/avatar';
-import { SidebarModule } from 'primeng/sidebar';
-import { ButtonModule } from 'primeng/button';
-import { Home } from '@primeicons/angular/home';
-import { Inbox } from '@primeicons/angular/inbox';
-import { Search } from '@primeicons/angular/search';
-import { Users } from '@primeicons/angular/users';
-import { Bell } from '@primeicons/angular/bell';
-import { Cog } from '@primeicons/angular/cog';
+import { Component, input, output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+
+interface NavItem {
+  label: string;
+  route: string;
+  icon: string;
+  badge?: string;
+}
 
 @Component({
   selector: 'app-sidebar',
-  imports: [SidebarModule],
+  standalone: true,
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
 export class Sidebar {
-  isMobile = signal(false);
-  constructor() {
-    if (typeof window === 'undefined') return;
-    const mql = window.matchMedia('(max-width: 1023px)');
-    this.isMobile.set(mql.matches);
-    mql.addEventListener('change', (e) => this.isMobile.set(e.matches));
+  readonly isOpen = input<boolean>(true);
+  readonly isMobile = input<boolean>(false);
+  readonly closeSidebar = output<void>();
+
+  readonly navItems: NavItem[] = [
+    {
+      label: 'Dashboard',
+      route: '/dashboard',
+      icon: 'pi pi-chart-bar',
+    },
+    {
+      label: 'Instituições',
+      route: '/instituicoes',
+      icon: 'pi pi-building',
+    },
+    {
+      label: 'Vínculos e Contratos',
+      route: '/vinculos',
+      icon: 'pi pi-file-edit',
+    },
+    {
+      label: 'Planos Operativos',
+      route: '/planos-operativos',
+      icon: 'pi pi-list-check',
+    },
+  ];
+
+  onNavigate(): void {
+    if (this.isMobile()) {
+      this.closeSidebar.emit();
+    }
   }
 }

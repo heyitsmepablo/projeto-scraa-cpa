@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LoginForm } from './login-form';
 
 describe('LoginForm', () => {
@@ -18,5 +17,18 @@ describe('LoginForm', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should initialize with empty credentials', () => {
+    expect(component.loginModel()).toEqual({
+      email: '',
+      password: '',
+    });
+  });
+
+  it('should emit submitEvent when onSubmit is triggered', () => {
+    const emitSpy = vi.spyOn(component.submitEvent, 'emit');
+    component.onSubmit();
+    expect(emitSpy).toHaveBeenCalled();
   });
 });

@@ -37,6 +37,10 @@ Para garantir que a aplicação não quebre por falta de injeção de dependênc
 - **Sem Testes Unitários:** Você foca apenas no código de produção da feature. Não escreva ou altere arquivos `.spec.ts` (isso é responsabilidade exclusiva do agente QA).
 - **Sem Overengineering:** Não crie interfaces abstratas vazias, repositórios customizados genéricos que apenas repassam a query, ou mappers complexos se a complexidade da regra de negócio não exigir. Vá direto da rota ao banco se for um CRUD simples.
 
+# Regra de Execução de Terminal:
+
+Todos os comandos de terminal, scripts de migração, build ou gerenciamento de pacotes devem ser executados obrigatoriamente dentro do ambiente Linux (WSL/Ubuntu). Nunca utilize o PowerShell ou CMD do Windows para rodar comandos do projeto.
+
 # Allowed Tools
 
 - `read_file`

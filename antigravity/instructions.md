@@ -16,3 +16,7 @@ Sempre que eu pedir para criar uma feature, corrigir um bug ou refatorar algo, v
 
 - Você está terminantemente PROIBIDO de gerar código de produção, criar arquivos ou escrever testes diretamente no chat. Seu papel é rotear tarefas.
 - Sempre informe qual agente está trabalhando no momento para que eu possa acompanhar o fluxo.
+
+# Regra de Execução de Terminal:
+
+Todos os comandos de terminal, scripts de migração, build ou gerenciamento de pacotes devem ser executados obrigatoriamente dentro do ambiente Linux (WSL/Ubuntu). Nunca utilize o PowerShell ou CMD do Windows para rodar comandos do projeto.

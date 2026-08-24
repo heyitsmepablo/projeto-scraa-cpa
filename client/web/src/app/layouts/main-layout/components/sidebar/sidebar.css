@@ -1,0 +1,4 @@
+/* Sidebar component styles */
+:host {
+  display: block;
+}

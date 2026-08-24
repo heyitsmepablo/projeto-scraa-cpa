@@ -1,58 +1,36 @@
-<p-sidebar-layout class="flex min-h-screen w-full">
-  <p-sidebar id="sidebar" collapsible="icon" [open]="false">
-    <p-sidebar-aside>
-      <p-sidebar-panel>
-        <p-sidebar-header>
-          <div class="flex items-center gap-2 p-2">
-            <h2 class="m-0 text-xl font-bold">Meu App</h2>
-          </div>
-        </p-sidebar-header>
+<div class="min-h-screen flex flex-col bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-0">
+  <app-topbar (toggleSidebar)="toggleSidebar()" />
 
-        <p-sidebar-content>
-          <p-sidebar-group>
-            <p-sidebar-group-label>Navegação</p-sidebar-group-label>
-            <p-sidebar-group-content>
-              <p-sidebar-menu>
-                <p-sidebar-menu-item>
-                  <a pSidebarMenuButton>
-                    <i class="pi pi-home"></i>
-                    <span>Início</span>
-                  </a>
-                </p-sidebar-menu-item>
+  <div class="flex flex-1 relative overflow-hidden">
+    <!-- Sidebar no Mobile com Backdrop -->
+    @if (isMobile() && isSidebarOpen()) {
+      <div
+        class="fixed inset-0 top-16 bg-black/40 backdrop-blur-xs z-30 transition-opacity"
+        (click)="closeSidebar()"
+      ></div>
+      <div class="fixed top-16 left-0 bottom-0 z-40 shadow-xl animate-fadein">
+        <app-sidebar
+          [isOpen]="isSidebarOpen()"
+          [isMobile]="isMobile()"
+          (closeSidebar)="closeSidebar()"
+        />
+      </div>
+    }
 
-                <p-sidebar-menu-item>
-                  <a pSidebarMenuButton>
-                    <i class="pi pi-user"></i>
-                    <span>Perfil</span>
-                  </a>
-                </p-sidebar-menu-item>
+    <!-- Sidebar no Desktop -->
+    @if (!isMobile() && isSidebarOpen()) {
+      <app-sidebar
+        [isOpen]="isSidebarOpen()"
+        [isMobile]="isMobile()"
+        (closeSidebar)="closeSidebar()"
+      />
+    }
 
-                <p-sidebar-menu-item>
-                  <a pSidebarMenuButton>
-                    <i class="pi pi-cog"></i>
-                    <span>Configurações</span>
-                  </a>
-                </p-sidebar-menu-item>
-              </p-sidebar-menu>
-            </p-sidebar-group-content>
-          </p-sidebar-group>
-        </p-sidebar-content>
-      </p-sidebar-panel>
-    </p-sidebar-aside>
-  </p-sidebar>
-
-  <p-sidebar-main>
-    <header
-      class="flex h-12 items-center gap-2 border-b border-surface-200 dark:border-surface-700 px-4"
-    >
-      <button pButton pSidebarTrigger target="sidebar" severity="secondary" text size="small">
-        button
-      </button>
-    </header>
-    <div class="flex-1 p-4 flex flex-col gap-4">
-      z
-      <div class="rounded-lg bg-surface-100 dark:bg-surface-800 h-48"></div>
-      <div class="rounded-lg bg-surface-100 dark:bg-surface-800 flex-1"></div>
-    </div>
-  </p-sidebar-main>
-</p-sidebar-layout>
+    <!-- Conteúdo Principal -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
+      <div class="max-w-7xl mx-auto">
+        <router-outlet />
+      </div>
+    </main>
+  </div>
+</div>

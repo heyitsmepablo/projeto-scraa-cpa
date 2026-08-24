@@ -1,4 +1,4 @@
-# Planejamento de Sprints - Ecossistema Pulsar (Módulo CPA)
+# Planejamento de Sprints
 
 ## Visão Geral
 
