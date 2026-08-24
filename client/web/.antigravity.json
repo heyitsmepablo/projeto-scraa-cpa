@@ -1,0 +1,24 @@
+{
+  "subagents": {
+    "elaborador": {
+      "file": ".antigravity/subagents/elaborador.md",
+      "model": "gemini-3.1-pro",
+      "temperature": 0.5
+    },
+    "desenvolvedor": {
+      "file": ".antigravity/subagents/desenvolvedor.md",
+      "model": "gemini-3.7-flash",
+      "temperature": 0.2
+    },
+    "revisor": {
+      "file": ".antigravity/subagents/revisor.md",
+      "model": "gpt-4o",
+      "temperature": 0.1
+    },
+    "qa": {
+      "file": ".antigravity/subagents/qa.md",
+      "model": "claude-3-5-sonnet",
+      "temperature": 0.1
+    }
+  }
+}
