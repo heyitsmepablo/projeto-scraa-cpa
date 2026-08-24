@@ -1,34 +1,62 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { InstituicoesListComponent } from './instituicoes-list.component';
 import { CompetenceService } from '../../core/services/competence.service';
+import { InstituicaoService } from '../../core/services/instituicao.service';
+import { Instituicao } from '../../core/models/instituicao.model';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { vi, describe, beforeEach, it, expect } from 'vitest';
 
 describe('InstituicoesListComponent', () => {
   let component: InstituicoesListComponent;
   let fixture: ComponentFixture<InstituicoesListComponent>;
-  let competenceService: CompetenceService;
+  
+  let instituicaoServiceMock: any;
+  let competenceServiceMock: any;
+
+  const mockInstituicoes: Partial<Instituicao>[] = [
+    { id: 1, nome: 'Inst 1', cnes: '111111', cnpj: '111', tipoInstituicao: 'FILANTRÓPICO' },
+    { id: 2, nome: 'Inst 2', cnes: '222222', cnpj: '222', tipoInstituicao: 'EMPRESA' },
+    { id: 3, nome: 'Inst 3', cnes: '333333', cnpj: '333', tipoInstituicao: 'EMPRESA' }
+  ];
 
   beforeEach(async () => {
+    instituicaoServiceMock = {
+      findAll: vi.fn().mockReturnValue(of(mockInstituicoes as Instituicao[]))
+    };
+    
+    competenceServiceMock = {
+      competenciaFormatada: vi.fn().mockReturnValue('08/2026')
+    };
+
     await TestBed.configureTestingModule({
       imports: [InstituicoesListComponent],
-      providers: [CompetenceService],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: InstituicaoService, useValue: instituicaoServiceMock },
+        { provide: CompetenceService, useValue: competenceServiceMock }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(InstituicoesListComponent);
     component = fixture.componentInstance;
-    competenceService = TestBed.inject(CompetenceService);
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display the header title and formatted competence', async () => {
-    competenceService.setCompetence('202404');
-    await fixture.whenStable();
+  it('should load instituicoes on init', () => {
+    expect(instituicaoServiceMock.findAll).toHaveBeenCalled();
+    expect(component.instituicoes()?.length).toBe(3);
+  });
 
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Instituições Prestadoras SUS');
-    expect(compiled.textContent).toContain('04/2024');
+  it('should return correct severity for tipoInstituicao', () => {
+    expect(component.getTipoSeverity('FILANTRÓPICO')).toBe('success');
+    expect(component.getTipoSeverity('EMPRESA')).toBe('info');
+    expect(component.getTipoSeverity('OUTROS')).toBe('secondary');
   });
 });

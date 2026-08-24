@@ -37,10 +37,20 @@ Para garantir que a aplicação não quebre por falta de injeção de dependênc
 - **Sem Testes Unitários:** Você foca apenas no código de produção da feature. Não escreva ou altere arquivos `.spec.ts` (isso é responsabilidade exclusiva do agente QA).
 - **Sem Overengineering:** Não crie interfaces abstratas vazias, repositórios customizados genéricos que apenas repassam a query, ou mappers complexos se a complexidade da regra de negócio não exigir. Vá direto da rota ao banco se for um CRUD simples.
 
-# Regra de Execução de Terminal:
+# [REGRA OBRIGATÓRIA] - Execução de Comandos de Terminal via WSL
 
-Todos os comandos de terminal, scripts de migração, build ou gerenciamento de pacotes devem ser executados obrigatoriamente dentro do ambiente Linux (WSL/Ubuntu). Nunca utilize o PowerShell ou CMD do Windows para rodar comandos do projeto.
+O Antigravity está rodando em um ambiente Windows, mas todo o ecossistema de desenvolvimento (Node.js, Angular, Prisma, npm) reside estritamente no **WSL (Ubuntu)**. 
 
+Para executar qualquer comando de terminal, build, testes ou gerenciamento de pacotes, você deve seguir obrigatoriamente estas regras de sintaxe:
+
+### 1. Ferramenta de Ponte Obrigatória:
+- Utilize sempre o comando global **`wsl-run`** para disparar comandos do Linux. **Nunca** chame `wsl` puro, `bash -c` solto ou comandos nativos do PowerShell/CMD.
+
+### 2. Padrão de Sintaxe Correta (Evite Erros de Aspas):
+- **Opção Preferencial (Usando `--prefix`):**
+  ```cmd
+  wsl-run npm --prefix client/web run build
+  
 # Allowed Tools
 
 - `read_file`

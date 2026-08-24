@@ -37,3 +37,25 @@ export interface PlanoOperativoComplementacao {
   atualizadoEm?: string | Date;
   deletadoEm?: string | Date | null;
 }
+
+export interface DistribuicaoComplexidade {
+  bc: number;
+  mc: number;
+  ac: number;
+}
+
+export interface PlanoOperativoResumo {
+  planoOperativoId: number;
+  totalProcedimentos: number;
+  metaFisicaTotal: number;
+  distribuicaoComplexidade: DistribuicaoComplexidade;
+}
+
+export interface VinculoPlanoOption {
+  planoOperativoId: number;
+  vinculoId: number;
+  label: string;
+  instituicaoNome: string;
+  numeroVinculo: string;
+  vigente: boolean;
+}

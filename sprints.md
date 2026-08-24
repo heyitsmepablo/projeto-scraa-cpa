@@ -21,7 +21,7 @@ Desenvolvimento do client web para monitoramento de execuções de contratos da 
 
 ---
 
-## Sprint 2: Gestão de Contratos e Instituições []
+## Sprint 2: Gestão de Contratos e Instituições [x]
 
 **Objetivo:** Disponibilizar a visualização das entidades prestadoras de serviço e seus respectivos vínculos jurídicos.
 
@@ -30,7 +30,7 @@ Desenvolvimento do client web para monitoramento de execuções de contratos da 
 
 ---
 
-## Sprint 3: Planos Operativos (O Coração do Pacto)
+## Sprint 3: Planos Operativos (O Coração do Pacto) [x]
 
 **Objetivo:** Mapear e exibir o que foi efetivamente contratado e estabelecido para cada instituição de saúde.
 
