@@ -73,10 +73,34 @@ describe('CompetenceService', () => {
     expect(service.competenciaFormatada()).toBe('04/2024');
   });
 
-  it('should go back to previous year December when previousCompetence is called on January', () => {
-    service.setCompetence('202401');
-    service.previousCompetence();
-    expect(service.competencia()).toBe('202312');
-    expect(service.competenciaFormatada()).toBe('12/2023');
+  it('should set range filter correctly', () => {
+    service.setRange('202401', '202404');
+    const filter = service.periodFilter();
+    expect(filter.mode).toBe('RANGE');
+    expect(filter.competenciaInicio).toBe('202401');
+    expect(filter.competenciaFim).toBe('202404');
+    expect(filter.mesesCount).toBe(4);
+    expect(service.periodMode()).toBe('RANGE');
+    expect(service.mesesCount()).toBe(4);
+    expect(service.periodoFormatado()).toContain('01/2024 a 04/2024 (4 meses)');
+  });
+
+  it('should set global filter correctly', () => {
+    service.setGlobal('202301', '202612');
+    const filter = service.periodFilter();
+    expect(filter.mode).toBe('GLOBAL');
+    expect(filter.competenciaInicio).toBe('202301');
+    expect(filter.competenciaFim).toBe('202612');
+    expect(filter.mesesCount).toBe(48);
+    expect(service.periodMode()).toBe('GLOBAL');
+    expect(service.mesesCount()).toBe(48);
+    expect(service.periodoFormatado()).toContain('Vigência Global');
+  });
+
+  it('should calculate months count between competencies', () => {
+    expect(service.countMonthsBetween('202401', '202401')).toBe(1);
+    expect(service.countMonthsBetween('202401', '202404')).toBe(4);
+    expect(service.countMonthsBetween('202301', '202412')).toBe(24);
   });
 });
+

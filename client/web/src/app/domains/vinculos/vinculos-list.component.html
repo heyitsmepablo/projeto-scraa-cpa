@@ -1,0 +1,10 @@
+<div class="flex flex-col gap-6">
+  <app-vinculos-header [competencia]="competenceService.competenciaFormatada()" />
+
+  <app-vinculos-table
+    [vinculos]="vinculos() ?? []"
+    [loading]="loading()"
+    [expandedRows]="expandedRows()"
+    (expandedRowsChange)="onExpandedRowsChange($event)"
+  />
+</div>

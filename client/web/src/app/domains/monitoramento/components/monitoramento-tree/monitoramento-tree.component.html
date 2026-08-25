@@ -1,0 +1,302 @@
+<p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
+  <p-treetable
+    [value]="treeNodes()"
+    [paginator]="true"
+    [rows]="15"
+    [rowsPerPageOptions]="[15, 30, 50, 100]"
+    [scrollable]="true"
+    [tableStyle]="{ 'min-width': '1800px' }"
+    [loading]="loading()"
+    styleClass="p-treetable-sm"
+  >
+    <ng-template #caption>
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <div>
+          <span class="text-lg font-semibold text-surface-900 dark:text-surface-0">
+            Árvore Hierárquica SIGTAP (Grupo &rarr; Subgrupo &rarr; Procedimento)
+          </span>
+          <span class="text-xs text-surface-500 block">
+            Rollup automatizado de quantidades físicas e consolidação financeira
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <p-button
+            label="Expandir Todos"
+            icon="pi pi-angle-double-down"
+            [outlined]="true"
+            severity="secondary"
+            size="small"
+            styleClass="text-xs"
+            (onClick)="expandAll.emit()"
+          />
+          <p-button
+            label="Recolher Todos"
+            icon="pi pi-angle-double-up"
+            [outlined]="true"
+            severity="secondary"
+            size="small"
+            styleClass="text-xs"
+            (onClick)="collapseAll.emit()"
+          />
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #header>
+      <tr class="bg-surface-100 dark:bg-surface-800 border-b-2 border-surface-300 dark:border-surface-600 shadow-xs">
+        <th ttSortableColumn="descricao" style="width: 440px; min-width: 440px" class="text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Estrutura Hierárquica SIGTAP <p-treetable-sort-icon field="descricao" />
+        </th>
+        <th ttSortableColumn="complexidade" style="width: 120px; min-width: 120px" class="text-center text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Complexidade <p-treetable-sort-icon field="complexidade" />
+        </th>
+        <th ttSortableColumn="vlUnitario" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 130px; min-width: 130px">
+          Valor Unit. <p-treetable-sort-icon field="vlUnitario" />
+        </th>
+        <th ttSortableColumn="qtdPactuadaMensal" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 130px; min-width: 130px">
+          Meta Física ({{ mesesCount() }}m) <p-treetable-sort-icon field="qtdPactuadaMensal" />
+        </th>
+        <th ttSortableColumn="qtdAprovada" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 130px; min-width: 130px">
+          Qtd. Aprovada <p-treetable-sort-icon field="qtdAprovada" />
+        </th>
+        <th ttSortableColumn="vlrPactuado" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 180px; min-width: 180px">
+          Financ. Pactuado ({{ mesesCount() }}m) <p-treetable-sort-icon field="vlrPactuado" />
+        </th>
+        <th ttSortableColumn="vlrAprovado" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 180px; min-width: 180px">
+          Financ. Aprovado <p-treetable-sort-icon field="vlrAprovado" />
+        </th>
+        <th ttSortableColumn="saldoFinanceiro" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 160px; min-width: 160px">
+          Saldo Financeiro <p-treetable-sort-icon field="saldoFinanceiro" />
+        </th>
+        <th ttSortableColumn="percExecucao" style="width: 180px; min-width: 180px" class="text-left text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Percentual de Execução <p-treetable-sort-icon field="percExecucao" />
+        </th>
+        <th ttSortableColumn="statusExecucao" style="width: 155px; min-width: 155px" class="text-center text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Status da Meta <p-treetable-sort-icon field="statusExecucao" />
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-rowNode let-rowData="rowData">
+      <tr
+        [ttRow]="rowNode"
+        [ngClass]="{
+          'bg-surface-100/90 dark:bg-surface-800 font-bold border-t-2 border-surface-200 dark:border-surface-700': rowData.tipo === 'GRUPO',
+          'bg-surface-50/70 dark:bg-surface-800/50 font-semibold text-surface-800 dark:text-surface-200': rowData.tipo === 'SUBGRUPO',
+          'bg-surface-0 dark:bg-surface-900 hover:bg-surface-50 dark:hover:bg-surface-800/30 text-surface-700 dark:text-surface-300': rowData.tipo === 'PROCEDIMENTO'
+        }"
+        class="border-b border-surface-100 dark:border-surface-800 transition-colors"
+      >
+        <!-- Coluna 1: Toggler e Descrição Hierárquica -->
+        <td style="width: 440px; min-width: 440px">
+          <div class="flex items-center gap-2">
+            <p-treetable-toggler [rowNode]="rowNode" />
+
+            @if (rowData.tipo === 'GRUPO') {
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-primary-100 dark:bg-primary-950 text-primary-700 dark:text-primary-300 flex items-center justify-center text-xs font-mono font-bold">
+                  {{ rowData.coCodigo }}
+                </span>
+                <span class="text-xs font-bold text-surface-900 dark:text-surface-0 tracking-tight">
+                  {{ rowData.descricao }}
+                </span>
+                <p-tag
+                  [value]="rowData.totalProcedimentos + ' procs'"
+                  severity="secondary"
+                  styleClass="text-[10px] px-1.5 py-0.2"
+                />
+              </div>
+            } @else if (rowData.tipo === 'SUBGRUPO') {
+              <div class="flex items-center gap-2 pl-2">
+                <span class="w-8 h-5 rounded bg-surface-200 dark:bg-surface-700 text-surface-700 dark:text-surface-300 flex items-center justify-center text-[11px] font-mono">
+                  {{ rowData.coCodigo }}
+                </span>
+                <span class="text-xs font-semibold text-surface-800 dark:text-surface-200">
+                  {{ rowData.descricao }}
+                </span>
+                <span class="text-[10px] text-surface-400 font-mono">({{ rowData.totalProcedimentos }})</span>
+              </div>
+            } @else {
+              <!-- Procedimento Individual (Folha) -->
+              <div class="flex items-center gap-2 pl-4">
+                <span class="font-mono text-[11px] font-semibold text-surface-700 dark:text-surface-300 bg-surface-100 dark:bg-surface-800 px-1.5 py-0.5 rounded border border-surface-200 dark:border-surface-700">
+                  {{ rowData.coProcedimentoFormatado }}
+                </span>
+                <span
+                  class="text-xs text-surface-900 dark:text-surface-100 truncate max-w-xs"
+                  [pTooltip]="rowData.noProcedimento"
+                  tooltipPosition="top"
+                >
+                  {{ rowData.noProcedimento }}
+                </span>
+              </div>
+            }
+          </div>
+        </td>
+
+        <!-- Complexidade -->
+        <td class="text-center" style="width: 120px; min-width: 120px">
+          @if (rowData.complexidade) {
+            <p-tag
+              [value]="rowData.complexidade"
+              [severity]="getComplexidadeSeverity(rowData.complexidade)"
+              styleClass="text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 whitespace-nowrap min-w-[32px] text-center"
+            />
+          } @else {
+            <span class="text-surface-400 text-xs">-</span>
+          }
+        </td>
+
+        <!-- Valor Unitário -->
+        <td class="text-right font-mono text-xs" style="width: 130px; min-width: 130px">
+          @if (rowData.vlUnitario !== undefined) {
+            {{ formatCurrency(rowData.vlUnitario) }}
+          } @else {
+            <span class="text-surface-400 italic text-[11px]">Múltiplos</span>
+          }
+        </td>
+
+        <!-- Meta Física -->
+        <td class="text-right font-mono text-xs" style="width: 130px; min-width: 130px">
+          @if (rowData.qtdPactuadaMensal !== null) {
+            <span [ngClass]="rowData.tipo !== 'PROCEDIMENTO' ? 'font-extrabold text-surface-900 dark:text-surface-0' : 'text-surface-800 dark:text-surface-200'">
+              {{ rowData.qtdPactuadaMensal | number }}
+            </span>
+          } @else {
+            <span class="text-surface-400 italic text-xs">Sem Pacto</span>
+          }
+        </td>
+
+        <!-- Qtd Aprovada -->
+        <td class="text-right font-mono text-xs" style="width: 130px; min-width: 130px">
+          <span class="font-bold text-emerald-600 dark:text-emerald-400">
+            {{ rowData.qtdAprovada | number }}
+          </span>
+        </td>
+
+        <!-- Financ. Pactuado -->
+        <td class="text-right font-mono text-xs" style="width: 180px; min-width: 180px">
+          @if (rowData.vlrPactuado !== null) {
+            <span [ngClass]="rowData.tipo !== 'PROCEDIMENTO' ? 'font-bold text-surface-900 dark:text-surface-0' : 'text-surface-700 dark:text-surface-300'">
+              {{ formatCurrency(rowData.vlrPactuado) }}
+            </span>
+          } @else {
+            <span class="text-surface-400 italic text-xs">R$ 0,00</span>
+          }
+        </td>
+
+        <!-- Financ. Aprovado -->
+        <td class="text-right font-mono text-xs" style="width: 180px; min-width: 180px">
+          <span class="font-bold text-surface-900 dark:text-surface-0">
+            {{ formatCurrency(rowData.vlrAprovado) }}
+          </span>
+        </td>
+
+        <!-- Saldo Financeiro -->
+        <td class="text-right font-mono text-xs" style="width: 160px; min-width: 160px">
+          <span
+            class="font-bold"
+            [ngClass]="getSaldoFinanceiroClass(rowData.saldoFinanceiro, rowData.statusExecucao)"
+          >
+            {{ rowData.saldoFinanceiro > 0 ? '+' : '' }}{{ formatCurrency(rowData.saldoFinanceiro) }}
+          </span>
+        </td>
+
+        <!-- Percentual de Execução -->
+        <td style="width: 180px; min-width: 180px">
+          @if (rowData.percExecucao !== null) {
+            <div class="flex flex-col gap-1">
+              <div class="flex justify-between text-xs font-mono font-bold">
+                <span [ngClass]="getPercTextClass(rowData.statusExecucao)">
+                  {{ rowData.percExecucao | number: '1.1-1' }}%
+                </span>
+              </div>
+              <p-progressbar
+                [value]="getClampedPercent(rowData.percExecucao)"
+                [showValue]="false"
+                [style]="{ height: '6px' }"
+                [class]="getProgressBarClass(rowData.statusExecucao)"
+              />
+            </div>
+          } @else {
+            <span class="text-surface-400 text-xs italic">-</span>
+          }
+        </td>
+
+        <!-- Status da Meta -->
+        <td class="text-center" style="width: 155px; min-width: 155px">
+          <p-tag
+            [value]="getStatusLabel(rowData.statusExecucao)"
+            [severity]="getStatusSeverity(rowData.statusExecucao)"
+            styleClass="text-[10px] whitespace-nowrap shrink-0 min-w-[90px] text-center px-2 py-0.5"
+          />
+        </td>
+      </tr>
+    </ng-template>
+
+    <!-- Totalizadores no Rodapé da TreeTable -->
+    <ng-template #footer>
+      <tr class="font-bold bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-0 border-t-2 border-surface-200 dark:border-surface-700">
+        <td colspan="3" class="text-right uppercase text-xs tracking-wider text-surface-600 dark:text-surface-400 py-3">
+          Totais Gerais:
+        </td>
+        <td class="text-right font-mono text-xs" style="width: 130px; min-width: 130px">
+          {{ kpis().totalPactuado | number }}
+        </td>
+        <td class="text-right font-mono text-xs text-emerald-600 dark:text-emerald-400" style="width: 130px; min-width: 130px">
+          {{ kpis().totalAprovado | number }}
+        </td>
+        <td class="text-right font-mono text-xs text-blue-600 dark:text-blue-400" style="width: 180px; min-width: 180px">
+          {{ formatCurrency(kpis().totalFinanceiroPactuado) }}
+        </td>
+        <td class="text-right font-mono text-xs text-indigo-600 dark:text-indigo-400" style="width: 180px; min-width: 180px">
+          {{ formatCurrency(kpis().totalFinanceiro) }}
+        </td>
+        <td class="text-right font-mono text-xs" style="width: 160px; min-width: 160px">
+          <span
+            class="font-bold"
+            [ngClass]="kpis().saldoFinanceiroGlobal >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'"
+          >
+            {{ kpis().saldoFinanceiroGlobal >= 0 ? '+' : '' }}{{ formatCurrency(kpis().saldoFinanceiroGlobal) }}
+          </span>
+        </td>
+        <td style="width: 180px; min-width: 180px">
+          <div class="flex flex-col gap-1">
+            <span class="font-mono text-xs font-bold text-surface-800 dark:text-surface-200">
+              {{ kpis().percentualGlobal | number: '1.1-1' }}%
+            </span>
+          </div>
+        </td>
+        <td class="text-center" style="width: 155px; min-width: 155px">
+          <p-tag
+            [value]="kpis().statusGeralLabel"
+            [severity]="kpis().statusGeralSeverity"
+            styleClass="text-xs whitespace-nowrap shrink-0 px-2 py-0.5 text-center"
+          />
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="10" class="text-center py-10 text-surface-500">
+          <div class="flex flex-col items-center justify-center gap-2">
+            <i class="pi pi-sitemap text-4xl text-surface-400"></i>
+            <span class="font-medium text-base">Nenhuma hierarquia SIGTAP encontrada.</span>
+            <p class="text-xs text-surface-400 max-w-md">
+              Não há procedimentos registrados para os critérios de busca aplicados.
+            </p>
+            <p-button
+              label="Limpar Filtros"
+              [text]="true"
+              size="small"
+              styleClass="mt-2"
+              (onClick)="resetFilters.emit()"
+            />
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-treetable>
+</p-card>

@@ -4,9 +4,6 @@ description: Arquiteto de Software responsável por estruturar os planos de impl
 subagent: true
 model: pro
 commandExecutionPolicy: sandbox
-tools:
-  - read_file
-  - list_directory
 ---
 
 # Role

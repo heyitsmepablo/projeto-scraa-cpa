@@ -8,17 +8,34 @@ import { InstituicaoService } from '../../core/services/instituicao.service';
 import { ProducaoService } from '../../core/services/producao.service';
 import { MOCK_PRODUCAO_PROCEDIMENTOS } from '../../core/mocks/producao.mock';
 
+import { signal, computed } from '@angular/core';
+import { PeriodFilter } from '../../core/models/competence.model';
+
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let competenceServiceMock: any;
   let instituicaoServiceMock: any;
   let producaoServiceMock: any;
+  let periodFilterSignal: any;
 
   beforeEach(async () => {
+    periodFilterSignal = signal<PeriodFilter>({
+      mode: 'SPECIFIC',
+      competencia: '202401',
+      competenciaInicio: '202401',
+      competenciaFim: '202401',
+      mesesCount: 1,
+      descricaoFormatada: '01/2024',
+    });
+
     competenceServiceMock = {
-      competencia: vi.fn().mockReturnValue('202401'),
-      competenciaFormatada: vi.fn().mockReturnValue('01/2024'),
+      periodFilter: periodFilterSignal,
+      periodMode: computed(() => periodFilterSignal().mode),
+      mesesCount: computed(() => periodFilterSignal().mesesCount),
+      periodoFormatado: computed(() => periodFilterSignal().descricaoFormatada),
+      competencia: computed(() => periodFilterSignal().competencia ?? '202401'),
+      competenciaFormatada: computed(() => '01/2024'),
       setCompetence: vi.fn(),
       previousCompetence: vi.fn(),
       nextCompetence: vi.fn(),
@@ -47,6 +64,10 @@ describe('DashboardComponent', () => {
 
     producaoServiceMock = {
       getProducaoPorProcedimento: vi.fn().mockImplementation((comp: string) => {
+        return of(MOCK_PRODUCAO_PROCEDIMENTOS.filter((p) => p.competencia === comp || !comp));
+      }),
+      getProducaoPorPeriodo: vi.fn().mockImplementation((period: PeriodFilter) => {
+        const comp = period.competencia || period.competenciaInicio || '202401';
         return of(MOCK_PRODUCAO_PROCEDIMENTOS.filter((p) => p.competencia === comp || !comp));
       }),
     };

@@ -1,0 +1,41 @@
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+  <div>
+    <h1 class="text-2xl font-bold text-surface-900 dark:text-surface-0 tracking-tight">
+      Dashboard Executivo CPA
+    </h1>
+    <p class="text-sm text-surface-600 dark:text-surface-400 mt-1">
+      Painel consolidado de apuração de produção SUS: Executado vs. Pactuado nos Planos Operativos
+    </p>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <p-button
+      icon="pi pi-chevron-left"
+      [text]="true"
+      severity="secondary"
+      size="small"
+      (onClick)="previousCompetence.emit()"
+      pTooltip="Período Anterior"
+    />
+    
+    <div class="flex flex-col items-center">
+      <span class="text-[10px] font-bold uppercase tracking-wider text-surface-500 dark:text-surface-400">
+        {{ periodMode() === 'SPECIFIC' ? 'Competência Ativa' : 'Período Ativo' }}
+      </span>
+      <p-tag
+        [value]="periodoFormatado()"
+        severity="info"
+        styleClass="text-sm font-bold px-3 py-1 font-mono shadow-xs"
+      />
+    </div>
+
+    <p-button
+      icon="pi pi-chevron-right"
+      [text]="true"
+      severity="secondary"
+      size="small"
+      (onClick)="nextCompetence.emit()"
+      pTooltip="Próximo Período"
+    />
+  </div>
+</div>

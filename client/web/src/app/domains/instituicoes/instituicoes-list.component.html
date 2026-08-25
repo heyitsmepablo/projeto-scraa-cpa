@@ -1,0 +1,8 @@
+<div class="flex flex-col gap-6">
+  <app-instituicoes-header [competencia]="competenceService.competenciaFormatada()" />
+
+  <app-instituicoes-table
+    [instituicoes]="instituicoes() ?? []"
+    [loading]="loading()"
+  />
+</div>

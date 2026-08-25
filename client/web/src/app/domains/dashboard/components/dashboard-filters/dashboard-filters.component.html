@@ -1,0 +1,63 @@
+<p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+    <!-- Filtro de Estabelecimento / Instituição -->
+    <div class="flex flex-col gap-1.5">
+      <label class="text-xs font-semibold uppercase tracking-wider text-surface-700 dark:text-surface-300">
+        Estabelecimento (CNES):
+      </label>
+      <p-select
+        [options]="instituicaoOptions()"
+        [ngModel]="selectedInstituicaoCnes()"
+        (ngModelChange)="instituicaoChange.emit($event)"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Todas as Instituições"
+        styleClass="w-full"
+      />
+    </div>
+
+    <!-- Filtro de Quadrimestre -->
+    <div class="flex flex-col gap-1.5">
+      <label class="text-xs font-semibold uppercase tracking-wider text-surface-700 dark:text-surface-300">
+        Quadrimestre:
+      </label>
+      <p-select
+        [options]="quadrimestreOptions()"
+        [ngModel]="selectedQuadrimestre()"
+        (ngModelChange)="quadrimestreChange.emit($event)"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Todos os Quadrimestres"
+        styleClass="w-full"
+      />
+    </div>
+
+    <!-- Filtro de Status de Execução -->
+    <div class="flex flex-col gap-1.5">
+      <label class="text-xs font-semibold uppercase tracking-wider text-surface-700 dark:text-surface-300">
+        Status de Meta:
+      </label>
+      <p-select
+        [options]="statusOptions()"
+        [ngModel]="selectedStatusExecucao()"
+        (ngModelChange)="statusChange.emit($event)"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Todos os Status"
+        styleClass="w-full"
+      />
+    </div>
+
+    <!-- Ação / Limpar Filtros -->
+    <div class="flex items-center">
+      <p-button
+        label="Limpar Filtros"
+        icon="pi pi-filter-slash"
+        [outlined]="true"
+        severity="secondary"
+        styleClass="w-full"
+        (onClick)="reset.emit()"
+      />
+    </div>
+  </div>
+</p-card>

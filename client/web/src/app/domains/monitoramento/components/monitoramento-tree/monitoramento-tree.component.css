@@ -1,0 +1,24 @@
+/* monitoramento-tree.component.css */
+:host ::ng-deep {
+  .p-treetable-toggler {
+    flex-shrink: 0 !important;
+  }
+  .p-tag {
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .p-progressbar-emerald .p-progressbar-value {
+    background: #10b981 !important;
+  }
+  .p-progressbar-amber .p-progressbar-value {
+    background: #f59e0b !important;
+  }
+  .p-progressbar-rose .p-progressbar-value {
+    background: #f43f5e !important;
+  }
+  .p-progressbar-slate .p-progressbar-value {
+    background: #64748b !important;
+  }
+}

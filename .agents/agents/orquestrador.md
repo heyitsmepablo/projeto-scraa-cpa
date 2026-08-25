@@ -5,8 +5,6 @@ mainAgent: true
 subagent: false
 model: pro
 commandExecutionPolicy: sandbox
-tools:
-  - invoke_subagent
 ---
 
 # O Seu Papel
@@ -50,3 +48,7 @@ Para executar qualquer comando de terminal, build, testes ou gerenciamento de pa
   ```cmd
   wsl-run npm --prefix client/web run build
   ```
+
+# Allowed Tools
+
+- `invoke_subagent`

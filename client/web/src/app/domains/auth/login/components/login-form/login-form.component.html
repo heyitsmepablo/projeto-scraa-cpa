@@ -1,0 +1,8 @@
+<div class="grid border rounded-2xl border-surface-200 dark:border-surface-800 bg-surface-0 dark:bg-surface-900 text-surface-900 dark:text-surface-0 shadow-md w-96 h-72 p-4 text-center">
+  <h1 class="text-lg font-semibold text-surface-900 dark:text-surface-0">Login</h1>
+  <div class="grid grid-rows-2 gap-4 mb-4">
+    <input pInputText placeholder="Email" type="email" [formField]="loginForm.email" />
+    <input pInputPassword placeholder="Senha" type="password" [formField]="loginForm.password" />
+  </div>
+  <button pButton size="large" class="h-12" (click)="onSubmit()">Entrar</button>
+</div>

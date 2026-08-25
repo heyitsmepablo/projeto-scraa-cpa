@@ -87,7 +87,7 @@ Desenvolvimento do client web para monitoramento de execuções de contratos da 
   - Garantir que a tabela cruze o **Plano Operativo Pactuado** com o **Executado (DATASUS)**, vinculada diretamente ao Contrato/Convênio selecionado.
   - Manter as tags/badges de status da execução ('ACIMA', 'ABAIXO', 'DENTRO', 'SEM_PACTO') e responsividade da tabela.
 
-## Sprint 6: Aprofundamento Financeiro e Hierarquia SIGTAP
+## Sprint 6: Aprofundamento Financeiro e Hierarquia SIGTAP [x]
 
 **Objetivo:** Evoluir a grade analítica do módulo de monitoramento para exibir o impacto financeiro completo (Pactuado vs. Aprovado) e permitir a navegação estruturada pelos níveis hierárquicos do SIGTAP.
 
@@ -114,7 +114,7 @@ Desenvolvimento do client web para monitoramento de execuções de contratos da 
 
 ---
 
-## Sprint 7: Análise Temporal Expandida (Recortes e Visão Global)
+## Sprint 7: Análise Temporal Expandida (Recortes e Visão Global) [x]
 
 **Objetivo:** Desacoplar a visualização de uma competência única (mês isolado), permitindo analisar a execução do plano operativo em períodos customizados ou em toda a vigência do contrato.
 

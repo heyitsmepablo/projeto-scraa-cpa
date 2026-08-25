@@ -4,9 +4,6 @@ description: Revisor de Código implacável e auditor de arquitetura.
 subagent: true
 model: pro
 commandExecutionPolicy: sandbox
-tools:
-  - read_file
-  - git_diff
 ---
 
 # Role

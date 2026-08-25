@@ -1,0 +1,39 @@
+<div class="flex flex-col gap-6">
+  <!-- Header Superior do Dashboard -->
+  <app-dashboard-header
+    [periodoFormatado]="competenceService.periodoFormatado()"
+    [periodMode]="competenceService.periodMode()"
+    (previousCompetence)="competenceService.previousCompetence()"
+    (nextCompetence)="competenceService.nextCompetence()"
+  />
+
+  <!-- Barra de Filtros Estratégicos -->
+  <app-dashboard-filters
+    [instituicaoOptions]="instituicaoOptions()"
+    [selectedInstituicaoCnes]="selectedInstituicaoCnes()"
+    [selectedQuadrimestre]="selectedQuadrimestre()"
+    [selectedStatusExecucao]="selectedStatusExecucao()"
+    [quadrimestreOptions]="quadrimestreOptions"
+    [statusOptions]="statusOptions"
+    (instituicaoChange)="selectedInstituicaoCnes.set($event)"
+    (quadrimestreChange)="selectedQuadrimestre.set($event)"
+    (statusChange)="selectedStatusExecucao.set($event)"
+    (reset)="resetFilters()"
+  />
+
+  <!-- Grid de Metric Cards (KPIs) -->
+  <app-dashboard-kpis
+    [kpis]="kpis()"
+    [mesesCount]="competenceService.mesesCount()"
+  />
+
+  <!-- Gráfico Comparativo: Pactuado vs. Aprovado -->
+  <app-dashboard-chart
+    [chartData]="chartData()"
+    [chartOptions]="chartOptions"
+    [mesesCount]="competenceService.mesesCount()"
+  />
+
+  <!-- Banner de Ação para Monitoramento Analítico -->
+  <app-dashboard-cta />
+</div>

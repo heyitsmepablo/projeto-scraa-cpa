@@ -1,0 +1,63 @@
+<div class="flex flex-col gap-6">
+  <!-- Header Superior e Contexto com Ações -->
+  <app-monitoramento-header
+    [vinculoOptions]="vinculoOptions()"
+    [selectedVinculoId]="selectedVinculoId()"
+    [periodoFormatado]="competenceService.periodoFormatado()"
+    [periodMode]="competenceService.periodMode()"
+    [viewMode]="viewMode()"
+    [hasData]="procedimentosFormatados().length > 0"
+    (vinculoChange)="selectedVinculoId.set($event)"
+    (previousCompetence)="competenceService.previousCompetence()"
+    (nextCompetence)="competenceService.nextCompetence()"
+    (viewModeChange)="viewMode.set($event)"
+    (exportCsv)="exportarDados()"
+  />
+
+  <!-- Card Hero do Vínculo Selecionado -->
+  <app-monitoramento-hero [vinculo]="selectedVinculo()" />
+
+  <!-- Grid de Metric Cards (5 Colunas: Físico vs Financeiro) -->
+  <app-monitoramento-kpis
+    [kpis]="kpis()"
+    [mesesCount]="competenceService.mesesCount()"
+  />
+
+  <!-- Barra de Filtros e Ações da Grade Analítica -->
+  <app-monitoramento-filters
+    [globalFilterText]="globalFilterText()"
+    [selectedStatus]="selectedStatus()"
+    [selectedComplexidade]="selectedComplexidade()"
+    [statusOptions]="statusOptions"
+    [complexidadeOptions]="complexidadeOptions"
+    [viewMode]="viewMode()"
+    (filterTextChange)="globalFilterText.set($event)"
+    (statusChange)="selectedStatus.set($event)"
+    (complexidadeChange)="selectedComplexidade.set($event)"
+    (reset)="resetFilters()"
+    (expandAll)="expandAll()"
+    (collapseAll)="collapseAll()"
+  />
+
+  <!-- ÁREA DE VISUALIZAÇÃO ALTERNÁVEL: MODO 1 (p-table) OU MODO 2 (p-treetable) -->
+  @if (viewMode() === 'flat') {
+    <app-monitoramento-table
+      [procedimentos]="procedimentosFormatados()"
+      [loading]="loading()"
+      [kpis]="kpis()"
+      [periodoFormatado]="competenceService.periodoFormatado()"
+      [mesesCount]="competenceService.mesesCount()"
+      (resetFilters)="resetFilters()"
+    />
+  } @else {
+    <app-monitoramento-tree
+      [treeNodes]="treeNodes()"
+      [loading]="loading()"
+      [kpis]="kpis()"
+      [mesesCount]="competenceService.mesesCount()"
+      (expandAll)="expandAll()"
+      (collapseAll)="collapseAll()"
+      (resetFilters)="resetFilters()"
+    />
+  }
+</div>

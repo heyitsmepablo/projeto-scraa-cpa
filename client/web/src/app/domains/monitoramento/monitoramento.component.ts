@@ -6,35 +6,33 @@ import {
   effect,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { CommonModule, DecimalPipe, DatePipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
-
-import { CardModule } from 'primeng/card';
-import { TagModule } from 'primeng/tag';
-import { TableModule, SortIcon } from 'primeng/table';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
-import { SelectModule } from 'primeng/select';
-import { TooltipModule } from 'primeng/tooltip';
-import { ProgressBarModule } from 'primeng/progressbar';
+import { TreeNode } from 'primeng/api';
 
 import { CompetenceService } from '../../core/services/competence.service';
 import { VinculoService } from '../../core/services/vinculo.service';
 import { InstituicaoService } from '../../core/services/instituicao.service';
 import { ProducaoService } from '../../core/services/producao.service';
-import { ProducaoPorProcedimento } from '../../core/models/producao.model';
 import { StatusExecucao } from '../../core/models/domain-enums';
 import { Vinculo } from '../../core/models/vinculo.model';
+import { Instituicao } from '../../core/models/instituicao.model';
+import {
+  MonitoramentoProcedimentoItem,
+  SigtapTreeNodeData,
+  MonitoramentoKpis,
+  SelectOption,
+} from './models/monitoramento.model';
+import { MonitoramentoHeaderComponent } from './components/monitoramento-header/monitoramento-header.component';
+import { MonitoramentoHeroComponent } from './components/monitoramento-hero/monitoramento-hero.component';
+import { MonitoramentoKpisComponent } from './components/monitoramento-kpis/monitoramento-kpis.component';
+import { MonitoramentoFiltersComponent } from './components/monitoramento-filters/monitoramento-filters.component';
+import { MonitoramentoTableComponent } from './components/monitoramento-table/monitoramento-table.component';
+import { MonitoramentoTreeComponent } from './components/monitoramento-tree/monitoramento-tree.component';
 
-export interface MonitoramentoProcedimentoItem extends ProducaoPorProcedimento {
-  coProcedimentoFormatado: string;
-  diferencaFisico: number | null;
-}
+export type { MonitoramentoProcedimentoItem, SigtapTreeNodeData, MonitoramentoKpis };
 
 @Component({
   selector: 'app-monitoramento',
@@ -42,582 +40,15 @@ export interface MonitoramentoProcedimentoItem extends ProducaoPorProcedimento {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    FormsModule,
-    DecimalPipe,
-    DatePipe,
-    CardModule,
-    TagModule,
-    TableModule,
-    ButtonModule,
-    InputTextModule,
-    IconFieldModule,
-    InputIconModule,
-    SelectModule,
-    TooltipModule,
-    ProgressBarModule,
-    SortIcon,
+    MonitoramentoHeaderComponent,
+    MonitoramentoHeroComponent,
+    MonitoramentoKpisComponent,
+    MonitoramentoFiltersComponent,
+    MonitoramentoTableComponent,
+    MonitoramentoTreeComponent,
   ],
-  styles: [`
-    :host ::ng-deep {
-      .p-progressbar-emerald .p-progressbar-value {
-        background: #10b981 !important;
-      }
-      .p-progressbar-amber .p-progressbar-value {
-        background: #f59e0b !important;
-      }
-      .p-progressbar-rose .p-progressbar-value {
-        background: #f43f5e !important;
-      }
-      .p-progressbar-slate .p-progressbar-value {
-        background: #64748b !important;
-      }
-    }
-  `],
-  template: `
-    <div class="flex flex-col gap-6">
-      <!-- Header Superior e Contexto com Ações -->
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-2xl font-bold text-surface-900 dark:text-surface-0 tracking-tight">
-              Monitoramento de Execução de Vínculos
-            </h1>
-            <p-tag value="Plano Operativo vs DATASUS" severity="info" styleClass="text-xs" />
-          </div>
-          <p class="text-sm text-surface-600 dark:text-surface-400 mt-1">
-            Auditoria física e orçamentária detalhada por procedimento contratado
-          </p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <!-- Seletor de Contrato / Vínculo -->
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-semibold uppercase text-surface-500 dark:text-surface-400 hidden sm:inline">Vínculo:</span>
-            <p-select
-              [options]="vinculoOptions()"
-              [ngModel]="selectedVinculoId()"
-              (ngModelChange)="selectedVinculoId.set($event)"
-              optionLabel="label"
-              optionValue="value"
-              placeholder="Selecione um Vínculo"
-              styleClass="w-72 sm:w-80 text-xs shadow-xs"
-              [filter]="true"
-              filterPlaceholder="Buscar contrato..."
-              appendTo="body"
-            />
-          </div>
-
-          <!-- Navegação de Competência Global -->
-          <div class="flex items-center gap-2 bg-surface-0 dark:bg-surface-900 border border-surface-200/80 dark:border-surface-800 p-1 rounded-xl shadow-xs">
-            <p-button
-              icon="pi pi-chevron-left"
-              [text]="true"
-              severity="secondary"
-              size="small"
-              (onClick)="competenceService.previousCompetence()"
-              pTooltip="Competência Anterior"
-            />
-            
-            <div class="flex flex-col items-center px-1">
-              <span class="text-[9px] font-bold uppercase tracking-wider text-surface-400">Competência</span>
-              <p-tag
-                [value]="competenceService.competenciaFormatada()"
-                severity="contrast"
-                styleClass="text-xs font-bold px-2 py-0.5 font-mono shadow-xs"
-              />
-            </div>
-
-            <p-button
-              icon="pi pi-chevron-right"
-              [text]="true"
-              severity="secondary"
-              size="small"
-              (onClick)="competenceService.nextCompetence()"
-              pTooltip="Próxima Competência"
-            />
-          </div>
-
-          <!-- Botão de Exportação Rápida CSV -->
-          <p-button
-            label="Exportar CSV"
-            icon="pi pi-file-excel"
-            severity="secondary"
-            [outlined]="true"
-            size="small"
-            styleClass="shadow-xs text-xs"
-            (onClick)="exportarDados()"
-            [disabled]="procedimentosFormatados().length === 0"
-            pTooltip="Exportar dados analíticos em formato CSV"
-          />
-        </div>
-      </div>
-
-      <!-- Card Hero do Vínculo Selecionado -->
-      @if (selectedVinculo(); as vinculo) {
-        <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900 overflow-hidden">
-          <div class="flex flex-col gap-4">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-surface-100 dark:border-surface-800 pb-3">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/60 text-primary-600 dark:text-primary-400 flex items-center justify-center font-bold text-lg ring-1 ring-primary-200/60 dark:ring-primary-800/40">
-                  <i class="pi pi-file-edit"></i>
-                </div>
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-base font-bold text-surface-900 dark:text-surface-0 font-mono">
-                      {{ vinculo.numero }}
-                    </span>
-                    <p-tag
-                      [value]="vinculo.tipoVinculo"
-                      [severity]="vinculo.tipoVinculo === 'CONVÊNIO' ? 'info' : 'warn'"
-                      styleClass="text-xs"
-                    />
-                  </div>
-                  <span class="text-xs text-surface-500 dark:text-surface-400 flex items-center gap-1 mt-0.5">
-                    <i class="pi pi-id-card text-surface-400 text-xs"></i>
-                    Processo SEI: <strong class="font-mono text-surface-700 dark:text-surface-300">{{ vinculo.numeroProcessoSei }}</strong>
-                  </span>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-2 text-xs">
-                <span class="text-surface-500">Valor Global Pactuado:</span>
-                <span class="font-bold text-surface-900 dark:text-surface-0 font-mono text-base text-primary-600 dark:text-primary-400">
-                  {{ formatCurrency(vinculo.valorTotal) }}
-                </span>
-              </div>
-            </div>
-
-            <!-- Detalhes do Estabelecimento com Ícones -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-              <div class="flex items-start gap-2.5">
-                <i class="pi pi-building text-primary-500 text-base mt-0.5"></i>
-                <div>
-                  <span class="text-surface-500 block">Instituição:</span>
-                  <span class="font-semibold text-surface-800 dark:text-surface-200">{{ vinculo.instituicao?.nome || 'N/A' }}</span>
-                </div>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <i class="pi pi-id-card text-primary-500 text-base mt-0.5"></i>
-                <div>
-                  <span class="text-surface-500 block">CNES:</span>
-                  <span class="font-mono font-semibold text-surface-800 dark:text-surface-200">{{ vinculo.instituicao?.cnes || 'N/A' }}</span>
-                </div>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <i class="pi pi-calendar text-primary-500 text-base mt-0.5"></i>
-                <div>
-                  <span class="text-surface-500 block">Período de Vigência:</span>
-                  <span class="font-medium text-surface-800 dark:text-surface-200">
-                    {{ vinculo.dataInicio | date: 'dd/MM/yyyy' }} até {{ (vinculo.dataFim | date: 'dd/MM/yyyy') || 'Indeterminado' }}
-                  </span>
-                </div>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <i class="pi pi-sliders-h text-primary-500 text-base mt-0.5"></i>
-                <div>
-                  <span class="text-surface-500 block">Complexidade Pactuada:</span>
-                  <div class="flex items-center gap-1 mt-0.5">
-                    @for (c of vinculo.complexidade; track c) {
-                      <p-tag [value]="c" [severity]="getComplexidadeSeverity(c)" styleClass="text-[10px]" />
-                    }
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </p-card>
-      }
-
-      <!-- Grid de Metric Cards (Desempenho no Vínculo Selecionado) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- KPI 1: Físico Pactuado -->
-        <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-          <div class="flex items-center justify-between">
-            <div>
-              <span class="text-xs font-bold text-surface-500 dark:text-surface-400 uppercase tracking-wider">
-                Físico Pactuado
-              </span>
-              <div class="text-2xl font-extrabold text-surface-900 dark:text-surface-0 mt-1 font-mono">
-                {{ kpis().totalPactuado | number }} <span class="text-xs font-normal text-surface-500">un.</span>
-              </div>
-            </div>
-            <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 ring-1 ring-slate-200 dark:ring-slate-700 flex items-center justify-center text-xl shadow-xs">
-              <i class="pi pi-bookmark"></i>
-            </div>
-          </div>
-          <div class="mt-3 flex items-center justify-between text-xs text-surface-500 dark:text-surface-400">
-            <span>Metas no Plano:</span>
-            <span class="font-bold text-surface-800 dark:text-surface-200">{{ kpis().totalComPacto }} procedimentos</span>
-          </div>
-        </p-card>
-
-        <!-- KPI 2: Físico Aprovado (DATASUS) -->
-        <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-          <div class="flex items-center justify-between">
-            <div>
-              <span class="text-xs font-bold text-surface-500 dark:text-surface-400 uppercase tracking-wider">
-                Físico Aprovado
-              </span>
-              <div class="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-1 font-mono">
-                {{ kpis().totalAprovado | number }} <span class="text-xs font-normal text-surface-500">un.</span>
-              </div>
-            </div>
-            <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 ring-1 ring-emerald-200/60 dark:ring-emerald-800/40 flex items-center justify-center text-xl shadow-xs">
-              <i class="pi pi-check-circle"></i>
-            </div>
-          </div>
-          <div class="mt-3 flex items-center justify-between text-xs text-surface-500 dark:text-surface-400">
-            <span>Saldo Físico Global:</span>
-            <span
-              class="font-bold font-mono"
-              [ngClass]="kpis().saldoFisico >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'"
-            >
-              {{ kpis().saldoFisico >= 0 ? '+' : '' }}{{ kpis().saldoFisico | number }} un.
-            </span>
-          </div>
-        </p-card>
-
-        <!-- KPI 3: Financeiro Aprovado -->
-        <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-          <div class="flex items-center justify-between">
-            <div>
-              <span class="text-xs font-bold text-surface-500 dark:text-surface-400 uppercase tracking-wider">
-                Financeiro Aprovado
-              </span>
-              <div class="text-2xl font-extrabold text-blue-600 dark:text-blue-400 mt-1 font-mono">
-                {{ formatCurrency(kpis().totalFinanceiro) }}
-              </div>
-            </div>
-            <div class="w-11 h-11 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 ring-1 ring-blue-200/60 dark:ring-blue-800/40 flex items-center justify-center text-xl shadow-xs">
-              <i class="pi pi-dollar"></i>
-            </div>
-          </div>
-          <div class="mt-3 flex items-center justify-between text-xs text-surface-500 dark:text-surface-400">
-            <span>Produzido Apresentado:</span>
-            <span class="font-bold text-surface-800 dark:text-surface-200 font-mono">{{ formatCurrency(kpis().totalFinanceiroProduzido) }}</span>
-          </div>
-        </p-card>
-
-        <!-- KPI 4: Cumprimento Global & Status -->
-        <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-          <div class="flex items-center justify-between">
-            <div>
-              <span class="text-xs font-bold text-surface-500 dark:text-surface-400 uppercase tracking-wider">
-                Cumprimento Global
-              </span>
-              <div class="text-2xl font-extrabold text-surface-900 dark:text-surface-0 mt-1 font-mono flex items-center gap-2">
-                <span>{{ kpis().percentualGlobal | number: '1.1-1' }}%</span>
-                <p-tag
-                  [value]="kpis().statusGeralLabel"
-                  [severity]="kpis().statusGeralSeverity"
-                  styleClass="text-xs"
-                />
-              </div>
-            </div>
-            <div class="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 ring-1 ring-indigo-200/60 dark:ring-indigo-800/40 flex items-center justify-center text-xl shadow-xs">
-              <i class="pi pi-chart-pie"></i>
-            </div>
-          </div>
-          <div class="mt-3 flex items-center gap-2 text-xs">
-            <span class="text-emerald-600 font-bold font-mono">✓ {{ kpis().totalDentro }}</span>
-            <span class="text-amber-600 font-bold font-mono">▲ {{ kpis().totalAcima }}</span>
-            <span class="text-rose-600 font-bold font-mono">▼ {{ kpis().totalAbaixo }}</span>
-            <span class="text-surface-500 font-bold font-mono">⚪ {{ kpis().totalSemPacto }}</span>
-          </div>
-        </p-card>
-      </div>
-
-      <!-- Barra de Filtros da Grade Analítica -->
-      <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
-          <!-- Campo de Busca Textual Global -->
-          <div class="flex flex-col gap-1.5 sm:col-span-2 lg:col-span-1">
-            <label class="text-xs font-semibold uppercase tracking-wider text-surface-700 dark:text-surface-300">
-              Buscar Procedimento / SIGTAP:
-            </label>
-            <p-iconfield iconPosition="left">
-              <p-inputicon class="pi pi-search" />
-              <input
-                pInputText
-                type="text"
-                [ngModel]="globalFilterText()"
-                (ngModelChange)="globalFilterText.set($event)"
-                placeholder="Ex: 0301010072 ou Consulta..."
-                class="w-full"
-              />
-            </p-iconfield>
-          </div>
-
-          <!-- Filtro de Status da Meta -->
-          <div class="flex flex-col gap-1.5">
-            <label class="text-xs font-semibold uppercase tracking-wider text-surface-700 dark:text-surface-300">
-              Status da Meta:
-            </label>
-            <p-select
-              [options]="statusOptions"
-              [ngModel]="selectedStatus()"
-              (ngModelChange)="selectedStatus.set($event)"
-              optionLabel="label"
-              optionValue="value"
-              placeholder="Todos os Status"
-              styleClass="w-full"
-            />
-          </div>
-
-          <!-- Filtro de Complexidade -->
-          <div class="flex flex-col gap-1.5">
-            <label class="text-xs font-semibold uppercase tracking-wider text-surface-700 dark:text-surface-300">
-              Complexidade:
-            </label>
-            <p-select
-              [options]="complexidadeOptions"
-              [ngModel]="selectedComplexidade()"
-              (ngModelChange)="selectedComplexidade.set($event)"
-              optionLabel="label"
-              optionValue="value"
-              placeholder="Todas as Complexidades"
-              styleClass="w-full"
-            />
-          </div>
-
-          <!-- Botão Limpar Filtros -->
-          <div class="flex items-center">
-            <p-button
-              label="Limpar Filtros"
-              icon="pi pi-filter-slash"
-              [outlined]="true"
-              severity="secondary"
-              styleClass="w-full"
-              (onClick)="resetFilters()"
-            />
-          </div>
-        </div>
-      </p-card>
-
-      <!-- Grade Analítica Especializada (p-table) -->
-      <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-        <p-table
-          #dt
-          [value]="procedimentosFormatados()"
-          [paginator]="true"
-          [rows]="10"
-          [rowsPerPageOptions]="[10, 25, 50]"
-          size="small"
-          [loading]="loading()"
-          styleClass="p-datatable-sm"
-        >
-          <ng-template #caption>
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-              <div>
-                <span class="text-lg font-semibold text-surface-900 dark:text-surface-0">
-                  Grade Analítica: Executado vs. Pactuado
-                </span>
-                <span class="text-xs text-surface-500 block">
-                  Exibindo {{ procedimentosFormatados().length }} itens na competência {{ competenceService.competenciaFormatada() }}
-                </span>
-              </div>
-
-              <div class="flex items-center gap-2">
-                <p-tag
-                  [value]="procedimentosFormatados().length + ' registros'"
-                  severity="secondary"
-                  styleClass="font-mono text-xs"
-                />
-              </div>
-            </div>
-          </ng-template>
-
-          <ng-template #header>
-            <tr>
-              <th pSortableColumn="coProcedimento" style="width: 145px">
-                Código SIGTAP <p-sorticon field="coProcedimento" />
-              </th>
-              <th pSortableColumn="noProcedimento">
-                Procedimento SUS & Financiamento <p-sorticon field="noProcedimento" />
-              </th>
-              <th pSortableColumn="complexidade" style="width: 90px">
-                Compl. <p-sorticon field="complexidade" />
-              </th>
-              <th pSortableColumn="qtdPactuadaMensal" class="text-right" style="width: 120px">
-                Meta Mensal <p-sorticon field="qtdPactuadaMensal" />
-              </th>
-              <th pSortableColumn="qtdAprovada" class="text-right" style="width: 120px">
-                Qtd Aprovada <p-sorticon field="qtdAprovada" />
-              </th>
-              <th pSortableColumn="diferencaFisico" class="text-right" style="width: 110px">
-                Dif. Físico <p-sorticon field="diferencaFisico" />
-              </th>
-              <th pSortableColumn="vlrAprovado" class="text-right" style="width: 140px">
-                Valor Aprovado <p-sorticon field="vlrAprovado" />
-              </th>
-              <th pSortableColumn="percExecucao" style="width: 150px">
-                % Execução <p-sorticon field="percExecucao" />
-              </th>
-              <th pSortableColumn="statusExecucao" style="width: 135px">
-                Status Meta <p-sorticon field="statusExecucao" />
-              </th>
-            </tr>
-          </ng-template>
-
-          <ng-template #body let-item>
-            <tr>
-              <!-- Código SIGTAP Formatado -->
-              <td>
-                <span class="font-mono text-xs font-bold tracking-wider text-surface-900 dark:text-surface-100 bg-surface-100 dark:bg-surface-800 px-2 py-1 rounded border border-surface-200 dark:border-surface-700 inline-block">
-                  {{ item.coProcedimentoFormatado }}
-                </span>
-              </td>
-
-              <!-- Nome do Procedimento e Financiamento -->
-              <td>
-                <div
-                  class="font-semibold text-surface-900 dark:text-surface-100 text-sm"
-                  [pTooltip]="item.noProcedimento"
-                  tooltipPosition="top"
-                >
-                  {{ item.noProcedimento }}
-                </div>
-                <div class="text-xs text-surface-500 dark:text-surface-400 mt-0.5 flex items-center gap-2">
-                  <span class="font-mono text-[11px]">Bloco: {{ item.coFinanciamento || '04' }}</span>
-                  <span class="text-surface-300 dark:text-surface-700">•</span>
-                  <span class="italic text-[11px]">{{ item.noFinanciamento }}</span>
-                </div>
-              </td>
-
-              <!-- Complexidade -->
-              <td>
-                <p-tag
-                  [value]="item.complexidade"
-                  [severity]="getComplexidadeSeverity(item.complexidade)"
-                />
-              </td>
-
-              <!-- Meta Mensal Pactuada -->
-              <td class="text-right font-mono text-sm">
-                @if (item.qtdPactuadaMensal !== null) {
-                  <span class="font-bold text-surface-900 dark:text-surface-0">{{ item.qtdPactuadaMensal | number }}</span>
-                } @else {
-                  <span class="text-surface-400 italic text-xs">Sem Pacto</span>
-                }
-              </td>
-
-              <!-- Qtd Aprovada (DATASUS) -->
-              <td class="text-right font-mono text-sm">
-                <span class="font-bold text-emerald-600 dark:text-emerald-400">{{ item.qtdAprovada | number }}</span>
-              </td>
-
-              <!-- Diferença de Físico (Aprovado - Meta) -->
-              <td class="text-right font-mono text-xs">
-                @if (item.diferencaFisico !== null) {
-                  <span
-                    class="font-bold"
-                    [ngClass]="item.diferencaFisico >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'"
-                  >
-                    {{ item.diferencaFisico >= 0 ? '+' : '' }}{{ item.diferencaFisico | number }}
-                  </span>
-                } @else {
-                  <span class="text-surface-400">-</span>
-                }
-              </td>
-
-              <!-- Valor Aprovado -->
-              <td class="text-right font-mono text-sm font-semibold text-surface-900 dark:text-surface-0">
-                {{ formatCurrency(item.vlrAprovado) }}
-              </td>
-
-              <!-- Barra e % Execução com cor semântica -->
-              <td>
-                @if (item.percExecucao !== null) {
-                  <div class="flex flex-col gap-1">
-                    <div class="flex justify-between text-xs font-mono font-bold">
-                      <span [ngClass]="getPercTextClass(item.statusExecucao)">{{ item.percExecucao | number: '1.1-1' }}%</span>
-                    </div>
-                    <p-progressbar
-                      [value]="getClampedPercent(item.percExecucao)"
-                      [showValue]="false"
-                      [style]="{ height: '6px' }"
-                      [class]="getProgressBarClass(item.statusExecucao)"
-                    />
-                  </div>
-                } @else {
-                  <span class="text-surface-400 text-xs italic">-</span>
-                }
-              </td>
-
-              <!-- Tag Status Execução -->
-              <td>
-                <p-tag
-                  [value]="getStatusLabel(item.statusExecucao)"
-                  [severity]="getStatusSeverity(item.statusExecucao)"
-                />
-              </td>
-            </tr>
-          </ng-template>
-
-          <!-- Totalizadores no Rodapé da Tabela -->
-          <ng-template #footer>
-            <tr class="font-bold bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-0 border-t-2 border-surface-200 dark:border-surface-700">
-              <td colspan="3" class="text-right uppercase text-xs tracking-wider text-surface-600 dark:text-surface-400 py-3">
-                Totais da Competência:
-              </td>
-              <td class="text-right font-mono text-sm">
-                {{ kpis().totalPactuado | number }}
-              </td>
-              <td class="text-right font-mono text-sm text-emerald-600 dark:text-emerald-400">
-                {{ kpis().totalAprovado | number }}
-              </td>
-              <td class="text-right font-mono text-xs">
-                <span
-                  class="font-bold"
-                  [ngClass]="kpis().saldoFisico >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'"
-                >
-                  {{ kpis().saldoFisico >= 0 ? '+' : '' }}{{ kpis().saldoFisico | number }}
-                </span>
-              </td>
-              <td class="text-right font-mono text-sm text-blue-600 dark:text-blue-400">
-                {{ formatCurrency(kpis().totalFinanceiro) }}
-              </td>
-              <td>
-                <div class="flex flex-col gap-1">
-                  <span class="font-mono text-xs font-bold" [ngClass]="getPercTextClass(kpis().statusGeralLabel === 'Dentro da Meta' ? 'DENTRO' : (kpis().statusGeralLabel === 'Acima da Meta' ? 'ACIMA' : 'ABAIXO'))">
-                    {{ kpis().percentualGlobal | number: '1.1-1' }}%
-                  </span>
-                </div>
-              </td>
-              <td>
-                <p-tag
-                  [value]="kpis().statusGeralLabel"
-                  [severity]="kpis().statusGeralSeverity"
-                  styleClass="text-xs"
-                />
-              </td>
-            </tr>
-          </ng-template>
-
-          <ng-template #emptymessage>
-            <tr>
-              <td colspan="9" class="text-center py-10 text-surface-500">
-                <div class="flex flex-col items-center justify-center gap-2">
-                  <i class="pi pi-inbox text-4xl text-surface-400"></i>
-                  <span class="font-medium text-base">Nenhum procedimento encontrado.</span>
-                  <p class="text-xs text-surface-400 max-w-md">
-                    Não há registros de produção ou procedimentos pactuados correspondentes aos filtros selecionados para esta competência.
-                  </p>
-                  <p-button
-                    label="Limpar Filtros"
-                    [text]="true"
-                    size="small"
-                    styleClass="mt-2"
-                    (onClick)="resetFilters()"
-                  />
-                </div>
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </p-card>
-    </div>
-  `,
+  templateUrl: './monitoramento.component.html',
+  styleUrl: './monitoramento.component.css',
 })
 export class MonitoramentoComponent {
   readonly competenceService = inject(CompetenceService);
@@ -631,14 +62,19 @@ export class MonitoramentoComponent {
     minimumFractionDigits: 2,
   });
 
-  // Estados de filtros reativos
-  readonly selectedVinculoId = signal<number | null>(null);
+  // Estados reativos
+  readonly selectedVinculoId = signal<number | null>(1);
+  readonly viewMode = signal<'flat' | 'tree'>('flat');
   readonly globalFilterText = signal<string>('');
   readonly selectedStatus = signal<string>('ALL');
   readonly selectedComplexidade = signal<string>('ALL');
 
-  // Opções de Status
-  readonly statusOptions = [
+  readonly viewModeOptions = [
+    { label: 'Lista Plana', value: 'flat', icon: 'pi pi-list' },
+    { label: 'Árvore SIGTAP', value: 'tree', icon: 'pi pi-sitemap' },
+  ];
+
+  readonly statusOptions: SelectOption[] = [
     { label: 'Todos os Status', value: 'ALL' },
     { label: 'Dentro da Meta (DENTRO)', value: 'DENTRO' },
     { label: 'Acima da Meta (ACIMA)', value: 'ACIMA' },
@@ -646,145 +82,326 @@ export class MonitoramentoComponent {
     { label: 'Sem Pactuação (SEM_PACTO)', value: 'SEM_PACTO' },
   ];
 
-  // Opções de Complexidade
-  readonly complexidadeOptions = [
+  readonly complexidadeOptions: SelectOption[] = [
     { label: 'Todas as Complexidades', value: 'ALL' },
-    { label: 'Atenção Básica (BC)', value: 'BC' },
+    { label: 'Baixa Complexidade (BC)', value: 'BC' },
     { label: 'Média Complexidade (MC)', value: 'MC' },
     { label: 'Alta Complexidade (AC)', value: 'AC' },
   ];
 
-  // Carregamento de Vínculos e Instituições
-  readonly vinculosRaw = toSignal(this.vinculoService.findAll(), { initialValue: [] });
-  readonly instituicoesRaw = toSignal(this.instituicaoService.findAll(), { initialValue: [] });
+  // Carregamento de vínculos e instituições
+  private readonly instituicoesRaw = toSignal(this.instituicaoService.findAll(), { initialValue: [] });
+  private readonly vinculosRaw = toSignal(this.vinculoService.findAll(), { initialValue: [] });
 
-  // Mapa de Instituições por ID
-  private readonly instituicoesMap = computed(() => {
-    const map = new Map<number, any>();
-    for (const inst of this.instituicoesRaw()) {
-      map.set(inst.id, inst);
-    }
-    return map;
-  });
+  readonly vinculoOptions = computed<SelectOption<number>[]>(() => {
+    const list = this.vinculosRaw();
+    const insts = this.instituicoesRaw();
+    const instMap = new Map<number, Instituicao>(insts.map((i) => [i.id, i]));
 
-  // Vínculos enriquecidos com entidade Instituição
-  readonly vinculosComInstituicao = computed<Vinculo[]>(() => {
-    const vinculos = this.vinculosRaw();
-    const instMap = this.instituicoesMap();
-    return vinculos.map((v) => ({
-      ...v,
-      instituicao: v.instituicao || instMap.get(v.instituicaoId),
-    }));
-  });
-
-  // Opções formatadas para o dropdown de vínculos
-  readonly vinculoOptions = computed(() => {
-    const list = this.vinculosComInstituicao();
-    return list.map((v) => ({
-      label: `${v.numero} - ${v.instituicao?.nome || 'Instituição'} (${v.tipoVinculo})`,
-      value: v.id,
-    }));
-  });
-
-  // Auto-selecionar o primeiro vínculo disponível
-  constructor() {
-    effect(() => {
-      const list = this.vinculoOptions();
-      const current = this.selectedVinculoId();
-      if (!current && list.length > 0) {
-        this.selectedVinculoId.set(list[0].value);
-      }
+    return list.map((v) => {
+      const inst = instMap.get(v.instituicaoId) || v.instituicao;
+      const nome = inst ? inst.nome : `Inst. #${v.instituicaoId}`;
+      const cnes = inst ? ` (${inst.cnes})` : '';
+      const tipo = v.tipoVinculo ? ` - ${v.tipoVinculo}` : '';
+      return {
+        label: `${v.numero} - ${nome}${cnes}${tipo}`,
+        value: v.id,
+      };
     });
-  }
+  });
 
   // Vínculo atualmente selecionado
   readonly selectedVinculo = computed<Vinculo | undefined>(() => {
-    const id = this.selectedVinculoId();
-    if (!id) return undefined;
-    return this.vinculosComInstituicao().find((v) => v.id === id);
+    const list = this.vinculosRaw();
+    const currentId = this.selectedVinculoId();
+    if (currentId === null || currentId === undefined) {
+      return undefined;
+    }
+    const insts = this.instituicoesRaw();
+    const instMap = new Map<number, Instituicao>(insts.map((i) => [i.id, i]));
+
+    const found = list.find((v) => v.id === currentId);
+    if (found) {
+      return {
+        ...found,
+        instituicao: instMap.get(found.instituicaoId) || found.instituicao,
+      };
+    }
+    return undefined;
   });
 
-  // Carregamento de procedimentos reativo combinando competência global e vínculo selecionado
+  // Carregamento reativo da produção por procedimento vinculado ao período selecionado
   private readonly paramsObservable = combineLatest([
-    toObservable(this.competenceService.competencia),
+    toObservable(this.competenceService.periodFilter),
     toObservable(this.selectedVinculoId),
   ]);
 
-  readonly rawProcedimentos = toSignal(
+  private readonly procedimentosRaw = toSignal(
     this.paramsObservable.pipe(
-      switchMap(([comp, vinculoId]) => {
-        const vId = vinculoId || undefined;
-        return this.producaoService.getProducaoPorProcedimento(comp, undefined, undefined, vId);
+      switchMap(([period, vinculoId]) => {
+        return this.producaoService.getProducaoPorPeriodo(period, vinculoId ?? undefined);
       })
     ),
     { initialValue: [] }
   );
 
-  readonly loading = computed(() => this.rawProcedimentos().length === 0 && this.vinculoOptions().length > 0);
+  readonly loading = computed(() => this.procedimentosRaw().length === 0);
 
-  // Procedimentos com filtros aplicados
-  readonly filteredProcedimentos = computed<ProducaoPorProcedimento[]>(() => {
-    let procs = this.rawProcedimentos();
-    const search = this.globalFilterText().trim().toLowerCase();
-    const status = this.selectedStatus();
-    const comp = this.selectedComplexidade();
-
-    if (search) {
-      procs = procs.filter((p) => {
-        const cleanCode = p.coProcedimento.replace(/\D/g, '');
-        const searchClean = search.replace(/\D/g, '');
-        const matchCode = searchClean.length > 0 && cleanCode.includes(searchClean);
-        const matchName = p.noProcedimento.toLowerCase().includes(search);
-        return matchCode || matchName;
-      });
-    }
-
-    if (status !== 'ALL') {
-      procs = procs.filter((p) => p.statusExecucao === status);
-    }
-
-    if (comp !== 'ALL') {
-      procs = procs.filter((p) => p.complexidade?.toUpperCase() === comp);
-    }
-
-    return procs;
-  });
-
-  // Lista formatada com código SIGTAP e cálculo de saldo físico
+  // Lista formatada e filtrada de procedimentos analíticos
   readonly procedimentosFormatados = computed<MonitoramentoProcedimentoItem[]>(() => {
-    return this.filteredProcedimentos().map((p) => {
-      const diferencaFisico =
-        p.qtdPactuadaMensal !== null ? p.qtdAprovada - p.qtdPactuadaMensal : null;
-      return {
-        ...p,
-        coProcedimentoFormatado: this.formatSigtapCode(p.coProcedimento),
-        diferencaFisico,
-      };
-    });
+    const raw = this.procedimentosRaw();
+    const filterText = this.globalFilterText().toLowerCase().trim();
+    const status = this.selectedStatus();
+    const compl = this.selectedComplexidade();
+
+    return raw
+      .map((item) => {
+        const diferencaFisico =
+          item.qtdPactuadaMensal !== null && item.qtdPactuadaMensal !== undefined
+            ? item.qtdAprovada - item.qtdPactuadaMensal
+            : null;
+
+        return {
+          ...item,
+          coProcedimentoFormatado: this.formatSigtapCode(item.coProcedimento),
+          diferencaFisico,
+        };
+      })
+      .filter((p) => {
+        if (filterText) {
+          const matchCode = p.coProcedimento.includes(filterText);
+          const matchFormattedCode = p.coProcedimentoFormatado.toLowerCase().includes(filterText);
+          const matchName = p.noProcedimento.toLowerCase().includes(filterText);
+          const matchGrupo = (p.noGrupo || '').toLowerCase().includes(filterText);
+          if (!matchCode && !matchFormattedCode && !matchName && !matchGrupo) {
+            return false;
+          }
+        }
+        if (status !== 'ALL' && p.statusExecucao !== status) {
+          return false;
+        }
+        if (compl !== 'ALL' && p.complexidade?.toUpperCase() !== compl) {
+          return false;
+        }
+        return true;
+      });
   });
 
-  // Cálculos de KPIs consolidados para o vínculo
-  readonly kpis = computed(() => {
-    const procs = this.filteredProcedimentos();
+  // Alias para compatibilidade com testes e outros consumidores
+  readonly filteredProcedimentos = computed<MonitoramentoProcedimentoItem[]>(() =>
+    this.procedimentosFormatados()
+  );
+
+  // Árvore Hierárquica SIGTAP (Grupo -> Subgrupo -> Procedimentos)
+  readonly treeNodes = computed<TreeNode<SigtapTreeNodeData>[]>(() => {
+    const procs = this.procedimentosFormatados();
+    const gruposMap = new Map<
+      string,
+      {
+        coGrupo: string;
+        noGrupo: string;
+        subgruposMap: Map<string, { coSubGrupo: string; noSubGrupo: string; procs: MonitoramentoProcedimentoItem[] }>;
+      }
+    >();
+
+    for (const proc of procs) {
+      const coGrupo = proc.coGrupo || '';
+      const noGrupo = proc.noGrupo || '';
+      const coSubGrupo = proc.coSubGrupo || '';
+      const noSubGrupo = proc.noSubGrupo || '';
+
+      if (!gruposMap.has(coGrupo)) {
+        gruposMap.set(coGrupo, {
+          coGrupo,
+          noGrupo,
+          subgruposMap: new Map(),
+        });
+      }
+
+      const grupo = gruposMap.get(coGrupo)!;
+      if (!grupo.subgruposMap.has(coSubGrupo)) {
+        grupo.subgruposMap.set(coSubGrupo, {
+          coSubGrupo,
+          noSubGrupo,
+          procs: [],
+        });
+      }
+
+      grupo.subgruposMap.get(coSubGrupo)!.procs.push(proc);
+    }
+
+    const tree: TreeNode<SigtapTreeNodeData>[] = [];
+
+    gruposMap.forEach((grupo) => {
+      const subgrupoNodes: TreeNode<SigtapTreeNodeData>[] = [];
+
+      let grupoQtdPactuada: number | null = null;
+      let grupoQtdAprovada = 0;
+      let grupoVlrPactuado: number | null = null;
+      let grupoVlrAprovado = 0;
+      let grupoTotalProcs = 0;
+
+      grupo.subgruposMap.forEach((subgrupo) => {
+        let subQtdPactuada: number | null = null;
+        let subQtdAprovada = 0;
+        let subVlrPactuado: number | null = null;
+        let subVlrAprovado = 0;
+
+        const procNodes: TreeNode<SigtapTreeNodeData>[] = subgrupo.procs.map((p) => {
+          if (p.qtdPactuadaMensal !== null && p.qtdPactuadaMensal !== undefined) {
+            subQtdPactuada = (subQtdPactuada || 0) + p.qtdPactuadaMensal;
+          }
+          subQtdAprovada += p.qtdAprovada || 0;
+
+          const pVlrPactuado = p.vlrPactuado !== undefined ? p.vlrPactuado : null;
+          if (pVlrPactuado !== null) {
+            subVlrPactuado = (subVlrPactuado || 0) + pVlrPactuado;
+          }
+          subVlrAprovado += p.vlrAprovado || 0;
+
+          return {
+            data: {
+              tipo: 'PROCEDIMENTO',
+              coCodigo: p.coProcedimento,
+              coProcedimento: p.coProcedimento,
+              coProcedimentoFormatado: p.coProcedimentoFormatado,
+              noProcedimento: p.noProcedimento,
+              descricao: `${p.coProcedimentoFormatado} - ${p.noProcedimento}`,
+              coFinanciamento: p.coFinanciamento,
+              noFinanciamento: p.noFinanciamento,
+              complexidade: p.complexidade,
+              vlUnitario: p.vlUnitario,
+              qtdPactuadaMensal: p.qtdPactuadaMensal,
+              qtdAprovada: p.qtdAprovada,
+              diferencaFisico: p.diferencaFisico,
+              vlrPactuado: pVlrPactuado,
+              vlrAprovado: p.vlrAprovado,
+              saldoFinanceiro: p.saldoFinanceiro ?? 0,
+              percExecucao: p.percExecucao ?? null,
+              percExecucaoFinanceira: p.percExecucaoFinanceira ?? null,
+              statusExecucao: p.statusExecucao,
+            },
+            leaf: true,
+          };
+        });
+
+        const subPerc =
+          subQtdPactuada !== null && subQtdPactuada > 0
+            ? (subQtdAprovada / subQtdPactuada) * 100
+            : null;
+
+        const subPercFin =
+          subVlrPactuado !== null && subVlrPactuado > 0
+            ? (subVlrAprovado / subVlrPactuado) * 100
+            : null;
+
+        const subSaldoFin = subVlrAprovado - (subVlrPactuado || 0);
+
+        let subStatus: StatusExecucao = 'SEM_PACTO';
+        if (subPerc !== null) {
+          if (subPerc > 105) subStatus = 'ACIMA';
+          else if (subPerc < 95) subStatus = 'ABAIXO';
+          else subStatus = 'DENTRO';
+        }
+
+        subgrupoNodes.push({
+          data: {
+            tipo: 'SUBGRUPO',
+            coCodigo: `${grupo.coGrupo}.${subgrupo.coSubGrupo}`,
+            descricao: `Subgrupo ${subgrupo.coSubGrupo} - ${subgrupo.noSubGrupo}`,
+            qtdPactuadaMensal: subQtdPactuada,
+            qtdAprovada: subQtdAprovada,
+            diferencaFisico: subQtdPactuada !== null ? subQtdAprovada - subQtdPactuada : null,
+            vlrPactuado: subVlrPactuado,
+            vlrAprovado: subVlrAprovado,
+            saldoFinanceiro: subSaldoFin,
+            percExecucao: subPerc,
+            percExecucaoFinanceira: subPercFin,
+            statusExecucao: subStatus,
+            totalProcedimentos: subgrupo.procs.length,
+          },
+          children: procNodes,
+          expanded: true,
+        });
+
+        if (subQtdPactuada !== null) {
+          grupoQtdPactuada = (grupoQtdPactuada || 0) + subQtdPactuada;
+        }
+        grupoQtdAprovada += subQtdAprovada;
+
+        if (subVlrPactuado !== null) {
+          grupoVlrPactuado = (grupoVlrPactuado || 0) + subVlrPactuado;
+        }
+        grupoVlrAprovado += subVlrAprovado;
+        grupoTotalProcs += subgrupo.procs.length;
+      });
+
+      const grupoPerc =
+        grupoQtdPactuada !== null && grupoQtdPactuada > 0
+          ? (grupoQtdAprovada / grupoQtdPactuada) * 100
+          : null;
+
+      const grupoPercFin =
+        grupoVlrPactuado !== null && grupoVlrPactuado > 0
+          ? (grupoVlrAprovado / grupoVlrPactuado) * 100
+          : null;
+
+      const grupoSaldoFin = grupoVlrAprovado - (grupoVlrPactuado || 0);
+
+      let grupoStatus: StatusExecucao = 'SEM_PACTO';
+      if (grupoPerc !== null) {
+        if (grupoPerc > 105) grupoStatus = 'ACIMA';
+        else if (grupoPerc < 95) grupoStatus = 'ABAIXO';
+        else grupoStatus = 'DENTRO';
+      }
+
+      tree.push({
+        data: {
+          tipo: 'GRUPO',
+          coCodigo: grupo.coGrupo,
+          descricao: `Grupo ${grupo.coGrupo} - ${grupo.noGrupo}`,
+          qtdPactuadaMensal: grupoQtdPactuada,
+          qtdAprovada: grupoQtdAprovada,
+          diferencaFisico: grupoQtdPactuada !== null ? grupoQtdAprovada - grupoQtdPactuada : null,
+          vlrPactuado: grupoVlrPactuado,
+          vlrAprovado: grupoVlrAprovado,
+          saldoFinanceiro: grupoSaldoFin,
+          percExecucao: grupoPerc,
+          percExecucaoFinanceira: grupoPercFin,
+          statusExecucao: grupoStatus,
+          totalProcedimentos: grupoTotalProcs,
+        },
+        children: subgrupoNodes,
+        expanded: true,
+      });
+    });
+
+    return tree;
+  });
+
+  // KPIs consolidados com base nos itens filtrados
+  readonly kpis = computed<MonitoramentoKpis>(() => {
+    const procs = this.procedimentosFormatados();
     let totalPactuado = 0;
     let totalAprovado = 0;
     let totalFinanceiro = 0;
-    let totalFinanceiroProduzido = 0;
+    let totalFinanceiroPactuado = 0;
+    let totalComPacto = 0;
 
     let totalDentro = 0;
     let totalAcima = 0;
     let totalAbaixo = 0;
     let totalSemPacto = 0;
-    let totalComPacto = 0;
 
     for (const p of procs) {
-      totalAprovado += p.qtdAprovada || 0;
-      totalFinanceiro += p.vlrAprovado || 0;
-      totalFinanceiroProduzido += p.vlrProduzido || 0;
-
-      if (p.qtdPactuadaMensal !== null && p.qtdPactuadaMensal > 0) {
+      if (p.qtdPactuadaMensal !== null && p.qtdPactuadaMensal !== undefined && p.qtdPactuadaMensal > 0) {
         totalPactuado += p.qtdPactuadaMensal;
         totalComPacto++;
+      }
+      totalAprovado += p.qtdAprovada || 0;
+      totalFinanceiro += p.vlrAprovado || 0;
+      if (p.vlrPactuado !== null && p.vlrPactuado !== undefined && p.vlrPactuado > 0) {
+        totalFinanceiroPactuado += p.vlrPactuado;
       }
 
       switch (p.statusExecucao) {
@@ -803,9 +420,11 @@ export class MonitoramentoComponent {
       }
     }
 
-    const percentualGlobal =
-      totalPactuado > 0 ? (totalAprovado / totalPactuado) * 100 : 100;
     const saldoFisico = totalAprovado - totalPactuado;
+    const saldoFinanceiroGlobal = totalFinanceiro - totalFinanceiroPactuado;
+    const percentualGlobal = totalPactuado > 0 ? (totalAprovado / totalPactuado) * 100 : 100;
+    const percentualGlobalFinanceiro =
+      totalFinanceiroPactuado > 0 ? (totalFinanceiro / totalFinanceiroPactuado) * 100 : 100;
 
     let statusGeralLabel = 'Dentro da Meta';
     let statusGeralSeverity: 'success' | 'warn' | 'danger' | 'info' = 'success';
@@ -818,15 +437,30 @@ export class MonitoramentoComponent {
       statusGeralSeverity = 'danger';
     }
 
+    let statusFinanceiroGlobalLabel = 'Dentro do Pactuado';
+    let statusFinanceiroGlobalSeverity: 'success' | 'warn' | 'danger' | 'info' = 'success';
+
+    if (saldoFinanceiroGlobal > 0.01) {
+      statusFinanceiroGlobalLabel = 'Superávit (+)';
+      statusFinanceiroGlobalSeverity = 'warn';
+    } else if (saldoFinanceiroGlobal < -0.01) {
+      statusFinanceiroGlobalLabel = 'Déficit (-)';
+      statusFinanceiroGlobalSeverity = 'danger';
+    }
+
     return {
       totalPactuado,
       totalAprovado,
-      totalFinanceiro,
-      totalFinanceiroProduzido,
-      percentualGlobal,
       saldoFisico,
+      totalFinanceiroPactuado,
+      totalFinanceiro,
+      saldoFinanceiroGlobal,
+      percentualGlobal,
+      percentualGlobalFinanceiro,
       statusGeralLabel,
       statusGeralSeverity,
+      statusFinanceiroGlobalLabel,
+      statusFinanceiroGlobalSeverity,
       totalItens: procs.length,
       totalComPacto,
       totalDentro,
@@ -836,15 +470,104 @@ export class MonitoramentoComponent {
     };
   });
 
-  formatCurrency(value?: number | null): string {
-    if (value === null || value === undefined) return 'R$ 0,00';
-    return this.currencyFormatter.format(value);
+  constructor() {
+    effect(() => {
+      const options = this.vinculoOptions();
+      const currentId = this.selectedVinculoId();
+      if (options.length > 0 && (currentId === null || currentId === undefined)) {
+        this.selectedVinculoId.set(options[0].value);
+      }
+    });
   }
 
+  // Ações de Usuário
   resetFilters(): void {
     this.globalFilterText.set('');
     this.selectedStatus.set('ALL');
     this.selectedComplexidade.set('ALL');
+  }
+
+  expandAll(): void {
+    const nodes = this.treeNodes();
+    const setExpand = (list: TreeNode[]) => {
+      for (const node of list) {
+        node.expanded = true;
+        if (node.children) setExpand(node.children);
+      }
+    };
+    setExpand(nodes);
+  }
+
+  collapseAll(): void {
+    const nodes = this.treeNodes();
+    const setCollapse = (list: TreeNode[]) => {
+      for (const node of list) {
+        node.expanded = false;
+        if (node.children) setCollapse(node.children);
+      }
+    };
+    setCollapse(nodes);
+  }
+
+  exportarDados(): void {
+    const procs = this.procedimentosFormatados();
+    if (procs.length === 0) return;
+
+    const headers = [
+      'Codigo_SIGTAP',
+      'Procedimento',
+      'Grupo',
+      'Subgrupo',
+      'Complexidade',
+      'Financiamento',
+      'Valor_Unitario',
+      'Qtd_Pactuada',
+      'Qtd_Aprovada',
+      'Saldo_Fisico',
+      'Vlr_Pactuado',
+      'Vlr_Aprovado',
+      'Saldo_Financeiro',
+      'Perc_Execucao',
+      'Status_Execucao',
+    ];
+
+    const rows = procs.map((p) => [
+      `"${p.coProcedimento}"`,
+      `"${(p.noProcedimento || '').replace(/"/g, '""')}"`,
+      `"${(p.noGrupo || '').replace(/"/g, '""')}"`,
+      `"${(p.noSubGrupo || '').replace(/"/g, '""')}"`,
+      `"${p.complexidade || ''}"`,
+      `"${p.noFinanciamento || ''}"`,
+      (p.vlUnitario || 0).toFixed(2),
+      p.qtdPactuadaMensal !== null && p.qtdPactuadaMensal !== undefined ? p.qtdPactuadaMensal : '',
+      p.qtdAprovada,
+      p.diferencaFisico !== null && p.diferencaFisico !== undefined ? p.diferencaFisico : '',
+      p.vlrPactuado !== null && p.vlrPactuado !== undefined ? p.vlrPactuado.toFixed(2) : '',
+      (p.vlrAprovado || 0).toFixed(2),
+      (p.saldoFinanceiro || 0).toFixed(2),
+      p.percExecucao !== null && p.percExecucao !== undefined ? p.percExecucao.toFixed(1) + '%' : '',
+      `"${p.statusExecucao}"`,
+    ]);
+
+    const csvContent = [headers.join(';'), ...rows.map((e) => e.join(';'))].join('\n');
+    const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute(
+      'download',
+      `monitoramento_cpa_${this.competenceService.periodFilter().mode}_${this.selectedVinculo()?.numero || 'contrato'}.csv`
+    );
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  // Formatadores e Helpers de Apresentação
+  formatCurrency(value?: number | null): string {
+    if (value === null || value === undefined) return 'R$ 0,00';
+    return this.currencyFormatter.format(value);
   }
 
   formatSigtapCode(code?: string): string {
@@ -856,71 +579,10 @@ export class MonitoramentoComponent {
     return code;
   }
 
-  getClampedPercent(perc?: number | null): number {
-    if (perc === null || perc === undefined) return 0;
-    return Math.min(Math.max(perc, 0), 100);
-  }
-
-  getPercTextClass(status: StatusExecucao): string {
-    switch (status) {
-      case 'DENTRO':
-        return 'text-emerald-600 dark:text-emerald-400';
-      case 'ACIMA':
-        return 'text-amber-600 dark:text-amber-400';
-      case 'ABAIXO':
-        return 'text-rose-600 dark:text-rose-400';
-      default:
-        return 'text-surface-600 dark:text-surface-300';
-    }
-  }
-
-  getProgressBarClass(status: StatusExecucao): string {
-    switch (status) {
-      case 'DENTRO':
-        return 'p-progressbar-emerald';
-      case 'ACIMA':
-        return 'p-progressbar-amber';
-      case 'ABAIXO':
-        return 'p-progressbar-rose';
-      case 'SEM_PACTO':
-        return 'p-progressbar-slate';
-      default:
-        return 'p-progressbar-slate';
-    }
-  }
-
-  getStatusLabel(status: StatusExecucao): string {
-    switch (status) {
-      case 'DENTRO':
-        return 'Dentro da Meta';
-      case 'ACIMA':
-        return 'Acima da Meta';
-      case 'ABAIXO':
-        return 'Abaixo da Meta';
-      case 'SEM_PACTO':
-        return 'Sem Pacto';
-      default:
-        return status;
-    }
-  }
-
-  getStatusSeverity(status: StatusExecucao): 'success' | 'warn' | 'danger' | 'secondary' {
-    switch (status) {
-      case 'DENTRO':
-        return 'success';
-      case 'ACIMA':
-        return 'warn';
-      case 'ABAIXO':
-        return 'danger';
-      case 'SEM_PACTO':
-        return 'secondary';
-      default:
-        return 'secondary';
-    }
-  }
-
-  getComplexidadeSeverity(complexidade?: string): 'info' | 'warn' | 'danger' | 'secondary' {
-    switch (complexidade?.toUpperCase()) {
+  getComplexidadeSeverity(
+    c?: string
+  ): 'success' | 'info' | 'warn' | 'danger' | 'secondary' | 'contrast' | undefined {
+    switch (c?.toUpperCase()) {
       case 'BC':
         return 'info';
       case 'MC':
@@ -932,50 +594,79 @@ export class MonitoramentoComponent {
     }
   }
 
-  exportarDados(): void {
-    const dados = this.procedimentosFormatados();
-    if (!dados || dados.length === 0) return;
-
-    const headers = [
-      'Código SIGTAP',
-      'Procedimento',
-      'Complexidade',
-      'Financiamento',
-      'Meta Mensal',
-      'Qtd Aprovada',
-      'Saldo Físico',
-      'Valor Aprovado (R$)',
-      '% Execução',
-      'Status Meta',
-    ];
-
-    const rows = dados.map((item) => [
-      `"${item.coProcedimentoFormatado}"`,
-      `"${(item.noProcedimento || '').replace(/"/g, '""')}"`,
-      `"${item.complexidade || ''}"`,
-      `"${(item.noFinanciamento || '').replace(/"/g, '""')}"`,
-      item.qtdPactuadaMensal !== null ? item.qtdPactuadaMensal : '',
-      item.qtdAprovada ?? 0,
-      item.diferencaFisico !== null ? item.diferencaFisico : '',
-      item.vlrAprovado !== null && item.vlrAprovado !== undefined ? item.vlrAprovado.toFixed(2) : '0.00',
-      item.percExecucao !== null && item.percExecucao !== undefined ? item.percExecucao.toFixed(1) : '',
-      `"${this.getStatusLabel(item.statusExecucao)}"`,
-    ]);
-
-    const csvContent = '\uFEFF' + [headers.join(';'), ...rows.map((r) => r.join(';'))].join('\r\n');
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-
-    if (typeof window !== 'undefined') {
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      const vinculoNumero = this.selectedVinculo()?.numero?.replace(/[^a-zA-Z0-9_-]/g, '_') || 'vinculo';
-      const comp = this.competenceService.competencia();
-      link.setAttribute('href', url);
-      link.setAttribute('download', `monitoramento_${vinculoNumero}_${comp}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+  getStatusSeverity(
+    status?: StatusExecucao | string
+  ): 'success' | 'warn' | 'danger' | 'info' | 'secondary' {
+    switch (status) {
+      case 'DENTRO':
+        return 'success';
+      case 'ACIMA':
+        return 'warn';
+      case 'ABAIXO':
+        return 'danger';
+      case 'SEM_PACTO':
+        return 'secondary';
+      default:
+        return 'info';
     }
+  }
+
+  getStatusLabel(status?: StatusExecucao | string): string {
+    switch (status) {
+      case 'DENTRO':
+        return 'Dentro da Meta';
+      case 'ACIMA':
+        return 'Acima da Meta';
+      case 'ABAIXO':
+        return 'Abaixo da Meta';
+      case 'SEM_PACTO':
+        return 'Sem Pacto';
+      default:
+        return status || '-';
+    }
+  }
+
+  getClampedPercent(perc?: number | null): number {
+    if (perc === null || perc === undefined) return 0;
+    return Math.min(Math.max(perc, 0), 100);
+  }
+
+  getProgressBarClass(status?: StatusExecucao | string): string {
+    switch (status) {
+      case 'DENTRO':
+        return 'p-progressbar-emerald';
+      case 'ACIMA':
+        return 'p-progressbar-amber';
+      case 'ABAIXO':
+        return 'p-progressbar-rose';
+      default:
+        return 'p-progressbar-slate';
+    }
+  }
+
+  getPercTextClass(status?: StatusExecucao | string): string {
+    switch (status) {
+      case 'DENTRO':
+        return 'text-emerald-600 dark:text-emerald-400';
+      case 'ACIMA':
+        return 'text-amber-600 dark:text-amber-400';
+      case 'ABAIXO':
+        return 'text-rose-600 dark:text-rose-400';
+      default:
+        return 'text-surface-600 dark:text-surface-400';
+    }
+  }
+
+  getSaldoFinanceiroClass(saldo: number, status?: StatusExecucao | string): string {
+    if (status === 'SEM_PACTO') {
+      return 'text-surface-600 dark:text-surface-400';
+    }
+    if (saldo > 0) {
+      return 'text-amber-600 dark:text-amber-400';
+    }
+    if (saldo < 0) {
+      return 'text-rose-600 dark:text-rose-400';
+    }
+    return 'text-emerald-600 dark:text-emerald-400';
   }
 }

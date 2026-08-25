@@ -1,0 +1,17 @@
+<div class="flex flex-col gap-6">
+  <app-plano-header
+    [planoOptions]="planoOptions()"
+    [selectedPlanoId]="selectedPlanoId()"
+    [planoSelecionado]="planoSelecionado()"
+    [competenciaFormatada]="competenceService.competenciaFormatada()"
+    (planoChange)="onPlanoSelect($event)"
+  />
+
+  <app-plano-metrics [resumo]="resumo()" />
+
+  <app-plano-table
+    [procedimentos]="procedimentosFormatados()"
+    [loading]="loading()"
+    [planoSelecionado]="planoSelecionado()"
+  />
+</div>

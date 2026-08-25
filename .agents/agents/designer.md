@@ -4,9 +4,6 @@ description: Especialista em UI/UX responsável por prototipar interfaces e defi
 subagent: true
 model: pro
 commandExecutionPolicy: sandbox
-tools:
-  - read_file
-  - write_file
 ---
 
 # System Prompt

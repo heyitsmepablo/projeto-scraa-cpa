@@ -4,11 +4,6 @@ description: Engenheiro de Software Fullstack Sênior focado em Clean Architectu
 subagent: true
 model: pro
 commandExecutionPolicy: sandbox
-tools:
-  - read_file
-  - write_file
-  - edit_file
-  - git_diff
 ---
 
 # Role
@@ -62,6 +57,27 @@ Para executar qualquer comando de terminal, build, testes ou gerenciamento de pa
   wsl-run npm --prefix client/web run build
 
   ```
+
+# Estrutura das Pastas e Arquivos Frontend
+
+src/app/domains/<nome-do-dominio>/
+├── components/ # Dumb Components (apresentacionais)
+│ ├── <dumb-component-name>/
+│ │ ├── <dumb-component-name>.component.ts
+│ │ ├── <dumb-component-name>.component.html
+│ │ ├── <dumb-component-name>.component.css
+│ │ └── <dumb-component-name>.component.spec.ts
+├── <smart-component-name>/ # Smart Component (container)
+│ ├── <smart-component-name>.component.ts
+│ ├── <smart-component-name>.component.html
+│ ├── <smart-component-name>.component.css
+│ └── <smart-component-name>.component.spec.ts
+├── services/ # ou colocated no domínio se isolado
+│ ├── <dominio>.service.ts
+│ └── <dominio>.service.spec.ts
+├── models/ # ou <dominio>.model.ts
+│ └── <dominio>.model.ts
+└── <dominio>.routes.ts # Rotas lazy-loaded
 
 # Allowed Tools
 

@@ -1,0 +1,60 @@
+<p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
+  <p-table
+    #dt
+    [value]="instituicoes() ?? []"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [globalFilterFields]="['nome', 'cnes', 'cnpj']"
+    responsiveLayout="scroll"
+    styleClass="p-datatable-sm"
+    [loading]="loading()"
+  >
+    <ng-template #caption>
+      <div class="flex justify-between items-center">
+        <span class="text-lg font-semibold">Lista de Instituições</span>
+        <p-iconfield iconPosition="left">
+          <p-inputicon class="pi pi-search" />
+          <input
+            #searchInput
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal(searchInput.value, 'contains')"
+            placeholder="Pesquisar..."
+          />
+        </p-iconfield>
+      </div>
+    </ng-template>
+
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="nome">Nome <p-sorticon field="nome" /></th>
+        <th pSortableColumn="cnes">CNES <p-sorticon field="cnes" /></th>
+        <th pSortableColumn="cnpj">CNPJ <p-sorticon field="cnpj" /></th>
+        <th pSortableColumn="tipoInstituicao">Tipo <p-sorticon field="tipoInstituicao" /></th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-inst>
+      <tr>
+        <td>{{ inst.nome }}</td>
+        <td class="font-mono text-sm">{{ inst.cnes }}</td>
+        <td class="font-mono text-sm">{{ inst.cnpj || '-' }}</td>
+        <td>
+          <p-tag
+            [value]="inst.tipoInstituicao"
+            [severity]="getTipoSeverity(inst.tipoInstituicao)"
+          />
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="4" class="text-center py-4 text-surface-500">
+          Nenhuma instituição encontrada.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>

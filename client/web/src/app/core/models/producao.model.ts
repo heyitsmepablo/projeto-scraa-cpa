@@ -33,11 +33,27 @@ export interface ProducaoPorProcedimento {
   complexidade: string;
   coProcedimento: string;
   noProcedimento: string;
+
+  // Hierarquia SIGTAP
+  coGrupo?: string;
+  noGrupo?: string;
+  coSubGrupo?: string;
+  noSubGrupo?: string;
+
+  // Valores Unitários & Totais
+  vlUnitario?: number;
   qtdAprovada: number;
   vlrAprovado: number;
   qtdProduzida: number;
   vlrProduzido: number;
+
+  // Pactuação e Execução Física
   qtdPactuadaMensal: number | null;
   percExecucao: number | null;
   statusExecucao: StatusExecucao;
+
+  // Pactuação e Execução Financeira
+  vlrPactuado?: number | null;
+  saldoFinanceiro?: number;
+  percExecucaoFinanceira?: number | null;
 }

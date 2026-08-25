@@ -42,6 +42,42 @@ describe('Topbar', () => {
       expect(setCompetenceSpy).not.toHaveBeenCalled();
     });
 
+    it('should apply specific competence and close popover', () => {
+      const setSpecificSpy = vi.spyOn(competenceService, 'setSpecificCompetence');
+      const fakePopover = { hide: vi.fn() };
+      component.selectedSpecificComp.set('202403');
+      component.applySpecific(fakePopover);
+      expect(setSpecificSpy).toHaveBeenCalledWith('202403');
+      expect(fakePopover.hide).toHaveBeenCalled();
+    });
+
+    it('should apply range preset and close popover', () => {
+      const setRangeSpy = vi.spyOn(competenceService, 'setRange');
+      const fakePopover = { hide: vi.fn() };
+      const preset = component.rangePresets[0];
+      component.applyPreset(preset, fakePopover);
+      expect(setRangeSpy).toHaveBeenCalledWith(preset.inicio, preset.fim);
+      expect(fakePopover.hide).toHaveBeenCalled();
+    });
+
+    it('should apply custom range and close popover', () => {
+      const setRangeSpy = vi.spyOn(competenceService, 'setRange');
+      const fakePopover = { hide: vi.fn() };
+      component.customInicio.set('202402');
+      component.customFim.set('202406');
+      component.applyCustomRange(fakePopover);
+      expect(setRangeSpy).toHaveBeenCalledWith('202402', '202406');
+      expect(fakePopover.hide).toHaveBeenCalled();
+    });
+
+    it('should apply global mode and close popover', () => {
+      const setGlobalSpy = vi.spyOn(competenceService, 'setGlobal');
+      const fakePopover = { hide: vi.fn() };
+      component.applyGlobal(fakePopover);
+      expect(setGlobalSpy).toHaveBeenCalledWith('202301', '202612');
+      expect(fakePopover.hide).toHaveBeenCalled();
+    });
+
     it('should emit toggleSidebar when trigger event is dispatched', () => {
       const emitSpy = vi.spyOn(component.toggleSidebar, 'emit');
       component.toggleSidebar.emit();

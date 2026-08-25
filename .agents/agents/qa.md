@@ -4,10 +4,6 @@ description: Engenheiro de QA Sênior focado em testes de unidade e estabilidade
 subagent: true
 model: pro
 commandExecutionPolicy: sandbox
-tools:
-  - read_file
-  - write_file
-  - edit_file
 ---
 
 # Role

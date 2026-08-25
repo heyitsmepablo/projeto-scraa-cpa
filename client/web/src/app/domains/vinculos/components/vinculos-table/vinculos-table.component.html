@@ -1,0 +1,125 @@
+<p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
+  <p-table
+    #dt
+    [value]="vinculos() ?? []"
+    dataKey="id"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [globalFilterFields]="['numero', 'numeroProcessoSei', 'instituicao.nome']"
+    responsiveLayout="scroll"
+    styleClass="p-datatable-sm"
+    [loading]="loading()"
+    [expandedRowKeys]="expandedRows()"
+    (expandedRowKeysChange)="onExpandedRowsChange($event)"
+  >
+    <ng-template #caption>
+      <div class="flex justify-between items-center">
+        <span class="text-lg font-semibold">Lista de Contratos e Convênios</span>
+        <p-iconfield iconPosition="left">
+          <p-inputicon class="pi pi-search" />
+          <input
+            #searchInput
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal(searchInput.value, 'contains')"
+            placeholder="Pesquisar..."
+          />
+        </p-iconfield>
+      </div>
+    </ng-template>
+
+    <ng-template #header>
+      <tr>
+        <th style="width: 3rem"></th>
+        <th pSortableColumn="numero">Nº Documento <p-sorticon field="numero" /></th>
+        <th pSortableColumn="instituicao.nome">Instituição <p-sorticon field="instituicao.nome" /></th>
+        <th pSortableColumn="dataInicio">Início <p-sorticon field="dataInicio" /></th>
+        <th pSortableColumn="dataFim">Fim <p-sorticon field="dataFim" /></th>
+        <th pSortableColumn="valorTotal">Valor Total <p-sorticon field="valorTotal" /></th>
+        <th>Status</th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-vinculo let-expanded="expanded">
+      <tr>
+        <td>
+          <p-button 
+            type="button" 
+            pRipple 
+            [pRowToggler]="vinculo" 
+            [text]="true" 
+            [rounded]="true" 
+            [plain]="true" 
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+        </td>
+        <td class="font-mono text-sm">
+          <div>{{ vinculo.numero }}</div>
+          <div class="text-xs text-surface-500">{{ vinculo.numeroProcessoSei }}</div>
+        </td>
+        <td>{{ vinculo.instituicao?.nome }}</td>
+        <td>{{ vinculo.dataInicio | date:'dd/MM/yyyy' }}</td>
+        <td>{{ vinculo.dataFim ? (vinculo.dataFim | date:'dd/MM/yyyy') : '-' }}</td>
+        <td class="font-mono">{{ vinculo.valorTotal | currency:'BRL':'symbol':'1.2-2' }}</td>
+        <td>
+          <p-tag
+            [value]="vinculo.statusVigencia"
+            [severity]="vinculo.severityVigencia"
+          />
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template #expandedrow let-vinculo>
+      <tr>
+        <td colspan="7">
+          <div class="p-4 bg-surface-50 dark:bg-surface-900 rounded-lg">
+            <h5 class="text-sm font-semibold mb-3">Aditivos Contratuais</h5>
+            
+            <p-table [value]="vinculo.aditivos || []" dataKey="id" styleClass="p-datatable-sm">
+              <ng-template #header>
+                <tr>
+                  <th>Nº Aditivo</th>
+                  <th>Tipos</th>
+                  <th>Processo SEI</th>
+                  <th>Data Assinatura</th>
+                  <th>Vigência (Fim)</th>
+                  <th>Valor Aditivado</th>
+                </tr>
+              </ng-template>
+              <ng-template #body let-aditivo>
+                <tr>
+                  <td class="font-mono text-sm">{{ aditivo.numero }}</td>
+                  <td>
+                    <div class="flex gap-1">
+                      @for (t of aditivo.tipoAditivo; track t) {
+                        <p-tag [value]="t" severity="secondary" />
+                      }
+                    </div>
+                  </td>
+                  <td class="font-mono text-xs">{{ aditivo.numeroProcessoSei }}</td>
+                  <td>{{ aditivo.dataDaAssinatura | date:'dd/MM/yyyy' }}</td>
+                  <td>{{ aditivo.dataFim | date:'dd/MM/yyyy' }}</td>
+                  <td class="font-mono">{{ aditivo.valorTotal ? (aditivo.valorTotal | currency:'BRL':'symbol':'1.2-2') : '-' }}</td>
+                </tr>
+              </ng-template>
+              <ng-template #emptymessage>
+                <tr>
+                  <td colspan="6" class="text-sm text-surface-500 py-3">Nenhum aditivo encontrado para este contrato.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="7" class="text-center py-4 text-surface-500">
+          Nenhum vínculo encontrado.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>

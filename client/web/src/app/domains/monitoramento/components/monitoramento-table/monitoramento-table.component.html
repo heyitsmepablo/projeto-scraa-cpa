@@ -1,0 +1,250 @@
+<p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
+  <p-table
+    #dt
+    [value]="procedimentos()"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [scrollable]="true"
+    [tableStyle]="{ 'min-width': '1800px' }"
+    size="small"
+    [loading]="loading()"
+  >
+    <ng-template #caption>
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <div>
+          <span class="text-lg font-semibold text-surface-900 dark:text-surface-0">
+            Grade Analítica Plana: Executado vs. Pactuado
+          </span>
+          <span class="text-xs text-surface-500 block">
+            Exibindo {{ procedimentos().length }} procedimentos no período: <strong>{{ periodoFormatado() }}</strong>
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <p-tag
+            [value]="procedimentos().length + ' registros'"
+            severity="secondary"
+            styleClass="font-mono text-xs"
+          />
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #header>
+      <tr class="bg-surface-100 dark:bg-surface-800 border-b-2 border-surface-300 dark:border-surface-600 shadow-xs">
+        <th pSortableColumn="coProcedimento" style="width: 140px; min-width: 140px" class="text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Código SIGTAP <p-sort-icon field="coProcedimento" />
+        </th>
+        <th pSortableColumn="noProcedimento" style="width: 380px; min-width: 380px" class="text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Procedimento SUS <p-sort-icon field="noProcedimento" />
+        </th>
+        <th pSortableColumn="complexidade" style="width: 120px; min-width: 120px" class="text-center text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Complexidade <p-sort-icon field="complexidade" />
+        </th>
+        <th pSortableColumn="vlUnitario" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 130px; min-width: 130px">
+          Valor Unitário <p-sort-icon field="vlUnitario" />
+        </th>
+        <th pSortableColumn="qtdPactuadaMensal" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 130px; min-width: 130px">
+          Meta Física ({{ mesesCount() }}m) <p-sort-icon field="qtdPactuadaMensal" />
+        </th>
+        <th pSortableColumn="qtdAprovada" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 130px; min-width: 130px">
+          Qtd. Aprovada <p-sort-icon field="qtdAprovada" />
+        </th>
+        <th pSortableColumn="vlrPactuado" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 190px; min-width: 190px">
+          Financ. Pactuado ({{ mesesCount() }}m) <p-sort-icon field="vlrPactuado" />
+        </th>
+        <th pSortableColumn="vlrAprovado" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 180px; min-width: 180px">
+          Financ. Aprovado <p-sort-icon field="vlrAprovado" />
+        </th>
+        <th pSortableColumn="saldoFinanceiro" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 160px; min-width: 160px">
+          Saldo Financeiro <p-sort-icon field="saldoFinanceiro" />
+        </th>
+        <th pSortableColumn="percExecucao" style="width: 180px; min-width: 180px" class="text-left text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Percentual de Execução <p-sort-icon field="percExecucao" />
+        </th>
+        <th pSortableColumn="statusExecucao" style="width: 155px; min-width: 155px" class="text-center text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Status da Execução <p-sort-icon field="statusExecucao" />
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-item>
+      <tr class="bg-surface-0 dark:bg-surface-900 border-b border-surface-100 dark:border-surface-800 hover:bg-surface-50 dark:hover:bg-surface-800/30 transition-colors duration-150">
+        <!-- Código SIGTAP Formatado -->
+        <td style="width: 140px; min-width: 140px">
+          <span class="font-mono text-xs font-bold tracking-wider text-surface-900 dark:text-surface-100 bg-surface-100 dark:bg-surface-800 px-2 py-0.5 rounded border border-surface-200 dark:border-surface-700 inline-flex items-center justify-center shrink-0 whitespace-nowrap min-w-[110px] text-center">
+            {{ item.coProcedimentoFormatado }}
+          </span>
+        </td>
+
+        <!-- Nome do Procedimento com Tooltip -->
+        <td style="width: 380px; min-width: 380px">
+          <div
+            class="font-semibold text-surface-900 dark:text-surface-100 text-xs"
+            [pTooltip]="tooltipProcedimentoPlano"
+            tooltipPosition="top"
+            [showDelay]="200"
+          >
+            {{ item.noProcedimento }}
+          </div>
+          <ng-template #tooltipProcedimentoPlano>
+            <div class="p-1 max-w-sm">
+              <div class="font-bold text-xs">{{ item.noProcedimento }}</div>
+              <div class="text-[11px] text-surface-300 mt-1">
+                Grupo {{ item.coGrupo }} • {{ item.noSubGrupo }}
+              </div>
+              <div class="text-[11px] text-surface-400 italic mt-0.5">
+                {{ item.noFinanciamento }}
+              </div>
+            </div>
+          </ng-template>
+        </td>
+
+        <!-- Complexidade -->
+        <td class="text-center" style="width: 120px; min-width: 120px">
+          <p-tag
+            [value]="item.complexidade"
+            [severity]="getComplexidadeSeverity(item.complexidade)"
+            styleClass="text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 whitespace-nowrap min-w-[32px] text-center"
+          />
+        </td>
+
+        <!-- Valor Unitário SIGTAP -->
+        <td class="text-right font-mono text-xs text-surface-600 dark:text-surface-300" style="width: 130px; min-width: 130px">
+          {{ formatCurrency(item.vlUnitario) }}
+        </td>
+
+        <!-- Meta Mensal Pactuada (Meta Fís.) -->
+        <td class="text-right font-mono text-xs" style="width: 120px; min-width: 120px">
+          @if (item.qtdPactuadaMensal !== null) {
+            <span class="font-bold text-surface-900 dark:text-surface-0">{{ item.qtdPactuadaMensal | number }}</span>
+          } @else {
+            <span class="text-surface-400 italic text-xs">Sem Pacto</span>
+          }
+        </td>
+
+        <!-- Qtd Aprovada (DATASUS) -->
+        <td class="text-right font-mono text-xs" style="width: 130px; min-width: 130px">
+          <span class="font-bold text-emerald-600 dark:text-emerald-400">{{ item.qtdAprovada | number }}</span>
+        </td>
+
+        <!-- Financ. Pact. -->
+        <td class="text-right font-mono text-xs text-surface-700 dark:text-surface-300" style="width: 180px; min-width: 180px">
+          @if (item.vlrPactuado !== null) {
+            {{ formatCurrency(item.vlrPactuado) }}
+          } @else {
+            <span class="text-surface-400 italic">R$ 0,00</span>
+          }
+        </td>
+
+        <!-- Financ. Aprov. -->
+        <td class="text-right font-mono text-xs font-semibold text-surface-900 dark:text-surface-0" style="width: 180px; min-width: 180px">
+          {{ formatCurrency(item.vlrAprovado) }}
+        </td>
+
+        <!-- Saldo Financ. -->
+        <td class="text-right font-mono text-xs" style="width: 160px; min-width: 160px">
+          <span
+            class="font-bold"
+            [ngClass]="getSaldoFinanceiroClass(item.saldoFinanceiro, item.statusExecucao)"
+          >
+            {{ item.saldoFinanceiro > 0 ? '+' : '' }}{{ formatCurrency(item.saldoFinanceiro) }}
+          </span>
+        </td>
+
+        <!-- % Execução -->
+        <td style="width: 180px; min-width: 180px">
+          @if (item.percExecucao !== null) {
+            <div class="flex flex-col gap-1">
+              <div class="flex justify-between text-xs font-mono font-bold">
+                <span [ngClass]="getPercTextClass(item.statusExecucao)">{{ item.percExecucao | number: '1.1-1' }}%</span>
+              </div>
+              <p-progressbar
+                [value]="getClampedPercent(item.percExecucao)"
+                [showValue]="false"
+                [style]="{ height: '6px' }"
+                [class]="getProgressBarClass(item.statusExecucao)"
+              />
+            </div>
+          } @else {
+            <span class="text-surface-400 text-xs italic">-</span>
+          }
+        </td>
+
+        <!-- Status -->
+        <td class="text-center" style="width: 155px; min-width: 155px">
+          <p-tag
+            [value]="getStatusLabel(item.statusExecucao)"
+            [severity]="getStatusSeverity(item.statusExecucao)"
+            styleClass="text-[10px] whitespace-nowrap shrink-0 min-w-[90px] text-center px-2 py-0.5"
+          />
+        </td>
+      </tr>
+    </ng-template>
+
+    <!-- Totalizadores no Rodapé da Tabela Plana -->
+    <ng-template #footer>
+      <tr class="font-bold bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-0 border-t-2 border-surface-200 dark:border-surface-700">
+        <td colspan="4" class="text-right uppercase text-xs tracking-wider text-surface-600 dark:text-surface-400 py-3">
+          Totais Globais:
+        </td>
+        <td class="text-right font-mono text-xs" style="width: 120px; min-width: 120px">
+          {{ kpis().totalPactuado | number }}
+        </td>
+        <td class="text-right font-mono text-xs text-emerald-600 dark:text-emerald-400" style="width: 130px; min-width: 130px">
+          {{ kpis().totalAprovado | number }}
+        </td>
+        <td class="text-right font-mono text-xs text-blue-600 dark:text-blue-400" style="width: 180px; min-width: 180px">
+          {{ formatCurrency(kpis().totalFinanceiroPactuado) }}
+        </td>
+        <td class="text-right font-mono text-xs text-indigo-600 dark:text-indigo-400" style="width: 180px; min-width: 180px">
+          {{ formatCurrency(kpis().totalFinanceiro) }}
+        </td>
+        <td class="text-right font-mono text-xs" style="width: 160px; min-width: 160px">
+          <span
+            class="font-bold"
+            [ngClass]="kpis().saldoFinanceiroGlobal >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'"
+          >
+            {{ kpis().saldoFinanceiroGlobal >= 0 ? '+' : '' }}{{ formatCurrency(kpis().saldoFinanceiroGlobal) }}
+          </span>
+        </td>
+        <td style="width: 180px; min-width: 180px">
+          <div class="flex flex-col gap-1">
+            <span class="font-mono text-xs font-bold text-surface-800 dark:text-surface-200">
+              {{ kpis().percentualGlobal | number: '1.1-1' }}%
+            </span>
+          </div>
+        </td>
+        <td class="text-center" style="width: 155px; min-width: 155px">
+          <p-tag
+            [value]="kpis().statusGeralLabel"
+            [severity]="kpis().statusGeralSeverity"
+            styleClass="text-xs whitespace-nowrap shrink-0 px-2 py-0.5 text-center"
+          />
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="11" class="text-center py-10 text-surface-500">
+          <div class="flex flex-col items-center justify-center gap-2">
+            <i class="pi pi-inbox text-4xl text-surface-400"></i>
+            <span class="font-medium text-base">Nenhum procedimento encontrado.</span>
+            <p class="text-xs text-surface-400 max-w-md">
+              Não há registros correspondentes aos filtros selecionados para esta competência.
+            </p>
+            <p-button
+              label="Limpar Filtros"
+              [text]="true"
+              size="small"
+              styleClass="mt-2"
+              (onClick)="resetFilters.emit()"
+            />
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>

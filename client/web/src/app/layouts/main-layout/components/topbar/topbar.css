@@ -3,3 +3,9 @@
   display: block;
   width: 100%;
 }
+
+:host ::ng-deep {
+  .p-popover {
+    border-radius: 1rem !important;
+  }
+}
