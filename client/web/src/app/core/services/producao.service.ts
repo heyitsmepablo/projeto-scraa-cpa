@@ -9,6 +9,7 @@ export interface ProducaoFiltros {
   competencia?: string;
   cnes?: string;
   instituicaoId?: number;
+  vinculoId?: number;
   quadrimestre?: string;
   statusExecucao?: string;
   termoBusca?: string;
@@ -44,7 +45,8 @@ export class ProducaoService {
   getProducaoPorProcedimento(
     competencia: string,
     instituicaoId?: number,
-    cnes?: string
+    cnes?: string,
+    vinculoId?: number
   ): Observable<ProducaoPorProcedimento[]> {
     if (this.http) {
       let params = new HttpParams().set('competencia', competencia);
@@ -54,11 +56,14 @@ export class ProducaoService {
       if (cnes !== undefined) {
         params = params.set('cnes', cnes);
       }
+      if (vinculoId !== undefined) {
+        params = params.set('vinculoId', vinculoId.toString());
+      }
       return this.http.get<ProducaoPorProcedimento[]>(`${this.apiUrl}/por-procedimento`, { params }).pipe(
-        catchError(() => this.getMockProducaoPorProcedimento(competencia, cnes))
+        catchError(() => this.getMockProducaoPorProcedimento(competencia, cnes, vinculoId))
       );
     }
-    return this.getMockProducaoPorProcedimento(competencia, cnes);
+    return this.getMockProducaoPorProcedimento(competencia, cnes, vinculoId);
   }
 
   /**
@@ -76,11 +81,12 @@ export class ProducaoService {
   }
 
   /**
-   * Retorna lista de procedimentos mockados filtrados por competência e CNES.
+   * Retorna lista de procedimentos mockados filtrados por competência, CNES e Vínculo.
    */
   getMockProducaoPorProcedimento(
     competencia?: string,
-    cnes?: string
+    cnes?: string,
+    vinculoId?: number
   ): Observable<ProducaoPorProcedimento[]> {
     let result = [...MOCK_PRODUCAO_PROCEDIMENTOS];
     if (competencia) {
@@ -88,6 +94,9 @@ export class ProducaoService {
     }
     if (cnes) {
       result = result.filter((p) => p.cnes === cnes);
+    }
+    if (vinculoId !== undefined) {
+      result = result.filter((p) => p.vinculoId === vinculoId);
     }
     return of(result).pipe(delay(150));
   }

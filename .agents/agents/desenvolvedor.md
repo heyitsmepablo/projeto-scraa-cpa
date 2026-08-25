@@ -1,7 +1,14 @@
 ---
-model: claude-sonnet-4.6-thinking
-fallback_model: gemini-3.1-pro-high
-temperature: 0.2
+name: desenvolvedor
+description: Engenheiro de Software Fullstack Sênior focado em Clean Architecture e DDD.
+subagent: true
+model: pro
+commandExecutionPolicy: sandbox
+tools:
+  - read_file
+  - write_file
+  - edit_file
+  - git_diff
 ---
 
 # Role
@@ -50,6 +57,7 @@ Para executar qualquer comando de terminal, build, testes ou gerenciamento de pa
 ### 2. Padrão de Sintaxe Correta (Evite Erros de Aspas):
 
 - **Opção Preferencial (Usando `--prefix`):**
+
   ```cmd
   wsl-run npm --prefix client/web run build
 
@@ -66,4 +74,7 @@ Para executar qualquer comando de terminal, build, testes ou gerenciamento de pa
 - `list_projects` (Angular MCP)
 - `get_component` (PrimeNG MCP)
 - `get_example` (PrimeNG MCP)
-- `migrate-dev` (Prisma MCP)
+- `search_prisma_documentation` (Prisma MCP)
+- `execute_prisma_postgres_schema_update` (Prisma MCP)
+- `introspect_database_schema` (Prisma MCP)
+- `execute_sql_query` (Prisma MCP)

@@ -1,30 +1,21 @@
 import { Component, inject, computed, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs/operators';
 
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
-import { TableModule, SortIcon } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
 import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { ChartModule } from 'primeng/chart';
-import { ProgressBarModule } from 'primeng/progressbar';
 
 import { CompetenceService } from '../../core/services/competence.service';
 import { InstituicaoService } from '../../core/services/instituicao.service';
 import { ProducaoService } from '../../core/services/producao.service';
 import { ProducaoPorProcedimento } from '../../core/models/producao.model';
-import { StatusExecucao } from '../../core/models/domain-enums';
-
-interface DashboardProcedimentoItem extends ProducaoPorProcedimento {
-  coProcedimentoFormatado: string;
-}
 
 @Component({
   selector: 'app-dashboard',
@@ -33,19 +24,14 @@ interface DashboardProcedimentoItem extends ProducaoPorProcedimento {
   imports: [
     CommonModule,
     FormsModule,
+    RouterLink,
     DecimalPipe,
     CardModule,
     TagModule,
-    TableModule,
     ButtonModule,
-    InputTextModule,
-    IconFieldModule,
-    InputIconModule,
     SelectModule,
     TooltipModule,
     ChartModule,
-    ProgressBarModule,
-    SortIcon,
   ],
   template: `
     <div class="flex flex-col gap-6">
@@ -53,7 +39,7 @@ interface DashboardProcedimentoItem extends ProducaoPorProcedimento {
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 class="text-2xl font-bold text-surface-900 dark:text-surface-0 tracking-tight">
-            Dashboard de Monitoramento CPA
+            Dashboard Executivo CPA
           </h1>
           <p class="text-sm text-surface-600 dark:text-surface-400 mt-1">
             Painel consolidado de apuração de produção SUS: Executado vs. Pactuado nos Planos Operativos
@@ -279,170 +265,39 @@ interface DashboardProcedimentoItem extends ProducaoPorProcedimento {
         </div>
       </p-card>
 
-      <!-- Tabela Analítica de Procedimentos -->
-      <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-        <p-table
-          #dt
-          [value]="procedimentosFormatados()"
-          [paginator]="true"
-          [rows]="10"
-          [rowsPerPageOptions]="[10, 25, 50]"
-          [globalFilterFields]="['coProcedimento', 'coProcedimentoFormatado', 'noProcedimento', 'nomeInstituicao', 'complexidade', 'statusExecucao']"
-          size="small"
-          [loading]="loading()"
-          styleClass="p-datatable-sm"
-        >
-          <ng-template #caption>
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-              <div>
-                <span class="text-lg font-semibold text-surface-900 dark:text-surface-0">
-                  Grade Analítica de Monitoramento
-                </span>
-                <span class="text-xs text-surface-500 block">
-                  {{ procedimentosFormatados().length }} itens filtrados na competência {{ competenceService.competenciaFormatada() }}
-                </span>
-              </div>
-
-              <p-iconfield iconPosition="left">
-                <p-inputicon class="pi pi-search" />
-                <input
-                  #searchInput
-                  pInputText
-                  type="text"
-                  (input)="dt.filterGlobal(searchInput.value, 'contains')"
-                  placeholder="Pesquisar procedimento, SIGTAP, CNES..."
-                  class="w-full sm:w-72"
-                />
-              </p-iconfield>
+      <!-- Banner de Ação para Monitoramento Analítico -->
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary-900 via-primary-800 to-indigo-900 p-6 md:p-8 text-white shadow-md">
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="flex flex-col gap-2 max-w-2xl">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-white/20 text-white backdrop-blur-xs">
+                Módulo Analítico Especializado
+              </span>
+              <span class="text-primary-200 text-xs">• Sprint 5</span>
             </div>
-          </ng-template>
+            <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white m-0">
+              Acompanhamento Detalhado de Metas e Vínculos
+            </h2>
+            <p class="text-sm text-primary-100/90 leading-relaxed m-0">
+              Analise item a item o cumprimento dos Planos Operativos contratados, visualize saldos físicos individuais por SIGTAP, identifique desvios de pactuação e audite o faturamento aprovado pelo DATASUS com filtros por vínculo e complexidade.
+            </p>
+          </div>
 
-          <ng-template #header>
-            <tr>
-              <th pSortableColumn="coProcedimento" style="width: 150px">
-                Código SIGTAP <p-sorticon field="coProcedimento" />
-              </th>
-              <th pSortableColumn="noProcedimento">
-                Procedimento & Estabelecimento <p-sorticon field="noProcedimento" />
-              </th>
-              <th pSortableColumn="complexidade" style="width: 100px">
-                Compl. <p-sorticon field="complexidade" />
-              </th>
-              <th pSortableColumn="qtdPactuadaMensal" class="text-right" style="width: 120px">
-                Meta Mensal <p-sorticon field="qtdPactuadaMensal" />
-              </th>
-              <th pSortableColumn="qtdAprovada" class="text-right" style="width: 120px">
-                Qtd Aprovada <p-sorticon field="qtdAprovada" />
-              </th>
-              <th pSortableColumn="vlrAprovado" class="text-right" style="width: 140px">
-                Valor Aprovado <p-sorticon field="vlrAprovado" />
-              </th>
-              <th pSortableColumn="percExecucao" style="width: 160px">
-                % Execução <p-sorticon field="percExecucao" />
-              </th>
-              <th pSortableColumn="statusExecucao" style="width: 150px">
-                Status Meta <p-sorticon field="statusExecucao" />
-              </th>
-            </tr>
-          </ng-template>
+          <div class="flex-shrink-0">
+            <a
+              routerLink="/monitoramento"
+              class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-primary-900 font-bold text-sm hover:bg-primary-50 transition-all shadow-sm active:scale-95"
+            >
+              <i class="pi pi-chart-line text-primary-700"></i>
+              <span>Acessar Grade de Monitoramento</span>
+            </a>
+          </div>
+        </div>
 
-          <ng-template #body let-item>
-            <tr>
-              <!-- Código SIGTAP -->
-              <td>
-                <span class="font-mono text-xs font-bold tracking-wider text-surface-900 dark:text-surface-100 bg-surface-100 dark:bg-surface-800 px-2 py-1 rounded border border-surface-200 dark:border-surface-700 inline-block">
-                  {{ item.coProcedimentoFormatado }}
-                </span>
-              </td>
-
-              <!-- Nome do Procedimento e Instituição -->
-              <td>
-                <div class="font-semibold text-surface-900 dark:text-surface-100 text-sm">
-                  {{ item.noProcedimento }}
-                </div>
-                <div class="text-xs text-surface-500 dark:text-surface-400 mt-0.5 flex flex-wrap items-center gap-2">
-                  <span>{{ item.nomeInstituicao }}</span>
-                  <span class="text-surface-300 dark:text-surface-700">•</span>
-                  <span>CNES: {{ item.cnes }}</span>
-                  <span class="text-surface-300 dark:text-surface-700">•</span>
-                  <span class="italic text-[11px]">{{ item.noFinanciamento }}</span>
-                </div>
-              </td>
-
-              <!-- Complexidade -->
-              <td>
-                <p-tag
-                  [value]="item.complexidade"
-                  [severity]="getComplexidadeSeverity(item.complexidade)"
-                />
-              </td>
-
-              <!-- Meta Mensal -->
-              <td class="text-right font-mono text-sm">
-                @if (item.qtdPactuadaMensal !== null) {
-                  <span class="font-bold text-surface-900 dark:text-surface-0">{{ item.qtdPactuadaMensal | number }}</span>
-                } @else {
-                  <span class="text-surface-400 italic text-xs">Sem Pacto</span>
-                }
-              </td>
-
-              <!-- Qtd Aprovada -->
-              <td class="text-right font-mono text-sm">
-                <span class="font-bold text-emerald-600 dark:text-emerald-400">{{ item.qtdAprovada | number }}</span>
-              </td>
-
-              <!-- Valor Aprovado -->
-              <td class="text-right font-mono text-sm font-semibold text-surface-900 dark:text-surface-0">
-                {{ formatCurrency(item.vlrAprovado) }}
-              </td>
-
-              <!-- % Execução -->
-              <td>
-                @if (item.percExecucao !== null) {
-                  <div class="flex flex-col gap-1">
-                    <div class="flex justify-between text-xs font-mono font-bold">
-                      <span [ngClass]="getPercTextClass(item.statusExecucao)">{{ item.percExecucao | number: '1.1-1' }}%</span>
-                    </div>
-                    <p-progressbar
-                      [value]="getClampedPercent(item.percExecucao)"
-                      [showValue]="false"
-                      [style]="{ height: '6px' }"
-                    />
-                  </div>
-                } @else {
-                  <span class="text-surface-400 text-xs italic">-</span>
-                }
-              </td>
-
-              <!-- Tag Status -->
-              <td>
-                <p-tag
-                  [value]="getStatusLabel(item.statusExecucao)"
-                  [severity]="getStatusSeverity(item.statusExecucao)"
-                />
-              </td>
-            </tr>
-          </ng-template>
-
-          <ng-template #emptymessage>
-            <tr>
-              <td colspan="8" class="text-center py-8 text-surface-500">
-                <div class="flex flex-col items-center justify-center gap-2">
-                  <i class="pi pi-inbox text-3xl text-surface-400"></i>
-                  <span class="font-medium">Nenhum registro de produção encontrado com os filtros selecionados.</span>
-                  <p-button
-                    label="Limpar Filtros"
-                    [text]="true"
-                    size="small"
-                    styleClass="mt-1"
-                    (onClick)="resetFilters()"
-                  />
-                </div>
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </p-card>
+        <!-- Elementos Decorativos -->
+        <div class="absolute -right-8 -bottom-8 w-48 h-48 rounded-full bg-white/5 blur-xl pointer-events-none"></div>
+        <div class="absolute right-40 -top-12 w-32 h-32 rounded-full bg-primary-400/10 blur-lg pointer-events-none"></div>
+      </div>
     </div>
   `,
 })
@@ -523,14 +378,6 @@ export class DashboardComponent {
     return procs;
   });
 
-  // Lista com formatação de código SIGTAP
-  readonly procedimentosFormatados = computed<DashboardProcedimentoItem[]>(() => {
-    return this.filteredProcedimentos().map((p) => ({
-      ...p,
-      coProcedimentoFormatado: this.formatSigtapCode(p.coProcedimento),
-    }));
-  });
-
   // KPIs consolidados
   readonly kpis = computed(() => {
     const procs = this.filteredProcedimentos();
@@ -605,7 +452,6 @@ export class DashboardComponent {
   // Configuração do gráfico Chart.js (Pactuado vs Aprovado)
   readonly chartData = computed(() => {
     const procs = this.filteredProcedimentos().filter((p) => p.qtdPactuadaMensal !== null);
-    // Pegamos os top 7 procedimentos com maior meta
     const topProcs = [...procs]
       .sort((a, b) => (b.qtdPactuadaMensal || 0) - (a.qtdPactuadaMensal || 0))
       .slice(0, 7);
@@ -695,75 +541,5 @@ export class DashboardComponent {
     this.selectedInstituicaoCnes.set('ALL');
     this.selectedQuadrimestre.set('ALL');
     this.selectedStatusExecucao.set('ALL');
-  }
-
-  formatSigtapCode(code?: string): string {
-    if (!code) return '-';
-    const clean = code.replace(/\D/g, '');
-    if (clean.length === 10) {
-      return `${clean.slice(0, 2)}.${clean.slice(2, 4)}.${clean.slice(4, 6)}.${clean.slice(6, 9)}-${clean.slice(9)}`;
-    }
-    return code;
-  }
-
-  getClampedPercent(perc?: number | null): number {
-    if (perc === null || perc === undefined) return 0;
-    return Math.min(Math.max(perc, 0), 100);
-  }
-
-  getPercTextClass(status: StatusExecucao): string {
-    switch (status) {
-      case 'DENTRO':
-        return 'text-emerald-600 dark:text-emerald-400';
-      case 'ACIMA':
-        return 'text-amber-600 dark:text-amber-400';
-      case 'ABAIXO':
-        return 'text-rose-600 dark:text-rose-400';
-      default:
-        return 'text-surface-600 dark:text-surface-300';
-    }
-  }
-
-  getStatusLabel(status: StatusExecucao): string {
-    switch (status) {
-      case 'DENTRO':
-        return 'Dentro da Meta';
-      case 'ACIMA':
-        return 'Acima da Meta';
-      case 'ABAIXO':
-        return 'Abaixo da Meta';
-      case 'SEM_PACTO':
-        return 'Sem Pacto';
-      default:
-        return status;
-    }
-  }
-
-  getStatusSeverity(status: StatusExecucao): 'success' | 'warn' | 'danger' | 'secondary' {
-    switch (status) {
-      case 'DENTRO':
-        return 'success';
-      case 'ACIMA':
-        return 'warn';
-      case 'ABAIXO':
-        return 'danger';
-      case 'SEM_PACTO':
-        return 'secondary';
-      default:
-        return 'secondary';
-    }
-  }
-
-  getComplexidadeSeverity(complexidade?: string): 'info' | 'warn' | 'danger' | 'secondary' {
-    switch (complexidade?.toUpperCase()) {
-      case 'BC':
-        return 'info';
-      case 'MC':
-        return 'warn';
-      case 'AC':
-        return 'danger';
-      default:
-        return 'secondary';
-    }
   }
 }

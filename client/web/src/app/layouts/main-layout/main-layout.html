@@ -1,5 +1,5 @@
-<div class="min-h-screen flex flex-col bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-0">
-  <app-topbar (toggleSidebar)="toggleSidebar()" />
+<div class="h-screen w-screen flex flex-col overflow-hidden bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-0">
+  <app-topbar (toggleSidebar)="toggleSidebar()" class="h-16 flex-shrink-0 z-20" />
 
   <div class="flex flex-1 relative overflow-hidden bg-surface-50 dark:bg-surface-950">
     <!-- Sidebar no Mobile com Backdrop -->
@@ -23,11 +23,12 @@
         [isOpen]="isSidebarOpen()"
         [isMobile]="isMobile()"
         (closeSidebar)="closeSidebar()"
+        class="h-full flex-shrink-0 overflow-y-auto"
       />
     }
 
     <!-- Conteúdo Principal -->
-    <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 bg-surface-50 dark:bg-surface-950">
+    <main class="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 md:p-6 lg:p-8 bg-surface-50 dark:bg-surface-950">
       <div class="max-w-7xl mx-auto">
         <router-outlet />
       </div>

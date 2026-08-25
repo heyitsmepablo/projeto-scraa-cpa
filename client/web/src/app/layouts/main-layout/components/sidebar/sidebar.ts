@@ -28,6 +28,11 @@ export class Sidebar {
       icon: 'pi pi-chart-bar',
     },
     {
+      label: 'Monitoramento',
+      route: '/monitoramento',
+      icon: 'pi pi-chart-line',
+    },
+    {
       label: 'Instituições',
       route: '/instituicoes',
       icon: 'pi pi-building',

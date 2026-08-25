@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-export const THEME_STORAGE_KEY = 'pulsar_cpa_theme';
+export const THEME_STORAGE_KEY = 'scraa_cpa_theme';
 
 @Injectable({
   providedIn: 'root',

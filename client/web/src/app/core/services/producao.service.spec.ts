@@ -163,4 +163,26 @@ describe('ProducaoService', () => {
       expect(res.length).toBe(MOCK_PRODUCAO_PROCEDIMENTOS.length);
     });
   });
+
+  it('should fetch producao por procedimento with vinculoId param', () => {
+    service.getProducaoPorProcedimento('202401', undefined, undefined, 2).subscribe((res) => {
+      expect(res.length).toBe(1);
+    });
+
+    const req = httpMock.expectOne((request) => {
+      return (
+        request.url === '/api/producao/por-procedimento' &&
+        request.params.get('competencia') === '202401' &&
+        request.params.get('vinculoId') === '2'
+      );
+    });
+    expect(req.request.method).toBe('GET');
+    req.flush(mockPorProcedimento);
+  });
+
+  it('should filter mock producao por procedimento by vinculoId', () => {
+    service.getMockProducaoPorProcedimento(undefined, undefined, 1).subscribe((res) => {
+      expect(res.every((p) => p.vinculoId === 1)).toBe(true);
+    });
+  });
 });

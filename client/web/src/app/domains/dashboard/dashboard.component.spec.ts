@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { provideRouter } from '@angular/router';
 import { describe, beforeEach, it, expect, vi } from 'vitest';
 import { DashboardComponent } from './dashboard.component';
 import { CompetenceService } from '../../core/services/competence.service';
@@ -53,6 +54,7 @@ describe('DashboardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DashboardComponent],
       providers: [
+        provideRouter([]),
         { provide: CompetenceService, useValue: competenceServiceMock },
         { provide: InstituicaoService, useValue: instituicaoServiceMock },
         { provide: ProducaoService, useValue: producaoServiceMock },
@@ -74,8 +76,6 @@ describe('DashboardComponent', () => {
   });
 
   it('should trigger competence navigation methods when buttons clicked', () => {
-    const buttons = fixture.nativeElement.querySelectorAll('button');
-    // Button previous and next
     component.competenceService.previousCompetence();
     expect(competenceServiceMock.previousCompetence).toHaveBeenCalled();
 
@@ -86,7 +86,7 @@ describe('DashboardComponent', () => {
   it('should contain the dashboard title and monitoring description', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const title = compiled.querySelector('h1');
-    expect(title?.textContent).toContain('Dashboard de Monitoramento CPA');
+    expect(title?.textContent).toContain('Dashboard Executivo CPA');
     expect(compiled.textContent).toContain('Painel consolidado de apuração de produção SUS');
   });
 
@@ -140,54 +140,11 @@ describe('DashboardComponent', () => {
     expect(quadFiltered.every((p) => p.quadrimestre === '1º Quadrimestre')).toBe(true);
   });
 
-  it('should format SIGTAP code properly', () => {
-    expect(component.formatSigtapCode('0301010072')).toBe('03.01.01.007-2');
-    expect(component.formatSigtapCode('0204030188')).toBe('02.04.03.018-8');
-    expect(component.formatSigtapCode('123')).toBe('123');
-    expect(component.formatSigtapCode('')).toBe('-');
-    expect(component.formatSigtapCode(undefined)).toBe('-');
-  });
-
   it('should format currency correctly', () => {
     expect(component.formatCurrency(null)).toBe('R$ 0,00');
     expect(component.formatCurrency(undefined)).toBe('R$ 0,00');
     const formatted = component.formatCurrency(1500.5);
     expect(formatted).toContain('1.500,50');
-  });
-
-  it('should clamp percentage safely between 0 and 100', () => {
-    expect(component.getClampedPercent(null)).toBe(0);
-    expect(component.getClampedPercent(undefined)).toBe(0);
-    expect(component.getClampedPercent(-10)).toBe(0);
-    expect(component.getClampedPercent(75.5)).toBe(75.5);
-    expect(component.getClampedPercent(140)).toBe(100);
-  });
-
-  it('should return correct CSS class based on execution status', () => {
-    expect(component.getPercTextClass('DENTRO')).toContain('emerald');
-    expect(component.getPercTextClass('ACIMA')).toContain('amber');
-    expect(component.getPercTextClass('ABAIXO')).toContain('rose');
-    expect(component.getPercTextClass('SEM_PACTO')).toContain('surface');
-  });
-
-  it('should map execution status severities and labels correctly', () => {
-    expect(component.getStatusSeverity('DENTRO')).toBe('success');
-    expect(component.getStatusSeverity('ACIMA')).toBe('warn');
-    expect(component.getStatusSeverity('ABAIXO')).toBe('danger');
-    expect(component.getStatusSeverity('SEM_PACTO')).toBe('secondary');
-
-    expect(component.getStatusLabel('DENTRO')).toBe('Dentro da Meta');
-    expect(component.getStatusLabel('ACIMA')).toBe('Acima da Meta');
-    expect(component.getStatusLabel('ABAIXO')).toBe('Abaixo da Meta');
-    expect(component.getStatusLabel('SEM_PACTO')).toBe('Sem Pacto');
-  });
-
-  it('should map complexidade severity correctly', () => {
-    expect(component.getComplexidadeSeverity('BC')).toBe('info');
-    expect(component.getComplexidadeSeverity('MC')).toBe('warn');
-    expect(component.getComplexidadeSeverity('AC')).toBe('danger');
-    expect(component.getComplexidadeSeverity(undefined)).toBe('secondary');
-    expect(component.getComplexidadeSeverity('UNKNOWN')).toBe('secondary');
   });
 
   it('should generate chartData with top procedures', () => {
@@ -204,5 +161,11 @@ describe('DashboardComponent', () => {
 
     const chart = component.chartData();
     expect(chart.labels.length).toBe(0);
+  });
+
+  it('should render the CTA banner for monitoring module', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Acompanhamento Detalhado de Metas e Vínculos');
+    expect(compiled.textContent).toContain('Acessar Grade de Monitoramento');
   });
 });

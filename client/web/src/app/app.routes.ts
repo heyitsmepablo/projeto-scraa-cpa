@@ -17,6 +17,13 @@ export const routes: Routes = [
           import('./domains/dashboard/dashboard.component').then((m) => m.DashboardComponent),
       },
       {
+        path: 'monitoramento',
+        loadComponent: () =>
+          import('./domains/monitoramento/monitoramento.component').then(
+            (m) => m.MonitoramentoComponent
+          ),
+      },
+      {
         path: 'instituicoes',
         loadComponent: () =>
           import('./domains/instituicoes/instituicoes-list.component').then(

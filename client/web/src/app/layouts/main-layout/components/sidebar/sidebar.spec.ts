@@ -21,10 +21,11 @@ describe('Sidebar', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have 4 navigation items', () => {
-    expect(component.navItems.length).toBe(4);
+  it('should have 5 navigation items', () => {
+    expect(component.navItems.length).toBe(5);
     expect(component.navItems.map((item) => item.label)).toEqual([
       'Dashboard',
+      'Monitoramento',
       'Instituições',
       'Vínculos e Contratos',
       'Planos Operativos',

@@ -1,6 +1,12 @@
 ---
-model: gemini-3.1-pro-high
-temperature: 0.4
+name: elaborador
+description: Arquiteto de Software responsável por estruturar os planos de implementação.
+subagent: true
+model: pro
+commandExecutionPolicy: sandbox
+tools:
+  - read_file
+  - list_directory
 ---
 
 # Role
@@ -49,3 +55,5 @@ Para executar qualquer comando de terminal, build, testes ou gerenciamento de pa
 - `search_documentation` (Angular MCP)
 - `search` (PrimeNG MCP)
 - `migrate-status` (Prisma MCP)
+- `search_prisma_documentation` (Prisma MCP)
+- `introspect_database_schema` (Prisma MCP)

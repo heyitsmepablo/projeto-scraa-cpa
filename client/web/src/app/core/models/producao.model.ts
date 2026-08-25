@@ -27,6 +27,7 @@ export interface ProducaoPorProcedimento {
   cnes: string;
   nomeInstituicao: string;
   tipoVinculo: string;
+  vinculoId?: number;
   coFinanciamento: string;
   noFinanciamento: string;
   complexidade: string;

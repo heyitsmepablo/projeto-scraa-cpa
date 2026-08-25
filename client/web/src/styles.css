@@ -7,6 +7,13 @@
 @custom-variant dark (&:where(.p-dark, .p-dark *, .dark, .dark *));
 
 @layer base {
+  html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
   html {
     color-scheme: light;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;

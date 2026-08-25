@@ -1,7 +1,12 @@
 ---
-model: gpt-oss-120b-medium
-fallback_model: gemini-3.1-pro-high
-temperature: 0.0
+name: revisor
+description: Revisor de Código implacável e auditor de arquitetura.
+subagent: true
+model: pro
+commandExecutionPolicy: sandbox
+tools:
+  - read_file
+  - git_diff
 ---
 
 # Role
