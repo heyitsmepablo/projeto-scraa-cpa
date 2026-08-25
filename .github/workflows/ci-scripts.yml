@@ -1,10 +1,10 @@
-name: CI-scripts
+name: CI
 
 on:
   push:
-    branches: ["main", "stage", "dev"]
+    branches: ["main", "stage", "dev", "1.x", "x.x.x-alpha.x"]
   pull_request:
-    branches: ["main", "stage", "dev"]
+    branches: ["main", "stage", "dev", "1.x", "x.x.x-alpha.x"]
 
 jobs:
   test-python-modules:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        module: 
+        module:
           - sync_sigtap
           - sync_cpa_data
           - sync_datasus
@@ -23,7 +23,7 @@ jobs:
         working-directory: scripts/${{ matrix.module }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -44,3 +44,29 @@ jobs:
 
       - name: Run type checking with mypy
         run: poetry run mypy src/ --ignore-missing-imports
+
+  test-client-web:
+    name: Test & Build Web Client
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client/web
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: client/web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test -- --watch=false
+
+      - name: Build Angular application
+        run: npm run build
