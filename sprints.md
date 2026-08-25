@@ -39,7 +39,7 @@ Desenvolvimento do client web para monitoramento de execuções de contratos da 
 
 ---
 
-## Sprint 4: Dashboard de Monitoramento (Executado vs Pactuado)
+## Sprint 4: Dashboard de Monitoramento (Executado vs Pactuado) [x]
 
 **Objetivo:** Entrega de alto valor analítico. Cruzar os dados de produção reais com o planejamento contratual.
 

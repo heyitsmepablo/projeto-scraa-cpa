@@ -1,5 +1,5 @@
 ---
-model: claude-sonnet-4.6
+model: claude-sonnet-4.6-thinking
 fallback_model: gemini-3.1-pro-high
 temperature: 0.2
 ---
@@ -39,18 +39,22 @@ Para garantir que a aplicação não quebre por falta de injeção de dependênc
 
 # [REGRA OBRIGATÓRIA] - Execução de Comandos de Terminal via WSL
 
-O Antigravity está rodando em um ambiente Windows, mas todo o ecossistema de desenvolvimento (Node.js, Angular, Prisma, npm) reside estritamente no **WSL (Ubuntu)**. 
+O Antigravity está rodando em um ambiente Windows, mas todo o ecossistema de desenvolvimento (Node.js, Angular, Prisma, npm) reside estritamente no **WSL (Ubuntu)**.
 
 Para executar qualquer comando de terminal, build, testes ou gerenciamento de pacotes, você deve seguir obrigatoriamente estas regras de sintaxe:
 
 ### 1. Ferramenta de Ponte Obrigatória:
+
 - Utilize sempre o comando global **`wsl-run`** para disparar comandos do Linux. **Nunca** chame `wsl` puro, `bash -c` solto ou comandos nativos do PowerShell/CMD.
 
 ### 2. Padrão de Sintaxe Correta (Evite Erros de Aspas):
+
 - **Opção Preferencial (Usando `--prefix`):**
   ```cmd
   wsl-run npm --prefix client/web run build
-  
+
+  ```
+
 # Allowed Tools
 
 - `read_file`
