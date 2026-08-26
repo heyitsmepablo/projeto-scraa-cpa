@@ -7,10 +7,16 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { TreeNode } from 'primeng/api';
+import { SelectModule } from 'primeng/select';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
+import { TooltipModule } from 'primeng/tooltip';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { CompetenceService } from '../../core/services/competence';
 import { VinculoService } from '../../core/services/vinculo';
@@ -25,7 +31,7 @@ import {
   MonitoramentoKpis,
   SelectOption,
 } from './models/monitoramento.model';
-import { MonitoramentoHeaderComponent } from './components/monitoramento-header/monitoramento-header';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { MonitoramentoHeroComponent } from './components/monitoramento-hero/monitoramento-hero';
 import { MonitoramentoKpisComponent } from './components/monitoramento-kpis/monitoramento-kpis';
 import { MonitoramentoFiltersComponent } from './components/monitoramento-filters/monitoramento-filters';
@@ -40,7 +46,13 @@ export type { MonitoramentoProcedimentoItem, SigtapTreeNodeData, MonitoramentoKp
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    MonitoramentoHeaderComponent,
+    FormsModule,
+    SelectModule,
+    ButtonModule,
+    TagModule,
+    TooltipModule,
+    SelectButtonModule,
+    PageHeaderComponent,
     MonitoramentoHeroComponent,
     MonitoramentoKpisComponent,
     MonitoramentoFiltersComponent,

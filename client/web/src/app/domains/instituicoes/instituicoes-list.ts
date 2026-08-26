@@ -1,10 +1,11 @@
 import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { TagModule } from 'primeng/tag';
 
 import { CompetenceService } from '../../core/services/competence';
 import { InstituicaoService } from '../../core/services/instituicao';
-import { InstituicoesHeaderComponent } from './components/instituicoes-header/instituicoes-header';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { InstituicoesTableComponent } from './components/instituicoes-table/instituicoes-table';
 
 @Component({
@@ -13,7 +14,8 @@ import { InstituicoesTableComponent } from './components/instituicoes-table/inst
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    InstituicoesHeaderComponent,
+    TagModule,
+    PageHeaderComponent,
     InstituicoesTableComponent,
   ],
   templateUrl: './instituicoes-list.html',

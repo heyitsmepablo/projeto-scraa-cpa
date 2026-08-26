@@ -1,5 +1,13 @@
 <div class="flex flex-col gap-6">
-  <app-instituicoes-header [competencia]="competenceService.competenciaFormatada()" />
+  <app-page-header
+    title="Instituições Prestadoras SUS"
+    description="Gestão cadastral de estabelecimentos conveniados e contratados"
+  >
+    <div class="flex items-center gap-3">
+      <span class="text-xs font-medium text-surface-500 dark:text-surface-400">Competência:</span>
+      <p-tag [value]="competenceService.competenciaFormatada()" severity="info" styleClass="font-mono shadow-xs" />
+    </div>
+  </app-page-header>
 
   <app-instituicoes-table
     [instituicoes]="instituicoes() ?? []"

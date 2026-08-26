@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
+import { TagModule } from 'primeng/tag';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { CompetenceService } from '../../core/services/competence';
 import { InstituicaoService } from '../../core/services/instituicao';
 import { ProducaoService } from '../../core/services/producao';
 import { ProducaoPorProcedimento } from '../../core/models/producao.model';
 import { DashboardKpis, SelectOption } from './models/dashboard.model';
-import { DashboardHeaderComponent } from './components/dashboard-header/dashboard-header';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { DashboardFiltersComponent } from './components/dashboard-filters/dashboard-filters';
 import { DashboardKpisComponent } from './components/dashboard-kpis/dashboard-kpis';
 import { DashboardChartComponent } from './components/dashboard-chart/dashboard-chart';
@@ -21,7 +24,10 @@ import { DashboardCtaComponent } from './components/dashboard-cta/dashboard-cta'
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    DashboardHeaderComponent,
+    TagModule,
+    ButtonModule,
+    TooltipModule,
+    PageHeaderComponent,
     DashboardFiltersComponent,
     DashboardKpisComponent,
     DashboardChartComponent,

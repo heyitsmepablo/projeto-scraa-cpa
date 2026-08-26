@@ -2,11 +2,12 @@ import { Component, inject, computed, signal, ChangeDetectionStrategy } from '@a
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
+import { TagModule } from 'primeng/tag';
 
 import { CompetenceService } from '../../core/services/competence';
 import { VinculoService } from '../../core/services/vinculo';
 import { VinculoView } from './models/vinculo-view.model';
-import { VinculosHeaderComponent } from './components/vinculos-header/vinculos-header';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { VinculosTableComponent } from './components/vinculos-table/vinculos-table';
 
 @Component({
@@ -15,7 +16,8 @@ import { VinculosTableComponent } from './components/vinculos-table/vinculos-tab
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    VinculosHeaderComponent,
+    TagModule,
+    PageHeaderComponent,
     VinculosTableComponent,
   ],
   templateUrl: './vinculos-list.html',

@@ -1,18 +1,89 @@
 <div class="flex flex-col gap-6">
   <!-- Header Superior e Contexto com Ações -->
-  <app-monitoramento-header
-    [vinculoOptions]="vinculoOptions()"
-    [selectedVinculoId]="selectedVinculoId()"
-    [periodoFormatado]="competenceService.periodoFormatado()"
-    [periodMode]="competenceService.periodMode()"
-    [viewMode]="viewMode()"
-    [hasData]="procedimentosFormatados().length > 0"
-    (vinculoChange)="selectedVinculoId.set($event)"
-    (previousCompetence)="competenceService.previousCompetence()"
-    (nextCompetence)="competenceService.nextCompetence()"
-    (viewModeChange)="viewMode.set($event)"
-    (exportCsv)="exportarDados()"
-  />
+  <app-page-header
+    title="Monitoramento de Execução de Vínculos"
+    description="Auditoria física e orçamentária detalhada por procedimento contratado"
+  >
+    <!-- Seletor de Contrato / Vínculo -->
+    <div class="flex items-center gap-2">
+      <span class="text-xs font-semibold uppercase text-surface-500 dark:text-surface-400 hidden sm:inline">Vínculo:</span>
+      <p-select
+        [options]="vinculoOptions()"
+        [ngModel]="selectedVinculoId()"
+        (ngModelChange)="selectedVinculoId.set($event)"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Selecione um Vínculo"
+        styleClass="w-72 sm:w-80 text-xs shadow-xs"
+        [filter]="true"
+        filterPlaceholder="Buscar contrato..."
+        appendTo="body"
+      />
+    </div>
+
+    <!-- Navegação de Competência / Período Global -->
+    <div class="flex items-center gap-2 bg-surface-0 dark:bg-surface-900 border border-surface-200/80 dark:border-surface-800 p-1 rounded-xl shadow-xs">
+      <p-button
+        icon="pi pi-chevron-left"
+        [text]="true"
+        severity="secondary"
+        size="small"
+        (onClick)="competenceService.previousCompetence()"
+        pTooltip="Período Anterior"
+      />
+      
+      <div class="flex flex-col items-center px-1">
+        <span class="text-[9px] font-bold uppercase tracking-wider text-surface-400">
+          {{ competenceService.periodMode() === 'SPECIFIC' ? 'Competência' : 'Período Ativo' }}
+        </span>
+        <p-tag
+          [value]="competenceService.periodoFormatado()"
+          severity="contrast"
+          styleClass="text-xs font-bold px-2 py-0.5 font-mono shadow-xs"
+        />
+      </div>
+
+      <p-button
+        icon="pi pi-chevron-right"
+        [text]="true"
+        severity="secondary"
+        size="small"
+        (onClick)="competenceService.nextCompetence()"
+        pTooltip="Próximo Período"
+      />
+    </div>
+
+    <!-- Alternância de Visualização (Lista Plana vs Hierarquia SIGTAP) -->
+    <p-selectbutton
+      [options]="viewModeOptions"
+      [ngModel]="viewMode()"
+      (ngModelChange)="viewMode.set($event)"
+      optionLabel="label"
+      optionValue="value"
+      styleClass="text-xs shadow-xs"
+      [allowEmpty]="false"
+    >
+      <ng-template #item let-item>
+        <div class="flex items-center gap-1.5 px-1 py-0.5 text-xs font-semibold">
+          <i [class]="item.icon"></i>
+          <span class="hidden sm:inline">{{ item.label }}</span>
+        </div>
+      </ng-template>
+    </p-selectbutton>
+
+    <!-- Botão de Exportação Rápida CSV -->
+    <p-button
+      label="Exportar CSV"
+      icon="pi pi-file-excel"
+      severity="secondary"
+      [outlined]="true"
+      size="small"
+      styleClass="shadow-xs text-xs"
+      (onClick)="exportarDados()"
+      [disabled]="procedimentosFormatados().length === 0"
+      pTooltip="Exportar dados analíticos e hierárquicos em formato CSV"
+    />
+  </app-page-header>
 
   <!-- Card Hero do Vínculo Selecionado -->
   <app-monitoramento-hero [vinculo]="selectedVinculo()" />

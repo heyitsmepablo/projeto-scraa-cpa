@@ -1,41 +1,22 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
   <!-- KPI 1: Físico Pactuado -->
-  <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-    <div class="flex items-center justify-between">
-      <div>
-        <span class="text-xs font-bold text-surface-500 dark:text-surface-400 uppercase tracking-wider">
-          Físico Pactuado {{ mesesCount() > 1 ? '(' + mesesCount() + 'm)' : '' }}
-        </span>
-        <div class="text-2xl font-extrabold text-surface-900 dark:text-surface-0 mt-1 font-mono">
-          {{ kpis().totalPactuado | number }} <span class="text-xs font-normal text-surface-500">un.</span>
-        </div>
-      </div>
-      <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 ring-1 ring-slate-200 dark:ring-slate-700 flex items-center justify-center text-lg shadow-xs">
-        <i class="pi pi-bookmark"></i>
-      </div>
-    </div>
-    <div class="mt-3 flex items-center justify-between text-xs text-surface-500 dark:text-surface-400">
-      <span>Metas no Plano:</span>
-      <span class="font-bold text-surface-800 dark:text-surface-200">{{ kpis().totalComPacto }} itens</span>
-    </div>
-  </p-card>
+  <app-kpi-card
+    [title]="'Físico Pactuado ' + (mesesCount() > 1 ? '(' + mesesCount() + 'm)' : '')"
+    [value]="(kpis().totalPactuado | number) + ' un.'"
+    icon="pi pi-bookmark"
+    variant="slate"
+    footerLabel="Metas no Plano:"
+    [footerValue]="kpis().totalComPacto + ' itens'"
+  />
 
   <!-- KPI 2: Físico Aprovado (DATASUS) -->
-  <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-    <div class="flex items-center justify-between">
-      <div>
-        <span class="text-xs font-bold text-surface-500 dark:text-surface-400 uppercase tracking-wider">
-          Físico Aprovado
-        </span>
-        <div class="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-1 font-mono">
-          {{ kpis().totalAprovado | number }} <span class="text-xs font-normal text-surface-500">un.</span>
-        </div>
-      </div>
-      <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 ring-1 ring-emerald-200/60 dark:ring-emerald-800/40 flex items-center justify-center text-lg shadow-xs">
-        <i class="pi pi-check-circle"></i>
-      </div>
-    </div>
-    <div class="mt-3 flex items-center justify-between text-xs text-surface-500 dark:text-surface-400">
+  <app-kpi-card
+    title="Físico Aprovado"
+    [value]="(kpis().totalAprovado | number) + ' un.'"
+    icon="pi pi-check-circle"
+    variant="emerald"
+  >
+    <div footer class="flex items-center justify-between text-xs text-surface-500 dark:text-surface-400">
       <span>Saldo Físico:</span>
       <span
         class="font-bold font-mono"
@@ -44,76 +25,36 @@
         {{ kpis().saldoFisico >= 0 ? '+' : '' }}{{ kpis().saldoFisico | number }} un.
       </span>
     </div>
-  </p-card>
+  </app-kpi-card>
 
   <!-- KPI 3: Financeiro Pactuado do Período -->
-  <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-    <div class="flex items-center justify-between">
-      <div>
-        <span class="text-xs font-bold text-surface-500 dark:text-surface-400 uppercase tracking-wider">
-          Financ. Pactuado {{ mesesCount() > 1 ? '(' + mesesCount() + 'm)' : '' }}
-        </span>
-        <div class="text-2xl font-extrabold text-blue-600 dark:text-blue-400 mt-1 font-mono">
-          {{ formatCurrency(kpis().totalFinanceiroPactuado) }}
-        </div>
-      </div>
-      <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 ring-1 ring-blue-200/60 dark:ring-blue-800/40 flex items-center justify-center text-lg shadow-xs">
-        <i class="pi pi-wallet"></i>
-      </div>
-    </div>
-    <div class="mt-3 flex items-center justify-between text-xs text-surface-500 dark:text-surface-400">
-      <span>Tabela SIGTAP:</span>
-      <span class="font-bold text-surface-800 dark:text-surface-200">
-        Meta × {{ mesesCount() }}m × Unit.
-      </span>
-    </div>
-  </p-card>
+  <app-kpi-card
+    [title]="'Financ. Pactuado ' + (mesesCount() > 1 ? '(' + mesesCount() + 'm)' : '')"
+    [value]="formatCurrency(kpis().totalFinanceiroPactuado)"
+    icon="pi pi-wallet"
+    variant="blue"
+    footerLabel="Tabela SIGTAP:"
+    [footerValue]="'Meta × ' + mesesCount() + 'm × Unit.'"
+  />
 
   <!-- KPI 4: Financeiro Aprovado -->
-  <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-    <div class="flex items-center justify-between">
-      <div>
-        <span class="text-xs font-bold text-surface-500 dark:text-surface-400 uppercase tracking-wider">
-          Financ. Aprovado
-        </span>
-        <div class="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400 mt-1 font-mono">
-          {{ formatCurrency(kpis().totalFinanceiro) }}
-        </div>
-      </div>
-      <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 ring-1 ring-indigo-200/60 dark:ring-indigo-800/40 flex items-center justify-center text-lg shadow-xs">
-        <i class="pi pi-dollar"></i>
-      </div>
-    </div>
-    <div class="mt-3 flex items-center justify-between text-xs text-surface-500 dark:text-surface-400">
-      <span>Execução Financeira:</span>
-      <span class="font-bold text-surface-800 dark:text-surface-200 font-mono">
-        {{ kpis().percentualGlobalFinanceiro | number: '1.1-1' }}%
-      </span>
-    </div>
-  </p-card>
+  <app-kpi-card
+    title="Financ. Aprovado"
+    [value]="formatCurrency(kpis().totalFinanceiro)"
+    icon="pi pi-dollar"
+    variant="indigo"
+    footerLabel="Execução Financeira:"
+    [footerValue]="(kpis().percentualGlobalFinanceiro | number: '1.1-1') + '%'"
+  />
 
   <!-- KPI 5: Saldo Financeiro Global -->
-  <p-card styleClass="shadow-xs border border-surface-200/80 dark:border-surface-800 bg-surface-0 dark:bg-surface-900">
-    <div class="flex items-center justify-between">
-      <div>
-        <span class="text-xs font-bold text-surface-500 dark:text-surface-400 uppercase tracking-wider">
-          Saldo Financeiro
-        </span>
-        <div
-          class="text-2xl font-extrabold mt-1 font-mono"
-          [ngClass]="kpis().saldoFinanceiroGlobal >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'"
-        >
-          {{ kpis().saldoFinanceiroGlobal >= 0 ? '+' : '' }}{{ formatCurrency(kpis().saldoFinanceiroGlobal) }}
-        </div>
-      </div>
-      <div
-        class="w-10 h-10 rounded-xl flex items-center justify-center text-lg shadow-xs ring-1"
-        [ngClass]="kpis().saldoFinanceiroGlobal >= 0 ? 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 ring-emerald-200/60 dark:ring-emerald-800/40' : 'bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 ring-rose-200/60 dark:ring-rose-800/40'"
-      >
-        <i class="pi pi-chart-line"></i>
-      </div>
-    </div>
-    <div class="mt-3 flex items-center justify-between text-xs">
+  <app-kpi-card
+    title="Saldo Financeiro"
+    [value]="(kpis().saldoFinanceiroGlobal >= 0 ? '+' : '') + formatCurrency(kpis().saldoFinanceiroGlobal)"
+    icon="pi pi-chart-line"
+    [variant]="kpis().saldoFinanceiroGlobal >= 0 ? 'emerald' : 'rose'"
+  >
+    <div footer class="flex items-center justify-between text-xs">
       <span class="text-surface-500">Status Saldo:</span>
       <p-tag
         [value]="kpis().statusFinanceiroGlobalLabel"
@@ -121,5 +62,5 @@
         styleClass="text-[10px]"
       />
     </div>
-  </p-card>
+  </app-kpi-card>
 </div>

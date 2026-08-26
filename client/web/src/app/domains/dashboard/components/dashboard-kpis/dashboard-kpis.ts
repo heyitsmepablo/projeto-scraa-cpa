@@ -1,14 +1,14 @@
 import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 import { DashboardKpis } from '../../models/dashboard.model';
+import { KpiCardComponent } from '../../../../shared/components/kpi-card/kpi-card';
 
 @Component({
   selector: 'app-dashboard-kpis',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, DecimalPipe, CardModule, TagModule],
+  imports: [CommonModule, DecimalPipe, TagModule, KpiCardComponent],
   templateUrl: './dashboard-kpis.html',
   styleUrl: './dashboard-kpis.css',
 })

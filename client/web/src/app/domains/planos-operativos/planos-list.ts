@@ -1,6 +1,10 @@
 import { Component, inject, computed, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { CardModule } from 'primeng/card';
+import { SelectModule } from 'primeng/select';
+import { TagModule } from 'primeng/tag';
 
 import { CompetenceService } from '../../core/services/competence';
 import { PlanoOperativoService } from './services/plano-operativo';
@@ -9,7 +13,7 @@ import {
   PlanoOperativoResumo,
   ProcedimentoViewItem,
 } from './models/plano-operativo.model';
-import { PlanoHeaderComponent } from './components/plano-header/plano-header';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { PlanoMetricsComponent } from './components/plano-metrics/plano-metrics';
 import { PlanoTableComponent } from './components/plano-table/plano-table';
 
@@ -19,7 +23,11 @@ import { PlanoTableComponent } from './components/plano-table/plano-table';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    PlanoHeaderComponent,
+    FormsModule,
+    CardModule,
+    SelectModule,
+    TagModule,
+    PageHeaderComponent,
     PlanoMetricsComponent,
     PlanoTableComponent,
   ],
