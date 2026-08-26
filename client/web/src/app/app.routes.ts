@@ -14,31 +14,31 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () =>
-          import('./domains/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+          import('./domains/dashboard/dashboard').then((m) => m.DashboardComponent),
       },
       {
         path: 'monitoramento',
         loadComponent: () =>
-          import('./domains/monitoramento/monitoramento.component').then(
+          import('./domains/monitoramento/monitoramento').then(
             (m) => m.MonitoramentoComponent
           ),
       },
       {
         path: 'instituicoes',
         loadComponent: () =>
-          import('./domains/instituicoes/instituicoes-list.component').then(
+          import('./domains/instituicoes/instituicoes-list').then(
             (m) => m.InstituicoesListComponent
           ),
       },
       {
         path: 'vinculos',
         loadComponent: () =>
-          import('./domains/vinculos/vinculos-list.component').then((m) => m.VinculosListComponent),
+          import('./domains/vinculos/vinculos-list').then((m) => m.VinculosListComponent),
       },
       {
         path: 'planos-operativos',
         loadComponent: () =>
-          import('./domains/planos-operativos/planos-list.component').then((m) => m.PlanosListComponent),
+          import('./domains/planos-operativos/planos-list').then((m) => m.PlanosListComponent),
       },
     ],
   },

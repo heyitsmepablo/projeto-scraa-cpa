@@ -30,7 +30,7 @@ Para garantir que a aplicação não quebre por falta de injeção de dependênc
 
 - **No Backend (NestJS 11):** Toda vez que você criar um novo Module, Controller ou Service, você TEM A OBRIGAÇÃO de usar a ferramenta `edit_file` no módulo pai correspondente (ex: `app.module.ts` ou módulo da feature) e registrar as novas classes nos arrays de `imports`, `controllers` ou `providers`.
 - **No Frontend (Angular 22):** Construa a interface utilizando estritamente componentes `Standalone` (`standalone: true`). Utilize o novo Control Flow (`@if`, `@for`) e gerencie o estado preferencialmente com Signals. Importe dependências e módulos do PrimeNG 22.1 diretamente no array de `imports` do próprio componente.
-- **Padrões de Nomenclatura:** Mantenha os sufixos convencionais da comunidade (ex: `*.controller.ts`, `*.service.ts`, `*.component.ts`).
+- **Padrões de Nomenclatura:** No backend (NestJS), mantenha os sufixos (*.controller.ts, *.service.ts, *.module.ts). No frontend (Angular), siga estritamente a estrutura definida na seção 'Estrutura das Pastas e Arquivos Frontend' (sem sufixos .component.ts e .service.ts).
 
 # Constraints
 
@@ -60,21 +60,46 @@ Para executar qualquer comando de terminal, build, testes ou gerenciamento de pa
 
 # Estrutura das Pastas e Arquivos Frontend
 
+## 1. Estrutura de um componente
+
+|-<component-name>/
+|-- <component-name>.ts
+|-- <component-name>.html
+|-- <component-name>.css
+|-- <component-name>.spec.ts
+
+## 2. Estrutura de um serviço
+
+|-- <service-name>.ts
+|-- <service-name>.spec.ts
+
+## 3. Estrutura de um modelo
+
+|-- <model-name>.model.ts
+|-- <model-name>.model.spec.ts
+
+## 4. Estrutura de uma rota
+
+|-- <route-name>.routes.ts
+|-- <route-name>.routes.spec.ts
+
+## 5. Exemplo de estrutura do projeto frontend
+
 src/app/domains/<nome-do-dominio>/
 ├── components/ # Dumb Components (apresentacionais)
 │ ├── <dumb-component-name>/
-│ │ ├── <dumb-component-name>.component.ts
-│ │ ├── <dumb-component-name>.component.html
-│ │ ├── <dumb-component-name>.component.css
-│ │ └── <dumb-component-name>.component.spec.ts
+│ │ ├── <dumb-component-name>.ts
+│ │ ├── <dumb-component-name>.html
+│ │ ├── <dumb-component-name>.css
+│ │ └── <dumb-component-name>.spec.ts
 ├── <smart-component-name>/ # Smart Component (container)
-│ ├── <smart-component-name>.component.ts
-│ ├── <smart-component-name>.component.html
-│ ├── <smart-component-name>.component.css
-│ └── <smart-component-name>.component.spec.ts
+│ ├── <smart-component-name>.ts
+│ ├── <smart-component-name>.html
+│ ├── <smart-component-name>.css
+│ └── <smart-component-name>.spec.ts
 ├── services/ # ou colocated no domínio se isolado
-│ ├── <dominio>.service.ts
-│ └── <dominio>.service.spec.ts
+│ ├── <dominio>.ts
+│ └── <dominio>.spec.ts
 ├── models/ # ou <dominio>.model.ts
 │ └── <dominio>.model.ts
 └── <dominio>.routes.ts # Rotas lazy-loaded

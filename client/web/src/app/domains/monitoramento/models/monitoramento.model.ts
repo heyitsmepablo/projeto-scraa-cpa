@@ -1,5 +1,5 @@
 import { ProducaoPorProcedimento } from '../../../core/models/producao.model';
-import { StatusExecucao } from '../../../core/models/domain-enums';
+import { StatusExecucao } from '../../../core/models/domain-enums.model';
 
 export interface MonitoramentoProcedimentoItem extends ProducaoPorProcedimento {
   coProcedimentoFormatado: string;

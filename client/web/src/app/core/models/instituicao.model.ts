@@ -1,4 +1,4 @@
-import { TipoInstituicao } from './domain-enums';
+import { TipoInstituicao } from './domain-enums.model';
 import { Vinculo } from './vinculo.model';
 
 export interface Instituicao {

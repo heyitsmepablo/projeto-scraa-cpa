@@ -1,6 +1,6 @@
-import { TipoAditivo, TipoComplexidade, TipoVinculo } from './domain-enums';
+import { TipoAditivo, TipoComplexidade, TipoVinculo } from './domain-enums.model';
 import { Instituicao } from './instituicao.model';
-import { PlanoOperativo } from './plano-operativo.model';
+import { PlanoOperativo } from '../../domains/planos-operativos/models/plano-operativo.model';
 
 export interface Vinculo {
   id: number;

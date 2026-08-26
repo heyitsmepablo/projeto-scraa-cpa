@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Topbar } from './topbar';
-import { CompetenceService } from '../../../../core/services/competence.service';
-import { ThemeService } from '../../../../core/services/theme.service';
+import { CompetenceService } from '../../../../core/services/competence';
+import { ThemeService } from '../../../../core/services/theme';
 import { By } from '@angular/platform-browser';
 import { Button } from 'primeng/button';
 

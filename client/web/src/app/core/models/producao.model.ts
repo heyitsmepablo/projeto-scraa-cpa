@@ -1,4 +1,4 @@
-import { StatusExecucao } from './domain-enums';
+import { StatusExecucao } from './domain-enums.model';
 
 export interface ProducaoResumoMensal {
   competencia: string;

@@ -1,5 +1,5 @@
 import { ProducaoPorProcedimento, ProducaoResumoMensal } from '../models/producao.model';
-import { StatusExecucao } from '../models/domain-enums';
+import { StatusExecucao } from '../models/domain-enums.model';
 
 export const MOCK_PRODUCAO_RESUMO: ProducaoResumoMensal[] = [
   // 202401 - Santa Casa
