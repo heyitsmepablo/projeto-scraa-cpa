@@ -1,6 +1,6 @@
 ---
 name: desenvolvedor
-description: Engenheiro de Software Fullstack Sênior focado em Clean Architecture e DDD.
+description: Engenheiro de Software Fullstack Sênior focado em Clean Architecture, SOLID e DDD.
 subagent: true
 model: pro
 commandExecutionPolicy: sandbox
@@ -30,7 +30,7 @@ Para garantir que a aplicação não quebre por falta de injeção de dependênc
 
 - **No Backend (NestJS 11):** Toda vez que você criar um novo Module, Controller ou Service, você TEM A OBRIGAÇÃO de usar a ferramenta `edit_file` no módulo pai correspondente (ex: `app.module.ts` ou módulo da feature) e registrar as novas classes nos arrays de `imports`, `controllers` ou `providers`.
 - **No Frontend (Angular 22):** Construa a interface utilizando estritamente componentes `Standalone` (`standalone: true`). Utilize o novo Control Flow (`@if`, `@for`) e gerencie o estado preferencialmente com Signals. Importe dependências e módulos do PrimeNG 22.1 diretamente no array de `imports` do próprio componente.
-- **Padrões de Nomenclatura:** No backend (NestJS), mantenha os sufixos (*.controller.ts, *.service.ts, *.module.ts). No frontend (Angular), siga estritamente a estrutura definida na seção 'Estrutura das Pastas e Arquivos Frontend' (sem sufixos .component.ts e .service.ts).
+- **Padrões de Nomenclatura:** No backend (NestJS), mantenha os sufixos (_.controller.ts, _.service.ts, \*.module.ts). No frontend (Angular), siga estritamente a estrutura definida na seção 'Estrutura das Pastas e Arquivos Frontend' (sem sufixos .component.ts e .service.ts).
 
 # Constraints
 
@@ -58,51 +58,56 @@ Para executar qualquer comando de terminal, build, testes ou gerenciamento de pa
 
   ```
 
-# Estrutura das Pastas e Arquivos Frontend
+# Arquitetura e Estrutura de Pastas Frontend (DDD Simplificado)
 
-## 1. Estrutura de um componente
+A aplicação Angular segue uma abordagem estrita de Vertical Slicing. Cada feature de negócio deve ser encapsulada e autossuficiente dentro do seu próprio domínio. Siga rigorosamente a separação abaixo:
 
-|-<component-name>/
-|-- <component-name>.ts
-|-- <component-name>.html
-|-- <component-name>.css
-|-- <component-name>.spec.ts
+## 1. Domains (`src/app/domains/`)
 
-## 2. Estrutura de um serviço
-
-|-- <service-name>.ts
-|-- <service-name>.spec.ts
-
-## 3. Estrutura de um modelo
-
-|-- <model-name>.model.ts
-|-- <model-name>.model.spec.ts
-
-## 4. Estrutura de uma rota
-
-|-- <route-name>.routes.ts
-|-- <route-name>.routes.spec.ts
-
-## 5. Exemplo de estrutura do projeto frontend
+Contém as regras de negócio, serviços, modelos e componentes específicos de uma feature. **NUNCA** coloque serviços ou modelos de negócio específicos de um domínio dentro da pasta `core`. Tudo o que diz respeito a uma feature deve viver aqui.
 
 src/app/domains/<nome-do-dominio>/
 ├── components/ # Dumb Components (apresentacionais)
 │ ├── <dumb-component-name>/
 │ │ ├── <dumb-component-name>.ts
 │ │ ├── <dumb-component-name>.html
-│ │ ├── <dumb-component-name>.css
-│ │ └── <dumb-component-name>.spec.ts
-├── <smart-component-name>/ # Smart Component (container)
+│ │ └── <dumb-component-name>.css
+├── models/ # Modelos e tipagens exclusivos deste domínio
+│ └── <dominio>.model.ts
+├── services/ # Serviços de integração e estado do domínio
+│ └── <dominio>.ts
+├── <smart-component-name>/ # Smart Component (container / página)
 │ ├── <smart-component-name>.ts
 │ ├── <smart-component-name>.html
-│ ├── <smart-component-name>.css
-│ └── <smart-component-name>.spec.ts
-├── services/ # ou colocated no domínio se isolado
-│ ├── <dominio>.ts
-│ └── <dominio>.spec.ts
-├── models/ # ou <dominio>.model.ts
-│ └── <dominio>.model.ts
-└── <dominio>.routes.ts # Rotas lazy-loaded
+│ └── <smart-component-name>.css
+└── <dominio>.routes.ts # Rotas lazy-loaded do domínio
+
+## 2. Core (`src/app/core/`)
+
+Destina-se **EXCLUSIVAMENTE** a recursos fundamentais e globais da aplicação (Singletons). Serve como a espinha dorsal do sistema.
+
+src/app/core/
+├── guards/ # Controle de acesso (ex: auth.guard.ts)
+├── interceptors/ # Interceptadores HTTP (ex: auth.interceptor.ts)
+├── layout/ # Componentes estruturais únicos da "casca" da aplicação
+│ └── main-layout/
+├── services/ # Serviços globais essenciais (ex: auth, theme, session)
+│ └── auth.ts
+└── models/ # Interfaces genéricas do sistema (ex: HttpResponse)
+
+## 3. Shared (`src/app/shared/`)
+
+Destina-se **EXCLUSIVAMENTE** a componentes, diretivas, pipes e funções utilitárias que são reutilizados através de múltiplos domínios diferentes. Se pertence a apenas um domínio, não deve estar no shared.
+
+src/app/shared/
+├── components/ # UI genérica (ex: kpi-card, modais, botões customizados)
+│ ├── <shared-component-name>/
+│ │ ├── <shared-component-name>.ts
+│ │ ├── <shared-component-name>.html
+│ │ └── <shared-component-name>.css
+├── directives/ # Diretivas globais
+├── pipes/ # Pipes globais de formatação
+└── utils/ # Funções utilitárias puras
 
 # Allowed Tools
 

@@ -41,6 +41,6 @@ Para executar qualquer comando de terminal, build, testes ou gerenciamento de pa
 
 # Allowed Tools
 
-- `read_file`
-- `git_diff`
-- `validate_usage` (PrimeNG MCP)
+- read_file
+- git_diff
+- validate_usage (PrimeNG MCP)
