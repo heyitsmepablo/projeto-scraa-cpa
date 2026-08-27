@@ -135,3 +135,84 @@ Desenvolvimento do client web para monitoramento de execuções de contratos da 
 - **Comportamento da Grade:** Quando "Recorte" ou "Global" estiver selecionado:
   - A "Meta Mensal" deve se transformar em "Meta do Período" (Meta Mensal \* N meses selecionados).
   - As quantidades e valores aprovados (`Qtd Aprovada`, `Valor Aprovado`) devem ser o somatório de todas as competências contidas no escopo.
+
+## Sprint 8: Refinamento do Controle Temporal, UX da Grade e Correções [x]
+
+**Objetivo:** Consolidar o controle de tempo no cabeçalho principal (Topbar) utilizando seletores nativos de mês, aprimorar a usabilidade da árvore hierárquica do SIGTAP (retomando o padrão visual de badges) e corrigir os comportamentos de filtros e expansão da grade.
+
+---
+
+### 1. Novo Seletor de Tempo (Topbar e Main Layout)
+
+**Objetivo:** Centralizar a seleção de período no header do layout principal e simplificar a navegação.
+
+- **Substituição:** Remover o botão de competência atual e implementar o novo seletor de Análise Temporal diretamente no header do `AppLayout`.
+- **Remoção de Redundâncias:** Remover os botões de seta lateral (`<` e `>`) de avançar/voltar meses.
+- **Componente Base:** Implementar o `p-datepicker` do PrimeNG configurado estritamente como `monthpicker` (exibindo apenas os meses e anos disponíveis com dados).
+- **Comportamento Padrão:** Ao carregar a aplicação (inclusive no Dashboard), o sistema deve identificar e selecionar automaticamente o mês/ano mais recente que possua dados disponíveis.
+
+### 2. Ajustes no Popover de Análise Temporal
+
+**Objetivo:** Enxugar o modal de seleção de período, focando em usabilidade direta.
+
+- **Aba "Recorte Temporal":**
+  - Remover totalmente a seção de "Atalhos Rápidos" (Quadrimestres, Semestres, etc.).
+  - Manter apenas os campos de "De (Início)" e "Até (Fim)", ambos utilizando o `p-datepicker` (modo monthpicker).
+- **Aba "Vigência Global":**
+  - Ajustar a regra de negócio: a seleção global deve projetar automaticamente o período considerando a data de início do contrato (buscando o mês mais antigo com dados a partir dessa data) até a data fim do contrato (limitado ao mês mais recente com dados disponíveis).
+
+### 3. UX e Reorganização da Grade Analítica (Árvore SIGTAP)
+
+**Objetivo:** Melhorar a legibilidade da tabela hierárquica e agrupar os controles de visualização.
+
+- **Refatoração das Badges SIGTAP:**
+  - Reverter o estilo visual das badges de Grupo e Subgrupo para o padrão anterior.
+  - A badge deve conter a nomenclatura completa em seu interior (ex: `[GRUPO 03]` com fundo escuro e `[SUBGRUPO 03.01]` com fundo claro).
+  - Remover as palavras "Grupo" e "Subgrupo" da coluna de texto adjacente, deixando apenas o nome do descritivo.
+  - Ajustar o tamanho das tags e o CSS para evitar as quebras de linha na tabela.
+- **Reposicionamento do Toggle de Visualização:**
+  - Remover o controle de alternância ("Lista Plana" / "Árvore SIGTAP") do cabeçalho superior.
+  - Mover este toggle para ficar alinhado ao lado dos botões "Expandir Todos" e "Recolher Todos", centralizando os controles da grade em um único local da UI.
+
+### 4. Correções de Bugs (Fixes)
+
+**Objetivo:** Restaurar a funcionalidade completa da grade de dados.
+
+- **Limpeza de UI nos Filtros:** Remover os botões de seta/ordenação de dentro dos filtros (status e complexidade), pois são redundantes com a ordenação nativa das colunas.
+- **Fix nos Filtros:** Investigar e corrigir o bug que impede o funcionamento correto da filtragem de Status da Meta e Complexidade.
+- **Fix na Expansão/Retração:** Corrigir a funcionalidade dos botões "Expandir Todos" e "Recolher Todos", garantindo que eles abram ou fechem todos os níveis (Grupo e Subgrupo) da árvore SIGTAP corretamente.
+
+## Sprint 9: Contextualização do Controle Temporal e Refinamentos de UI [x]
+
+**Objetivo:** Tornar o seletor de Análise Temporal (Topbar) inteligente e ciente do contexto da rota atual, corrigir o cálculo de vigência global dos contratos e otimizar a visualização padrão da árvore SIGTAP.
+
+---
+
+### 1. Seletor Temporal Contextual (Context-Aware Topbar)
+
+**Objetivo:** Fazer com que o popover de Análise Temporal adapte suas opções e mensagens dependendo da página (rota) ativa.
+
+- **Inteligência de Rota:** O componente do Topbar deve escutar as mudanças de rota da aplicação.
+- **Comportamento no Dashboard:** Na aba "Vigência Global", a mensagem e o comportamento devem refletir a visão agregada de _todos os vínculos_ da base de dados.
+- **Comportamento no Monitoramento:** Na aba "Vigência Global", o componente deve recuperar (via Signal ou serviço de estado) as informações do Vínculo atualmente selecionado na tela de Monitoramento.
+
+### 2. Correção da Vigência Global no Monitoramento (Fix)
+
+**Objetivo:** Garantir que o texto explicativo e a regra de consolidação reflitam exatamente o contrato selecionado.
+
+- **Ajuste de Projeção:** Corrigir a mensagem estática atual (que exibe incorretamente um intervalo fixo, ex: "48 meses / 2023 a 2026").
+- **Cálculo Dinâmico:** A mensagem deve calcular a diferença em meses dinamicamente com base na `Data de Início` e `Data Fim` do contrato selecionado no dropdown da página, limitando a busca ao período que efetivamente possui dados do DATASUS processados.
+
+### 3. Limpeza de Redundâncias no Dashboard
+
+**Objetivo:** Simplificar a interface do Dashboard agora que o controle de tempo está centralizado no Topbar.
+
+- **Remoção de Filtro:** Remover o filtro de "QUADRIMESTRE" que fica ao lado do seletor de estabelecimentos na view principal do Dashboard Executivo.
+- O filtro temporal (seja mês específico ou recorte) passa a ser ditado exclusivamente pelo controle no Topbar.
+
+### 4. Estado Padrão da Árvore SIGTAP
+
+**Objetivo:** Melhorar a legibilidade inicial da grade de monitoramento.
+
+- **Recolhimento Padrão:** Configurar o componente da tabela hierárquica (PrimeNG) para carregar com todos os Grupos e Subgrupos _recolhidos_ (collapsed) por padrão.
+- O usuário visualizará apenas os totais dos Grupos (Nível 1) ao abrir a tela, utilizando os botões de expansão ou clicando nas setas apenas quando quiser detalhar os procedimentos.
