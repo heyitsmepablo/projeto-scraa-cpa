@@ -1,77 +1,129 @@
 # Projeto SCRAA-CPA
 
-Sistema de Controle e Registro de Acompanhamento Administrativo - Controle de Planos Operativos e Auditoria (SCRAA-CPA).
+**Sistema de Controle e Registro de Acompanhamento Administrativo - Controle de Planos Operativos e Auditoria (SCRAA-CPA)**
 
-Este repositório contém a infraestrutura e serviços backend para gestão de convênios, contratos, aditivos e planos operativos entre instituições de saúde e o governo, com foco no faturamento e na integração constante com a base de dados do SIGTAP (Sistema de Gerenciamento da Tabela de Procedimentos, Medicamentos e OPM do SUS).
+Plataforma integrada para gestão contratual, faturamento, auditoria e acompanhamento de planos operativos entre instituições de saúde e a administração pública, integrada de forma contínua às bases de dados oficiais do SUS (SIGTAP e DATASUS SIA/SIH).
 
-## Estrutura do Projeto
+---
 
-O projeto é monorepo e atualmente é composto pelas seguintes pastas e serviços:
+## 🏛️ Estrutura do Monorepo
 
-- **[`/database`](./database/)**: Contém o schema, as configurações e migrações do banco de dados (Prisma + PostgreSQL). Define toda a modelagem de domínio, as entidades de faturamento (Planos Operativos) e o ecossistema de tabelas replicadas do SIGTAP.
-- **[`/scripts/sync_sigtap`](./scripts/sync_sigtap/)**: Serviço em Python (ETL) responsável por sincronizar de forma autônoma e programada (ou manual) todos os dados do FTP do DATASUS referentes à Tabela Unificada do SIGTAP para o banco de dados do projeto. Mantém o histórico completo de alterações (Changelog) para fins de auditoria e compliance.
-- **[`/scripts/sync_cpa_data`](./scripts/sync_cpa_data/)**: Pipeline ETL responsável por extrair dados referentes às Instituições, Vínculos e Planos Operativos a partir de uma planilha Excel (CPA) local e sincronizá-los com o banco de dados PostgreSQL.
-- **[`/scripts/sync_datasus`](./scripts/sync_datasus/)**: Módulo responsável por automatizar o download e o processamento de bases de produção do DATASUS (SIA/SIH), parseando os arquivos originados do FTP governamental e populando os dados de produção faturada no banco de dados.
-- **[`/scripts/utils/format_and_validate_cpa_data`](./scripts/utils/format_and_validate_cpa_data/)**: Ferramentas auxiliares para a higienização, formatação e validação prévia dos dados da planilha do CPA.
+O repositório é organizado no formato monorepo com módulos desacoplados:
 
-## Tecnologias Principais
+- **[`/client/web`](./client/web/)**: Interface de usuário web construída em **Angular 22** com arquitetura moderna baseada em Signals, PrimeNG 22, TailwindCSS 4 e testes automatizados com Vitest.
+- **[`/database`](./database/)**: Modelagem relacional, schemas e migrações de banco de dados com **Prisma ORM** e **PostgreSQL 18**.
+- **[`/scripts/sync_sigtap`](./scripts/sync_sigtap/)**: Pipeline ETL em Python para extração e sincronização contínua das tabelas oficiais do SIGTAP via FTP do DATASUS, com versionamento e histórico de alterações (changelog).
+- **[`/scripts/sync_cpa_data`](./scripts/sync_cpa_data/)**: Pipeline ETL para importação e atualização de cadastros de instituições, vínculos e metas de planos operativos a partir de planilhas locais.
+- **[`/scripts/sync_datasus`](./scripts/sync_datasus/)**: Módulo de automação para download, descompressão e ingestão de dados de produção ambulatorial e hospitalar (SIA/SIH) do DATASUS.
+- **[`/scripts/utils/format_and_validate_cpa_data`](./scripts/utils/format_and_validate_cpa_data/)**: Scripts utilitários para higienização, formatação e validação prévia de planilhas de dados.
+- **[`/.agents`](./.agents/)**: Definições de agentes autônomos, personas e regras de orquestração do projeto.
 
-- **Banco de Dados:** PostgreSQL 
+---
+
+## 🛠️ Stack Tecnológica
+
+### Frontend (Client Web)
+- **Framework:** Angular 22 (Standalone Components, Zoneless / Signals, Inject API)
+- **Componentes & UI:** PrimeNG 22, PrimeIcons, TailwindCSS 4
+- **Gráficos & Dashboards:** Chart.js
+- **Testes Unitários:** Vitest & JSDOM
+
+### Backend & Banco de Dados
+- **Banco de Dados:** PostgreSQL 18
 - **ORM:** Prisma
-- **ETL / Scripts:** Python 3.13+, Poetry, Pandas, PySUS
-- **CI/CD:** GitHub Actions
+- **Containers:** Docker & Docker Compose (PostgreSQL + PgAdmin)
 
-## Começando
+### ETL & Processamento de Dados
+- **Linguagem & Gestão:** Python 3.13+, Poetry
+- **Processamento:** Pandas, PySUS, Requests, SQLAlchemy
 
-### 1. Variáveis de Ambiente (Global)
-O projeto agora utiliza um **arquivo `.env` centralizado na raiz** para evitar redundâncias de credenciais (como a `DATABASE_URL`) entre os diferentes serviços e scripts.
+### CI/CD & Versionamento
+- **Versionamento Semântico:** Semantic Release
+- **Integração Contínua:** GitHub Actions
+
+---
+
+## 🚀 Como Iniciar
+
+### 1. Configuração de Variáveis de Ambiente
+O projeto adota um arquivo `.env` centralizado na raiz:
 
 ```bash
-# Na raiz do repositório
+# Copie o template de ambiente
 cp .env.example .env
-# Preencha a DATABASE_URL e demais variáveis de configuração
+
+# Configure as credenciais de banco de dados e URLs necessárias
 ```
 
-### 2. Banco de Dados
-Para subir a infraestrutura de banco de dados e aplicar as migrações:
+### 2. Infraestrutura Local (Docker)
+Suba os containers do PostgreSQL e PgAdmin:
+
+```bash
+docker compose up -d
+```
+- **PostgreSQL:** `localhost:5432`
+- **PgAdmin:** `http://localhost:8080`
+
+### 3. Banco de Dados e Migrações
+Aplique as migrações do Prisma para estruturar o schema:
+
 ```bash
 cd database
 npx prisma migrate dev
 ```
-*(Nota: O Prisma no diretório `database` pode exigir um `.env` local próprio caso não configurado para ler da raiz. Se ocorrer erro, faça um link simbólico ou crie o `.env` ali também).*
 
-### 3. Sincronização SIGTAP
-Para rodar a rotina de ETL que popula as tabelas de referência do SIGTAP:
+### 4. Executando o Frontend Web
+Para instalar dependências e iniciar o servidor de desenvolvimento:
+
+```bash
+cd client/web
+npm install
+npm start
+```
+Acesse a aplicação em `http://localhost:4200`.
+
+Para executar a suíte de testes unitários:
+```bash
+npm test
+```
+
+### 5. Pipelines ETL e Sincronização
+
+#### A. Sincronização da Tabela Unificada do SIGTAP
 ```bash
 cd scripts/sync_sigtap
 poetry install
 poetry run python -m sync_sigtap run
 ```
 
-### 4. Carga de Dados da CPA
-Para carregar instituições, vínculos e planos operativos a partir da planilha:
+#### B. Carga de Dados da CPA (Instituições, Vínculos e Planos)
 ```bash
 cd scripts/sync_cpa_data
 poetry install
 poetry run python -m sync_cpa_data
 ```
 
-### 5. Sincronização DATASUS (SIA/SIH)
-Para baixar e sincronizar a produção faturada do DATASUS (SIA/SIH):
+#### C. Sincronização de Produção do DATASUS (SIA/SIH)
 ```bash
 cd scripts/sync_datasus
 poetry install
-# Exemplo puxando a partir da competência de Janeiro/2026:
+# Exemplo importando a partir de uma competência inicial:
 poetry run python -m sync_datasus --competencia-inicial 202601
 ```
 
-## Arquitetura de Dados
+---
 
-O banco está dividido logicamente em:
-1. **Entidades Administrativas**: `Instituicao`, `Vinculo`, `Aditivo`. (Gestão contratual)
-2. **Operação e Faturamento**: `PlanoOperativo`, `PlanoOperativoProcedimento`. (Pactuações de metas, quantidades e valores)
-3. **Tabelas de Referência Governamentais (SIGTAP)**: `sigtap_importacao`, `sigtap_changelog`, e as 23+ tabelas contendo as regras, procedimentos, CIDs, CBOs e complexidades oficias (ex: `sigtap_tb_procedimento`, `sigtap_tb_rubrica`, etc).
+## 📊 Arquitetura de Dados
 
-## Histórico e Changelog
+O modelo de dados está estruturado em três camadas essenciais:
 
-Qualquer atualização nos dados do SUS (SIGTAP) é registrada individualmente. Se um procedimento muda de preço ou muda a complexidade, a rotina ETL gera entradas na tabela de **Changelog**, permitindo que o faturamento de meses retroativos respeite as regras vigentes na data de competência da prestação de serviço.
+1. **Gestão Contratual e Administrativa:** `Instituicao`, `Vinculo`, `Aditivo`, controlando convênios, vigências e entidades hospitalares.
+2. **Planejamento e Faturamento:** `PlanoOperativo`, `PlanoOperativoProcedimento`, definindo tetos, metas físicas/orçamentárias e regras de rateio.
+3. **Catálogo Governamental e Auditoria (SIGTAP):** Mais de 20 tabelas espelhadas (`sigtap_tb_procedimento`, `sigtap_tb_rubrica`, CIDs, CBOs) associadas ao histórico de alterações (`sigtap_changelog`), garantindo conformidade retroativa e precisão histórica no faturamento.
+
+---
+
+## 🤝 Padrões de Contribuição
+
+- Mensagens de commit seguem a convenção de **[Conventional Commits](https://www.conventionalcommits.org/)** (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`).
+- Mantenha a cobertura de testes automatizados ao implementar novas funcionalidades no frontend ou scripts de ingestão.
