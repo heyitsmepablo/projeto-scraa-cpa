@@ -2,10 +2,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { describe, beforeEach, it, expect, vi } from 'vitest';
 import { MonitoramentoComponent, SigtapTreeNodeData } from './monitoramento';
-import { CompetenceService } from '../../core/services/competence';
-import { VinculoService } from '../../core/services/vinculo';
-import { InstituicaoService } from '../../core/services/instituicao';
-import { ProducaoService } from '../../core/services/producao';
+import {
+  formatSigtapCode,
+  formatCurrency,
+  getClampedPercent,
+  getPercTextClass,
+  getSaldoFinanceiroClass,
+  getProgressBarClass,
+  getStatusLabel,
+  getStatusSeverity,
+  getComplexidadeSeverity,
+} from './utils/monitoramento.utils';
+import { CompetenceService } from '../../core/services/competence/competence';
+import { VinculoService } from '../../core/services/vinculo/vinculo';
+import { InstituicaoService } from '../../core/services/instituicao/instituicao';
+import { ProducaoService } from '../../core/services/producao/producao';
 import { MOCK_PRODUCAO_PROCEDIMENTOS } from '../../core/mocks/producao.mock';
 
 import { signal, computed } from '@angular/core';
@@ -83,6 +94,13 @@ describe('MonitoramentoComponent', () => {
       periodoFormatado: computed(() => periodFilterSignal().descricaoFormatada),
       competencia: computed(() => periodFilterSignal().competencia ?? '202401'),
       competenciaFormatada: computed(() => '01/2024'),
+      globalBounds: computed(() => ({
+        competenciaInicio: '202301',
+        competenciaFim: '202612',
+        descricao: 'Consolidação Global da Rede (01/2023 a 12/2026)',
+        mesesCount: 48,
+        contexto: 'DASHBOARD',
+      })),
       setCompetence: vi.fn((c) =>
         periodFilterSignal.set({
           mode: 'SPECIFIC',
@@ -91,13 +109,29 @@ describe('MonitoramentoComponent', () => {
           competenciaFim: c,
           mesesCount: 1,
           descricaoFormatada: c,
-        })
+        }),
       ),
       setSpecificCompetence: vi.fn(),
       setRange: vi.fn(),
       setGlobal: vi.fn(),
+      setGlobalBounds: vi.fn(),
+      resetGlobalBounds: vi.fn(),
+      applyGlobal: vi.fn(),
       previousCompetence: vi.fn(),
       nextCompetence: vi.fn(),
+      countMonthsBetween: vi.fn((inicio: string, fim: string) => {
+        if (!inicio || !fim || inicio.length !== 6 || fim.length !== 6) return 1;
+        const anoInicio = parseInt(inicio.substring(0, 4), 10);
+        const mesInicio = parseInt(inicio.substring(4, 6), 10);
+        const anoFim = parseInt(fim.substring(0, 4), 10);
+        const mesFim = parseInt(fim.substring(4, 6), 10);
+        const count = (anoFim - anoInicio) * 12 + (mesFim - mesInicio) + 1;
+        return count > 0 ? count : 1;
+      }),
+      formatCompetenciaShort: vi.fn((raw: string | null) => {
+        if (!raw || raw.length !== 6) return raw || '';
+        return `${raw.substring(4, 6)}/${raw.substring(0, 4)}`;
+      }),
     };
 
     instituicaoServiceMock = {
@@ -111,27 +145,27 @@ describe('MonitoramentoComponent', () => {
     producaoServiceMock = {
       getProducaoPorProcedimento: vi
         .fn()
-        .mockImplementation((comp: string, _instId?: number, _cnes?: string, vinculoId?: number) => {
-          let procs = MOCK_PRODUCAO_PROCEDIMENTOS.filter(
-            (p) => p.competencia === comp || !comp
-          );
-          if (vinculoId !== undefined) {
-            procs = procs.filter((p) => p.vinculoId === vinculoId);
-          }
-          return of(procs);
-        }),
+        .mockImplementation(
+          (comp: string, _instId?: number, _cnes?: string, vinculoId?: number) => {
+            let procs = MOCK_PRODUCAO_PROCEDIMENTOS.filter((p) => p.competencia === comp || !comp);
+            if (vinculoId !== undefined) {
+              procs = procs.filter((p) => p.vinculoId === vinculoId);
+            }
+            return of(procs);
+          },
+        ),
       getProducaoPorPeriodo: vi
         .fn()
-        .mockImplementation((period: PeriodFilter, _instId?: number, _cnes?: string, vinculoId?: number) => {
-          const comp = period.competencia || period.competenciaInicio || '202401';
-          let procs = MOCK_PRODUCAO_PROCEDIMENTOS.filter(
-            (p) => p.competencia === comp || !comp
-          );
-          if (vinculoId !== undefined) {
-            procs = procs.filter((p) => p.vinculoId === vinculoId);
-          }
-          return of(procs);
-        }),
+        .mockImplementation(
+          (period: PeriodFilter, _instId?: number, _cnes?: string, vinculoId?: number) => {
+            const comp = period.competencia || period.competenciaInicio || '202401';
+            let procs = MOCK_PRODUCAO_PROCEDIMENTOS.filter((p) => p.competencia === comp || !comp);
+            if (vinculoId !== undefined) {
+              procs = procs.filter((p) => p.vinculoId === vinculoId);
+            }
+            return of(procs);
+          },
+        ),
     };
 
     await TestBed.configureTestingModule({
@@ -177,10 +211,9 @@ describe('MonitoramentoComponent', () => {
       fixture.detectChanges();
       expect(component.selectedVinculo()).toBeUndefined();
 
-      // Resetando para null deve acionar auto-seleção pelo effect
       component.selectedVinculoId.set(null);
       fixture.detectChanges();
-      expect(component.selectedVinculoId()).toBe(1);
+      expect(component.selectedVinculo()).toBeUndefined();
     });
   });
 
@@ -221,7 +254,8 @@ describe('MonitoramentoComponent', () => {
 
       // KPI 4: Financeiro Aprovado
       expect(kpis.totalFinanceiro).toBe(expFinancAprovado);
-      const expPercFinanc = expFinancPactuado > 0 ? (expFinancAprovado / expFinancPactuado) * 100 : 100;
+      const expPercFinanc =
+        expFinancPactuado > 0 ? (expFinancAprovado / expFinancPactuado) * 100 : 100;
       expect(kpis.percentualGlobalFinanceiro).toBeCloseTo(expPercFinanc, 1);
 
       // KPI 5: Saldo Financeiro Global
@@ -229,7 +263,9 @@ describe('MonitoramentoComponent', () => {
       expect(kpis.saldoFinanceiroGlobal).toBeCloseTo(expSaldoFinanc, 2);
 
       // Consistência de contadores de status
-      expect(kpis.totalDentro + kpis.totalAcima + kpis.totalAbaixo + kpis.totalSemPacto).toBe(kpis.totalItens);
+      expect(kpis.totalDentro + kpis.totalAcima + kpis.totalAbaixo + kpis.totalSemPacto).toBe(
+        kpis.totalItens,
+      );
     });
 
     it('deve calcular status global de meta física conforme faixas percentuais', () => {
@@ -333,7 +369,9 @@ describe('MonitoramentoComponent', () => {
             expect(subData.vlrPactuado).toBeCloseTo(expectedVlrPactuado, 2);
             expect(subData.diferencaFisico).toBe(expectedQtdAprovada - expectedQtdPactuada);
           } else {
-            expect(subData.qtdPactuadaMensal).toBe(expectedQtdPactuada !== 0 ? expectedQtdPactuada : null);
+            expect(subData.qtdPactuadaMensal).toBe(
+              expectedQtdPactuada !== 0 ? expectedQtdPactuada : null,
+            );
           }
         }
       }
@@ -420,30 +458,39 @@ describe('MonitoramentoComponent', () => {
       const results = component.filteredProcedimentos();
       expect(results.length).toBeGreaterThan(0);
       expect(
-        results.every((p) =>
-          (p.noGrupo || '').toUpperCase().includes('DIAGNÓSTICA') ||
-          (p.noSubGrupo || '').toUpperCase().includes('DIAGNÓSTICA') ||
-          p.noProcedimento.toUpperCase().includes('DIAGNÓSTICA')
-        )
+        results.every(
+          (p) =>
+            (p.noGrupo || '').toUpperCase().includes('DIAGNÓSTICA') ||
+            (p.noSubGrupo || '').toUpperCase().includes('DIAGNÓSTICA') ||
+            p.noProcedimento.toUpperCase().includes('DIAGNÓSTICA'),
+        ),
       ).toBe(true);
     });
 
     it('deve filtrar por status de execução', () => {
       component.selectedStatus.set('DENTRO');
       fixture.detectChanges();
-      expect(component.filteredProcedimentos().every((p) => p.statusExecucao === 'DENTRO')).toBe(true);
+      expect(component.filteredProcedimentos().every((p) => p.statusExecucao === 'DENTRO')).toBe(
+        true,
+      );
 
       component.selectedStatus.set('ACIMA');
       fixture.detectChanges();
-      expect(component.filteredProcedimentos().every((p) => p.statusExecucao === 'ACIMA')).toBe(true);
+      expect(component.filteredProcedimentos().every((p) => p.statusExecucao === 'ACIMA')).toBe(
+        true,
+      );
 
       component.selectedStatus.set('ABAIXO');
       fixture.detectChanges();
-      expect(component.filteredProcedimentos().every((p) => p.statusExecucao === 'ABAIXO')).toBe(true);
+      expect(component.filteredProcedimentos().every((p) => p.statusExecucao === 'ABAIXO')).toBe(
+        true,
+      );
 
       component.selectedStatus.set('SEM_PACTO');
       fixture.detectChanges();
-      expect(component.filteredProcedimentos().every((p) => p.statusExecucao === 'SEM_PACTO')).toBe(true);
+      expect(component.filteredProcedimentos().every((p) => p.statusExecucao === 'SEM_PACTO')).toBe(
+        true,
+      );
     });
 
     it('deve filtrar por complexidade', () => {
@@ -475,76 +522,78 @@ describe('MonitoramentoComponent', () => {
 
   describe('7. Funções Utilitárias e Helpers Visuais', () => {
     it('deve formatar código SIGTAP de 10 dígitos com máscara 00.00.00.000-0', () => {
-      expect(component.formatSigtapCode('0301010072')).toBe('03.01.01.007-2');
-      expect(component.formatSigtapCode('0205020097')).toBe('02.05.02.009-7');
-      expect(component.formatSigtapCode('12345')).toBe('12345');
-      expect(component.formatSigtapCode('')).toBe('-');
-      expect(component.formatSigtapCode(undefined)).toBe('-');
+      expect(formatSigtapCode('0301010072')).toBe('03.01.01.007-2');
+      expect(formatSigtapCode('0205020097')).toBe('02.05.02.009-7');
+      expect(formatSigtapCode('12345')).toBe('12345');
+      expect(formatSigtapCode('')).toBe('-');
+      expect(formatSigtapCode(undefined)).toBe('-');
     });
 
     it('deve formatar valores monetários em formato pt-BR BRL', () => {
-      expect(component.formatCurrency(null)).toBe('R$ 0,00');
-      expect(component.formatCurrency(undefined)).toBe('R$ 0,00');
-      expect(component.formatCurrency(12500.75)).toContain('12.500,75');
-      expect(component.formatCurrency(0)).toContain('0,00');
+      expect(formatCurrency(null)).toBe('R$ 0,00');
+      expect(formatCurrency(undefined)).toBe('R$ 0,00');
+      expect(formatCurrency(12500.75)).toContain('12.500,75');
+      expect(formatCurrency(0)).toContain('0,00');
     });
 
     it('deve limitar percentuais entre 0 e 100 com getClampedPercent', () => {
-      expect(component.getClampedPercent(null)).toBe(0);
-      expect(component.getClampedPercent(undefined)).toBe(0);
-      expect(component.getClampedPercent(-10)).toBe(0);
-      expect(component.getClampedPercent(45.5)).toBe(45.5);
-      expect(component.getClampedPercent(120)).toBe(100);
+      expect(getClampedPercent(null)).toBe(0);
+      expect(getClampedPercent(undefined)).toBe(0);
+      expect(getClampedPercent(-10)).toBe(0);
+      expect(getClampedPercent(45.5)).toBe(45.5);
+      expect(getClampedPercent(120)).toBe(100);
     });
 
     it('deve retornar classes de cor do texto de percentual', () => {
-      expect(component.getPercTextClass('DENTRO')).toContain('text-emerald-600');
-      expect(component.getPercTextClass('ACIMA')).toContain('text-amber-600');
-      expect(component.getPercTextClass('ABAIXO')).toContain('text-rose-600');
-      expect(component.getPercTextClass('SEM_PACTO')).toContain('text-surface-600');
-      expect(component.getPercTextClass(undefined)).toContain('text-surface-600');
+      expect(getPercTextClass('DENTRO')).toContain('text-emerald-600');
+      expect(getPercTextClass('ACIMA')).toContain('text-amber-600');
+      expect(getPercTextClass('ABAIXO')).toContain('text-rose-600');
+      expect(getPercTextClass('SEM_PACTO')).toContain('text-surface-600');
+      expect(getPercTextClass(undefined)).toContain('text-surface-600');
     });
 
     it('deve retornar classes de cor para saldo financeiro', () => {
-      expect(component.getSaldoFinanceiroClass(500, 'DENTRO')).toContain('text-amber-600');
-      expect(component.getSaldoFinanceiroClass(-250, 'ABAIXO')).toContain('text-rose-600');
-      expect(component.getSaldoFinanceiroClass(0, 'DENTRO')).toContain('text-emerald-600');
-      expect(component.getSaldoFinanceiroClass(100, 'SEM_PACTO')).toContain('text-surface-600');
+      expect(getSaldoFinanceiroClass(500, 'DENTRO')).toContain('text-amber-600');
+      expect(getSaldoFinanceiroClass(-250, 'ABAIXO')).toContain('text-rose-600');
+      expect(getSaldoFinanceiroClass(0, 'DENTRO')).toContain('text-emerald-600');
+      expect(getSaldoFinanceiroClass(100, 'SEM_PACTO')).toContain('text-surface-600');
     });
 
     it('deve retornar classes para a barra de progresso', () => {
-      expect(component.getProgressBarClass('DENTRO')).toBe('p-progressbar-emerald');
-      expect(component.getProgressBarClass('ACIMA')).toBe('p-progressbar-amber');
-      expect(component.getProgressBarClass('ABAIXO')).toBe('p-progressbar-rose');
-      expect(component.getProgressBarClass('SEM_PACTO')).toBe('p-progressbar-slate');
-      expect(component.getProgressBarClass(undefined)).toBe('p-progressbar-slate');
+      expect(getProgressBarClass('DENTRO')).toBe('p-progressbar-emerald');
+      expect(getProgressBarClass('ACIMA')).toBe('p-progressbar-amber');
+      expect(getProgressBarClass('ABAIXO')).toBe('p-progressbar-rose');
+      expect(getProgressBarClass('SEM_PACTO')).toBe('p-progressbar-slate');
+      expect(getProgressBarClass(undefined)).toBe('p-progressbar-slate');
     });
 
     it('deve retornar labels e severidades de status e complexidade', () => {
-      expect(component.getStatusLabel('DENTRO')).toBe('Dentro da Meta');
-      expect(component.getStatusLabel('ACIMA')).toBe('Acima da Meta');
-      expect(component.getStatusLabel('ABAIXO')).toBe('Abaixo da Meta');
-      expect(component.getStatusLabel('SEM_PACTO')).toBe('Sem Pacto');
+      expect(getStatusLabel('DENTRO')).toBe('Dentro da Meta');
+      expect(getStatusLabel('ACIMA')).toBe('Acima da Meta');
+      expect(getStatusLabel('ABAIXO')).toBe('Abaixo da Meta');
+      expect(getStatusLabel('SEM_PACTO')).toBe('Sem Pacto');
 
-      expect(component.getStatusSeverity('DENTRO')).toBe('success');
-      expect(component.getStatusSeverity('ACIMA')).toBe('warn');
-      expect(component.getStatusSeverity('ABAIXO')).toBe('danger');
-      expect(component.getStatusSeverity('SEM_PACTO')).toBe('secondary');
+      expect(getStatusSeverity('DENTRO')).toBe('success');
+      expect(getStatusSeverity('ACIMA')).toBe('warn');
+      expect(getStatusSeverity('ABAIXO')).toBe('danger');
+      expect(getStatusSeverity('SEM_PACTO')).toBe('secondary');
 
-      expect(component.getComplexidadeSeverity('BC')).toBe('info');
-      expect(component.getComplexidadeSeverity('MC')).toBe('warn');
-      expect(component.getComplexidadeSeverity('AC')).toBe('danger');
-      expect(component.getComplexidadeSeverity(undefined)).toBe('secondary');
+      expect(getComplexidadeSeverity('BC')).toBe('info');
+      expect(getComplexidadeSeverity('MC')).toBe('warn');
+      expect(getComplexidadeSeverity('AC')).toBe('danger');
+      expect(getComplexidadeSeverity(undefined)).toBe('secondary');
     });
   });
 
   describe('8. Exportação CSV com Hierarquia e Dados Financeiros', () => {
     it('deve exportar CSV gerando Blob com cabeçalhos completos e iniciar download', () => {
       let createdBlob: any = null;
-      const createObjectURLSpy = vi.spyOn(URL, 'createObjectURL').mockImplementation((blob: any) => {
-        createdBlob = blob;
-        return 'blob:mock-url-csv';
-      });
+      const createObjectURLSpy = vi
+        .spyOn(URL, 'createObjectURL')
+        .mockImplementation((blob: any) => {
+          createdBlob = blob;
+          return 'blob:mock-url-csv';
+        });
       const revokeObjectURLSpy = vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {});
       const clickSpy = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
 

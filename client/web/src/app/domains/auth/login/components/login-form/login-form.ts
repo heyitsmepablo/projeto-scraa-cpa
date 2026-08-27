@@ -1,30 +1,31 @@
-import { Component, output, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, output, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ButtonDirective } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputPasswordModule } from 'primeng/inputpassword';
-import { form, FormField } from '@angular/forms/signals';
+import { PasswordModule } from 'primeng/password';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { LoginFormModel } from './login-form.model';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ButtonDirective, InputTextModule, InputPasswordModule, FormField],
+  imports: [ButtonDirective, InputTextModule, PasswordModule, ReactiveFormsModule],
   templateUrl: './login-form.html',
   styleUrl: './login-form.css',
 })
 export class LoginFormComponent {
-  loginModel = signal<LoginFormModel>({
-    email: '',
-    password: '',
+  submitEvent = output<LoginFormModel>();
+  private readonly fb = inject(FormBuilder);
+
+  loginForm = this.fb.nonNullable.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
   });
 
-  loginForm = form(this.loginModel);
-
-  submitEvent = output<LoginFormModel>();
-
   onSubmit() {
-    this.submitEvent.emit(this.loginForm().value());
+    if (this.loginForm.valid) {
+      this.submitEvent.emit(this.loginForm.getRawValue());
+    }
   }
 }
 

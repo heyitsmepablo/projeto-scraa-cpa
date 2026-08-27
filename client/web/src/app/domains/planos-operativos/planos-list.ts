@@ -6,7 +6,7 @@ import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
 import { TagModule } from 'primeng/tag';
 
-import { CompetenceService } from '../../core/services/competence';
+import { CompetenceService } from '../../core/services/competence/competence';
 import { PlanoOperativoService } from './services/plano-operativo';
 import {
   PlanoOperativo,
@@ -119,7 +119,7 @@ export class PlanosListComponent {
   }
 
   getComplexidadeSeverity(
-    tp?: string
+    tp?: string,
   ): 'success' | 'info' | 'warn' | 'danger' | 'secondary' | 'contrast' | undefined {
     switch (tp?.toUpperCase()) {
       case 'BC':

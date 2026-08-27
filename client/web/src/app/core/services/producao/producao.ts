@@ -2,10 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
-import { ProducaoPorProcedimento, ProducaoResumoMensal } from '../models/producao.model';
-import { PeriodFilter } from '../models/competence.model';
-import { StatusExecucao } from '../models/domain-enums.model';
-import { MOCK_PRODUCAO_PROCEDIMENTOS, MOCK_PRODUCAO_RESUMO } from '../mocks/producao.mock';
+import { ProducaoPorProcedimento, ProducaoResumoMensal } from '../../models/producao.model';
+import { PeriodFilter } from '../../models/competence.model';
+import { StatusExecucao, calcularStatusExecucao } from '../../models/domain-enums.model';
+import { MOCK_PRODUCAO_PROCEDIMENTOS, MOCK_PRODUCAO_RESUMO } from '../../mocks/producao.mock';
 
 export interface ProducaoFiltros {
   competencia?: string;
@@ -37,9 +37,9 @@ export class ProducaoService {
       if (cnes) {
         params = params.set('cnes', cnes);
       }
-      return this.http.get<ProducaoResumoMensal[]>(`${this.apiUrl}/resumo-mensal`, { params }).pipe(
-        catchError(() => this.getMockResumoMensal(competencia, cnes))
-      );
+      return this.http
+        .get<ProducaoResumoMensal[]>(`${this.apiUrl}/resumo-mensal`, { params })
+        .pipe(catchError(() => this.getMockResumoMensal(competencia, cnes)));
     }
     return this.getMockResumoMensal(competencia, cnes);
   }
@@ -51,7 +51,7 @@ export class ProducaoService {
     competencia: string,
     instituicaoId?: number,
     cnes?: string,
-    vinculoId?: number
+    vinculoId?: number,
   ): Observable<ProducaoPorProcedimento[]> {
     const period: PeriodFilter = {
       mode: 'SPECIFIC',
@@ -71,7 +71,7 @@ export class ProducaoService {
     period: PeriodFilter,
     instituicaoId?: number,
     cnes?: string,
-    vinculoId?: number
+    vinculoId?: number,
   ): Observable<ProducaoPorProcedimento[]> {
     if (this.http) {
       let params = new HttpParams().set('mode', period.mode);
@@ -97,9 +97,11 @@ export class ProducaoService {
         params = params.set('vinculoId', vinculoId.toString());
       }
 
-      return this.http.get<ProducaoPorProcedimento[]>(`${this.apiUrl}/por-periodo`, { params }).pipe(
-        catchError(() => this.getMockProducaoPorPeriodo(period, instituicaoId, cnes, vinculoId))
-      );
+      return this.http
+        .get<ProducaoPorProcedimento[]>(`${this.apiUrl}/por-periodo`, { params })
+        .pipe(
+          catchError(() => this.getMockProducaoPorPeriodo(period, instituicaoId, cnes, vinculoId)),
+        );
     }
 
     return this.getMockProducaoPorPeriodo(period, instituicaoId, cnes, vinculoId);
@@ -125,7 +127,7 @@ export class ProducaoService {
   getMockProducaoPorProcedimento(
     competencia?: string,
     cnes?: string,
-    vinculoId?: number
+    vinculoId?: number,
   ): Observable<ProducaoPorProcedimento[]> {
     let result = [...MOCK_PRODUCAO_PROCEDIMENTOS];
     if (competencia) {
@@ -147,7 +149,7 @@ export class ProducaoService {
     period: PeriodFilter,
     instituicaoId?: number,
     cnes?: string,
-    vinculoId?: number
+    vinculoId?: number,
   ): Observable<ProducaoPorProcedimento[]> {
     let allProcs = [...MOCK_PRODUCAO_PROCEDIMENTOS];
 
@@ -184,7 +186,7 @@ export class ProducaoService {
 
     // Filtra pelo intervalo de competências no dataset
     let matchingProcs = allProcs.filter(
-      (p) => p.competencia >= startComp && p.competencia <= endComp
+      (p) => p.competencia >= startComp && p.competencia <= endComp,
     );
 
     // Se o dataset não possui todas as competências gravadas explicitamente,
@@ -238,12 +240,14 @@ export class ProducaoService {
         template.vlUnitario !== undefined
           ? template.vlUnitario
           : sumQtdAprovada > 0
-          ? Math.round((sumVlrAprovado / sumQtdAprovada) * 100) / 100
-          : 10.0;
+            ? Math.round((sumVlrAprovado / sumQtdAprovada) * 100) / 100
+            : 10.0;
 
       // Financeiro pactuado multiplicado por N meses
       const vlrPactuadoPeriodo =
-        qtdPactuadaPeriodo !== null ? Math.round(qtdPactuadaPeriodo * vlUnitario * 100) / 100 : null;
+        qtdPactuadaPeriodo !== null
+          ? Math.round(qtdPactuadaPeriodo * vlUnitario * 100) / 100
+          : null;
 
       // Saldo financeiro recalculado para o período
       const saldoFinanceiro =
@@ -263,18 +267,9 @@ export class ProducaoService {
           : null;
 
       // Status da execução física no período
-      let statusExecucao: StatusExecucao = 'SEM_PACTO';
-      if (qtdPactuadaPeriodo !== null && qtdPactuadaPeriodo > 0) {
-        if (percExecucao !== null) {
-          if (percExecucao >= 95 && percExecucao <= 105) {
-            statusExecucao = 'DENTRO';
-          } else if (percExecucao > 105) {
-            statusExecucao = 'ACIMA';
-          } else {
-            statusExecucao = 'ABAIXO';
-          }
-        }
-      }
+      const statusExecucao: StatusExecucao = calcularStatusExecucao(
+        qtdPactuadaPeriodo !== null && qtdPactuadaPeriodo > 0 ? percExecucao : null,
+      );
 
       aggregatedList.push({
         ...template,

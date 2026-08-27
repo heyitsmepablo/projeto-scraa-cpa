@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { TagModule } from 'primeng/tag';
 
-import { CompetenceService } from '../../core/services/competence';
-import { InstituicaoService } from '../../core/services/instituicao';
+import { CompetenceService } from '../../core/services/competence/competence';
+import { InstituicaoService } from '../../core/services/instituicao/instituicao';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { InstituicoesTableComponent } from './components/instituicoes-table/instituicoes-table';
 
@@ -12,12 +12,7 @@ import { InstituicoesTableComponent } from './components/instituicoes-table/inst
   selector: 'app-instituicoes-list',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    TagModule,
-    PageHeaderComponent,
-    InstituicoesTableComponent,
-  ],
+  imports: [CommonModule, TagModule, PageHeaderComponent, InstituicoesTableComponent],
   templateUrl: './instituicoes-list.html',
   styleUrl: './instituicoes-list.css',
 })
@@ -29,7 +24,7 @@ export class InstituicoesListComponent {
   readonly loading = computed(() => this.instituicoes() === undefined);
 
   getTipoSeverity(
-    tipo: string
+    tipo: string,
   ): 'success' | 'info' | 'warn' | 'danger' | 'secondary' | 'contrast' | undefined {
     switch (tipo) {
       case 'FILANTRÓPICO':

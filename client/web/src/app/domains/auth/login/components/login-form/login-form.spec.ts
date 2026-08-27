@@ -20,7 +20,7 @@ describe('LoginForm', () => {
   });
 
   it('should initialize with empty credentials', () => {
-    expect(component.loginModel()).toEqual({
+    expect(component.loginForm.getRawValue()).toEqual({
       email: '',
       password: '',
     });
@@ -28,7 +28,11 @@ describe('LoginForm', () => {
 
   it('should emit submitEvent when onSubmit is triggered', () => {
     const emitSpy = vi.spyOn(component.submitEvent, 'emit');
+    component.loginForm.setValue({
+      email: 'test@test.com',
+      password: 'password123'
+    });
     component.onSubmit();
-    expect(emitSpy).toHaveBeenCalled();
+    expect(emitSpy).toHaveBeenCalledWith({ email: 'test@test.com', password: 'password123' });
   });
 });

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Vinculo, Aditivo } from '../models/vinculo.model';
-import { TipoAditivo, TipoComplexidade, TipoVinculo } from '../models/domain-enums.model';
+import { Vinculo, Aditivo } from '../../models/vinculo.model';
+import { TipoAditivo, TipoComplexidade, TipoVinculo } from '../../models/domain-enums.model';
 
 const today = new Date();
 const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
@@ -21,7 +21,7 @@ const MOCK_VINCULOS: Vinculo[] = [
     dataDaAssinatura: new Date('2023-01-01T00:00:00Z'),
     dataInicio: new Date('2023-01-01T00:00:00Z'),
     dataFim: nextYear, // Ativo
-    valorTotal: 15000000.00,
+    valorTotal: 15000000.0,
     aditivos: [
       {
         id: 101,
@@ -32,9 +32,9 @@ const MOCK_VINCULOS: Vinculo[] = [
         dataDaAssinatura: new Date('2023-12-01T00:00:00Z'),
         dataInicio: new Date('2024-01-01T00:00:00Z'),
         dataFim: nextYear,
-        valorTotal: 1500000.00
-      }
-    ]
+        valorTotal: 1500000.0,
+      },
+    ],
   },
   {
     id: 2,
@@ -47,7 +47,7 @@ const MOCK_VINCULOS: Vinculo[] = [
     dataDaAssinatura: new Date('2022-06-15T00:00:00Z'),
     dataInicio: new Date('2022-06-15T00:00:00Z'),
     dataFim: nextWeek, // Expirando
-    valorTotal: 8500000.00,
+    valorTotal: 8500000.0,
     aditivos: [
       {
         id: 102,
@@ -58,9 +58,9 @@ const MOCK_VINCULOS: Vinculo[] = [
         dataDaAssinatura: new Date('2023-06-10T00:00:00Z'),
         dataInicio: new Date('2023-06-15T00:00:00Z'),
         dataFim: nextWeek,
-        valorTotal: -500000.00
-      }
-    ]
+        valorTotal: -500000.0,
+      },
+    ],
   },
   {
     id: 3,
@@ -73,8 +73,8 @@ const MOCK_VINCULOS: Vinculo[] = [
     dataDaAssinatura: new Date('2021-03-10T00:00:00Z'),
     dataInicio: new Date('2021-03-10T00:00:00Z'),
     dataFim: lastMonth, // Expirado
-    valorTotal: 1200000.00,
-    aditivos: []
+    valorTotal: 1200000.0,
+    aditivos: [],
   },
   {
     id: 4,
@@ -87,9 +87,9 @@ const MOCK_VINCULOS: Vinculo[] = [
     dataDaAssinatura: new Date('2024-01-15T00:00:00Z'),
     dataInicio: new Date('2024-01-15T00:00:00Z'),
     dataFim: new Date(today.getTime() + 15 * 24 * 60 * 60 * 1000), // Expirando
-    valorTotal: 5000000.00,
-    aditivos: []
-  }
+    valorTotal: 5000000.0,
+    aditivos: [],
+  },
 ];
 
 @Injectable({
@@ -101,17 +101,17 @@ export class VinculoService {
   }
 
   findById(id: number): Observable<Vinculo> {
-    const vinculo = MOCK_VINCULOS.find(v => v.id === id);
+    const vinculo = MOCK_VINCULOS.find((v) => v.id === id);
     return of(vinculo as Vinculo).pipe(delay(200));
   }
 
   findByInstituicaoId(instituicaoId: number): Observable<Vinculo[]> {
-    const vinculos = MOCK_VINCULOS.filter(v => v.instituicaoId === instituicaoId);
+    const vinculos = MOCK_VINCULOS.filter((v) => v.instituicaoId === instituicaoId);
     return of(vinculos).pipe(delay(200));
   }
 
   findAditivosByVinculoId(vinculoId: number): Observable<Aditivo[]> {
-    const vinculo = MOCK_VINCULOS.find(v => v.id === vinculoId);
+    const vinculo = MOCK_VINCULOS.find((v) => v.id === vinculoId);
     return of(vinculo?.aditivos || []).pipe(delay(200));
   }
 }

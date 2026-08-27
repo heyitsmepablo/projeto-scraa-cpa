@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ProducaoService } from './producao';
-import { ProducaoPorProcedimento, ProducaoResumoMensal } from '../models/producao.model';
-import { MOCK_PRODUCAO_PROCEDIMENTOS, MOCK_PRODUCAO_RESUMO } from '../mocks/producao.mock';
+import { ProducaoPorProcedimento, ProducaoResumoMensal } from '../../models/producao.model';
+import { MOCK_PRODUCAO_PROCEDIMENTOS, MOCK_PRODUCAO_RESUMO } from '../../mocks/producao.mock';
 
 describe('ProducaoService', () => {
   let service: ProducaoService;
@@ -189,14 +189,19 @@ describe('ProducaoService', () => {
 
   it('should fetch and aggregate mock producao accurately for RANGE mode (N = 4 months)', () => {
     service
-      .getProducaoPorPeriodo({
-        mode: 'RANGE',
-        competencia: null,
-        competenciaInicio: '202401',
-        competenciaFim: '202404',
-        mesesCount: 4,
-        descricaoFormatada: '1º Quadrimestre 2024 (Jan-Abr)',
-      }, undefined, '1234567', 1)
+      .getProducaoPorPeriodo(
+        {
+          mode: 'RANGE',
+          competencia: null,
+          competenciaInicio: '202401',
+          competenciaFim: '202404',
+          mesesCount: 4,
+          descricaoFormatada: '1º Quadrimestre 2024 (Jan-Abr)',
+        },
+        undefined,
+        '1234567',
+        1,
+      )
       .subscribe((res) => {
         expect(res.length).toBeGreaterThan(0);
         expect(res.every((p) => p.competencia === '202401 a 202404')).toBe(true);
@@ -207,13 +212,13 @@ describe('ProducaoService', () => {
         if (consultaProc) {
           // Meta quadrimestral (4 meses) = 2000 * 4 = 8000
           expect(consultaProc.qtdPactuadaMensal).toBe(8000);
-          expect(consultaProc.vlUnitario).toBe(10.00);
-          expect(consultaProc.vlrPactuado).toBe(80000.00);
+          expect(consultaProc.vlUnitario).toBe(10.0);
+          expect(consultaProc.vlrPactuado).toBe(80000.0);
           // Projeção escalonada a partir dos 3 meses existentes (2000 + 2050 + 1980 = 6030; 6030 * 4 / 3 = 8040)
           expect(consultaProc.qtdAprovada).toBe(8040);
-          expect(consultaProc.vlrAprovado).toBe(80400.00);
-          expect(consultaProc.saldoFinanceiro).toBe(400.00);
-          expect(consultaProc.percExecucao).toBe(100.50);
+          expect(consultaProc.vlrAprovado).toBe(80400.0);
+          expect(consultaProc.saldoFinanceiro).toBe(400.0);
+          expect(consultaProc.percExecucao).toBe(100.5);
           expect(consultaProc.statusExecucao).toBe('DENTRO');
         }
 
@@ -225,7 +230,7 @@ describe('ProducaoService', () => {
           expect(cardioProc.qtdPactuadaMensal).toBe(4000);
           // 750 + 780 + 720 = 2250; 2250 * 4 / 3 = 3000
           expect(cardioProc.qtdAprovada).toBe(3000);
-          expect(cardioProc.percExecucao).toBe(75.00);
+          expect(cardioProc.percExecucao).toBe(75.0);
           expect(cardioProc.statusExecucao).toBe('ABAIXO');
         }
       });
@@ -236,14 +241,19 @@ describe('ProducaoService', () => {
 
   it('should fetch and aggregate mock producao accurately for GLOBAL mode (N = 48 months)', () => {
     service
-      .getProducaoPorPeriodo({
-        mode: 'GLOBAL',
-        competencia: null,
-        competenciaInicio: '202301',
-        competenciaFim: '202612',
-        mesesCount: 48,
-        descricaoFormatada: 'Vigência Global (2023 a 2026)',
-      }, undefined, '1234567', 1)
+      .getProducaoPorPeriodo(
+        {
+          mode: 'GLOBAL',
+          competencia: null,
+          competenciaInicio: '202301',
+          competenciaFim: '202612',
+          mesesCount: 48,
+          descricaoFormatada: 'Vigência Global (2023 a 2026)',
+        },
+        undefined,
+        '1234567',
+        1,
+      )
       .subscribe((res) => {
         expect(res.length).toBeGreaterThan(0);
         expect(res.every((p) => p.competencia === '202301 a 202612')).toBe(true);
@@ -253,12 +263,12 @@ describe('ProducaoService', () => {
         if (consultaProc) {
           // Meta global (48 meses) = 2000 * 48 = 96000
           expect(consultaProc.qtdPactuadaMensal).toBe(96000);
-          expect(consultaProc.vlUnitario).toBe(10.00);
-          expect(consultaProc.vlrPactuado).toBe(960000.00);
+          expect(consultaProc.vlUnitario).toBe(10.0);
+          expect(consultaProc.vlrPactuado).toBe(960000.0);
           // Projeção a partir das 4 competências (1950 + 2000 + 2050 + 1980 = 7980; 7980 * 48 / 4 = 95760)
           expect(consultaProc.qtdAprovada).toBe(95760);
-          expect(consultaProc.vlrAprovado).toBe(957600.00);
-          expect(consultaProc.saldoFinanceiro).toBe(-2400.00);
+          expect(consultaProc.vlrAprovado).toBe(957600.0);
+          expect(consultaProc.saldoFinanceiro).toBe(-2400.0);
           expect(consultaProc.percExecucao).toBe(99.75);
           expect(consultaProc.statusExecucao).toBe('DENTRO');
         }

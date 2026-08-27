@@ -48,8 +48,8 @@
         <th ttSortableColumn="descricao" style="width: 440px; min-width: 440px" class="text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
           Estrutura Hierárquica SIGTAP <p-treetable-sort-icon field="descricao" />
         </th>
-        <th ttSortableColumn="complexidade" style="width: 120px; min-width: 120px" class="text-center text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
-          Complexidade <p-treetable-sort-icon field="complexidade" />
+        <th style="width: 120px; min-width: 120px" class="text-center text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Complexidade
         </th>
         <th ttSortableColumn="vlUnitario" class="text-right text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider" style="width: 130px; min-width: 130px">
           Valor Unit. <p-treetable-sort-icon field="vlUnitario" />
@@ -72,8 +72,8 @@
         <th ttSortableColumn="percExecucao" style="width: 180px; min-width: 180px" class="text-left text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
           Percentual de Execução <p-treetable-sort-icon field="percExecucao" />
         </th>
-        <th ttSortableColumn="statusExecucao" style="width: 155px; min-width: 155px" class="text-center text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
-          Status da Meta <p-treetable-sort-icon field="statusExecucao" />
+        <th style="width: 155px; min-width: 155px" class="text-center text-surface-900 dark:text-surface-50 font-bold uppercase text-xs tracking-wider">
+          Status da Meta
         </th>
       </tr>
     </ng-template>
@@ -94,33 +94,33 @@
             <p-treetable-toggler [rowNode]="rowNode" />
 
             @if (rowData.tipo === 'GRUPO') {
-              <div class="flex items-center gap-2">
-                <span class="w-6 h-6 rounded-lg bg-primary-100 dark:bg-primary-950 text-primary-700 dark:text-primary-300 flex items-center justify-center text-xs font-mono font-bold">
-                  {{ rowData.coCodigo }}
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="bg-surface-900 dark:bg-surface-0 text-surface-0 dark:text-surface-900 font-bold px-2 py-0.5 rounded text-xs whitespace-nowrap shrink-0">
+                  GRUPO {{ rowData.coCodigo }}
                 </span>
-                <span class="text-xs font-bold text-surface-900 dark:text-surface-0 tracking-tight">
+                <span class="text-xs font-bold text-surface-900 dark:text-surface-0 tracking-tight truncate">
                   {{ rowData.descricao }}
                 </span>
                 <p-tag
                   [value]="rowData.totalProcedimentos + ' procs'"
                   severity="secondary"
-                  styleClass="text-[10px] px-1.5 py-0.2"
+                  styleClass="text-[10px] px-1.5 py-0.2 whitespace-nowrap shrink-0"
                 />
               </div>
             } @else if (rowData.tipo === 'SUBGRUPO') {
-              <div class="flex items-center gap-2 pl-2">
-                <span class="w-8 h-5 rounded bg-surface-200 dark:bg-surface-700 text-surface-700 dark:text-surface-300 flex items-center justify-center text-[11px] font-mono">
-                  {{ rowData.coCodigo }}
+              <div class="flex items-center gap-2 pl-2 min-w-0">
+                <span class="bg-surface-100 dark:bg-surface-800 text-surface-700 dark:text-surface-100 font-medium px-2 py-0.5 rounded text-xs whitespace-nowrap border border-surface-200 dark:border-surface-700 shrink-0">
+                  SUBGRUPO {{ rowData.coCodigo }}
                 </span>
-                <span class="text-xs font-semibold text-surface-800 dark:text-surface-200">
+                <span class="text-xs font-semibold text-surface-800 dark:text-surface-200 truncate">
                   {{ rowData.descricao }}
                 </span>
-                <span class="text-[10px] text-surface-400 font-mono">({{ rowData.totalProcedimentos }})</span>
+                <span class="text-[10px] text-surface-400 font-mono whitespace-nowrap shrink-0">({{ rowData.totalProcedimentos }})</span>
               </div>
             } @else {
               <!-- Procedimento Individual (Folha) -->
-              <div class="flex items-center gap-2 pl-4">
-                <span class="font-mono text-[11px] font-semibold text-surface-700 dark:text-surface-300 bg-surface-100 dark:bg-surface-800 px-1.5 py-0.5 rounded border border-surface-200 dark:border-surface-700">
+              <div class="flex items-center gap-2 pl-4 min-w-0">
+                <span class="font-mono text-[11px] font-semibold text-surface-700 dark:text-surface-300 bg-surface-100 dark:bg-surface-800 px-1.5 py-0.5 rounded border border-surface-200 dark:border-surface-700 whitespace-nowrap shrink-0">
                   {{ rowData.coProcedimentoFormatado }}
                 </span>
                 <span

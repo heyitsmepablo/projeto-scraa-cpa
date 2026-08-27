@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Instituicao } from '../models/instituicao.model';
-import { TipoInstituicao } from '../models/domain-enums.model';
+import { Instituicao } from '../../models/instituicao.model';
+import { TipoInstituicao } from '../../models/domain-enums.model';
 
 const MOCK_INSTITUICOES: Instituicao[] = [
   {
@@ -44,7 +44,7 @@ const MOCK_INSTITUICOES: Instituicao[] = [
     cnpj: '61.599.876/0001-34',
     tipoInstituicao: 'FILANTRÓPICO',
     criadoEm: new Date('2023-05-12T16:20:00Z'),
-  }
+  },
 ];
 
 @Injectable({
@@ -56,12 +56,12 @@ export class InstituicaoService {
   }
 
   findById(id: number): Observable<Instituicao> {
-    const inst = MOCK_INSTITUICOES.find(i => i.id === id);
+    const inst = MOCK_INSTITUICOES.find((i) => i.id === id);
     return of(inst as Instituicao).pipe(delay(200));
   }
 
   findByCnes(cnes: string): Observable<Instituicao> {
-    const inst = MOCK_INSTITUICOES.find(i => i.cnes === cnes);
+    const inst = MOCK_INSTITUICOES.find((i) => i.cnes === cnes);
     return of(inst as Instituicao).pipe(delay(200));
   }
 }

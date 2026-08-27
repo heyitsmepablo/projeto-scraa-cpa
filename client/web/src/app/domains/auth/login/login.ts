@@ -13,7 +13,7 @@ import { LoginFormComponent } from './components/login-form/login-form';
 })
 export class LoginComponent {
   onLoginSubmit(credentials: LoginFormModel) {
-    console.log(credentials);
+    // TODO: Send credentials to authentication service
   }
 }
 

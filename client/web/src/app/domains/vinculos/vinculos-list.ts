@@ -4,8 +4,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
 import { TagModule } from 'primeng/tag';
 
-import { CompetenceService } from '../../core/services/competence';
-import { VinculoService } from '../../core/services/vinculo';
+import { CompetenceService } from '../../core/services/competence/competence';
+import { VinculoService } from '../../core/services/vinculo/vinculo';
 import { VinculoView } from './models/vinculo-view.model';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { VinculosTableComponent } from './components/vinculos-table/vinculos-table';
@@ -14,12 +14,7 @@ import { VinculosTableComponent } from './components/vinculos-table/vinculos-tab
   selector: 'app-vinculos-list',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    TagModule,
-    PageHeaderComponent,
-    VinculosTableComponent,
-  ],
+  imports: [CommonModule, TagModule, PageHeaderComponent, VinculosTableComponent],
   templateUrl: './vinculos-list.html',
   styleUrl: './vinculos-list.css',
 })
@@ -36,9 +31,9 @@ export class VinculosListComponent {
           ...v,
           statusVigencia: this.getVigenciaStatus(v.dataFim),
           severityVigencia: this.getVigenciaSeverity(v.dataFim),
-        }))
-      )
-    )
+        })),
+      ),
+    ),
   );
   readonly loading = computed(() => this.vinculos() === undefined);
 
@@ -59,7 +54,7 @@ export class VinculosListComponent {
   }
 
   getVigenciaSeverity(
-    dataFim?: string | Date | null
+    dataFim?: string | Date | null,
   ): 'success' | 'info' | 'warn' | 'danger' | 'secondary' | 'contrast' | undefined {
     if (!dataFim) return 'info';
 

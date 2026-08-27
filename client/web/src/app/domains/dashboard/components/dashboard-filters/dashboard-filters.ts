@@ -17,13 +17,10 @@ import { SelectOption } from '../../models/dashboard.model';
 export class DashboardFiltersComponent {
   readonly instituicaoOptions = input<SelectOption[]>([]);
   readonly selectedInstituicaoCnes = input<string>('ALL');
-  readonly selectedQuadrimestre = input<string>('ALL');
   readonly selectedStatusExecucao = input<string>('ALL');
-  readonly quadrimestreOptions = input<SelectOption[]>([]);
   readonly statusOptions = input<SelectOption[]>([]);
 
   readonly instituicaoChange = output<string>();
-  readonly quadrimestreChange = output<string>();
   readonly statusChange = output<string>();
   readonly reset = output<void>();
 }

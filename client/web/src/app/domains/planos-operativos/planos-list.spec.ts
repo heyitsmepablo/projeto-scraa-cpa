@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { describe, beforeEach, it, expect, vi } from 'vitest';
 import { PlanosListComponent } from './planos-list';
-import { CompetenceService } from '../../core/services/competence';
+import { CompetenceService } from '../../core/services/competence/competence';
 import { PlanoOperativoService } from './services/plano-operativo';
 import { PlanoOperativo } from './models/plano-operativo.model';
 

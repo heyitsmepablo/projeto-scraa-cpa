@@ -13,9 +13,9 @@ describe('CompetenceService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should have initial competence set to 202401', () => {
-    expect(service.competencia()).toBe('202401');
-    expect(service.competenciaFormatada()).toBe('01/2024');
+  it('should have initial competence set to 202403', () => {
+    expect(service.competencia()).toBe('202403');
+    expect(service.competenciaFormatada()).toBe('03/2024');
   });
 
   it('should list competencies covering 2023 to 2026', () => {
@@ -99,5 +99,59 @@ describe('CompetenceService', () => {
     expect(service.countMonthsBetween('202401', '202401')).toBe(1);
     expect(service.countMonthsBetween('202401', '202404')).toBe(4);
     expect(service.countMonthsBetween('202301', '202412')).toBe(24);
+    expect(service.countMonthsBetween('', '202412')).toBe(1);
+    expect(service.countMonthsBetween('202401', '')).toBe(1);
+  });
+
+  it('should automatically reverse range dates if start > end', () => {
+    service.setRange('202408', '202402');
+    const filter = service.periodFilter();
+    expect(filter.mode).toBe('RANGE');
+    expect(filter.competenciaInicio).toBe('202402');
+    expect(filter.competenciaFim).toBe('202408');
+    expect(filter.mesesCount).toBe(7);
+    expect(service.periodoFormatado()).toContain('02/2024 a 08/2024 (7 meses)');
+  });
+
+  it('should ignore setRange with invalid formats', () => {
+    service.setRange('202401', '202403');
+    service.setRange('invalid', '202404');
+    expect(service.periodFilter().competenciaFim).toBe('202403');
+  });
+
+  it('should shift range window forward and backward with next/previous competence in RANGE mode', () => {
+    service.setRange('202402', '202404');
+    service.nextCompetence();
+    expect(service.periodFilter().competenciaInicio).toBe('202403');
+    expect(service.periodFilter().competenciaFim).toBe('202405');
+
+    service.previousCompetence();
+    expect(service.periodFilter().competenciaInicio).toBe('202402');
+    expect(service.periodFilter().competenciaFim).toBe('202404');
+  });
+
+  it('should support custom global bounds configuration and reset', () => {
+    const customBounds = {
+      competenciaInicio: '202306',
+      competenciaFim: '202506',
+      descricao: 'Vigência Customizada',
+      mesesCount: 25,
+      contexto: 'MONITORAMENTO' as const,
+      contratoNumero: 'CONT-123/2023',
+    };
+    service.setGlobalBounds(customBounds);
+    expect(service.globalBounds()).toEqual(customBounds);
+
+    service.applyGlobal();
+    const filter = service.periodFilter();
+    expect(filter.mode).toBe('GLOBAL');
+    expect(filter.competenciaInicio).toBe('202306');
+    expect(filter.competenciaFim).toBe('202506');
+    expect(filter.descricaoFormatada).toContain('Vigência Contrato CONT-123/2023');
+
+    service.resetGlobalBounds();
+    expect(service.globalBounds().contexto).toBe('DASHBOARD');
+    expect(service.globalBounds().competenciaInicio).toBe('202301');
+    expect(service.globalBounds().competenciaFim).toBe('202612');
   });
 });

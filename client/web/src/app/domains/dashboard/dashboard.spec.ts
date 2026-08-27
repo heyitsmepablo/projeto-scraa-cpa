@@ -3,13 +3,16 @@ import { of } from 'rxjs';
 import { provideRouter } from '@angular/router';
 import { describe, beforeEach, it, expect, vi } from 'vitest';
 import { DashboardComponent } from './dashboard';
-import { CompetenceService } from '../../core/services/competence';
-import { InstituicaoService } from '../../core/services/instituicao';
-import { ProducaoService } from '../../core/services/producao';
+import { CompetenceService } from '../../core/services/competence/competence';
+import { InstituicaoService } from '../../core/services/instituicao/instituicao';
+import { ProducaoService } from '../../core/services/producao/producao';
 import { MOCK_PRODUCAO_PROCEDIMENTOS } from '../../core/mocks/producao.mock';
 
 import { signal, computed } from '@angular/core';
 import { PeriodFilter } from '../../core/models/competence.model';
+
+// Mock Canvas for Chart.js
+HTMLCanvasElement.prototype.getContext = () => null as any;
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -36,7 +39,20 @@ describe('DashboardComponent', () => {
       periodoFormatado: computed(() => periodFilterSignal().descricaoFormatada),
       competencia: computed(() => periodFilterSignal().competencia ?? '202401'),
       competenciaFormatada: computed(() => '01/2024'),
+      globalBounds: computed(() => ({
+        competenciaInicio: '202301',
+        competenciaFim: '202612',
+        descricao: 'Consolidação Global da Rede (01/2023 a 12/2026)',
+        mesesCount: 48,
+        contexto: 'DASHBOARD',
+      })),
       setCompetence: vi.fn(),
+      setSpecificCompetence: vi.fn(),
+      setRange: vi.fn(),
+      setGlobal: vi.fn(),
+      setGlobalBounds: vi.fn(),
+      resetGlobalBounds: vi.fn(),
+      applyGlobal: vi.fn(),
       previousCompetence: vi.fn(),
       nextCompetence: vi.fn(),
     };
@@ -58,7 +74,7 @@ describe('DashboardComponent', () => {
             cnpj: '60.453.016/0001-74',
             tipoInstituicao: 'FILANTRÓPICO',
           },
-        ])
+        ]),
       ),
     };
 
@@ -80,7 +96,15 @@ describe('DashboardComponent', () => {
         { provide: InstituicaoService, useValue: instituicaoServiceMock },
         { provide: ProducaoService, useValue: producaoServiceMock },
       ],
-    }).compileComponents();
+    })
+      .overrideComponent(DashboardComponent, {
+        set: {
+          providers: [
+            { provide: CompetenceService, useValue: competenceServiceMock },
+          ],
+        },
+      })
+      .compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
@@ -118,7 +142,9 @@ describe('DashboardComponent', () => {
     expect(kpis.totalQtdAprovada).toBeGreaterThan(0);
     expect(kpis.totalQtdProduzida).toBeGreaterThan(0);
     expect(kpis.taxaExecucaoGeral).toBeGreaterThan(0);
-    expect(kpis.totalDentro + kpis.totalAcima + kpis.totalAbaixo + kpis.totalSemPacto).toBe(kpis.totalProcedimentos);
+    expect(kpis.totalDentro + kpis.totalAcima + kpis.totalAbaixo + kpis.totalSemPacto).toBe(
+      kpis.totalProcedimentos,
+    );
   });
 
   it('should populate instituicaoOptions correctly with ALL placeholder and items', () => {
@@ -129,36 +155,29 @@ describe('DashboardComponent', () => {
   });
 
   it('should filter items when changing selectedInstituicaoCnes', () => {
-    const initialTotal = component.filteredProcedimentos().length;
+    const initialTotal = component.dashboardService.filteredProcedimentos().length;
     expect(initialTotal).toBeGreaterThan(0);
 
     // Filtra pela Santa Casa (1234567)
     component.selectedInstituicaoCnes.set('1234567');
     fixture.detectChanges();
 
-    const filtered = component.filteredProcedimentos();
+    const filtered = component.dashboardService.filteredProcedimentos();
     expect(filtered.length).toBeLessThanOrEqual(initialTotal);
     expect(filtered.every((p) => p.cnes === '1234567')).toBe(true);
 
     // Reseta filtros
     component.resetFilters();
     expect(component.selectedInstituicaoCnes()).toBe('ALL');
-    expect(component.selectedQuadrimestre()).toBe('ALL');
     expect(component.selectedStatusExecucao()).toBe('ALL');
   });
 
-  it('should filter items by quadrimestre and statusExecucao', () => {
+  it('should filter items by statusExecucao', () => {
     component.selectedStatusExecucao.set('ACIMA');
     fixture.detectChanges();
 
-    const filtered = component.filteredProcedimentos();
+    const filtered = component.dashboardService.filteredProcedimentos();
     expect(filtered.every((p) => p.statusExecucao === 'ACIMA')).toBe(true);
-
-    component.selectedQuadrimestre.set('1º Quadrimestre');
-    fixture.detectChanges();
-
-    const quadFiltered = component.filteredProcedimentos();
-    expect(quadFiltered.every((p) => p.quadrimestre === '1º Quadrimestre')).toBe(true);
   });
 
   it('should format currency correctly', () => {

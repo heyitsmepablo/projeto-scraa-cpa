@@ -9,6 +9,15 @@ export interface PeriodFilter {
   descricaoFormatada: string;
 }
 
+export interface GlobalBoundsContext {
+  competenciaInicio: string;
+  competenciaFim: string;
+  descricao: string;
+  mesesCount: number;
+  contexto: 'DASHBOARD' | 'MONITORAMENTO';
+  contratoNumero?: string;
+}
+
 export interface CompetenciaOption {
   value: string;
   label: string;

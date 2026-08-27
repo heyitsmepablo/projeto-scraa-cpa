@@ -1,18 +1,34 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { CompetenciaOption, PeriodFilter, PeriodMode } from '../models/competence.model';
+import {
+  CompetenciaOption,
+  GlobalBoundsContext,
+  PeriodFilter,
+  PeriodMode,
+} from '../../models/competence.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CompetenceService {
+  private readonly _defaultGlobalBounds: GlobalBoundsContext = {
+    competenciaInicio: '202301',
+    competenciaFim: '202612',
+    descricao: 'Consolidação Global da Rede (01/2023 a 12/2026)',
+    mesesCount: 48,
+    contexto: 'DASHBOARD',
+  };
+
+  private readonly _globalBounds = signal<GlobalBoundsContext>(this._defaultGlobalBounds);
+  readonly globalBounds = computed(() => this._globalBounds());
+
   private readonly _competencias = signal<CompetenciaOption[]>(this.generateCompetencias());
   private readonly _periodFilter = signal<PeriodFilter>({
     mode: 'SPECIFIC',
-    competencia: '202401',
-    competenciaInicio: '202401',
-    competenciaFim: '202401',
+    competencia: '202403',
+    competenciaInicio: '202403',
+    competenciaFim: '202403',
     mesesCount: 1,
-    descricaoFormatada: '01/2024 - Janeiro',
+    descricaoFormatada: '03/2024 - Março',
   });
 
   // Novos signals reativos para análise temporal
@@ -25,7 +41,7 @@ export class CompetenceService {
   readonly competencias = computed(() => this._competencias());
   readonly competencia = computed(() => {
     const pf = this._periodFilter();
-    return pf.competencia ?? pf.competenciaInicio ?? '202401';
+    return pf.competencia ?? pf.competenciaInicio ?? '202403';
   });
 
   readonly competenciaFormatada = computed(() => {
@@ -39,6 +55,28 @@ export class CompetenceService {
   readonly selectedOption = computed(() => {
     return this.competencias().find((c) => c.value === this.competencia()) ?? null;
   });
+
+  /**
+   * Define os limites e contexto para o modo Vigência Global.
+   */
+  setGlobalBounds(bounds: GlobalBoundsContext): void {
+    this._globalBounds.set(bounds);
+  }
+
+  /**
+   * Restaura os limites globais padrão (Dashboard).
+   */
+  resetGlobalBounds(): void {
+    this._globalBounds.set(this._defaultGlobalBounds);
+  }
+
+  /**
+   * Aplica a vigência global baseada nos limites atualmente configurados no contexto ativo.
+   */
+  applyGlobal(): void {
+    const bounds = this._globalBounds();
+    this.setGlobal(bounds.competenciaInicio, bounds.competenciaFim);
+  }
 
   /**
    * Define uma competência mensal específica (Modo SPECIFIC - N=1).
@@ -86,7 +124,11 @@ export class CompetenceService {
    */
   setGlobal(inicio: string = '202301', fim: string = '202612'): void {
     const mesesCount = this.countMonthsBetween(inicio, fim);
-    const descricaoFormatada = `Vigência Global (${this.formatCompetenciaShort(inicio)} a ${this.formatCompetenciaShort(fim)} - ${mesesCount} meses)`;
+    const bounds = this._globalBounds();
+    let descricaoFormatada = `Vigência Global (${this.formatCompetenciaShort(inicio)} a ${this.formatCompetenciaShort(fim)} - ${mesesCount} meses)`;
+    if (bounds.contexto === 'MONITORAMENTO' && bounds.contratoNumero) {
+      descricaoFormatada = `Vigência Contrato ${bounds.contratoNumero} (${this.formatCompetenciaShort(inicio)} a ${this.formatCompetenciaShort(fim)} - ${mesesCount} meses)`;
+    }
 
     this._periodFilter.set({
       mode: 'GLOBAL',
@@ -215,4 +257,19 @@ export class CompetenceService {
 
     return options;
   }
+
+  /**
+   * Avança para o próximo período (compatibilidade com seletor unificado).
+   */
+  nextPeriod(): void {
+    this.nextCompetence();
+  }
+
+  /**
+   * Retrocede para o período anterior (compatibilidade com seletor unificado).
+   */
+  previousPeriod(): void {
+    this.previousCompetence();
+  }
 }
+
