@@ -1,0 +1,20 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir poetry
+
+COPY sync_sigtap/pyproject.toml sync_sigtap/poetry.lock* ./
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi --only main || pip install --no-cache-dir pandas openpyxl sqlalchemy python-dotenv click apscheduler psycopg2-binary
+
+COPY shared ./scripts/shared
+COPY sync_sigtap/src ./src
+
+ENV PYTHONPATH="/app:/app/src"
+CMD ["python", "-m", "sync_sigtap", "schedule"]

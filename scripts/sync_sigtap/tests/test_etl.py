@@ -1,7 +1,21 @@
+from datetime import date, datetime, timezone
+from decimal import Decimal
+from unittest.mock import MagicMock
 import pandas as pd
+from scripts.shared.models.cpa import Instituicao
 
-from sync_sigtap.database import SigtapProcedimento, SigtapChangelog, SigtapImportacao, get_session_factory
+from sync_sigtap.database import (
+    SigtapProcedimento,
+    SigtapChangelog,
+    SigtapImportacao,
+    SigtapComponenteRede,
+    SigtapTuss,
+    SigtapRenases,
+    Vinculo,
+    get_session_factory,
+)
 from sync_sigtap.etl_core import LayoutParser, SigtapEtl, FtpClient
+from sync_sigtap.main import get_oldest_contract_competencia
 
 def test_parse_layout_returns_correct_colspecs():
     layout_content = """tb_procedimento
@@ -144,7 +158,7 @@ def test_apply_diff_inserts_to_db(pg_engine):
         df_db = pd.DataFrame()
         diff = etl.compute_diff(df_ftp, df_db)
         
-        etl.apply_diff(diff, session, importacao.id, df_db, SigtapProcedimento, "tb_procedimento")
+        etl.apply_diff(diff, session, importacao.id, df_db, SigtapProcedimento, "tb_procedimento", competencia="202301")
         
         # Verify
         procs = session.query(SigtapProcedimento).all()
@@ -196,7 +210,7 @@ def test_apply_diff_delete_generates_log_no_hard_delete(pg_engine):
         diff = etl.compute_diff(df_ftp, df_db)
         assert len(diff.deletes) == 1
         
-        etl.apply_diff(diff, session, importacao.id, df_db, SigtapProcedimento, "tb_procedimento")
+        etl.apply_diff(diff, session, importacao.id, df_db, SigtapProcedimento, "tb_procedimento", competencia="202302")
         
         # Verify soft delete
         proc_db = session.query(SigtapProcedimento).filter_by(coProcedimento="9999999999").first()
@@ -291,4 +305,342 @@ def test_diff_detects_composite_pk_changes():
     assert len(diff.updates) == 1
     assert diff.updates.index.tolist() == [("002", "2")]
     assert len(diff.deletes) == 0
+
+
+def test_upsert_table_empty_df():
+    """Valida que upsert_table retorna 0 imediatamente para DataFrame vazio."""
+    from unittest.mock import MagicMock
+    etl = SigtapEtl({})
+    session = MagicMock()
+    result = etl.upsert_table(
+        session=session,
+        model_class=SigtapProcedimento,
+        table_name="tb_procedimento",
+        df_ftp=pd.DataFrame(),
+        competencia="202401",
+    )
+    assert result == 0
+    session.execute.assert_not_called()
+    session.bulk_insert_mappings.assert_not_called()
+
+
+def test_upsert_table_deduplication():
+    """Valida que linhas duplicadas na chave primária são deduplicadas mantendo a última."""
+    from unittest.mock import MagicMock
+    etl = SigtapEtl({})
+    session = MagicMock()
+    session.bind.dialect.name = "sqlite"
+
+    df_ftp = pd.DataFrame([
+        {"coProcedimento": "0101010010", "noProcedimento": "Versao 1", "vlSh": 10.0},
+        {"coProcedimento": "0101010010", "noProcedimento": "Versao 2", "vlSh": 20.0}, # duplicata
+        {"coProcedimento": "0202010120", "noProcedimento": "Outro Proc", "vlSh": 30.0},
+    ]).set_index("coProcedimento")
+
+    total = etl.upsert_table(
+        session=session,
+        model_class=SigtapProcedimento,
+        table_name="tb_procedimento",
+        df_ftp=df_ftp,
+        competencia="202401",
+    )
+
+    assert total == 2  # Deduplicado de 3 para 2 registros
+    assert session.bulk_insert_mappings.call_count == 1
+    call_args = session.bulk_insert_mappings.call_args[0]
+    inserted_records = call_args[1]
+    assert len(inserted_records) == 2
+    assert inserted_records[0]["noProcedimento"] == "Versao 2"
+
+
+def test_upsert_table_sqlite_execution(pg_engine):
+    """Valida a execução de upsert_table persistindo dados no SQLite (fallback bulk_insert_mappings)."""
+    SessionLocal = get_session_factory(pg_engine)
+    etl = SigtapEtl({})
+
+    df_ftp = pd.DataFrame([
+        {
+            "coProcedimento": "0301010158",
+            "noProcedimento": "Consulta Medica Especializada",
+            "tpComplexidade": "2",
+            "tpSexo": "A",
+            "qtMaximaExecucao": 99,
+            "qtDiasPermanencia": 0,
+            "qtPontos": 0,
+            "vlIdadeMinima": 0,
+            "vlIdadeMaxima": 120,
+            "vlSh": 0.0,
+            "vlSa": 15.0,
+            "vlSp": 0.0,
+            "coFinanciamento": "01",
+            "coRubrica": "000000",
+            "qtTempoPermanencia": 0,
+            "dtCompetencia": "202401",
+        }
+    ]).set_index("coProcedimento")
+
+    with SessionLocal() as session:
+        count = etl.upsert_table(
+            session=session,
+            model_class=SigtapProcedimento,
+            table_name="tb_procedimento",
+            df_ftp=df_ftp,
+            competencia="202401",
+        )
+        session.commit()
+
+        assert count == 1
+        proc = session.query(SigtapProcedimento).filter_by(coProcedimento="0301010158").first()
+        assert proc is not None
+        assert proc.noProcedimento == "Consulta Medica Especializada"
+        assert float(proc.vlSa) == 15.0
+
+
+def test_upsert_table_postgres_dialect_calls_execute():
+    """Valida que sob dialeto PostgreSQL o método monta e executa ON CONFLICT DO UPDATE."""
+    from unittest.mock import MagicMock
+    etl = SigtapEtl({})
+    session = MagicMock()
+    session.bind.dialect.name = "postgresql"
+
+    df_ftp = pd.DataFrame([
+        {
+            "coProcedimento": "0101010010",
+            "noProcedimento": "Teste PostgreSQL",
+            "vlSh": 10.0,
+        }
+    ]).set_index("coProcedimento")
+
+    count = etl.upsert_table(
+        session=session,
+        model_class=SigtapProcedimento,
+        table_name="tb_procedimento",
+        df_ftp=df_ftp,
+        competencia="202401",
+    )
+
+    assert count == 1
+    assert session.execute.call_count == 1
+    assert session.flush.call_count == 1
+
+
+def test_upsert_table_tb_componente_rede_snake_case_pk_no_keyerror(pg_engine):
+    """Valida que upsert_table não lança KeyError para tb_componente_rede (PK snake_case co_componente_rede)."""
+    SessionLocal = get_session_factory(pg_engine)
+    etl = SigtapEtl({})
+
+    df_ftp = pd.DataFrame([
+        {
+            "coComponenteRede": "CR001",
+            "noComponenteRede": "Componente Especializado",
+            "coRedeAtencao": "001",
+        },
+        {
+            "coComponenteRede": "CR002",
+            "noComponenteRede": "Componente Basico",
+            "coRedeAtencao": "002",
+        },
+    ]).set_index("coComponenteRede")
+
+    # 1. Execução no SQLite (fallback)
+    with SessionLocal() as session:
+        count = etl.upsert_table(
+            session=session,
+            model_class=SigtapComponenteRede,
+            table_name="tb_componente_rede",
+            df_ftp=df_ftp,
+            competencia="202401",
+        )
+        session.commit()
+        assert count == 2
+
+        reg = session.query(SigtapComponenteRede).filter_by(coComponenteRede="CR001").first()
+        assert reg is not None
+        assert reg.noComponenteRede == "Componente Especializado"
+        assert reg.coRedeAtencao == "001"
+
+    # 2. Execução com dialeto PostgreSQL mockado para checar ON CONFLICT e target_columns
+    mock_session = MagicMock()
+    mock_session.bind.dialect.name = "postgresql"
+    count_pg = etl.upsert_table(
+        session=mock_session,
+        model_class=SigtapComponenteRede,
+        table_name="tb_componente_rede",
+        df_ftp=df_ftp,
+        competencia="202401",
+    )
+    assert count_pg == 2
+    assert mock_session.execute.call_count == 1
+    stmt = mock_session.execute.call_args[0][0]
+    assert "sigtap_tb_componente_rede" in str(stmt)
+
+
+def test_upsert_table_tb_tuss_snake_case_pk_no_keyerror(pg_engine):
+    """Valida que upsert_table não lança KeyError para tb_tuss (PK snake_case co_tuss)."""
+    SessionLocal = get_session_factory(pg_engine)
+    etl = SigtapEtl({})
+
+    df_ftp = pd.DataFrame([
+        {
+            "coTuss": "TUSS100001",
+            "noTuss": "Procedimento Odontologico Tuss",
+        }
+    ]).set_index("coTuss")
+
+    with SessionLocal() as session:
+        count = etl.upsert_table(
+            session=session,
+            model_class=SigtapTuss,
+            table_name="tb_tuss",
+            df_ftp=df_ftp,
+            competencia="202401",
+        )
+        session.commit()
+        assert count == 1
+
+        reg = session.query(SigtapTuss).filter_by(coTuss="TUSS100001").first()
+        assert reg is not None
+        assert reg.noTuss == "Procedimento Odontologico Tuss"
+
+    # Dialeto PostgreSQL
+    mock_session = MagicMock()
+    mock_session.bind.dialect.name = "postgresql"
+    count_pg = etl.upsert_table(
+        session=mock_session,
+        model_class=SigtapTuss,
+        table_name="tb_tuss",
+        df_ftp=df_ftp,
+        competencia="202401",
+    )
+    assert count_pg == 1
+    assert mock_session.execute.call_count == 1
+
+
+def test_upsert_table_tb_renases_snake_case_pk_no_keyerror(pg_engine):
+    """Valida que upsert_table não lança KeyError para tb_renases (PK snake_case co_renases)."""
+    SessionLocal = get_session_factory(pg_engine)
+    etl = SigtapEtl({})
+
+    df_ftp = pd.DataFrame([
+        {
+            "coRenases": "REN0000001",
+            "noRenases": "Acao de Saude Renases",
+        }
+    ]).set_index("coRenases")
+
+    with SessionLocal() as session:
+        count = etl.upsert_table(
+            session=session,
+            model_class=SigtapRenases,
+            table_name="tb_renases",
+            df_ftp=df_ftp,
+            competencia="202401",
+        )
+        session.commit()
+        assert count == 1
+
+        reg = session.query(SigtapRenases).filter_by(coRenases="REN0000001").first()
+        assert reg is not None
+        assert reg.noRenases == "Acao de Saude Renases"
+
+    # Dialeto PostgreSQL
+    mock_session = MagicMock()
+    mock_session.bind.dialect.name = "postgresql"
+    count_pg = etl.upsert_table(
+        session=mock_session,
+        model_class=SigtapRenases,
+        table_name="tb_renases",
+        df_ftp=df_ftp,
+        competencia="202401",
+    )
+    assert count_pg == 1
+    assert mock_session.execute.call_count == 1
+
+
+def test_sync_sigtap_get_oldest_contract_competencia_com_vinculo(pg_engine):
+    """Valida que sync_sigtap obtém a competência (YYYYMM) da dataInicio mais antiga de Vinculo."""
+    SessionLocal = get_session_factory(pg_engine)
+
+    with SessionLocal() as session:
+        inst = Instituicao(id=1, cnes="1234567", nome="Hosp Teste", tipoInstituicao="FILANTRÓPICO")
+        session.add(inst)
+        # Vínculo mais antigo: 2023-05-10 -> competência 202305
+        v1 = Vinculo(
+            id=101,
+            instituicaoId=1,
+            numero="001/2023",
+            numeroProcessoSei="SEI-001",
+            tipoVinculo="CONTRATO",
+            objeto="Objeto 1",
+            complexidade=["MC"],
+            dataDaAssinatura=datetime(2023, 5, 1, tzinfo=timezone.utc),
+            dataInicio=date(2023, 5, 10),
+            valorTotal=Decimal("1000.00"),
+        )
+        # Vínculo mais recente: 2024-01-01
+        v2 = Vinculo(
+            id=102,
+            instituicaoId=1,
+            numero="002/2024",
+            numeroProcessoSei="SEI-002",
+            tipoVinculo="CONTRATO",
+            objeto="Objeto 2",
+            complexidade=["AC"],
+            dataDaAssinatura=datetime(2024, 1, 1, tzinfo=timezone.utc),
+            dataInicio=date(2024, 1, 1),
+            valorTotal=Decimal("2000.00"),
+        )
+        session.add_all([v1, v2])
+        session.commit()
+
+        oldest = get_oldest_contract_competencia(session)
+        assert oldest == "202305"
+
+
+def test_sync_sigtap_get_oldest_contract_competencia_sem_vinculo(pg_engine):
+    """Valida que get_oldest_contract_competencia retorna None quando não há vínculos."""
+    SessionLocal = get_session_factory(pg_engine)
+    with SessionLocal() as session:
+        assert get_oldest_contract_competencia(session) is None
+
+
+def test_sync_sigtap_get_oldest_contract_competencia_ignora_deletados(pg_engine):
+    """Valida que contratos deletados (deletadoEm não nulo) são ignorados na determinação da competência mais antiga."""
+    SessionLocal = get_session_factory(pg_engine)
+
+    with SessionLocal() as session:
+        inst = Instituicao(id=2, cnes="7654321", nome="Hosp Teste 2", tipoInstituicao="FILANTRÓPICO")
+        session.add(inst)
+        # Vínculo antigo deletado
+        v_deletado = Vinculo(
+            id=201,
+            instituicaoId=2,
+            numero="003/2021",
+            numeroProcessoSei="SEI-003",
+            tipoVinculo="CONTRATO",
+            objeto="Objeto Deletado",
+            complexidade=["BC"],
+            dataDaAssinatura=datetime(2021, 1, 1, tzinfo=timezone.utc),
+            dataInicio=date(2021, 1, 1),
+            valorTotal=Decimal("500.00"),
+            deletadoEm=datetime(2022, 1, 1, 12, 0, tzinfo=timezone.utc),
+        )
+        # Vínculo ativo mais antigo
+        v_ativo = Vinculo(
+            id=202,
+            instituicaoId=2,
+            numero="004/2023",
+            numeroProcessoSei="SEI-004",
+            tipoVinculo="CONTRATO",
+            objeto="Objeto Ativo",
+            complexidade=["MC"],
+            dataDaAssinatura=datetime(2023, 9, 15, tzinfo=timezone.utc),
+            dataInicio=date(2023, 9, 15),
+            valorTotal=Decimal("1500.00"),
+        )
+        session.add_all([v_deletado, v_ativo])
+        session.commit()
+
+        oldest = get_oldest_contract_competencia(session)
+        assert oldest == "202309"
 

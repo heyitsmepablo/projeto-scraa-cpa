@@ -7,11 +7,12 @@ import zipfile
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
+from typing import Optional
 
 from .config import load_settings
-from .database import get_engine, get_session_factory, SigtapImportacao
-from .etl_core import FtpClient, SigtapEtl, LayoutParser
-import sync_sigtap.database as db_models
+from .database import get_engine, get_session_factory, SigtapImportacao, Vinculo
+from .etl_core import FtpClient, SigtapEtl, LayoutParser, FtpFileNotFoundError
+from . import database as db_models
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,19 @@ def setup_logging(level: str):
     )
     logging.getLogger("apscheduler").setLevel(logging.WARNING)
     logging.getLogger("sqlalchemy.engine").setLevel(logging.WARNING)
+
+def get_oldest_contract_competencia(session) -> Optional[str]:
+    """Busca a competência a partir da data de início do contrato mais antigo ativo (Vinculo.dataInicio)."""
+    primeiro_vinculo = (
+        session.query(Vinculo)
+        .filter(Vinculo.deletadoEm.is_(None))
+        .order_by(Vinculo.dataInicio.asc())
+        .first()
+    )
+    if primeiro_vinculo and primeiro_vinculo.dataInicio:
+        return primeiro_vinculo.dataInicio.strftime("%Y%m")
+    return None
+
 
 def execute_etl(settings, competencia_inicial=None):
     logger.info("Iniciando rotina de sincronização SIGTAP genérica...")
@@ -46,9 +60,46 @@ def execute_etl(settings, competencia_inicial=None):
                 return
         else:
             try:
-                competencia, filename = ftp.get_latest_competencia()
-                competencias_to_process = [(competencia, filename)]
-                logger.info(f"Última competência no FTP: {competencia} ({filename})")
+                # 1. Se houver última importação com SUCESSO no banco, avança 1 mês
+                ultima_imp = (
+                    session.query(SigtapImportacao)
+                    .filter_by(status="SUCESSO")
+                    .order_by(SigtapImportacao.competencia.desc())
+                    .first()
+                )
+                if ultima_imp and ultima_imp.competencia:
+                    y = int(ultima_imp.competencia[:4])
+                    m = int(ultima_imp.competencia[4:6])
+                    m += 1
+                    if m > 12:
+                        m = 1
+                        y += 1
+                    next_comp = f"{y}{m:02d}"
+                    logger.info(
+                        f"Última importação SIGTAP com sucesso: {ultima_imp.competencia}. "
+                        f"Buscando competências a partir de {next_comp}..."
+                    )
+                    try:
+                        competencias_to_process = ftp.get_competencias_from(next_comp)
+                        logger.info(f"Encontradas {len(competencias_to_process)} novas competências a partir de {next_comp}.")
+                    except FtpFileNotFoundError:
+                        logger.info(f"Base SIGTAP já está atualizada. Nenhuma nova competência a partir de {next_comp}.")
+                        return
+                else:
+                    # 2. Se NÃO houver importação no banco, busca a data de início mais antiga na tabela Vinculo
+                    oldest_comp = get_oldest_contract_competencia(session)
+                    if oldest_comp:
+                        logger.info(
+                            f"Sem histórico no banco para SIGTAP. "
+                            f"Utilizando competência mais antiga do contrato: {oldest_comp}"
+                        )
+                        competencias_to_process = ftp.get_competencias_from(oldest_comp)
+                        logger.info(f"Encontradas {len(competencias_to_process)} competências a partir de {oldest_comp}.")
+                    else:
+                        # 3. Fallback se não houver vínculos cadastrados
+                        competencia, filename = ftp.get_latest_competencia()
+                        competencias_to_process = [(competencia, filename)]
+                        logger.info(f"Sem histórico e sem vínculos. Processando apenas a mais recente: {competencia} ({filename})")
             except Exception as e:
                 logger.error(f"Erro ao verificar FTP: {e}")
                 return
@@ -114,23 +165,18 @@ def execute_etl(settings, competencia_inicial=None):
                         logger.info(f"[{idx:02d}/{total_tables:02d}] ({percent:.1f}%) Processando {table_name} | ETA: {eta_str}")
                         
                         try:
-                            df_ftp = etl.extract_table_from_zip(zip_path, table_name)
-                            if df_ftp.empty:
-                                continue
-                                
-                            df_db = etl.extract_table_from_db(session, model_class, table_name)
-                            diff = etl.compute_diff(df_ftp, df_db)
-                            
-                            logger.info(f"[{table_name}] Diff -> INSERTs: {len(diff.inserts)}, UPDATEs: {len(diff.updates)}, DELETEs: {len(diff.deletes)}")
-                            
-                            if not diff.inserts.empty or not diff.updates.empty or not diff.deletes.empty:
-                                etl.apply_diff(diff, session, importacao.id, df_db, model_class, table_name, competencia)
-                                
-                            tabelas_sucesso.append(table_name)
+                            with session.begin_nested():
+                                df_ftp = etl.extract_table_from_zip(zip_path, table_name)
+                                if not df_ftp.empty:
+                                    total_upserted = etl.upsert_table(
+                                        session, model_class, table_name, df_ftp, competencia, batch_size=2000
+                                    )
+                                    logger.info(f"[{table_name}] UPSERT -> {total_upserted} registros sincronizados.")
+                                    tabelas_sucesso.append(table_name)
                         except Exception as ex:
-                            session.rollback()
-                            logger.error(f"Erro ao processar {table_name}: {ex}. Interrompendo a sincronização.", exc_info=True)
-                            raise  # Interrompe o processo e vai para o catch principal para marcar a importacao como FALHA
+                            logger.error(f"Erro ao processar tabela {table_name}: {ex}. Isolando falha.", exc_info=True)
+                            if table_name == "tb_procedimento":
+                                raise
                     
                 importacao.status = "SUCESSO"
                 importacao.tabelasAfetadas = ", ".join(tabelas_sucesso)
