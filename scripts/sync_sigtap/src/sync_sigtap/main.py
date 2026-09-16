@@ -3,6 +3,7 @@ import logging
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import click
+import re
 import zipfile
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -199,19 +200,38 @@ def cli():
     pass
 
 @cli.command()
-@click.option('--competencia-inicial', help='Competência inicial para importação histórica (ex: 202401).')
-def run(competencia_inicial):
+@click.option('--competencia-inicial', envvar='COMPETENCIA_INICIAL', default=None, help='Competência inicial para importação histórica (ex: 202401).')
+@click.option('--auto-confirm', is_flag=True, default=False, envvar='AUTO_CONFIRM_SYNC', help='Pula confirmação para limpeza do banco em execuções automatizadas.')
+def run(competencia_inicial, auto_confirm):
     try:
         settings = load_settings()
         setup_logging(settings.log_level)
         
+        if competencia_inicial:
+            comp_clean = str(competencia_inicial).strip()
+            if not comp_clean:
+                competencia_inicial = None
+            else:
+                m1 = re.match(r'^(\d{4})(\d{2})$', comp_clean)
+                m2 = re.match(r'^(\d{4})-(\d{2})$', comp_clean)
+                m3 = re.match(r'^(\d{2})/(\d{4})$', comp_clean)
+                if m1:
+                    competencia_inicial = f"{m1.group(1)}{m1.group(2)}"
+                elif m2:
+                    competencia_inicial = f"{m2.group(1)}{m2.group(2)}"
+                elif m3:
+                    competencia_inicial = f"{m3.group(2)}{m3.group(1)}"
+                else:
+                    logger.error(f"Erro: Formato de competência inválido '{competencia_inicial}'. Use YYYYMM, YYYY-MM ou MM/YYYY.")
+                    sys.exit(1)
+
         if competencia_inicial:
             engine = get_engine(settings.database_url)
             SessionLocal = get_session_factory(engine)
             with SessionLocal() as session:
                 count = session.query(SigtapImportacao).count()
                 if count > 0:
-                    if click.confirm("O banco de dados já possui importações do SIGTAP. Deseja apagar todos os dados SIGTAP e recarregar o histórico?", default=False):
+                    if auto_confirm or click.confirm("O banco de dados já possui importações do SIGTAP. Deseja apagar todos os dados SIGTAP e recarregar o histórico?", default=False):
                         logger.info("Deletando histórico do SIGTAP...")
                         for table in reversed(db_models.Base.metadata.sorted_tables):
                             if table.name.startswith("sigtap_"):
