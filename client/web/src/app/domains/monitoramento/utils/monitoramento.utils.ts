@@ -34,15 +34,35 @@ export function formatSigtapCode(code?: string): string {
 export function getComplexidadeSeverity(
   c?: string
 ): 'success' | 'info' | 'warn' | 'danger' | 'secondary' | 'contrast' | undefined {
-  switch (c?.toUpperCase()) {
-    case 'BC':
+  switch (c) {
+    case '1':
       return 'info';
-    case 'MC':
+    case '2':
       return 'warn';
-    case 'AC':
+    case '3':
       return 'danger';
+    case '0':
+      return 'secondary';
     default:
       return 'secondary';
+  }
+}
+
+/**
+ * Retorna o rótulo legível para a complexidade do procedimento.
+ */
+export function getComplexidadeLabel(c?: string): string {
+  switch (c) {
+    case '1':
+      return 'Atenção Básica';
+    case '2':
+      return 'Média Complexidade';
+    case '3':
+      return 'Alta Complexidade';
+    case '0':
+      return 'Não se aplica';
+    default:
+      return c || '-';
   }
 }
 

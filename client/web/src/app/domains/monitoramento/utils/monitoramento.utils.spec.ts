@@ -2,6 +2,7 @@ import {
   formatCurrency, 
   formatSigtapCode, 
   getComplexidadeSeverity, 
+  getComplexidadeLabel,
   getStatusSeverity, 
   getStatusLabel, 
   getClampedPercent, 
@@ -35,11 +36,26 @@ describe('MonitoramentoUtils', () => {
   });
 
   describe('getComplexidadeSeverity', () => {
-    it('should return proper severity for each complexity', () => {
-      expect(getComplexidadeSeverity('BC')).toBe('info');
-      expect(getComplexidadeSeverity('MC')).toBe('warn');
-      expect(getComplexidadeSeverity('AC')).toBe('danger');
+    it('should return proper severity for each complexity (1, 2, 3, 0, undefined, default)', () => {
+      expect(getComplexidadeSeverity('1')).toBe('info');
+      expect(getComplexidadeSeverity('2')).toBe('warn');
+      expect(getComplexidadeSeverity('3')).toBe('danger');
+      expect(getComplexidadeSeverity('0')).toBe('secondary');
+      expect(getComplexidadeSeverity(undefined)).toBe('secondary');
       expect(getComplexidadeSeverity('UNKNOWN')).toBe('secondary');
+      expect(getComplexidadeSeverity('')).toBe('secondary');
+    });
+  });
+
+  describe('getComplexidadeLabel', () => {
+    it('should return proper label for each complexity (1, 2, 3, 0, undefined, default)', () => {
+      expect(getComplexidadeLabel('1')).toBe('Atenção Básica');
+      expect(getComplexidadeLabel('2')).toBe('Média Complexidade');
+      expect(getComplexidadeLabel('3')).toBe('Alta Complexidade');
+      expect(getComplexidadeLabel('0')).toBe('Não se aplica');
+      expect(getComplexidadeLabel(undefined)).toBe('-');
+      expect(getComplexidadeLabel('')).toBe('-');
+      expect(getComplexidadeLabel('OUTRO')).toBe('OUTRO');
     });
   });
 

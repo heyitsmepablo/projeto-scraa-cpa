@@ -14,6 +14,7 @@ import {
 import {
   formatCurrency,
   getComplexidadeSeverity,
+  getComplexidadeLabel,
   getStatusSeverity,
   getStatusLabel,
   getClampedPercent,
@@ -71,6 +72,7 @@ export class MonitoramentoTableComponent {
 
   readonly formatCurrency = formatCurrency;
   readonly getComplexidadeSeverity = getComplexidadeSeverity;
+  readonly getComplexidadeLabel = getComplexidadeLabel;
   readonly getStatusSeverity = getStatusSeverity;
   readonly getStatusLabel = getStatusLabel;
   readonly getClampedPercent = getClampedPercent;

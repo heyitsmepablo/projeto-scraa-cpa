@@ -161,9 +161,10 @@ export class MonitoramentoComponent implements OnDestroy {
 
   readonly complexidadeOptions: SelectOption[] = [
     { label: 'Todas as Complexidades', value: 'ALL' },
-    { label: 'Baixa Complexidade (BC)', value: 'BC' },
-    { label: 'Média Complexidade (MC)', value: 'MC' },
-    { label: 'Alta Complexidade (AC)', value: 'AC' },
+    { label: 'Atenção Básica (1)', value: '1' },
+    { label: 'Média Complexidade (2)', value: '2' },
+    { label: 'Alta Complexidade (3)', value: '3' },
+    { label: 'Não se aplica (0)', value: '0' },
   ];
 
   // Ações de Usuário

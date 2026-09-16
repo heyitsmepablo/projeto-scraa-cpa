@@ -104,8 +104,9 @@
         <!-- Complexidade -->
         <td class="text-center" style="width: 120px; min-width: 120px">
           <p-tag
-            [value]="item.complexidade"
+            [value]="getComplexidadeLabel(item.complexidade)"
             [severity]="getComplexidadeSeverity(item.complexidade)"
+            [rounded]="true"
             styleClass="text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 whitespace-nowrap min-w-[32px] text-center"
           />
         </td>

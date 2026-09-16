@@ -12,6 +12,7 @@ import {
   getStatusLabel,
   getStatusSeverity,
   getComplexidadeSeverity,
+  getComplexidadeLabel,
 } from './utils/monitoramento.utils';
 import { CompetenceService } from '../../core/services/competence/competence';
 import { VinculoService } from '../../core/services/vinculo/vinculo';
@@ -583,10 +584,17 @@ describe('MonitoramentoComponent', () => {
       expect(getStatusSeverity('ABAIXO')).toBe('danger');
       expect(getStatusSeverity('SEM_PACTO')).toBe('secondary');
 
-      expect(getComplexidadeSeverity('BC')).toBe('info');
-      expect(getComplexidadeSeverity('MC')).toBe('warn');
-      expect(getComplexidadeSeverity('AC')).toBe('danger');
+      expect(getComplexidadeSeverity('1')).toBe('info');
+      expect(getComplexidadeSeverity('2')).toBe('warn');
+      expect(getComplexidadeSeverity('3')).toBe('danger');
+      expect(getComplexidadeSeverity('0')).toBe('secondary');
       expect(getComplexidadeSeverity(undefined)).toBe('secondary');
+
+      expect(getComplexidadeLabel('1')).toBe('Atenção Básica');
+      expect(getComplexidadeLabel('2')).toBe('Média Complexidade');
+      expect(getComplexidadeLabel('3')).toBe('Alta Complexidade');
+      expect(getComplexidadeLabel('0')).toBe('Não se aplica');
+      expect(getComplexidadeLabel(undefined)).toBe('-');
     });
   });
 
