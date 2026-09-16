@@ -33,13 +33,18 @@ show_help() {
   echo "  <custom>    - Carrega .env.<custom> e executa docker-compose.yml"
   echo ""
   echo "Comandos especiais:"
-  echo "  sync        - Executa a pipeline ETL sequencial completa (Sigtap -> CPA -> DATASUS)"
-  echo "  migrate     - Executa migrações pendentes no banco de dados (Prisma Migrate)"
+  echo "  sync [comp] [-d] - Executa a pipeline ETL sequencial completa (Sigtap -> CPA -> DATASUS)"
+  echo "                     Opcional: Informe a competência inicial [comp] (ex: 202401, 2024-01, 01/2024)."
+  echo "                     Opcional: Informe -d (ou daemon) para rodar em segundo plano (modo daemon)."
+  echo "  migrate          - Executa migrações pendentes no banco de dados (Prisma Migrate)"
   echo ""
   echo "Exemplos:"
   echo "  ./deploy.sh dev up -d"
   echo "  ./deploy.sh dev up -d --build"
   echo "  ./deploy.sh dev sync"
+  echo "  ./deploy.sh dev sync -d"
+  echo "  ./deploy.sh dev sync 202401 -d"
+  echo "  ./deploy.sh prod sync 202401 -d"
   echo "  ./deploy.sh dev migrate"
   echo "  ./deploy.sh alpha up -d --build"
   echo "  ./deploy.sh beta ps"
@@ -101,14 +106,91 @@ fi
 # Tratamento de comandos especiais de automação
 if [ "${COMMAND_ARGS[0]}" = "sync" ]; then
   EXTRA_ARGS=("${COMMAND_ARGS[@]:1}")
+  COMPETENCIA_INICIAL=""
+  AUTO_CONFIRM_SYNC="false"
+  IS_DAEMON="false"
+
+  FILTERED_ARGS=()
+  SKIP_NEXT=false
+  for i in "${!EXTRA_ARGS[@]}"; do
+    if [ "$SKIP_NEXT" = true ]; then
+      SKIP_NEXT=false
+      continue
+    fi
+    arg="${EXTRA_ARGS[$i]}"
+    if [ "$arg" = "-d" ] || [ "$arg" = "--detach" ] || [ "$arg" = "daemon" ] || [ "$arg" = "deamon" ] || [ "$arg" = "-daemon" ] || [ "$arg" = "--daemon" ]; then
+      IS_DAEMON="true"
+    elif [ "$arg" = "--competencia-inicial" ] && [ $((i + 1)) -lt ${#EXTRA_ARGS[@]} ]; then
+      VAL="${EXTRA_ARGS[$((i + 1))]}"
+      if [[ "$VAL" =~ ^([0-9]{4})([0-9]{2})$ ]] || [[ "$VAL" =~ ^([0-9]{4})-([0-9]{2})$ ]]; then
+        COMPETENCIA_INICIAL="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
+        AUTO_CONFIRM_SYNC="true"
+        SKIP_NEXT=true
+      elif [[ "$VAL" =~ ^([0-9]{2})/([0-9]{4})$ ]]; then
+        COMPETENCIA_INICIAL="${BASH_REMATCH[2]}${BASH_REMATCH[1]}"
+        AUTO_CONFIRM_SYNC="true"
+        SKIP_NEXT=true
+      else
+        FILTERED_ARGS+=("$arg")
+      fi
+    elif [[ "$arg" =~ ^--competencia-inicial=(.*)$ ]]; then
+      VAL="${BASH_REMATCH[1]}"
+      if [[ "$VAL" =~ ^([0-9]{4})([0-9]{2})$ ]] || [[ "$VAL" =~ ^([0-9]{4})-([0-9]{2})$ ]]; then
+        COMPETENCIA_INICIAL="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
+        AUTO_CONFIRM_SYNC="true"
+      elif [[ "$VAL" =~ ^([0-9]{2})/([0-9]{4})$ ]]; then
+        COMPETENCIA_INICIAL="${BASH_REMATCH[2]}${BASH_REMATCH[1]}"
+        AUTO_CONFIRM_SYNC="true"
+      else
+        FILTERED_ARGS+=("$arg")
+      fi
+    elif [ -z "$COMPETENCIA_INICIAL" ] && [[ "$arg" =~ ^([0-9]{4})([0-9]{2})$ ]]; then
+      COMPETENCIA_INICIAL="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
+      AUTO_CONFIRM_SYNC="true"
+    elif [ -z "$COMPETENCIA_INICIAL" ] && [[ "$arg" =~ ^([0-9]{4})-([0-9]{2})$ ]]; then
+      COMPETENCIA_INICIAL="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
+      AUTO_CONFIRM_SYNC="true"
+    elif [ -z "$COMPETENCIA_INICIAL" ] && [[ "$arg" =~ ^([0-9]{2})/([0-9]{4})$ ]]; then
+      COMPETENCIA_INICIAL="${BASH_REMATCH[2]}${BASH_REMATCH[1]}"
+      AUTO_CONFIRM_SYNC="true"
+    else
+      FILTERED_ARGS+=("$arg")
+    fi
+  done
+  EXTRA_ARGS=("${FILTERED_ARGS[@]}")
+
+  export COMPETENCIA_INICIAL
+  export AUTO_CONFIRM_SYNC
+
+  if [ "$IS_DAEMON" = "true" ]; then
+    EXTRA_ARGS=("-d" "${EXTRA_ARGS[@]}")
+  fi
+
   echo "=============================================================================="
   echo "🚀 SCRAA-CPA - Pipeline ETL (Sync Sequencial)"
   echo "Ambiente:    $ENV_NAME"
   echo "Compose:     $COMPOSE_FILE"
   echo "Env File:    $ENV_FILE"
+  if [ -n "$COMPETENCIA_INICIAL" ]; then
+    echo "Competência: $COMPETENCIA_INICIAL (Inicial)"
+  fi
+  if [ "$IS_DAEMON" = "true" ]; then
+    echo "Modo:        Segundo plano (Daemon / Detached)"
+  fi
   echo "Comando:     docker compose -f $COMPOSE_FILE --env-file $ENV_FILE --profile sync up ${EXTRA_ARGS[*]} sync-datasus"
   echo "=============================================================================="
-  exec docker compose -f "$COMPOSE_FILE" --env-file "$ENV_FILE" --profile sync up "${EXTRA_ARGS[@]}" sync-datasus
+
+  if [ "$IS_DAEMON" = "true" ]; then
+    docker compose -f "$COMPOSE_FILE" --env-file "$ENV_FILE" --profile sync up "${EXTRA_ARGS[@]}" sync-datasus
+    echo ""
+    echo "✅ Pipeline ETL iniciada em segundo plano (Modo Daemon)!"
+    echo "   Para acompanhar os logs em tempo real, execute:"
+    echo "     ./deploy.sh $ENV_NAME logs -f sync-sigtap"
+    echo "     ./deploy.sh $ENV_NAME logs -f sync-sigtap sync-cpa-data sync-datasus"
+    echo ""
+  else
+    exec docker compose -f "$COMPOSE_FILE" --env-file "$ENV_FILE" --profile sync up "${EXTRA_ARGS[@]}" sync-datasus
+  fi
 elif [ "${COMMAND_ARGS[0]}" = "migrate" ]; then
   EXTRA_ARGS=("${COMMAND_ARGS[@]:1}")
   echo "=============================================================================="
