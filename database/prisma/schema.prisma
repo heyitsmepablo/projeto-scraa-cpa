@@ -5,7 +5,7 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../../api/generated/prisma"
 }
 
 datasource db {
@@ -595,7 +595,7 @@ model DatasusImportacao {
   dataInicio           DateTime  @default(now()) @map("data_inicio")
   dataFim              DateTime? @map("data_fim")
   status               String    @db.VarChar(20) // "SUCESSO", "FALHA", "EM_ANDAMENTO"
-  arquivosAfetados     String?   @map("arquivos_afetados") @db.Text 
+  arquivosAfetados     String?   @map("arquivos_afetados") @db.Text
   registrosProcessados Int?      @map("registros_processados")
   criadoEm             DateTime  @default(now()) @map("criado_em")
   atualizadoEm         DateTime  @updatedAt @map("atualizado_em")
@@ -604,59 +604,58 @@ model DatasusImportacao {
 }
 
 model DatasusSihTbRd {
-  id          Int      @id @default(autoincrement())
-  
+  id Int @id @default(autoincrement())
+
   // Competência e Atendimento
-  anoCmpt     String   @map("ANO_CMPT") @db.Char(4)    
-  mesCmpt     String   @map("MES_CMPT") @db.Char(2)    
-  diInter     String?  @map("DI_INTER") @db.Char(8)
-  
+  anoCmpt String  @map("ANO_CMPT") @db.Char(4)
+  mesCmpt String  @map("MES_CMPT") @db.Char(2)
+  diInter String? @map("DI_INTER") @db.Char(8)
+
   // Procedimento e Unidade
-  procRea     String   @map("PROC_REA") @db.Char(10)   
-  cnes        String   @map("CNES") @db.Char(7)        
-  
+  procRea String @map("PROC_REA") @db.Char(10)
+  cnes    String @map("CNES") @db.Char(7)
+
   // Valores e Frequência
-  valTot      Decimal  @map("VAL_TOT") @db.Decimal(14, 2) 
-  qtDiarias   Decimal  @map("QT_DIARIAS") @db.Decimal(3, 0) 
-  
+  valTot    Decimal @map("VAL_TOT") @db.Decimal(14, 2)
+  qtDiarias Decimal @map("QT_DIARIAS") @db.Decimal(3, 0)
+
   // Gestão e Classificação
-  ufZi        String   @map("UF_ZI") @db.Char(6)       
-  financ      String   @map("FINANC") @db.Char(2)      
-  complex     String   @map("COMPLEX") @db.Char(2)     
-  procSolic   String?  @map("PROC_SOLIC") @db.Char(10) 
-  diagPrinc   String?  @map("DIAG_PRINC") @db.VarChar(4) 
+  ufZi      String  @map("UF_ZI") @db.Char(6)
+  financ    String  @map("FINANC") @db.Char(2)
+  complex   String  @map("COMPLEX") @db.Char(2)
+  procSolic String? @map("PROC_SOLIC") @db.Char(10)
+  diagPrinc String? @map("DIAG_PRINC") @db.VarChar(4)
 
   @@index([cnes, anoCmpt, mesCmpt])
   @@map("datasus_sih_tb_rd")
 }
 
 model DatasusSiaTbPa {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   // Competência e Atendimento
-  paMvm       String   @map("PA_MVM") @db.Char(6)      
-  paCmp       String   @map("PA_CMP") @db.Char(6)      
-  
+  paMvm String @map("PA_MVM") @db.Char(6)
+  paCmp String @map("PA_CMP") @db.Char(6)
+
   // Procedimento e Unidade
-  paProcId    String   @map("PA_PROC_ID") @db.Char(10) 
-  paCoduni    String   @map("PA_CODUNI") @db.Char(7)   
-  
+  paProcId String @map("PA_PROC_ID") @db.Char(10)
+  paCoduni String @map("PA_CODUNI") @db.Char(7)
+
   // Valores
-  paValpro    Decimal  @map("PA_VALPRO") @db.Decimal(20, 2) 
-  paValapr    Decimal  @map("PA_VALAPR") @db.Decimal(20, 2) 
-  
+  paValpro Decimal @map("PA_VALPRO") @db.Decimal(20, 2)
+  paValapr Decimal @map("PA_VALAPR") @db.Decimal(20, 2)
+
   // Frequência
-  paQtdpro    Decimal  @map("PA_QTDPRO") @db.Decimal(11, 0) 
-  paQtdapr    Decimal  @map("PA_QTDAPR") @db.Decimal(11, 0) 
-  
+  paQtdpro Decimal @map("PA_QTDPRO") @db.Decimal(11, 0)
+  paQtdapr Decimal @map("PA_QTDAPR") @db.Decimal(11, 0)
+
   // Gestão e Classificação
-  paGestao    String   @map("PA_GESTAO") @db.Char(6)   
-  paTpfin     String   @map("PA_TPFIN") @db.Char(2)    
-  paNivcpl    String   @map("PA_NIVCPL") @db.Char(1)   
-  paSubfin    String?  @map("PA_SUBFIN") @db.VarChar(4)
-  paCnpjCpf   String?  @map("PA_CNPJCPF") @db.VarChar(14)
+  paGestao  String  @map("PA_GESTAO") @db.Char(6)
+  paTpfin   String  @map("PA_TPFIN") @db.Char(2)
+  paNivcpl  String  @map("PA_NIVCPL") @db.Char(1)
+  paSubfin  String? @map("PA_SUBFIN") @db.VarChar(4)
+  paCnpjCpf String? @map("PA_CNPJCPF") @db.VarChar(14)
 
   @@index([paCoduni, paCmp])
   @@map("datasus_sia_tb_pa")
 }
-
