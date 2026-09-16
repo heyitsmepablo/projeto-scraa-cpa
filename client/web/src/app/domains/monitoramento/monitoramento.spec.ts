@@ -16,7 +16,7 @@ import {
 import { CompetenceService } from '../../core/services/competence/competence';
 import { VinculoService } from '../../core/services/vinculo/vinculo';
 import { InstituicaoService } from '../../core/services/instituicao/instituicao';
-import { ProducaoService } from '../../core/services/producao/producao';
+import { MonitoramentoApiService } from './services/monitoramento-api.service';
 import { MOCK_PRODUCAO_PROCEDIMENTOS } from '../../core/mocks/producao.mock';
 
 import { signal, computed } from '@angular/core';
@@ -28,7 +28,7 @@ describe('MonitoramentoComponent', () => {
   let competenceServiceMock: any;
   let vinculoServiceMock: any;
   let instituicaoServiceMock: any;
-  let producaoServiceMock: any;
+  let monitoramentoApiServiceMock: any;
   let periodFilterSignal: any;
 
   const mockInstituicoes = [
@@ -142,30 +142,35 @@ describe('MonitoramentoComponent', () => {
       findAll: vi.fn().mockReturnValue(of(mockVinculos)),
     };
 
-    producaoServiceMock = {
-      getProducaoPorProcedimento: vi
-        .fn()
-        .mockImplementation(
-          (comp: string, _instId?: number, _cnes?: string, vinculoId?: number) => {
-            let procs = MOCK_PRODUCAO_PROCEDIMENTOS.filter((p) => p.competencia === comp || !comp);
-            if (vinculoId !== undefined) {
-              procs = procs.filter((p) => p.vinculoId === vinculoId);
-            }
-            return of(procs);
-          },
-        ),
-      getProducaoPorPeriodo: vi
-        .fn()
-        .mockImplementation(
-          (period: PeriodFilter, _instId?: number, _cnes?: string, vinculoId?: number) => {
-            const comp = period.competencia || period.competenciaInicio || '202401';
-            let procs = MOCK_PRODUCAO_PROCEDIMENTOS.filter((p) => p.competencia === comp || !comp);
-            if (vinculoId !== undefined) {
-              procs = procs.filter((p) => p.vinculoId === vinculoId);
-            }
-            return of(procs);
-          },
-        ),
+    monitoramentoApiServiceMock = {
+      getAnalitico: vi.fn().mockImplementation((vinculoId: number, period: PeriodFilter) => {
+        const comp = period.competencia || period.competenciaInicio || '202401';
+        let procs = MOCK_PRODUCAO_PROCEDIMENTOS.filter((p) => p.competencia === comp || !comp);
+        if (vinculoId !== undefined) {
+          procs = procs.filter((p) => p.vinculoId === vinculoId);
+        }
+        const itens = procs.map(p => ({
+          coProcedimento: p.coProcedimento,
+          noProcedimento: p.noProcedimento,
+          coGrupo: p.coGrupo,
+          noGrupo: p.noGrupo,
+          coSubGrupo: p.coSubGrupo,
+          noSubGrupo: p.noSubGrupo,
+          complexidade: p.complexidade,
+          vlUnitario: p.vlUnitario,
+          metaFisica: p.qtdPactuadaMensal,
+          fisicoRealizado: p.qtdAprovada,
+          saldoFisico: p.qtdAprovada - (p.qtdPactuadaMensal || 0),
+          percentualFisico: p.qtdPactuadaMensal ? (p.qtdAprovada / p.qtdPactuadaMensal) * 100 : 100,
+          metaFinanceira: p.vlrPactuado,
+          financeiroRealizado: p.vlrAprovado,
+          saldoFinanceiro: p.vlrAprovado - (p.vlrPactuado || 0),
+          percentualFinanceiro: p.vlrPactuado ? (p.vlrAprovado / p.vlrPactuado) * 100 : 100,
+          status: p.statusExecucao
+        }));
+        return of({ itens });
+      }),
+      getResumo: vi.fn().mockImplementation(() => of({}))
     };
 
     await TestBed.configureTestingModule({
@@ -174,7 +179,7 @@ describe('MonitoramentoComponent', () => {
         { provide: CompetenceService, useValue: competenceServiceMock },
         { provide: VinculoService, useValue: vinculoServiceMock },
         { provide: InstituicaoService, useValue: instituicaoServiceMock },
-        { provide: ProducaoService, useValue: producaoServiceMock },
+        { provide: MonitoramentoApiService, useValue: monitoramentoApiServiceMock },
       ],
     }).compileComponents();
 

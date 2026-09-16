@@ -1,13 +1,14 @@
 import { Injectable, inject, signal, computed, linkedSignal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { combineLatest } from 'rxjs';
+import { combineLatest, of } from 'rxjs';
 import { switchMap, map, startWith } from 'rxjs/operators';
 import { TreeNode } from 'primeng/api';
 
 import { CompetenceService } from '../../../core/services/competence/competence';
 import { VinculoService } from '../../../core/services/vinculo/vinculo';
 import { InstituicaoService } from '../../../core/services/instituicao/instituicao';
-import { ProducaoService } from '../../../core/services/producao/producao';
+import { MonitoramentoApiService } from './monitoramento-api.service';
+import { MonitoramentoItemAnaliticoDto } from './monitoramento.dto';
 import { ProducaoPorProcedimento } from '../../../core/models/producao.model';
 import { StatusExecucao, calcularStatusExecucao } from '../../../core/models/domain-enums.model';
 import { Vinculo } from '../../../core/models/vinculo.model';
@@ -27,7 +28,7 @@ export class MonitoramentoService {
   readonly competenceService = inject(CompetenceService);
   private readonly vinculoService = inject(VinculoService);
   private readonly instituicaoService = inject(InstituicaoService);
-  private readonly producaoService = inject(ProducaoService);
+  private readonly apiService = inject(MonitoramentoApiService);
 
   readonly viewMode = signal<'flat' | 'tree'>('flat');
   readonly globalFilterText = signal<string>('');
@@ -86,10 +87,44 @@ export class MonitoramentoService {
   private readonly procedimentosState = toSignal(
     this.paramsObservable.pipe(
       switchMap(([period, vinculoId]) => {
-        return this.producaoService
-          .getProducaoPorPeriodo(period, vinculoId ?? undefined)
+        if (!vinculoId) return of({ loading: false, data: [] as ProducaoPorProcedimento[] });
+        return this.apiService
+          .getAnalitico(vinculoId, period)
           .pipe(
-            map((data) => ({ loading: false, data })),
+            map((res) => {
+              const mapped: ProducaoPorProcedimento[] = res.itens.map(item => ({
+                competencia: period.competencia || '',
+                ano: period.competencia?.substring(0, 4) || '',
+                mes: period.competencia?.substring(4, 6) || '',
+                nomeMes: '',
+                quadrimestre: '',
+                tipoContrato: '',
+                cnes: '',
+                nomeInstituicao: '',
+                tipoVinculo: '',
+                coFinanciamento: '',
+                noFinanciamento: '',
+                complexidade: item.complexidade,
+                coProcedimento: item.coProcedimento,
+                noProcedimento: item.noProcedimento,
+                coGrupo: item.coGrupo,
+                noGrupo: item.noGrupo,
+                coSubGrupo: item.coSubGrupo,
+                noSubGrupo: item.noSubGrupo,
+                vlUnitario: item.vlUnitario,
+                qtdAprovada: item.fisicoRealizado,
+                vlrAprovado: item.financeiroRealizado,
+                qtdProduzida: item.fisicoRealizado,
+                vlrProduzido: item.financeiroRealizado,
+                qtdPactuadaMensal: item.metaFisica,
+                vlrPactuado: item.metaFinanceira,
+                saldoFinanceiro: item.saldoFinanceiro,
+                percExecucao: item.percentualFisico,
+                percExecucaoFinanceira: item.percentualFinanceiro,
+                statusExecucao: item.status as StatusExecucao
+              }));
+              return { loading: false, data: mapped };
+            }),
             startWith({ loading: true, data: [] as ProducaoPorProcedimento[] }),
           );
       }),

@@ -30,6 +30,8 @@ export interface PlanoOperativoResumo {
   totalProcedimentos: number;
   metaFisicaTotal: number;
   distribuicaoComplexidade: DistribuicaoComplexidade;
+  totalPactuado?: number;
+  valorFinanceiroPrevisto?: number;
 }
 
 export interface VinculoPlanoOption {
