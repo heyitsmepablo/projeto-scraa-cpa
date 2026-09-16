@@ -125,8 +125,8 @@ def main():
             client = DatasusClient()
             etl = DatasusEtl(session, client)
             
-            # Carrega a lista de CNES válidos na memória
-            etl.carregar_cnes_ativos()
+            # Carrega a lista de CNES válidos e procedimentos pactuados na memória
+            etl.carregar_catalogo_pactuado()
             
             sistemas: list[Literal["SIA", "SIH"]] = ["SIA", "SIH"]
             

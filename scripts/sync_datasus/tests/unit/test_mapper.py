@@ -51,7 +51,7 @@ def test_map_sih_rd_row_cnes_valido(sample_cnes_ativos):
     result = map_sih_rd_row(row, sample_cnes_ativos)
     assert result is not None
     assert result["cnes"] == "1234567"
-    assert result["procRea"] == "301010158"
+    assert result["procRea"] == "0301010158"
     assert result["valTot"] == Decimal("1500.50")
     assert result["qtDiarias"] == Decimal("5")
 
@@ -101,3 +101,68 @@ def test_normalize_cnes():
     assert normalize_cnes(" 996424 ") == "0996424"
     assert normalize_cnes(None) is None
     assert normalize_cnes("2458365") == "2458365"
+
+
+def test_filter_and_map_sih_df_extracao_cirurgica():
+    """Valida que a extração cirúrgica retém apenas registros com par (CNES, PROC) pactuado."""
+    cnes_ativos = {"1234567", "7654321"}
+    mapa_pactos = {
+        "1234567": {"0301010158"},
+        "7654321": {"0202010120"},
+    }
+    todos_procedimentos = {"0301010158", "0202010120"}
+
+    df = pd.DataFrame([
+        # 1. CNES ativo E procedimento pactuado para ele -> DEVE INCLUIR
+        {"CNES": "1234567", "PROC_REA": "0301010158", "ANO_CMPT": "2024", "VAL_TOT": 100},
+        # 2. CNES ativo MAS procedimento pactuado em OUTRO CNES -> DEVE DESCARTAR
+        {"CNES": "1234567", "PROC_REA": "0202010120", "ANO_CMPT": "2024", "VAL_TOT": 150},
+        # 3. CNES ativo MAS procedimento NÃO pactuado em nenhum plano -> DEVE DESCARTAR
+        {"CNES": "1234567", "PROC_REA": "0401010010", "ANO_CMPT": "2024", "VAL_TOT": 200},
+        # 4. Outro CNES ativo com procedimento pactuado (float) -> DEVE INCLUIR
+        {"CNES": 7654321.0, "PROC_REA": 202010120.0, "ANO_CMPT": "2024", "VAL_TOT": 300},
+        # 5. CNES inativo com procedimento pactuado -> DEVE DESCARTAR
+        {"CNES": "9999999", "PROC_REA": "0301010158", "ANO_CMPT": "2024", "VAL_TOT": 400},
+    ])
+
+    result = filter_and_map_sih_df(
+        df,
+        cnes_ativos=cnes_ativos,
+        mapa_pactos=mapa_pactos,
+        todos_procedimentos_pactuados=todos_procedimentos,
+    )
+
+    assert len(result) == 2
+    assert result[0]["cnes"] == "1234567"
+    assert result[0]["procRea"] == "0301010158"
+    assert result[1]["cnes"] == "7654321"
+    assert result[1]["procRea"] == "0202010120"
+
+
+def test_filter_and_map_sia_df_extracao_cirurgica():
+    """Valida que a extração cirúrgica retém apenas registros ambulatoriais pactuados."""
+    cnes_ativos = {"1234567"}
+    mapa_pactos = {
+        "1234567": {"0301010158"},
+    }
+    todos_procedimentos = {"0301010158"}
+
+    df = pd.DataFrame([
+        # Par válido
+        {"PA_CODUNI": "1234567", "PA_PROC_ID": "0301010158", "PA_VALPRO": 50.0},
+        # Procedimento não pactuado
+        {"PA_CODUNI": "1234567", "PA_PROC_ID": "0999999999", "PA_VALPRO": 30.0},
+        # CNES não cadastrado
+        {"PA_CODUNI": "0000000", "PA_PROC_ID": "0301010158", "PA_VALPRO": 20.0},
+    ])
+
+    result = filter_and_map_sia_df(
+        df,
+        cnes_ativos=cnes_ativos,
+        mapa_pactos=mapa_pactos,
+        todos_procedimentos_pactuados=todos_procedimentos,
+    )
+
+    assert len(result) == 1
+    assert result[0]["paCoduni"] == "1234567"
+    assert result[0]["paProcId"] == "0301010158"

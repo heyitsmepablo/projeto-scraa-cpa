@@ -1,6 +1,6 @@
 import pytest
 from testcontainers.postgres import PostgresContainer # type: ignore
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
 from sync_datasus.database import Base, get_session_factory
@@ -16,6 +16,17 @@ def postgres_container():
 def pg_engine(postgres_container):
     """Create SQLAlchemy engine using the container."""
     engine = create_engine(postgres_container.get_connection_url())
+    # Cria os ENUMs necessários no PostgreSQL antes de criar as tabelas
+    with engine.connect() as conn:
+        for enum_stmt in [
+            "DO $$ BEGIN CREATE TYPE \"TipoOperacao\" AS ENUM ('INSERT', 'UPDATE', 'DELETE'); EXCEPTION WHEN duplicate_object THEN null; END $$;",
+            "DO $$ BEGIN CREATE TYPE \"TipoVinculo\" AS ENUM ('CONVÊNIO', 'CONTRATO'); EXCEPTION WHEN duplicate_object THEN null; END $$;",
+            "DO $$ BEGIN CREATE TYPE \"TipoInstituicao\" AS ENUM ('FILANTRÓPICO', 'EMPRESA'); EXCEPTION WHEN duplicate_object THEN null; END $$;",
+            "DO $$ BEGIN CREATE TYPE \"TipoAditivo\" AS ENUM ('ACRÉSCIMO', 'SUPRESSÃO', 'PRAZO'); EXCEPTION WHEN duplicate_object THEN null; END $$;",
+            "DO $$ BEGIN CREATE TYPE \"TipoComplexidade\" AS ENUM ('BC', 'MC', 'AC'); EXCEPTION WHEN duplicate_object THEN null; END $$;",
+        ]:
+            conn.execute(text(enum_stmt))
+        conn.commit()
     # Crie as tabelas
     Base.metadata.create_all(engine)
     yield engine

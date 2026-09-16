@@ -8,7 +8,7 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
 dependencies = [
-    "pysus==2.7.0",
+    "pysus>=2.11.2",
     "pandas>=2.2.0,<3.0.0",
     "sqlalchemy>=2.0.51,<3.0.0",
     "python-dotenv>=1.2.2,<2.0.0",

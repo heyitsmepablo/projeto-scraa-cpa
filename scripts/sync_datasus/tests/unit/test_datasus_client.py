@@ -1,47 +1,68 @@
-import pytest
+"""Testes unitários para o DatasusClient."""
+
+from pathlib import Path
+import urllib.error
+from unittest.mock import AsyncMock, MagicMock, patch
 import pandas as pd
-from unittest.mock import patch
+import pytest
+
 from sync_datasus.datasus_client import DatasusClient
-from datetime import datetime
+
 
 @pytest.fixture
 def client():
     return DatasusClient()
 
-@patch('sync_datasus.datasus_client.pysus_sia')
-def test_download_dataframe_sucesso_sia(mock_sia, client):
-    mock_df = pd.DataFrame([{"PA_CODUNI": "123", "PA_MVM": "202301"}])
-    mock_sia.return_value = mock_df
+
+def test_format_ftp_url(client):
+    """Valida a formação correta das URLs de FTP para SIA e SIH."""
+    url_sia = client._format_ftp_url("SIA", "MA", "202401")
+    assert url_sia == "ftp://ftp.datasus.gov.br/dissemin/publicos/SIASUS/200801_/Dados/PAMA2401.dbc"
+
+    url_sih = client._format_ftp_url("SIH", "MA", "202402")
+    assert url_sih == "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA2402.dbc"
+
+
+@patch("sync_datasus.datasus_client.DBC")
+@patch("sync_datasus.datasus_client.urllib.request.urlretrieve")
+def test_download_dataframe_sucesso(mock_retrieve, mock_dbc_cls, client):
+    """Valida o fluxo de download e parsing de DBC quando o arquivo existe."""
+    expected_df = pd.DataFrame([{"PA_CODUNI": "1234567", "PA_PROC_ID": "0301010158"}])
     
-    df = client.download_dataframe("SIA", "SP", "202301")
-    
+    mock_dbc_instance = MagicMock()
+    mock_dbc_instance.load = AsyncMock(return_value=expected_df)
+    mock_dbc_cls.return_value = mock_dbc_instance
+
+    df = client.download_dataframe("SIA", "MA", "202401")
+
     assert df is not None
-    assert not df.empty
-    mock_sia.assert_called_once_with(state="SP", year=2023, month=1, group="PA", as_dataframe=True)
+    assert len(df) == 1
+    assert df.iloc[0]["PA_CODUNI"] == "1234567"
+    mock_retrieve.assert_called_once()
 
-@patch('sync_datasus.datasus_client.pysus_sih')
-@patch('sync_datasus.datasus_client.pysus_sia')
-def test_download_dataframe_competencia_indisponivel(mock_sia, mock_sih, client):
-    mock_sih.side_effect = FileNotFoundError("Not found")
-    
-    df = client.download_dataframe("SIH", "SP", "202301")
-    
+
+@patch("sync_datasus.datasus_client.DBC")
+@patch("sync_datasus.datasus_client.urllib.request.urlretrieve")
+def test_download_dataframe_url_error_550(mock_retrieve, mock_dbc_cls, client):
+    """Valida que erro 550 (arquivo não encontrado no FTP) retorna None amigavelmente."""
+    mock_retrieve.side_effect = urllib.error.URLError("ftp error: 550 Failed to open file.")
+
+    df = client.download_dataframe("SIH", "MA", "202401")
+
     assert df is None
-    mock_sih.assert_called_once_with(state="SP", year=2023, month=1, as_dataframe=True)
 
-@patch('sync_datasus.datasus_client.pysus_sia')
-def test_get_latest_competencia(mock_sia, client):
-    # Mock download to return None for the first few months, then a DataFrame
-    def mock_download(state, year, month, as_dataframe):
-        if year == datetime.now().year and month == datetime.now().month:
-            return None
-        if month == datetime.now().month - 1 or (month == 12 and datetime.now().month == 1):
-             return pd.DataFrame([{"TEST": "DATA"}])
-        return None
-        
-    mock_sia.side_effect = mock_download
-    
-    latest = client.get_latest_competencia("SIA", "SP")
-    
-    assert latest is not None
-    assert len(latest) == 6
+
+def test_get_latest_competencia(client):
+    """Valida o mecanismo regressivo de identificação da última competência disponível."""
+    with patch.object(client, "download_dataframe") as mock_download:
+        # Retorna None na 1ª tentativa e DataFrame na 2ª
+        mock_download.side_effect = [
+            None,
+            pd.DataFrame([{"CNES": "1234567"}]),
+        ]
+
+        comp = client.get_latest_competencia("SIH", "MA")
+        assert comp is not None
+        assert len(comp) == 6
+        assert comp.isdigit()
+        assert mock_download.call_count == 2

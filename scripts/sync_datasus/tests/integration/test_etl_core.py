@@ -11,9 +11,9 @@ def mock_client():
 
 def test_buscar_cnes_ativos(session, mock_client):
     # Setup database
-    inst1 = Instituicao(id=1, cnes="1111111")
-    inst2 = Instituicao(id=2, cnes="2222222")
-    inst3 = Instituicao(id=3, cnes="3333333", deletadoEm=datetime.utcnow())
+    inst1 = Instituicao(id=1, cnes="1111111", nome="Hospital Um", tipoInstituicao="FILANTRÓPICO")
+    inst2 = Instituicao(id=2, cnes="2222222", nome="Hospital Dois", tipoInstituicao="FILANTRÓPICO")
+    inst3 = Instituicao(id=3, cnes="3333333", nome="Hospital Tres", tipoInstituicao="FILANTRÓPICO", deletadoEm=datetime.utcnow())
     session.add_all([inst1, inst2, inst3])
     session.commit()
     
@@ -38,7 +38,7 @@ def test_get_ultima_competencia_banco(session, mock_client):
 
 def test_processar_competencia_sih_insere_registros(session, mock_client):
     # Setup
-    inst = Instituicao(id=1, cnes="1234567")
+    inst = Instituicao(id=1, cnes="1234567", nome="Hospital Teste", tipoInstituicao="FILANTRÓPICO")
     session.add(inst)
     session.commit()
     
@@ -57,6 +57,9 @@ def test_processar_competencia_sih_insere_registros(session, mock_client):
     mock_client.download_dataframe.return_value = mock_df
     
     etl = DatasusEtl(session, mock_client)
+    etl.cnes_ativos = {"1234567"}
+    etl.mapa_pactos = {"1234567": {"1234567890"}}
+    etl.todos_procedimentos_pactuados = {"1234567890"}
     inserted = etl.processar_competencia("SIH", "SP", "202301")
     
     assert inserted == 1
@@ -73,7 +76,7 @@ def test_processar_competencia_sih_insere_registros(session, mock_client):
 
 def test_processar_competencia_registra_importacao_falha(session, mock_client):
     # Setup
-    inst = Instituicao(id=1, cnes="1234567")
+    inst = Instituicao(id=1, cnes="1234567", nome="Hospital Teste", tipoInstituicao="FILANTRÓPICO")
     session.add(inst)
     session.commit()
     

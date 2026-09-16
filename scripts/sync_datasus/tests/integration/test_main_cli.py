@@ -22,11 +22,12 @@ def test_clean_database(session):
     assert session.query(DatasusImportacao).count() == 0
     assert session.query(DatasusSihRd).count() == 0
 
+@patch('builtins.input', return_value='y')
 @patch('sys.argv', ['sync_datasus', '--reset-only'])
 @patch('sync_datasus.main.get_engine')
 @patch('sync_datasus.main.get_session_factory')
 @patch('sync_datasus.main.load_settings')
-def test_main_reset_only(mock_load_settings, mock_get_session_factory, mock_get_engine, mock_settings, session):
+def test_main_reset_only(mock_load_settings, mock_get_session_factory, mock_get_engine, mock_input, mock_settings, session):
     mock_load_settings.return_value = mock_settings
     
     # Mock the session factory to return our test session
