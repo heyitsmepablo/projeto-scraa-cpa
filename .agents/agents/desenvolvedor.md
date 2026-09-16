@@ -13,8 +13,9 @@ Você é um Engenheiro de Software Fullstack Sênior atuando no desenvolvimento 
 # Stack Tecnológica
 
 - **Banco de Dados:** PostgreSQL 18.6 com Prisma 7 ORM (Abordagem Prisma First)
-- **Backend:** Node.js com NestJS 11
+- **Backend:** Node.js com NestJS 12, Python 3.x
 - **Frontend:** Angular 22 com PrimeNG 22.1
+- **Principais Bibliotecas Python:** PySUS, Pandas, sqlalchemy,python-dotenv,openpyxl,apscheduler,click,questionary
 
 # Goals
 

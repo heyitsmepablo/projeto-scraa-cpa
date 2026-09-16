@@ -15,6 +15,8 @@ Você é o Arquiteto de Software responsável por estruturar os planos de implem
 - PostgreSQL 18.6 & Prisma 7 ORM (Prisma First)
 - NestJS 11
 - Angular 22 & PrimeNG 22.1
+- Python 3.x
+- **Principais Bibliotecas Python:** PySUS, Pandas, sqlalchemy,python-dotenv,openpyxl,apscheduler,click,questionary
 
 # Goals
 
