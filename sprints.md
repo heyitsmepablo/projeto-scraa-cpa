@@ -216,3 +216,124 @@ Desenvolvimento do client web para monitoramento de execuções de contratos da 
 
 - **Recolhimento Padrão:** Configurar o componente da tabela hierárquica (PrimeNG) para carregar com todos os Grupos e Subgrupos _recolhidos_ (collapsed) por padrão.
 - O usuário visualizará apenas os totais dos Grupos (Nível 1) ao abrir a tela, utilizando os botões de expansão ou clicando nas setas apenas quando quiser detalhar os procedimentos.
+
+## Sprint 10: Implementação da API de Monitoramento (NestJS + Prisma + Swagger) [x]
+
+**Objetivo Principal:** O frontend do módulo de Monitoramento já está construído no projeto. Sua tarefa como agente é analisar o frontend existente e o banco de dados, e então construir os endpoints do backend (NestJS) para fornecer os dados reais, substituindo os mocks.
+
+---
+
+### 1. Fase de Descoberta (Leitura Obrigatória)
+
+- **Análise do Banco de Dados:** Leia o arquivo `schema.prisma` no diretório do backend. Identifique as relações entre Vínculo, Plano Operativo, Procedimentos (Pactuado) e a tabela de Produção do DATASUS (Executado).
+- **Análise do Frontend:** Inspecione os componentes e serviços do Angular (módulo de Monitoramento). Entenda o formato exato da resposta JSON que a UI espera para renderizar os _Cards de Resumo_ e a _Árvore Hierárquica do SIGTAP_.
+
+### 2. Implementação do Backend (NestJS)
+
+- **Estrutura:** Crie o `MonitoramentoModule`, `MonitoramentoController` e `MonitoramentoService`.
+- **Regras de Consulta (Prisma):** Utilize o `PrismaService` para realizar as buscas. Realize o cruzamento (Join/GroupBy) entre a meta pactuada vigente e a produção aprovada pelo DATASUS.
+- **Endpoints Exigidos:**
+  - `GET /api/monitoramento/:vinculoId/resumo`: Retorna os totais consolidados (Físico Pactuado, Físico Aprovado, Financeiro Pactuado, Financeiro Aprovado e Saldo/Déficit).
+  - `GET /api/monitoramento/:vinculoId/analitico`: Retorna a grade estruturada em níveis hierárquicos (Grupo SIGTAP -> Subgrupo SIGTAP -> Procedimentos), incluindo a consolidação matemática (diferenças) em cada nível.
+- **Inteligência de Filtros:** Os métodos devem aceitar _Query Parameters_ (`mesAno`, `dataInicio`, `dataFim`). Se um período for informado, multiplique a meta física/financeira mensal pelo número de meses do recorte para que a comparação seja justa.
+
+### 3. Documentação e Tipagem (OpenAPI/Swagger)
+
+- **DTOs de Entrada e Saída:** Crie DTOs para receber os filtros e formatar as respostas, utilizando `class-validator`.
+- **Decorators do Swagger:** Documente exaustivamente todos os endpoints criados usando `@ApiTags`, `@ApiOperation`, `@ApiParam`, `@ApiQuery` e `@ApiResponse`. Cada propriedade dos DTOs de saída deve ter seu `@ApiProperty` com descrição clara.
+
+### 4. Restrições e Padrões
+
+- **Sem Mocks:** Não gere dados aleatórios. A lógica deve buscar os dados estritamente do Prisma.
+- **Arquitetura:** Mantenha os controladores limpos; toda a regra de agrupamento e matemática financeira deve residir no `MonitoramentoService`.
+- **Resiliência:** Implemente tratamento de erros padrão do NestJS (ex: disparar `NotFoundException` se o UUID do vínculo for inválido ou não possuir um Plano Operativo ativo).
+
+## Sprint 11: Geração Dinâmica da API Core baseada no Frontend e Schema [x]
+
+**Objetivo Principal:** A API de Monitoramento foi iniciada na Sprint anterior. Sua tarefa agora não é seguir uma lista predeterminada de rotas, mas sim agir autonomamente para **varrer o código do frontend existente**, cruzar as necessidades de dados com o **schema do Prisma**, e elaborar/implementar todas as rotas faltantes no backend (NestJS) para que a aplicação funcione de ponta a ponta sem dados _mockados_.
+
+---
+
+### 1. Fase de Mapeamento e Descoberta (Obrigatório)
+
+Antes de escrever qualquer código no backend, você deve mapear as dependências do projeto:
+
+- **Varredura do Frontend (Angular):** Inspecione a pasta do frontend. Busque por todos os arquivos `*.service.ts`, diretórios de `mocks`, chamadas ao `HttpClient` e definições de `Interfaces/Tipagens` (ex: telas de Instituições, Vínculos, Planos Operativos e Dashboard).
+- **Identificação de Contratos:** Para cada tela ou componente principal, identifique qual estrutura de JSON o frontend espera receber e quais parâmetros ele envia (filtros, paginação, IDs).
+- **Varredura do Banco de Dados:** Analise o arquivo `schema.prisma`. Entenda perfeitamente as tabelas, campos, relacionamentos e chaves estrangeiras disponíveis.
+
+### 2. Elaboração Dinâmica das Rotas
+
+A partir da descoberta da Etapa 1, deduza a arquitetura da API:
+
+- Desenhe a estrutura RESTful necessária para satisfazer o frontend. Se o frontend possui uma tela que lista "Vínculos" cruzados com "Instituições", planeje uma rota que forneça esse payload consolidado.
+- Crie os módulos faltantes no NestJS correspondentes aos domínios encontrados (ex: `InstituicaoModule`, `VinculoModule`, `PlanoOperativoModule`, `DashboardModule`, `SigtapModule`, `DataSUSModule`).
+
+### 3. Implementação do Backend (NestJS + Prisma)
+
+Codifique a infraestrutura da API deduzida na etapa anterior:
+
+- **Controladores e Serviços:** Crie os Controllers para expor as rotas e os Services para concentrar a regra de negócio e consultas ao banco.
+- **Consultas Reais:** Utilize injeção de dependência do `PrismaService` para buscar os dados. Remova qualquer dependência de mocks.
+- **Otimização:** Aplique projeções (`select`) e carregamento de relações (`include`) no Prisma estritamente conforme a necessidade do frontend mapeada na Etapa 1, evitando _overfetching_ (trazer dados inúteis) ou _underfetching_ (causar _N+1 queries_).
+
+### 4. Tipagem e Documentação Automática (Swagger)
+
+- **DTOs de Validação:** Crie DTOs para todas as requisições (filtros, paginação, bodies de criação/edição se aplicável) utilizando `class-validator`.
+- **OpenAPI:** Documente exaustivamente todas as rotas deduzidas e implementadas utilizando os decorators nativos do NestJS Swagger (`@ApiTags()`, `@ApiOperation()`, `@ApiResponse()`, `@ApiQuery()`).
+- **Modelos de Resposta:** Garanta que as propriedades dos DTOs de saída possuam `@ApiProperty()` para que o Swagger reflita exatamente os contratos mapeados na Etapa 1.
+
+## Sprint 12: Implementação da API de Domínio SIGTAP (Dropdowns e Filtros) [x]
+
+**Objetivo Principal:** O frontend possui diversos filtros e formulários que utilizam componentes de seleção (dropdowns, selects, autocompletes) baseados na tabela SUS (SIGTAP). Sua tarefa é varrer o frontend para identificar esses pontos de seleção, cruzar com o banco de dados e construir as rotas otimizadas no backend (NestJS) para alimentar essas listas.
+
+---
+
+### 1. Fase de Descoberta (Selects e Schema)
+
+- **Mapeamento de Componentes (Frontend):** Varra os arquivos HTML e TypeScript do frontend (Angular). Busque por componentes de seleção do PrimeNG (como `p-dropdown`, `p-select`, `p-autoComplete`, `p-multiSelect`) que façam referência a dados do SIGTAP (ex: Filtros de Grupo, Subgrupo, Forma de Organização, Procedimentos, Complexidade, etc.).
+- **Mapeamento de Contratos:** Para cada select encontrado, identifique o formato exato que o frontend espera receber (ex: espera um array de objetos `{ id, nome }` ou `{ codigo, descricao }`?).
+- **Mapeamento do Banco (Prisma):** Analise o arquivo `schema.prisma`. Identifique as tabelas de domínio que compõem o dicionário do SIGTAP e entenda seus relacionamentos (hierarquia: Grupo -> Subgrupo -> Forma de Organização -> Procedimento).
+
+### 2. Elaboração e Estruturação das Rotas (SigtapModule)
+
+A partir da descoberta, crie o `SigtapModule` no NestJS. Desenhe a estrutura de rotas suportando paginação, busca por texto e **seleção em cascata** (cascading dropdowns).
+
+- _Exemplo de arquitetura esperada:_
+  - `GET /api/sigtap/grupos`: Lista todos os grupos.
+  - `GET /api/sigtap/subgrupos`: Lista subgrupos (deve aceitar `?grupoCodigo=` para filtrar em cascata).
+  - `GET /api/sigtap/procedimentos`: Rota de busca (autocomplete) otimizada, aceitando `?busca=` (pesquisa por código ou nome) e `?complexidade=`.
+
+### 3. Implementação Otimizada (PrismaService)
+
+- **Payloads Leves:** Como essas rotas alimentam componentes de interface (UI), é estritamente proibido retornar a entidade inteira do banco de dados (que pode ser pesada). Utilize a cláusula `select` do Prisma para retornar apenas os campos estritamente necessários para os dropdowns (ex: apenas `codigo` e `descricao`).
+- **Busca Textual (Filtros):** Para a rota de procedimentos, implemente a busca usando o operador `contains` (com `mode: 'insensitive'`) no Prisma para permitir que o usuário digite parte do nome ou do código do procedimento no frontend.
+- **Cache (Opcional/Recomendado):** Como os dados do SIGTAP são estáticos (dicionário), avalie a inclusão de cache em memória básica no serviço para não sobrecarregar o banco de dados em requisições repetitivas dos dropdowns.
+
+### 4. Documentação OpenAPI (Swagger)
+
+- **DTOs e Query Params:** Crie DTOs (`@Query()`) usando `class-validator` para validar os parâmetros de busca em cascata (ex: garantir que `grupoCodigo` seja opcional, mas válido se enviado).
+- **Especificação Swagger:** Decore todos os endpoints do `SigtapController` com `@ApiTags('SIGTAP (Dicionários)')`, `@ApiOperation` explicando qual dropdown a rota alimenta, `@ApiQuery` para os filtros opcionais e `@ApiResponse` contendo os schemas de retorno tipados.
+
+## Task: Sprint 13 - Refatoração e Otimização de Scripts Python (ETL) [x]
+
+**Objetivo Principal:** Analisar todos os scripts Python de extração de dados e reescrevê-los para garantir a arquitetura mais performática, concisa e organizada possível. O foco é otimizar o consumo de memória, tempo de execução e garantir a inserção cirúrgica de dados no banco.
+
+### 1. Auditoria e Arquitetura Base (Utils)
+
+- Analise todos os scripts Python existentes no diretório atual.
+- Isole as funções transversais e repetitivas (gerenciamento de conexão com banco, formatação de strings, logs) em arquivos utilitários consolidados (`utils`).
+- Estruture o código de forma modular e tipada, facilitando a execução limpa via linha de comando ou orquestradores (como CRON).
+
+### 2. Otimização por Domínio de Extração
+
+- **Módulo CPA (Planilhas):** Implemente a leitura em lote de planilhas utilizando bibliotecas de alta performance (como `pandas`), higienizando as colunas antes da persistência no banco de dados.
+- **Módulo DATASUS (Pré-Filtro Inteligente):** Configure o script para, antes da extração, consultar o banco de dados atual e mapear todas as instituições e seus respectivos procedimentos ativos nos Planos Operativos.
+- **Módulo DATASUS (Extração Cirúrgica):** Extraia e insira no banco de dados _estritamente_ a produção aprovada que corresponda aos procedimentos mapeados no passo anterior, descartando qualquer volume de dados não utilizado pelo sistema.
+- **Módulo SIGTAP (Carga Mensal):** Desenvolva a rotina para atualizar a competência mensal da tabela SIGTAP, utilizando operações de "Upsert" para atualizar descrições e valores financeiros sem gerar duplicação de códigos existentes.
+
+### 3. Engenharia de Performance e Confiabilidade
+
+- Elimine laços de repetição que fazem inserções linha a linha; utilize estritamente operações de _Bulk Insert_ ou métodos otimizados em lote.
+- Implemente um bloco de tratamento de exceções robusto (try/catch) para evitar que a falha em um arquivo corrompa toda a fila de processamento.
+- Exiba logs sumarizados ao final da execução informando tempo total, registros inseridos e registros ignorados (especialmente no DATASUS).
