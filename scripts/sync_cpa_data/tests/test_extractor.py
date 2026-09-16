@@ -25,9 +25,12 @@ def _mock_excel(sheet_data: dict[str, pd.DataFrame]):
     return patch("sync_cpa_data.extractor.pd.read_excel", side_effect=_reader)
 
 
-def _fake_path(exists: bool = True) -> MagicMock:
+def _fake_path(exists: bool = True):
+    if not exists:
+        return Path("/tmp/nonexistent_cpa_file_test.xlsx")
     p = MagicMock(spec=Path)
-    p.exists.return_value = exists
+    p.exists.return_value = True
+    p.__fspath__ = lambda self: "/tmp/fake_cpa_file_test.xlsx"
     return p
 
 

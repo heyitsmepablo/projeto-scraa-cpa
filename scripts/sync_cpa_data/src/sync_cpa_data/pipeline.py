@@ -3,6 +3,7 @@
 import logging
 import time
 
+import pandas as pd
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -65,14 +66,15 @@ def run(reset: bool = False, exit_after_reset: bool = False) -> None:
     if exit_after_reset:
         logger.info("Modo --reset-only ativo. Pulando extração de dados.")
     else:
-        # ── Extract ───────────────────────────────────────────────────────────────
-        inst_result = extract_instituicoes(SPREADSHEET_PATH)
-        vinc_result = extract_vinculos(SPREADSHEET_PATH)
-        adit_result = extract_aditivos(SPREADSHEET_PATH)
-        plano_result = extract_planos_operativos(SPREADSHEET_PATH)
-        comp_tipo_result = extract_complementacoes_tipos(SPREADSHEET_PATH)
-        comp_item_result = extract_complementacoes_itens(SPREADSHEET_PATH)
-        comp_plano_result = extract_complementacoes_plano(SPREADSHEET_PATH)
+        # ── Extract (otimizado via pd.ExcelFile único) ───────────────────────────
+        with pd.ExcelFile(SPREADSHEET_PATH) as xls:
+            inst_result = extract_instituicoes(xls)
+            vinc_result = extract_vinculos(xls)
+            adit_result = extract_aditivos(xls)
+            plano_result = extract_planos_operativos(xls)
+            comp_tipo_result = extract_complementacoes_tipos(xls)
+            comp_item_result = extract_complementacoes_itens(xls)
+            comp_plano_result = extract_complementacoes_plano(xls)
 
     # ── Load (single transaction) ─────────────────────────────────────────────
     with get_session() as session:

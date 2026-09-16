@@ -1,169 +1,56 @@
-"""Loader: upserts DataFrames into the PostgreSQL database."""
-
 import logging
+import sys
 from datetime import datetime, timezone
 from decimal import Decimal
+from pathlib import Path
 from typing import Any
 
+# Assegura a resolução de scripts.shared dinamicamente sem IndexError
+for _parent in Path(__file__).resolve().parents:
+    if (_parent / "scripts" / "shared").is_dir():
+        for _p in [str(_parent), str(_parent / "scripts")]:
+            if _p not in sys.path:
+                sys.path.insert(0, _p)
+        break
+    elif (_parent / "shared").is_dir():
+        _scripts_p = _parent if _parent.name == "scripts" else _parent / "scripts"
+        _root_p = _parent.parent if _parent.name == "scripts" else _parent
+        for _p in [str(_root_p), str(_scripts_p)]:
+            if Path(_p).is_dir() and _p not in sys.path:
+                sys.path.insert(0, _p)
+        break
+
 import pandas as pd
-from sqlalchemy import ARRAY, JSON, Boolean, Column, DateTime, Integer, MetaData, Numeric, String, Table, insert, select, update, delete, text, UniqueConstraint
-from sqlalchemy.dialects.postgresql import ENUM, insert as pg_insert
+from sqlalchemy import insert, select, update, delete, text
+from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
 
-# ── SQLAlchemy Core table definitions (mirror the Prisma schema) ─────────────
-
-_metadata = MetaData()
-
-_instituicao = Table(
-    "instituicao",
-    _metadata,
-    Column("id", Integer, primary_key=True),
-    Column("nome", String(150)),
-    Column("cnes", String(7)),
-    Column("cnpj", String(14)),
-    Column("tipo_instituicao", String),
-    Column("criado_em", DateTime(timezone=True)),
-    Column("atualizado_em", DateTime(timezone=True)),
-    Column("deletado_em", DateTime(timezone=True)),
+from scripts.shared.models.cpa import (
+    Instituicao,
+    Vinculo,
+    Aditivo,
+    PlanoOperativo,
+    PlanoOperativoProcedimento,
+    ComplementacaoTipo,
+    ComplementacaoItem,
+    PlanoOperativoComplementacao,
+    CpaImportacao,
+    CpaImportacaoChangelog,
 )
 
-_tipo_complexidade = ENUM("BC", "MC", "AC", name="TipoComplexidade", create_type=False)
-_tipo_operacao = ENUM("INSERT", "UPDATE", "DELETE", name="TipoOperacao", create_type=False)
-
-_cpa_importacao = Table(
-    "cpa_importacao",
-    _metadata,
-    Column("id", Integer, primary_key=True),
-    Column("versao", String(6)),
-    Column("data_inicio", DateTime(timezone=True)),
-    Column("data_fim", DateTime(timezone=True)),
-    Column("status", String(20)),
-    Column("tabelas_afetadas", String),
-    Column("criado_em", DateTime(timezone=True)),
-    Column("atualizado_em", DateTime(timezone=True)),
-)
-
-_cpa_importacao_changelog = Table(
-    "cpa_importacao_changelog",
-    _metadata,
-    Column("id", Integer, primary_key=True),
-    Column("importacao_id", Integer),
-    Column("tabela", String(50)),
-    Column("chave_registro", String(50)),
-    Column("descricao_registro", String),
-    Column("tipo_operacao", _tipo_operacao),
-    Column("dados_antigos", JSON),
-    Column("dados_novos", JSON),
-    Column("criado_em", DateTime(timezone=True)),
-)
-
-_vinculo = Table(
-    "vinculo",
-    _metadata,
-    Column("id", Integer, primary_key=True),
-    Column("instituicao_id", Integer),
-    Column("numero", String(50)),
-    Column("numero_processo_sei", String(50)),
-    Column("tipo_vinculo", String),
-    Column("objeto", String),
-    Column("complexidade", ARRAY(_tipo_complexidade)),
-    Column("data_da_assinatura", DateTime(timezone=True)),
-    Column("data_inicio", DateTime(timezone=True)),
-    Column("data_fim", DateTime(timezone=True)),
-    Column("valor_total", Numeric(15, 2)),
-    Column("criado_em", DateTime(timezone=True)),
-    Column("atualizado_em", DateTime(timezone=True)),
-    Column("deletado_em", DateTime(timezone=True)),
-)
-
-_tipo_aditivo = ENUM(
-    "ACRÉSCIMO",
-    "PRAZO",
-    "SUPRESSÃO",
-    "VALOR",
-    name="TipoAditivo",
-    create_type=False,
-)
-
-_aditivo = Table(
-    "aditivo",
-    _metadata,
-    Column("id", Integer, primary_key=True),
-    Column("vinculo_id", Integer),
-    Column("numero", String(50)),
-    Column("numero_processo_sei", String(50)),
-    Column("tipo_aditivo", ARRAY(_tipo_aditivo)),
-    Column("data_da_assinatura", DateTime(timezone=True)),
-    Column("data_inicio", DateTime(timezone=True)),
-    Column("data_fim", DateTime(timezone=True)),
-    Column("valor_total", Numeric(15, 2)),
-    Column("criado_em", DateTime(timezone=True)),
-    Column("atualizado_em", DateTime(timezone=True)),
-    Column("deletado_em", DateTime(timezone=True)),
-)
-
-_plano_operativo = Table(
-    "plano_operativo",
-    _metadata,
-    Column("id", Integer, primary_key=True),
-    Column("vinculo_id", Integer),
-    Column("aditivo_id", Integer),
-    Column("vigente", Boolean, default=True),
-    Column("expirado_em", DateTime(timezone=True)),
-    Column("criado_em", DateTime(timezone=True)),
-    Column("atualizado_em", DateTime(timezone=True)),
-    Column("deletado_em", DateTime(timezone=True)),
-)
-
-_plano_operativo_procedimento = Table(
-    "plano_operativo_procedimento",
-    _metadata,
-    Column("id", Integer, primary_key=True),
-    Column("plano_operativo_id", Integer),
-    Column("co_procedimento", String(10)),
-    Column("quantidade_pactuada_mensal", Integer),
-    Column("criado_em", DateTime(timezone=True)),
-    Column("atualizado_em", DateTime(timezone=True)),
-    Column("deletado_em", DateTime(timezone=True)),
-)
-
-_complementacao_tipo = Table(
-    "complementacao_tipo",
-    _metadata,
-    Column("id", Integer, primary_key=True),
-    Column("nome", String(255)),
-    Column("descricao", String),
-    Column("criado_em", DateTime(timezone=True)),
-    Column("atualizado_em", DateTime(timezone=True)),
-    Column("deletado_em", DateTime(timezone=True)),
-)
-
-_complementacao_item = Table(
-    "complementacao_item",
-    _metadata,
-    Column("id", Integer, primary_key=True),
-    Column("complementacao_tipo_id", Integer),
-    Column("descricao", String(255)),
-    Column("valor_unitario", Numeric(15, 2)),
-    Column("criado_em", DateTime(timezone=True)),
-    Column("atualizado_em", DateTime(timezone=True)),
-    Column("deletado_em", DateTime(timezone=True)),
-)
-
-_plano_operativo_complementacao = Table(
-    "plano_operativo_complementacao",
-    _metadata,
-    Column("id", Integer, primary_key=True),
-    Column("plano_operativo_id", Integer),
-    Column("complementacao_item_id", Integer),
-    Column("quantidade_pactuada_mensal", Integer),
-    Column("criado_em", DateTime(timezone=True)),
-    Column("atualizado_em", DateTime(timezone=True)),
-    Column("deletado_em", DateTime(timezone=True)),
-    UniqueConstraint("plano_operativo_id", "complementacao_item_id"),
-)
+# Tabelas SQLAlchemy mapeadas dos modelos centralizados
+_instituicao = Instituicao.__table__
+_vinculo = Vinculo.__table__
+_aditivo = Aditivo.__table__
+_plano_operativo = PlanoOperativo.__table__
+_plano_operativo_procedimento = PlanoOperativoProcedimento.__table__
+_complementacao_tipo = ComplementacaoTipo.__table__
+_complementacao_item = ComplementacaoItem.__table__
+_plano_operativo_complementacao = PlanoOperativoComplementacao.__table__
+_cpa_importacao = CpaImportacao.__table__
+_cpa_importacao_changelog = CpaImportacaoChangelog.__table__
 
 
 def _now() -> datetime:

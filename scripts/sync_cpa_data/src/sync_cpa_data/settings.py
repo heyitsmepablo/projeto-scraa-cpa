@@ -22,7 +22,14 @@ except KeyError as exc:
 
 # ── Spreadsheet path ─────────────────────────────────────────────────────────
 # Can be overridden via env var for CI/testing.
-_DEFAULT_SPREADSHEET = _SCRIPT_ROOT.parent / "arquivos" / "cpa-data" / "dados-cpa.xlsx"
+_container_spreadsheet = Path("/app/arquivos/cpa-data/dados-cpa.xlsx")
+if Path("/app/arquivos").is_dir() or _container_spreadsheet.exists():
+    _DEFAULT_SPREADSHEET = _container_spreadsheet
+elif (_SCRIPT_ROOT / "arquivos" / "cpa-data" / "dados-cpa.xlsx").exists():
+    _DEFAULT_SPREADSHEET = _SCRIPT_ROOT / "arquivos" / "cpa-data" / "dados-cpa.xlsx"
+else:
+    _DEFAULT_SPREADSHEET = _SCRIPT_ROOT.parent / "arquivos" / "cpa-data" / "dados-cpa.xlsx"
+
 SPREADSHEET_PATH: Path = Path(os.getenv("CPA_SPREADSHEET_PATH", str(_DEFAULT_SPREADSHEET)))
 
 # ── Logging ───────────────────────────────────────────────────────────────────

@@ -4,12 +4,23 @@ import logging
 import unicodedata
 from datetime import datetime
 from pathlib import Path
-from typing import NamedTuple
+from typing import NamedTuple, Union
 import re
 
 import pandas as pd
 
 logger = logging.getLogger(__name__)
+
+
+def _load_sheet(source: Union[Path, pd.ExcelFile, str], sheet_name: str) -> pd.DataFrame:
+    """Lê uma aba da planilha reaproveitando um pd.ExcelFile aberto ou abrindo o arquivo."""
+    if isinstance(source, pd.ExcelFile):
+        return pd.read_excel(source, sheet_name=sheet_name, dtype=str)
+    p = Path(source)
+    if not p.exists():
+        raise FileNotFoundError(f"Planilha não encontrada: {p}")
+    return pd.read_excel(p, sheet_name=sheet_name, dtype=str)
+
 
 SHEET_INSTITUICOES = "INSTITUICOES"
 SHEET_VINCULOS = "VINCULOS"
@@ -141,28 +152,9 @@ def _safe_str(raw: object) -> str:
 # ── Public extractors ─────────────────────────────────────────────────────────
 
 
-def extract_instituicoes(path: Path) -> ExtractionResult:
-    """Read and validate the INSTITUICOES sheet.
-
-    Columns processed:
-        - ESTABELECIMENTO → nome
-        - CNES → cnes (zero-padded to 7 digits)
-        - TIPO DE INSTITUIÇÃO → tipo_instituicao (enum-normalised)
-
-    Args:
-        path: Absolute path to the Excel file.
-
-    Returns:
-        ExtractionResult containing the cleaned DataFrame plus counters.
-
-    Raises:
-        FileNotFoundError: If the file does not exist at *path*.
-        ValueError: If required columns are missing from the sheet.
-    """
-    if not path.exists():
-        raise FileNotFoundError(f"Planilha não encontrada: {path}")
-
-    df: pd.DataFrame = pd.read_excel(path, sheet_name=SHEET_INSTITUICOES, dtype=str)
+def extract_instituicoes(path: Union[Path, pd.ExcelFile, str]) -> ExtractionResult:
+    """Read and validate the INSTITUICOES sheet."""
+    df: pd.DataFrame = _load_sheet(path, SHEET_INSTITUICOES)
     df.columns = [_clean_column_name(c) for c in df.columns]
 
     # CNPJ is optional in the spreadsheet — falls back to "" if the column
@@ -239,36 +231,9 @@ def extract_instituicoes(path: Path) -> ExtractionResult:
     return ExtractionResult(data=pd.DataFrame(valid_rows), total=total, invalid=invalid)
 
 
-def extract_vinculos(path: Path) -> ExtractionResult:
-    """Read and validate the VINCULOS sheet.
-
-    Columns processed:
-        - CNES → cnes (used to resolve instituicao_id FK in the loader)
-        - NUMERO DO VINCULO → numero
-        - NUMERO DO PRCESSO ORIGINAL → numero_processo_sei
-        - TIPO DO VINCULO → tipo_vinculo (enum-normalised)
-        - VALOR DO DOCUMENTO ORIGINAL (ANUAL) → valor_total (Decimal-safe)
-        - DATA DA ASSINATURA → data_da_assinatura (datetime)
-        - DATA DE INÍCIO → data_inicio (datetime)
-        - DATA DE FINALIZAÇÃO → data_fim (datetime | None)
-
-    Columns ignored (present in the sheet but not in the DB schema):
-        ESTABELECIMENTO, OBJETO, COMPLEXIDADE
-
-    Args:
-        path: Absolute path to the Excel file.
-
-    Returns:
-        ExtractionResult containing the cleaned DataFrame plus counters.
-
-    Raises:
-        FileNotFoundError: If the file does not exist at *path*.
-        ValueError: If required columns are missing from the sheet.
-    """
-    if not path.exists():
-        raise FileNotFoundError(f"Planilha não encontrada: {path}")
-
-    df: pd.DataFrame = pd.read_excel(path, sheet_name=SHEET_VINCULOS, dtype=str)
+def extract_vinculos(path: Union[Path, pd.ExcelFile, str]) -> ExtractionResult:
+    """Read and validate the VINCULOS sheet."""
+    df: pd.DataFrame = _load_sheet(path, SHEET_VINCULOS)
     df.columns = [_clean_column_name(c) for c in df.columns]
 
     for col in df.columns:
@@ -433,11 +398,8 @@ _COL_COMPLEMENTACOES_PLANO: dict[str, str] = {
     "QUANTIDADE PACTUADA MÊS": "quantidade_pactuada_mensal",
 }
 
-def extract_planos_operativos(path: Path) -> ExtractionResult:
-    if not path.exists():
-        raise FileNotFoundError(f"Planilha não encontrada: {path}")
-
-    df = pd.read_excel(path, sheet_name=SHEET_PLANOS_OPERATIVOS, dtype=str)
+def extract_planos_operativos(path: Union[Path, pd.ExcelFile, str]) -> ExtractionResult:
+    df = _load_sheet(path, SHEET_PLANOS_OPERATIVOS)
     df.columns = [_clean_column_name(c) for c in df.columns]
 
     missing = set(_COL_PLANOS_OPERATIVOS) - set(df.columns)
@@ -486,11 +448,8 @@ def extract_planos_operativos(path: Path) -> ExtractionResult:
     return ExtractionResult(data=pd.DataFrame(valid_rows), total=total, invalid=invalid, details=details)
 
 
-def extract_complementacoes_tipos(path: Path) -> ExtractionResult:
-    if not path.exists():
-        raise FileNotFoundError(f"Planilha não encontrada: {path}")
-
-    df = pd.read_excel(path, sheet_name=SHEET_COMPLEMENTACOES_TIPOS, dtype=str)
+def extract_complementacoes_tipos(path: Union[Path, pd.ExcelFile, str]) -> ExtractionResult:
+    df = _load_sheet(path, SHEET_COMPLEMENTACOES_TIPOS)
     df.columns = [_clean_column_name(c) for c in df.columns]
 
     missing = set(_COL_COMPLEMENTACOES_TIPOS) - set(df.columns)
@@ -518,11 +477,8 @@ def extract_complementacoes_tipos(path: Path) -> ExtractionResult:
     return ExtractionResult(data=pd.DataFrame(valid_rows), total=total, invalid=invalid)
 
 
-def extract_complementacoes_itens(path: Path) -> ExtractionResult:
-    if not path.exists():
-        raise FileNotFoundError(f"Planilha não encontrada: {path}")
-
-    df = pd.read_excel(path, sheet_name=SHEET_COMPLEMENTACOES_ITENS, dtype=str)
+def extract_complementacoes_itens(path: Union[Path, pd.ExcelFile, str]) -> ExtractionResult:
+    df = _load_sheet(path, SHEET_COMPLEMENTACOES_ITENS)
     df.columns = [_clean_column_name(c) for c in df.columns]
 
     missing = set(_COL_COMPLEMENTACOES_ITENS) - set(df.columns)
@@ -572,11 +528,8 @@ def extract_complementacoes_itens(path: Path) -> ExtractionResult:
     return ExtractionResult(data=pd.DataFrame(valid_rows), total=total, invalid=invalid)
 
 
-def extract_complementacoes_plano(path: Path) -> ExtractionResult:
-    if not path.exists():
-        raise FileNotFoundError(f"Planilha não encontrada: {path}")
-
-    df = pd.read_excel(path, sheet_name=SHEET_COMPLEMENTACOES_PLANO, dtype=str)
+def extract_complementacoes_plano(path: Union[Path, pd.ExcelFile, str]) -> ExtractionResult:
+    df = _load_sheet(path, SHEET_COMPLEMENTACOES_PLANO)
     df.columns = [_clean_column_name(c) for c in df.columns]
 
     missing = set(_COL_COMPLEMENTACOES_PLANO) - set(df.columns)
@@ -624,11 +577,8 @@ def extract_complementacoes_plano(path: Path) -> ExtractionResult:
 
 # ── Aditivos ──────────────────────────────────────────────────────────────────
 
-def extract_aditivos(path: Path) -> ExtractionResult:
-    if not path.exists():
-        raise FileNotFoundError(f"Planilha não encontrada: {path}")
-
-    df = pd.read_excel(path, sheet_name=SHEET_ADITIVOS, dtype=str)
+def extract_aditivos(path: Union[Path, pd.ExcelFile, str]) -> ExtractionResult:
+    df = _load_sheet(path, SHEET_ADITIVOS)
     
     # Normalize spaces and newlines from column headers
     df.columns = [_clean_column_name(c) for c in df.columns]
